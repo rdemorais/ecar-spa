@@ -7,7 +7,7 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.OeDto;
 
-public class ConvertServiceImpl {
+public class ConvertServiceImpl implements ConvertService{
 	
 	public List<OeDto> convertListaOE(List<OE> oesDd) throws AkulaRuntimeException {
 		List<OeDto> oes = new ArrayList<OeDto>();

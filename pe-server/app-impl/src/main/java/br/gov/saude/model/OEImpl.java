@@ -7,7 +7,7 @@ import javax.persistence.Table;
 
 @Entity(name="OE")
 @Table(name="tb_oe", schema="dbsitedemas2016")
-public class OEImpl {
+public class OEImpl implements OE{
 	@Id
 	@Column(name="cod_oe")
 	private Long id;
