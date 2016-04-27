@@ -11,7 +11,7 @@ public class SentinelaAuthenticationProvider implements AuthenticationProvider {
 	private static final Logger logger = LoggerFactory.getLogger(SentinelaAuthenticationProvider.class);
 	
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
-		logger.debug("Iniciando autenticacao para usuario");
+		logger.debug("Iniciando autenticacao para usuario " + auth.getName());
 		
 		Autenticacao autenticacao = new Autenticacao();
 		autenticacao.setName("rafael");

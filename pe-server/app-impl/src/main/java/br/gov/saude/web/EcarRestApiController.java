@@ -14,6 +14,7 @@ import br.gov.saude.service.EcarSiteService;
 import br.gov.saude.web.dto.OeDto;
 
 @Controller
+//@CrossOrigin(origins="*", maxAge=3600)
 @RequestMapping(value="/oauth/api")
 public class EcarRestApiController {
 	

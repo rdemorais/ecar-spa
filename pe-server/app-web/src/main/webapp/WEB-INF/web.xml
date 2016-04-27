@@ -28,6 +28,16 @@
 			classpath:/META-INF/sentinela-app-context.xml
 		</param-value>
 	</context-param>
+	
+	<filter>
+	  <filter-name>cors</filter-name>
+	  <filter-class>br.gov.saude.cors.CORSFilter</filter-class>
+	</filter>
+	  
+	<filter-mapping>
+	  <filter-name>cors</filter-name>
+	  <url-pattern>/oauth/token</url-pattern>
+	</filter-mapping>
 
 
 	<!-- Spring Security -->

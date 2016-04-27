@@ -38,18 +38,17 @@
 
 	<!-- This is default url to get a token from OAuth -->
 	<http pattern="/oauth/token" create-session="always" authentication-manager-ref="authenticationManager">
-		<intercept-url pattern="/oauth/token" access="permitAll()" />
+		<intercept-url pattern="/oauth/token" access="permitAll()" method="POST" />
 		<anonymous enabled="false" />
 		<csrf disabled="true" />
 		<http-basic entry-point-ref="clientAuthenticationEntryPoint" />
-		<custom-filter ref="clientCredentialsTokenEndpointFilter"
-			after="BASIC_AUTH_FILTER" />
+		<custom-filter ref="clientCredentialsTokenEndpointFilter" after="BASIC_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 	</http>
 
 	<!-- This is where we tells spring security what URL should be protected 
 		and what roles have access to them -->
-	<http pattern="/oauth/api/**" create-session="stateless" entry-point-ref="oauthAuthenticationEntryPoint" 
+	<http pattern="/oauth/api/**" create-session="always" entry-point-ref="oauthAuthenticationEntryPoint" 
 		access-decision-manager-ref="accessDecisionManager">
 		<anonymous enabled="false" />
 		<intercept-url pattern="/oauth/api/**" access="hasRole('ROLE_AUTENTICADO')" />
@@ -62,9 +61,9 @@
 		xmlns="http://www.springframework.org/schema/beans">
 		<constructor-arg>
 			<list>
+				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 				<bean class="org.springframework.security.oauth2.provider.vote.ScopeVoter" />
 				<bean class="org.springframework.security.access.vote.RoleVoter" />
-				<bean class="org.springframework.security.web.access.expression.WebExpressionVoter" />
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter" />
 			</list>
 		</constructor-arg>
