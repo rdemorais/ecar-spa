@@ -48,10 +48,10 @@
 
 	<!-- This is where we tells spring security what URL should be protected 
 		and what roles have access to them -->
-	<http pattern="/oauth/api/**" create-session="always" entry-point-ref="oauthAuthenticationEntryPoint" 
+	<http pattern="/ecar/api/**" create-session="stateless" entry-point-ref="oauthAuthenticationEntryPoint" 
 		access-decision-manager-ref="accessDecisionManager">
 		<anonymous enabled="false" />
-		<intercept-url pattern="/oauth/api/**" access="hasRole('ROLE_AUTENTICADO')" />
+		<intercept-url pattern="/oauth/api/**" access="hasRole('ROLE_AUTENTICADO')" method="OPTIONS"/>
 		<custom-filter ref="resourceServerFilter" before="PRE_AUTH_FILTER" />
 		<access-denied-handler ref="oauthAccessDeniedHandler" />
 		<csrf disabled="true" />
