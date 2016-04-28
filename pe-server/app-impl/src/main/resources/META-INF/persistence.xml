@@ -12,6 +12,8 @@
         <class>br.gov.saude.model.EtiquetaImpl</class>
         <class>br.gov.saude.model.MonitoramentoImpl</class>
         <class>br.gov.saude.model.MetaIniciativaImpl</class>
+        <class>br.gov.saude.model.ProdutoIntermediarioImpl</class>
+        <class>br.gov.saude.model.AtividadeImpl</class>
         <class>br.gov.saude.model.UsuarioImpl</class>
         
         <exclude-unlisted-classes/>

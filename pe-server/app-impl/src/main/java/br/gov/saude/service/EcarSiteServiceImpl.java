@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
+import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.EtiquetaDto;
@@ -51,6 +52,6 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	public List<ItemDto> loadListaItens() throws AkulaRuntimeException {
-		return ecarSiteDao.loadListaItens();
+		return ecarSiteDao.loadListaItens(1L, Estrutura.ATIVIDADE);
 	}
 }

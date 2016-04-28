@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaRuntimeException;
+import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.ItemDto;
@@ -81,7 +82,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ItemDto> loadListaItens() throws AkulaRuntimeException {
+	public List<ItemDto> loadListaItens(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
@@ -97,10 +98,24 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			
-			hql.append("JOIN iett.oe oe ");
-			hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("JOIN iett.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("JOIN iett.metaIniciativa mi ");
+				hql.append("JOIN mi.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (ProdutoIntermediario) ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("JOIN iett.produtoIntermediario pi ");
+				hql.append("JOIN pi.metaIniciativa mi ");
+				hql.append("JOIN mi.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (Atividade) ");	
+			}
+			
+			hql.append("AND mon.exercicio = :codExe");
 			
 			Query q = em.createQuery(hql.toString());
+			q.setParameter("codExe", codExe);
 			
 			return q.getResultList();
 		} catch (Exception e) {
