@@ -7,6 +7,7 @@ import javax.persistence.Query;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
@@ -18,7 +19,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			return q.getResultList();
 		} catch (Exception e) {
-			throw new AkulaRuntimeException(e.getMessage());
+			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
 	
@@ -29,12 +30,12 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			return q.getResultList();
 		} catch (Exception e) {
-			throw new AkulaRuntimeException(e.getMessage());
+			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<StatusDto> loadStatusCount() throws AkulaRuntimeException {
+	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
@@ -48,7 +49,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
-			q.setParameter("codExe", 1L);
+			q.setParameter("codExe", codExe);
 			
 			return q.getResultList();
 		} catch (Exception e) {
@@ -57,7 +58,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<StatusDto> loadStatusCountNaoMonitorado() throws AkulaRuntimeException {
+	public List<StatusDto> loadStatusCountNaoMonitorado(Long codExe) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
@@ -71,11 +72,39 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
-			q.setParameter("codExe", 1L);
+			q.setParameter("codExe", codExe);
 			
 			return q.getResultList();
 		} catch (Exception e) {
 			throw new AkulaRuntimeException(e.getMessage());
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ItemDto> loadListaItens() throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			
+			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
+			hql.append("iett.id, "); 
+			hql.append("mon.nomeCor, ");
+			hql.append("iett.nome, ");
+			hql.append("mon.descricaoSit, ");
+			hql.append("iett.estrutura, ");
+			hql.append("iett.siglaOrg, ");
+			hql.append("mon.mes, ");
+			hql.append("oe.sigla) ");
+			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.iett iett ");
+			
+			hql.append("JOIN iett.oe oe ");
+			hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
 }

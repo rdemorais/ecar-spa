@@ -12,6 +12,7 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.EtiquetaDto;
+import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.StatusDto;
 
@@ -37,14 +38,19 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		return convertService.convertListaEtiquetas(etiquetas);
 	}
 	
-	public List<StatusDto> loadStatusCount() throws AkulaRuntimeException {
-		List<StatusDto> statusCores = ecarSiteDao.loadStatusCount();
+	@Transactional
+	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException {
+		List<StatusDto> statusCores = ecarSiteDao.loadStatusCount(codExe);
 		
-		List<StatusDto> naoMonitorado = ecarSiteDao.loadStatusCountNaoMonitorado();
+		List<StatusDto> naoMonitorado = ecarSiteDao.loadStatusCountNaoMonitorado(codExe);
 		
 		List<StatusDto> statusList = new ArrayList<StatusDto>(statusCores);
 		statusList.addAll(naoMonitorado);
 		
 		return statusList;
+	}
+	
+	public List<ItemDto> loadListaItens() throws AkulaRuntimeException {
+		return ecarSiteDao.loadListaItens();
 	}
 }
