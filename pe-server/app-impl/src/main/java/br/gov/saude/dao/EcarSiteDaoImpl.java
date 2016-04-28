@@ -19,4 +19,15 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			throw new AkulaRuntimeException(e.getMessage());
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<OE> loadEtiquetas() throws AkulaRuntimeException {
+		try {
+			Query q = em.createQuery("FROM Etiqueta et");
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage());
+		}
+	}
 }

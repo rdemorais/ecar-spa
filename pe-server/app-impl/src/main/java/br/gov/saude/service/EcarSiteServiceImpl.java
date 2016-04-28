@@ -2,6 +2,8 @@ package br.gov.saude.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.dao.EcarSiteDao;
@@ -17,6 +19,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	@Autowired
 	public ConvertService convertService;
 	
+	@Transactional
 	public List<OeDto> listaOes() throws AkulaRuntimeException {
 		List<OE> oesDb = ecarSiteDao.loadOes();
 		
