@@ -39,18 +39,20 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(mon.significadoCor, mon.nomeCor, count(mon.codCor)) ");
+			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(iett.estrutura, mon.significadoCor, mon.nomeCor, count(mon.codCor)) ");
 			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.iett iett ");
 			hql.append("WHERE mon.exercicio = :codExe ");
-			hql.append("AND mon.ultimoParecer = 'Y'");
-			hql.append("GROUP BY mon.significadoCor, mon.nomeCor, mon.codCor");
+			hql.append("AND mon.ultimoParecer = 'Y' ");
+			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
+			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", 1L);
 			
 			return q.getResultList();
 		} catch (Exception e) {
-			throw new AkulaRuntimeException(e.getMessage());
+			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
 	
@@ -60,11 +62,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto('Não Monitorado', 'Branco', count(mon.iett)) ");
+			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(iett.estrutura, 'Não Monitorado', 'Branco', count(mon.iett)) ");
 			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.iett iett ");
 			hql.append("WHERE mon.exercicio = :codExe ");
-			hql.append("AND mon.naoMonitorado = 'Y'");
-			hql.append("GROUP BY mon.significadoCor, mon.nomeCor, mon.codCor");
+			hql.append("AND mon.naoMonitorado = 'Y' ");
+			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
+			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", 1L);
