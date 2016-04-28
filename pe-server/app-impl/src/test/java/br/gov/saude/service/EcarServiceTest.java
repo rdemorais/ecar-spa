@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.StatusDto;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -35,5 +36,16 @@ public class EcarServiceTest {
 		List<EtiquetaDto> etiquetas = ecarSiteService.listaEtiquetas();
 		logger.debug("Tamanho da listagem de etiquetas: " + etiquetas.size());
 		Assert.assertTrue(etiquetas.size() >= 0);
+	}
+	
+	@Test
+	public void testLoadStatusCount() {
+		List<StatusDto> statusList = ecarSiteService.loadStatusCount();
+		logger.debug("Tamanho da listagem de status: " + statusList.size());
+		
+		for (StatusDto statusDto : statusList) {
+			logger.debug(statusDto.toString());
+		}
+		Assert.assertTrue(statusList.size() >= 0);
 	}
 }

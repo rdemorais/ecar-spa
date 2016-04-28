@@ -10,6 +10,7 @@
 		<class>br.gov.saude.model.IettImpl</class> 
         <class>br.gov.saude.model.OEImpl</class>
         <class>br.gov.saude.model.EtiquetaImpl</class>
+        <class>br.gov.saude.model.MonitoramentoImpl</class>
         
         <exclude-unlisted-classes/>
          
