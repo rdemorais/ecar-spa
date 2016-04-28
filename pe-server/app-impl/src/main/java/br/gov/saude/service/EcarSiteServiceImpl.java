@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
+import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.OeDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
@@ -24,5 +26,12 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		List<OE> oesDb = ecarSiteDao.loadOes();
 		
 		return convertService.convertListaOE(oesDb);
+	}
+	
+	@Transactional
+	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException {
+		List<Etiqueta> etiquetas = ecarSiteDao.loadEtiquetas();
+		
+		return convertService.convertListaEtiquetas(etiquetas);
 	}
 }

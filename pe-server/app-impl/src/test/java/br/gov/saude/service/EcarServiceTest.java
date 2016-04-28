@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.OeDto;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
@@ -23,9 +24,16 @@ public class EcarServiceTest {
 	private EcarSiteService ecarSiteService;
 	
 	@Test
-	public void testListOEs() {
+	public void testListaOEs() {
 		List<OeDto> oes = ecarSiteService.listaOes();
 		logger.debug("Tamanho da listagem: " + oes.size());
 		Assert.assertEquals(24, oes.size());
+	}
+	
+	@Test
+	public void testListaEtiquetas() {
+		List<EtiquetaDto> etiquetas = ecarSiteService.listaEtiquetas();
+		logger.debug("Tamanho da listagem de etiquetas: " + etiquetas.size());
+		Assert.assertTrue(etiquetas.size() >= 0);
 	}
 }
