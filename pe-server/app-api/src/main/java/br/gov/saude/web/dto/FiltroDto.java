@@ -8,7 +8,8 @@ public class FiltroDto {
 	private boolean meta = false;
 	private boolean iniciativa = false;
 	private List<Long> oes = new ArrayList<Long>();
-	private List<EtiquetaDto> etiquetas = new ArrayList<EtiquetaDto>();
+	private List<Long> status = new ArrayList<Long>();
+	private List<Long> etiquetas = new ArrayList<Long>();
 	private Long codExe;
 	
 	public boolean isPpa() {
@@ -35,10 +36,10 @@ public class FiltroDto {
 	public void setOes(List<Long> oes) {
 		this.oes = oes;
 	}
-	public List<EtiquetaDto> getEtiquetas() {
+	public List<Long> getEtiquetas() {
 		return etiquetas;
 	}
-	public void setEtiquetas(List<EtiquetaDto> etiquetas) {
+	public void setEtiquetas(List<Long> etiquetas) {
 		this.etiquetas = etiquetas;
 	}
 	public Long getCodExe() {
@@ -46,5 +47,11 @@ public class FiltroDto {
 	}
 	public void setCodExe(Long codExe) {
 		this.codExe = codExe;
+	}
+	public List<Long> getStatus() {
+		return status;
+	}
+	public void setStatus(List<Long> status) {
+		this.status = status;
 	}
 }

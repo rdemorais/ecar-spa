@@ -118,7 +118,7 @@ public class EcarServiceTest {
 	public void testFiltroOEsListaItens() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		filtro.setOes(Arrays.asList(new Long(17), new Long(28))); //OE 01 e OE 12
+		filtro.setOes(Arrays.asList(new Long(17))); //OE 01 
 		
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
 		/*
@@ -127,6 +127,28 @@ public class EcarServiceTest {
 		}
 		*/
 		logger.debug("Tamanho da listagem - Filtro OE 01: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroStatusListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setStatus(Arrays.asList(new Long(1))); //Verde 
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+
+		logger.debug("Tamanho da listagem - Filtro Status: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEtiquetasListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setEtiquetas(Arrays.asList(new Long(1144))); 
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+
+		logger.debug("Tamanho da listagem - Filtro Etiquetas: " + listaItens.size());
 	}
 	
 }

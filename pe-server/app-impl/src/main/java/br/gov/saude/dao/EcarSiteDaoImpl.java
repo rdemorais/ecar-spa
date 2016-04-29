@@ -98,6 +98,9 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("oe.sigla) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
+			if(filtro.getEtiquetas().size() > 0) {
+				hql.append("JOIN iett.etiquetas etq ");
+			}
 			
 			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
 				hql.append("JOIN iett.oe oe ");
@@ -120,7 +123,16 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("AND oe.id IN :oes ");
 			}
 			
-			hql.append("AND mon.exercicio = :codExe");
+			if(filtro.getStatus().size() > 0) {
+				hql.append("AND mon.codCor IN :status ");
+			}
+			
+			if(filtro.getEtiquetas().size() > 0) {
+				hql.append("AND etq.id IN :etiquetas ");
+			}
+			
+			hql.append("AND mon.exercicio = :codExe ");
+			hql.append("AND mon.ultimoParecer = 'Y' ");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", filtro.getCodExe());
@@ -136,6 +148,14 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			if(filtro.getOes().size() > 0) {
 				q.setParameter("oes", filtro.getOes());
+			}
+			
+			if(filtro.getStatus().size() > 0) {
+				q.setParameter("status", filtro.getStatus());
+			}
+			
+			if(filtro.getEtiquetas().size() > 0) {
+				q.setParameter("etiquetas", filtro.getEtiquetas());
 			}
 			
 			
