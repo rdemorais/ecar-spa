@@ -16,6 +16,7 @@
 	<bean id="ecarSiteDao" class="br.gov.saude.dao.EcarSiteDaoImpl"/>
 	<bean id="convertService" class="br.gov.saude.service.ConvertServiceImpl"/>
 	<bean id="ecarSiteService" class="br.gov.saude.service.EcarSiteServiceImpl"/>
+	<bean id="statusService" class="br.gov.saude.service.StatusServiceImpl"/>
 	
 	<!-- Configuração de acesso ao banco -->
 	<bean

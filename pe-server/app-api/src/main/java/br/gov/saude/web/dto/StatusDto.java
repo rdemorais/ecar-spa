@@ -1,9 +1,6 @@
 package br.gov.saude.web.dto;
 
-import br.gov.saude.model.Estrutura;
-
 public class StatusDto {
-	private Estrutura estrutura;
 	private String desc;
 	private String nomeCor;
 	private Long count;
@@ -11,22 +8,17 @@ public class StatusDto {
 	public StatusDto() {
 	}
 	
-	public StatusDto(Estrutura estrutura, String desc, String nomeCor, Long count) {
-		super();
-		this.estrutura = estrutura;
+	public StatusDto(String desc, String nomeCor, Long count) {
 		this.desc = desc;
 		this.nomeCor = nomeCor;
 		this.count = count;
 	}
 	
-	public Estrutura getEstrutura() {
-		return estrutura;
+	public StatusDto(String nomeCor, Long count) {
+		this.nomeCor = nomeCor;
+		this.count = count;
 	}
-
-	public void setEstrutura(Estrutura estrutura) {
-		this.estrutura = estrutura;
-	}
-
+	
 	public String getDesc() {
 		return desc;
 	}
@@ -48,7 +40,6 @@ public class StatusDto {
 
 	@Override
 	public String toString() {
-		return "StatusDto [estrutura=" + estrutura + ", desc=" + desc + ", nomeCor=" + nomeCor + ", count=" + count
-				+ "]";
+		return "StatusDto [desc=" + desc + ", nomeCor=" + nomeCor + ", count=" + count + "]";
 	}
 }

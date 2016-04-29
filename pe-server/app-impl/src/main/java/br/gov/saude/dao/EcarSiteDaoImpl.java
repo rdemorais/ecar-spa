@@ -2,6 +2,7 @@ package br.gov.saude.dao;
 
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaRuntimeException;
@@ -37,21 +38,22 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException {
+	public List<StatusDto> loadStatusCount(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(iett.estrutura, mon.significadoCor, mon.nomeCor, count(mon.codCor)) ");
+			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(mon.nomeCor, count(mon.codCor)) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("WHERE mon.exercicio = :codExe ");
+			hql.append("AND iett.estrutura = :est ");
 			hql.append("AND mon.ultimoParecer = 'Y' ");
 			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
-			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", codExe);
+			q.setParameter("est", estrutura);
 			
 			return q.getResultList();
 		} catch (Exception e) {
@@ -59,24 +61,26 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
-	public List<StatusDto> loadStatusCountNaoMonitorado(Long codExe) throws AkulaRuntimeException {
+	public StatusDto loadStatusCountNaoMonitorado(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(iett.estrutura, 'Não Monitorado', 'Branco', count(mon.iett)) ");
+			hql.append("SELECT new br.gov.saude.web.dto.StatusDto('Branco', count(mon.iett)) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("WHERE mon.exercicio = :codExe ");
 			hql.append("AND mon.naoMonitorado = 'Y' ");
+			hql.append("AND iett.estrutura = :est ");
 			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
-			hql.append("ORDER BY iett.estrutura ASC");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", codExe);
+			q.setParameter("est", estrutura);
 			
-			return q.getResultList();
+			return (StatusDto) q.getSingleResult();
+		} catch (NoResultException e) {
+			return new StatusDto();
 		} catch (Exception e) {
 			throw new AkulaRuntimeException(e.getMessage());
 		}

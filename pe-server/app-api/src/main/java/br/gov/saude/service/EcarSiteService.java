@@ -8,11 +8,11 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.StatusDto;
+import br.gov.saude.web.dto.StatusBarDto;
 
 public interface EcarSiteService {
 	public List<OeDto> listaOes() throws AkulaRuntimeException;
 	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException;
-	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException;
+	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException;
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 }

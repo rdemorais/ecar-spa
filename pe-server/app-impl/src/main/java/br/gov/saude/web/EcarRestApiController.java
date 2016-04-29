@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.gov.saude.service.EcarSiteService;
+import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.OeDto;
 
 @Controller
@@ -37,5 +38,26 @@ public class EcarRestApiController {
 		logger.debug("retornando lista de OEs: " + oes.size());
 		
 		return EcarResponse.ok(oes);
+	}
+	
+	@RequestMapping(value="/status", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadStatus() {
+		
+		logger.debug("retornando statusBar");
+		
+		return EcarResponse.ok(ecarSiteService.loadStatusBar(1L));
+	}
+	
+	@RequestMapping(value="/etiquetas", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadEtiquetas() {
+		List<EtiquetaDto> etiquetas = ecarSiteService.listaEtiquetas();
+		
+		logger.debug("retornando lista de Etiquetas: " + etiquetas.size());
+		
+		return EcarResponse.ok(etiquetas);
 	}
 }

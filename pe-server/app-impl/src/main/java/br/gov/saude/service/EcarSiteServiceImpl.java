@@ -1,6 +1,5 @@
 package br.gov.saude.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -16,15 +15,18 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.StatusDto;
+import br.gov.saude.web.dto.StatusBarDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
-	public EcarSiteDao ecarSiteDao;
+	private EcarSiteDao ecarSiteDao;
 	
 	@Autowired
-	public ConvertService convertService;
+	private ConvertService convertService;
+	
+	@Autowired
+	private StatusService statusService;
 	
 	@Transactional
 	public List<OeDto> listaOes() throws AkulaRuntimeException {
@@ -41,15 +43,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	@Transactional
-	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException {
-		List<StatusDto> statusCores = ecarSiteDao.loadStatusCount(codExe);
+	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException {
 		
-		List<StatusDto> naoMonitorado = ecarSiteDao.loadStatusCountNaoMonitorado(codExe);
-		
-		List<StatusDto> statusList = new ArrayList<StatusDto>(statusCores);
-		statusList.addAll(naoMonitorado);
-		
-		return statusList;
+		return statusService.loadStatusBar(codExe);
 	}
 	
 	@Transactional

@@ -13,7 +13,7 @@ import br.gov.saude.web.dto.StatusDto;
 public interface EcarSiteDao extends Dao{
 	public List<OE> loadOes() throws AkulaRuntimeException;
 	public List<Etiqueta> loadEtiquetas() throws AkulaRuntimeException;
-	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException;
-	public List<StatusDto> loadStatusCountNaoMonitorado(Long codExe) throws AkulaRuntimeException;
+	public List<StatusDto> loadStatusCount(Long codExe, Estrutura estrutura) throws AkulaRuntimeException;
+	public StatusDto loadStatusCountNaoMonitorado(Long codExe, Estrutura estrutura) throws AkulaRuntimeException;
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 }

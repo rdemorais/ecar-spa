@@ -17,7 +17,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.StatusDto;
+import br.gov.saude.web.dto.StatusBarDto;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -43,11 +43,9 @@ public class EcarServiceTest {
 	}
 	
 	@Test
-	public void testLoadStatusCount() {
-		List<StatusDto> statusList = ecarSiteService.loadStatusCount(1L);
-		logger.debug("Tamanho da listagem de status: " + statusList.size());
-		
-		Assert.assertTrue(statusList.size() >= 0);
+	public void testLoadStatusBar() {
+		StatusBarDto statusBar = ecarSiteService.loadStatusBar(1L);
+		logger.debug("Carregando StatusBar: " + statusBar.toString());
 	}
 	
 	@Test
