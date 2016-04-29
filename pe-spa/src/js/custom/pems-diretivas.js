@@ -103,12 +103,12 @@
       };
 
       function controller($scope, $element, pemsService, pemsFilterService) {
-        pemsFilterService.listaOEs(function(oes) {
+        pemsService.loadOEs(function(oes) {
           $scope.oes = oes;
         });
 
         $scope.oeClick = function(oe) {
-          //pemsFilterService.addRemoveOe(oe.id);
+          pemsFilterService.addRemoveOe(oe.id);
           oe.sel = !oe.sel;
         }
       }

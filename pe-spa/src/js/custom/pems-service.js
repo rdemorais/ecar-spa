@@ -134,21 +134,29 @@
     	};
 
     	this.loadOEs = function(callback) {
-            $http({
-                method: 'POST',
-                url: 'http://localhost:8080/pe-server/ecar/api/lista-oes',
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-            }).then(function successCallBack(response) {
-                var ecarResponse = response.data;
-                if(ecarResponse.status == 'success') {
-                    var _oes = ecarResponse.obj;
-                    callback(_oes);
-                }else {
-                    //tratar erro
-                }
-            }, function errorCallBack(response) {
-                console.log(response);
-            });
+            if(fixedArrays.oes.length == 0) {
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:8080/pe-server/ecar/api/lista-oes',
+                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+                }).then(function successCallBack(response) {
+                    var ecarResponse = response.data;
+                    if(ecarResponse.status == 'success') {
+                        fixedArrays.oes = ecarResponse.obj;
+                        for (var i = 0; i < fixedArrays.oes.length; i++) {
+                            fixedArrays.oes[i].sel = false;
+                            fixedArrays.oes[i].ord = i+1;
+                        };
+                        callback(fixedArrays.oes);
+                    }else {
+                        //tratar erro
+                    }
+                }, function errorCallBack(response) {
+                    console.log(response);
+                });
+            }else {
+                callback(fixedArrays.oes);
+            }
     	};
     }
 
@@ -160,20 +168,6 @@
             status: [],
             oes: [],
             etiquetas: []
-        };
-
-        this.listaOEs = function(callback) {
-            pemsService.loadOEs(function(oes) {
-
-                for (var i = 0; i < oes.length; i++) {
-                    oes[i].sel = false;
-                    oes[i].ord = i+1;
-                };
-
-                filtros.oes = oes;
-
-                callback(filtros.oes);
-            });
         };
 
         this.clear = function() {
