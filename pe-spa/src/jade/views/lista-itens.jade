@@ -1,0 +1,38 @@
+.row(ng-controller="listaItensController as listaItens")
+	.col-lg-4.fw-boxed
+		.panel.panel-default
+			.panel-body
+				.row
+					h4.ml Filtros
+				.row
+					pems-oes(mod="side")
+				.row.row-table
+					.col-sm-12.col-xs-12
+						h5 Etiquetas
+						pems-etiquetas
+				.row.row-table
+					.col-sm-12.col-xs-12
+						h5 Status
+						pems-status-filter
+				.row.row-table
+					.col-sm-12.col-xs-12
+						.checkbox.c-checkbox
+							label
+								input(type='checkbox', ng-model="filtro.ppa")
+								span.fa.fa-check
+								| Apenas PPA
+						.checkbox.c-checkbox
+							label
+								input(type='checkbox', ng-model="filtro.meta")
+								span.fa.fa-check
+								| Apenas Metas
+						.checkbox.c-checkbox
+							label
+								input(type='checkbox', ng-model="filtro.iniciativa")
+								span.fa.fa-check
+								| Apenas Iniciativas
+				.row.row-table
+					.col-sm-12.col-xs-12
+						button.mr.btn.btn-primary.btn-fw.mt-xl(ng-click="pesquisar()") Pesquisar
+	.col-lg-8.fw-boxed
+		pems-lista-itens(nivel=1)

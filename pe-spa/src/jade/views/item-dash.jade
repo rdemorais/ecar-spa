@@ -1,0 +1,37 @@
+.row(ng-controller="itemDashController as itemDash")
+	.col-lg-1
+	.col-lg-10
+		.panel.panel-default
+			.panel-body
+				.col-md-1
+					.label(ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
+				.col-md-5 
+					strong Responsável:
+					|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
+				.col-md-3
+					strong Situação:
+					|&nbsp; {{itemDash.item.situacao}}
+				.col-md-2
+					strong Ciclo:
+					small 03/2012
+				.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
+					
+		accordion(close-others='false')
+			accordion-group(is-open='true')
+				accordion-heading 
+					span.text-success {{itemDash.item.tipo}}: 
+					|&nbsp;{{itemDash.item.sigla}} - {{itemDash.item.descricao}}
+				.smoothy
+					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
+				strong Anexos:
+				scrollable.pt(height=50)
+					a.mr(ng-repeat="anexo in itemDash.item.anexos", href="{{anexo.link}}") {{anexo.nome}}
+			accordion-group(is-open='false')
+				accordion-heading Indicadores
+				p
+					pems-indicadores(indicadores="itemDash.item.indicadores")
+			accordion-group(is-open='false')
+				accordion-heading Produtos intermediários
+				p
+					scrollable.pt(height=350)
+						pems-lista-itens(nivel=2)

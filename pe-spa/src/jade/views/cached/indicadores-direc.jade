@@ -1,0 +1,38 @@
+.row
+	.col-lg-12
+		accordion(close-others='false')
+			accordion-group(is-open='true', ng-repeat="ind in indicadores")
+				accordion-heading {{ind.nome}}
+				p 
+					.table-responsive
+						table.table.table-striped.table-bordered.table-hover
+							tbody
+								tr
+									td Ano: {{ind.ano}}
+									td Linha de Base: {{ind.linhaBase | format: 'num'}}
+									td Meta {{ind.ano}}: {{ind.meta | format: 'num'}}
+									td Meta Quadrienal: {{ind.metaQuadrienal | format: 'num'}}
+					.table-responsive
+						table.table.table-striped.table-bordered.table-hover
+							tbody
+								tr
+									td 
+									td(ng-repeat="mes in ind.meses") {{mes.nome}}
+								tr
+									td Realizado
+									td(ng-repeat="rea in ind.meses") {{rea.realizado | format: 'num'}}
+								tr
+									td Quantitativo a ser realizado {{ind.ano}}
+									td(ng-repeat="aRea in ind.meses") {{aRea.aRealizar | format: 'num'}}
+								tr
+									td Resultado Anual
+									td(ng-repeat="rAnual in ind.meses") {{rAnual.resultadoAnual | format: 'perc'}}
+								tr
+									td Quantitativo a ser realizado {{ind.ano}}-19
+									td(ng-repeat="aRea19 in ind.meses") {{aRea19.aRealizar19 | format: 'num'}}
+								tr
+									td Resultado Quadrienal
+									td(ng-repeat="qua in ind.meses") {{qua.resultadoQuadrienal | format: 'perc'}}
+								tr
+									td Quantidade Acumulada {{ind.ano}}
+									td(ng-repeat="ac in ind.meses") {{ac.qtdAcumulada | format: 'num'}}

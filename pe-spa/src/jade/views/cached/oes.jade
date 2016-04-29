@@ -1,0 +1,13 @@
+.col-lg-2.col-sm-1.col-xs-2.animated.fadeInUp(ng-repeat="oe in oes", ng-if="mod == 'main'")
+	.mb.clickable(ng-if="!oe.sel", ng-click="oeClick(oe)", ng-class="'oe-'+oe.ord") 
+		strong {{oe.sigla}} 
+	.mb.clickable(ng-if="oe.sel", ng-click="oeClick(oe)", ng-class="'oe-'+oe.ord+'-sel'") 
+		strong {{oe.sigla}} 
+//  .panel.clickable(ripple="", ng-class="'panel-oe'+oe.sigla", ng-click="oeClick(oe)")
+//    .panel-heading 
+//    .panel-body.text-center
+//      h4.text-thin(ng-if="!oe.sel") OE {{oe.sigla}} 
+//      h4.strong.text-success(ng-if="oe.sel") OE {{oe.sigla}} 
+.col-lg-3.col-sm-1.col-xs-2(ng-repeat="oe in oes", ng-if="mod == 'side'")
+	.clickable(ng-class="'side-oe' + oe.ord", ng-if="!oe.sel", ng-click="oeClick(oe)") {{oe.sigla}}
+	.clickable(ng-class="'side-sel-oe' + oe.ord", ng-if="oe.sel", ng-click="oeClick(oe)") {{oe.sigla}}

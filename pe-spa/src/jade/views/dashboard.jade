@@ -1,0 +1,49 @@
+.row.p(ng-controller="dashboardController as dashboard")
+  .col-lg-8.fw-boxed
+    .row
+      .col-md-12
+        .panel.panel-default
+          pems-status-bar
+    .row
+      .col-md-12
+          .panel.panel-default
+            .panel-body
+              .col-md-1
+              .col-md-10
+                pems-oes(mod="main")
+
+  .col-md-4.fw-boxed.pull-right
+    .row
+      .panel.panel-default
+        .row.p
+          .col-md-11
+            .row.row-table
+              .col-sm-12.col-xs-12
+                .h4 Etiquetas
+                pems-etiquetas
+            .row.row-table
+              .col-sm-12.col-xs-12
+                .h4 Outros filtros
+                pems-status-filter
+            .row.row-table.ml.mt
+              .col-sm-6.col.col-xs-6
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox', ng-model="filtro.ppa")
+                    span.fa.fa-check
+                    | Apenas PPA
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox', ng-model="filtro.meta")
+                    span.fa.fa-check
+                    | Apenas Metas
+                .checkbox.c-checkbox
+                  label
+                    input(type='checkbox', ng-model="filtro.iniciativa")
+                    span.fa.fa-check
+                    | Apenas Iniciativas
+            .row.row-table
+              .col-sm-12.col.col-xs-12
+                a.pull-right.mt-lg(href="", ng-click="limparFiltros()") Limpar filtros
+                button.mr.btn.btn-primary.btn-fw.mt(ng-click="pesquisar()") Pesquisar
+      

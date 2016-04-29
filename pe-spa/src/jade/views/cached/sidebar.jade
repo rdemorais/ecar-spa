@@ -1,0 +1,20 @@
+// START Sidebar
+.sidebar-wrapper
+  .sidebar(ui-sidebar="")
+    .sidebar-nav
+        ul.nav
+          // Iterates over all sidebar items
+          li.nav-heading
+            span.text-muted(translate='sidebar.heading.HEADER') Main Navigation
+          li(ng-class="{active:$state.includes('app')}")
+            a(href='', title='Layouts', ripple='')
+              em.sidebar-item-icon.icon-layout
+              em.sidebar-item-caret.fa.pull-right.fa-angle-right
+              span Paniel
+            ul.nav.sidebar-subnav
+              li.sidebar-subnav-header
+                a
+                  em.sidebar-item-icon.fa.fa-angle-right
+                  | Painel
+              
+// END Sidebar

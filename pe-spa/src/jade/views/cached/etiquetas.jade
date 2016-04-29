@@ -1,0 +1,6 @@
+.form-horizontal
+  ui-select(multiple='', ng-model='uiselectEt.etSelectionadas', theme='bootstrap', on-select="onSelectEt($item)", on-remove="onRemoveEt($item)")
+    ui-select-match(placeholder='Informe uma etiqueta') {{$item.nome}}
+    ui-select-choices(repeat='et in uiselectEt.etiquetas | propsFilter: {nome: $select.search}')
+      div(ng-bind-html='et.nome | highlight: $select.search')
+      
