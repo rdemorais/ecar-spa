@@ -20,10 +20,8 @@
         controller: controller
       };
       function controller($scope, $element, pemsService, colors) {
-        pemsService.loadStatus(function(statusBar) {
-          $scope.statusBar = statusBar;
-        });
-
+        $scope.statusBar = {};
+        
         var pieOptionsCor = function(nomeCor) {
           var pieOptions = {
             animate:{
@@ -39,50 +37,56 @@
           };
 
           return pieOptions;
-        }
+        };
 
         $scope.statusClick = function(item) {
           item.sel = !item.sel;
         }
 
-        //Calculo de percentual e cor
-        var iniciativa = $scope.statusBar.iniciativa;
-        angular.forEach(iniciativa.status, function(value, key) {
-          var st = value;
-          st.pieOptions = pieOptionsCor(st.nomeCor);
+        pemsService.loadStatus(function(statusBar) {
+          $scope.statusBar = statusBar;
+        
 
-          st.percentual = (st.count/iniciativa.totalInicitiva) * 100;
+          //Calculo de percentual e cor
+          var iniciativa = $scope.statusBar.iniciativa;
+          angular.forEach(iniciativa.status, function(value, key) {
+            var st = value;
+            st.pieOptions = pieOptionsCor(st.nomeCor);
+
+            st.percentual = (st.count/iniciativa.total) * 100;
+          });
+
+          var meta = $scope.statusBar.meta;
+          angular.forEach(meta.status, function(value, key) {
+            var st = value;
+            value.pieOptions = pieOptionsCor(value.nomeCor);
+
+            st.pieOptions = pieOptionsCor(st.nomeCor);
+
+            st.percentual = (st.count/meta.total) * 100;
+          });
+
+          var produto = $scope.statusBar.produto;
+          angular.forEach(produto.status, function(value, key) {
+            var st = value;
+            value.pieOptions = pieOptionsCor(value.nomeCor);
+
+            st.pieOptions = pieOptionsCor(st.nomeCor);
+
+            st.percentual = (st.count/produto.total) * 100;
+          });
+
+          var atividade = $scope.statusBar.atividade;
+          angular.forEach(atividade.status, function(value, key) {
+            var st = value;
+            value.pieOptions = pieOptionsCor(value.nomeCor);
+
+            st.pieOptions = pieOptionsCor(st.nomeCor);
+
+            st.percentual = (st.count/atividade.total) * 100;
+          });
         });
 
-        var meta = $scope.statusBar.meta;
-        angular.forEach(meta.status, function(value, key) {
-          var st = value;
-          value.pieOptions = pieOptionsCor(value.nomeCor);
-
-          st.pieOptions = pieOptionsCor(st.nomeCor);
-
-          st.percentual = (st.count/meta.totalMeta) * 100;
-        });
-
-        var produto = $scope.statusBar.produto;
-        angular.forEach(produto.status, function(value, key) {
-          var st = value;
-          value.pieOptions = pieOptionsCor(value.nomeCor);
-
-          st.pieOptions = pieOptionsCor(st.nomeCor);
-
-          st.percentual = (st.count/produto.totalProduto) * 100;
-        });
-
-        var atividade = $scope.statusBar.atividade;
-        angular.forEach(atividade.status, function(value, key) {
-          var st = value;
-          value.pieOptions = pieOptionsCor(value.nomeCor);
-
-          st.pieOptions = pieOptionsCor(st.nomeCor);
-
-          st.percentual = (st.count/atividade.totalAtividade) * 100;
-        });
       }
     };
 
@@ -126,12 +130,8 @@
         
         pemsService.loadEtiquetas(function(ets) {
           $scope.uiselectEt.etiquetas = ets;
+          $scope.uiselectEt.etSelectionadas = pemsFilterService.getFiltros().etiquetas;
         });  
-
-        $scope.uiselectEt.etSelectionadas = [$scope.uiselectEt.etiquetas[0]];
-
-        //$scope.uiselectEt.etSelectionadas = pemsFilterService.getFiltros().etiquetas;
-        //console.log($scope.uiselectEt.etSelectionadas);
 
         $scope.onSelectEt = function(et) {
           pemsFilterService.addRemoveEtiqueta(et);

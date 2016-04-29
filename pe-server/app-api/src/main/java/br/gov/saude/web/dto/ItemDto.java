@@ -7,7 +7,7 @@ public class ItemDto {
 	private String nomeCor;
 	private String desc;
 	private String situacao;
-	private Estrutura estrutura;
+	private String nivel;
 	private String orgaoResp;
 	private String ciclo;
 	private String oe;
@@ -18,16 +18,17 @@ public class ItemDto {
 	}
 	
 	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String ciclo, String oe) {
+			String mes, String ano, String oe) {
 		super();
 		this.id = id;
 		this.nomeCor = nomeCor;
 		this.desc = desc;
 		this.situacao = situacao;
-		this.estrutura = estrutura;
+		this.nivel = estrutura.name().toLowerCase();
 		this.orgaoResp = orgaoResp;
-		this.ciclo = ciclo;
+		this.ciclo = mes + "/" + ano;
 		this.oe = oe;
+		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
 	}
 
 	public Long getId() {
@@ -54,11 +55,11 @@ public class ItemDto {
 	public void setSituacao(String situacao) {
 		this.situacao = situacao;
 	}
-	public Estrutura getEstrutura() {
-		return estrutura;
+	public String getNivel() {
+		return nivel;
 	}
-	public void setEstrutura(Estrutura estrutura) {
-		this.estrutura = estrutura;
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
 	}
 	public String getOrgaoResp() {
 		return orgaoResp;
@@ -87,7 +88,7 @@ public class ItemDto {
 	@Override
 	public String toString() {
 		return "ItemDto [id=" + id + ", nomeCor=" + nomeCor + ", desc=" + desc + ", situacao=" + situacao
-				+ ", estrutura=" + estrutura + ", orgaoResp=" + orgaoResp + ", ciclo=" + ciclo + ", oe=" + oe
+				+ ", nivel=" + nivel + ", orgaoResp=" + orgaoResp + ", ciclo=" + ciclo + ", oe=" + oe
 				+ ", oeShortName=" + oeShortName + "]";
 	}
 	

@@ -13,7 +13,7 @@
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.iniciativa.totalInicitiva}}
+          .h5.pull-right.mr-xl Total: {{statusBar.iniciativa.total}}
           .h4.animated.fadeInUp Iniciativas
         .row.row-flush.text-center
           .col-xs-4(ng-repeat="st in statusBar.iniciativa.status")
@@ -25,7 +25,7 @@
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.meta.totalMeta}}
+          .h5.pull-right.mr-xl Total: {{statusBar.meta.total}}
           .h4.animated.fadeInDown Metas
         .row.row-flush.text-center
           .col-xs-4(ng-repeat="st in statusBar.meta.status")
@@ -37,7 +37,7 @@
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.produto.totalProduto}}
+          .h5.pull-right.mr-xl Total: {{statusBar.produto.total}}
           .h4.animated.fadeInUp Produtos Intermediários
         .row.row-flush.text-center
           .col-xs-4(ng-repeat="st in statusBar.produto.status")
@@ -49,7 +49,7 @@
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.atividade.totalAtividade}}
+          .h5.pull-right.mr-xl Total: {{statusBar.atividade.total}}
           .h4.animated.fadeInDown Atividades
         .row.row-flush.text-center
           .col-xs-4(ng-repeat="st in statusBar.atividade.status")

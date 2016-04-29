@@ -1,13 +1,13 @@
 .panel.panel-default
   .panel-heading
-    | {{listaItens.total}}
-    span(ng-if="listaItens.total > 1") itens encontrados
-    span(ng-if="listaItens.total == 1") item encontrado
+    | {{listaItens.length}}
+    span(ng-if="listaItens.length > 1") itens encontrados
+    span(ng-if="listaItens.length == 1") item encontrado
   // START table-responsive
   .table-responsive
     table.table.table-hover
       tbody
-        tr(ng-repeat="item in listaItens.lista")
+        tr(ng-repeat="item in listaItens")
           td
             .media
               a.pull-left(href='', ng-click="itemSelecionado(item.id)")

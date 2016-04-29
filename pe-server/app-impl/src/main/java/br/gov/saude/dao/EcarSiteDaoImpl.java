@@ -93,12 +93,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
 			hql.append("iett.id, "); 
-			hql.append("mon.nomeCor, ");
+			hql.append("LOWER(mon.nomeCor), ");
 			hql.append("iett.nome, ");
 			hql.append("mon.descricaoSit, ");
 			hql.append("iett.estrutura, ");
 			hql.append("iett.siglaOrg, ");
 			hql.append("mon.mes, ");
+			hql.append("mon.ano, ");
 			hql.append("oe.sigla) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");

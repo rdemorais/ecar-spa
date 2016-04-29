@@ -13,15 +13,21 @@
         };
 
         this.loadEtiquetas = function(callback) {
-            var etiquetas = [
-                {nome: 'Saúde mais perto de você', id: 10},
-                {nome: 'Rede Cegonha', id: 2},
-                {nome: 'SOS Emergências', id: 4},
-                {nome: 'SOS', id: 5},
-                {nome: 'UPA', id: 6}
-            ];
-
-            callback(etiquetas);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/pe-server/ecar/api/etiquetas',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var etiquetas = ecarResponse.obj;
+                    callback(etiquetas);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                console.log(response);
+            });
         };
 
     	this.loadItem = function(itemId, callback) {
@@ -92,102 +98,42 @@
     	};
 
     	this.loadListaItens = function(callback) {
-            //pemsFilterService.getFiltros());
-    		var listaItens = {
-    			total: 6,
-    			lista: [
-    				{oe: 'OE 1', oeShortName: 'oe1', situacao: 'Em andamento', desc: 'Alcançar 20.335 médicos brasileiros e estrangeiros atuando em regiões prioritárias para o SUS, por meio do Programa Mais Médicos e do Programa de Valorização dos Profissionais da Atenção Básica - PROVAB. (03Z5)', nivel: 'meta', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'verde', ciclo: '03/2016', id: 345},
-    				{oe: 'OE 2', oeShortName: 'oe2', situacao: 'Não iniciado',desc: 'Fortalecimento do Centro Colaborador para a Qualidade do Cuidado e para a Segurança do Paciente - Proqualis, de forma a contribuir para a melhoria continuada da qualidade dos cuidados de saúde no Brasil e outros países de língua portuguesa, ampliando de 1.200 para 2.400 as publicações e o conteúdo técnico científico disponibilizado no Portal Proqualis. (06B0)', nivel: 'iniciativa', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'amarelo', ciclo: '03/2016', id: 33},
-    				{oe: 'OE 3', oeShortName: 'oe3', situacao: 'Atrasado',desc: 'Implantação do Cadastro Nacional de Especialistas, com prazo de implantação até 2016. (05NE)', nivel: 'iniciativa', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'cinza', ciclo: '03/2016', id: 12},
-    				{oe: 'OE 4', oeShortName: 'oe4', situacao: 'Em andamento',desc: 'Ampliar o número de equipes da Estratégia Saúde da Família para 46 mil. (0265)', nivel: 'meta', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'vermelho', ciclo: '03/2016', id: 45},
-    				{oe: 'OE 5', oeShortName: 'oe5', situacao: 'Alcançado',desc: 'Ampliação do número de equipes de atenção básica prisional - EABP. (02PV)', nivel: 'iniciativa', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'azul', ciclo: '03/2016', id: 78},
-    				{oe: 'OE 6', oeShortName: 'oe6', situacao: 'Em andamento',desc: 'Implantar 684 novas equipes de atenção domiciliar, sendo 432 novas Equipes Multiprofissionais de Atenção Domiciliar (EMAD) e 252 novas Equipes Multiprofissionais de Apoio (EMAP). (026O)', nivel: 'meta', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'branco', ciclo: '03/2016', id: 32}
-
-    			]
-    		};
-
-    		callback(listaItens);
+    		$http({
+                method: 'POST',
+                url: 'http://localhost:8080/pe-server/ecar/api/lista-itens',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var listaItens = ecarResponse.obj;
+                    callback(listaItens);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                console.log(response);
+            });
     	};
 
     	this.loadStatus = function(callback) {
-    		var statusBar = {
-    			iniciativa: {
-    				totalInicitiva: 200,
-    				status: [
-    					{desc: 'Satisfatório', nomeCor: 'Verde', count: 15},
-	    				{desc: 'Alerta', nomeCor: 'Amarelo', count: 23},
-	    				{desc: 'Crítico', nomeCor: 'Vermelho', count: 43},
-	    				{desc: 'Alcançado', nomeCor: 'Azul', count: 30},
-	    				{desc: 'Cancelado', nomeCor: 'Cinza', count: 66},
-	    				{desc: 'Não Monitorado', nomeCor: 'Branco', count: 23}
-    				]
-    			},
-    			meta: {
-    				totalMeta: 239,
-    				status: [
-    					{desc: 'Satisfatório', nomeCor: 'Verde', count: 25},
-	    				{desc: 'Alerta', nomeCor: 'Amarelo', count: 56},
-	    				{desc: 'Crítico', nomeCor: 'Vermelho', count: 90},
-	    				{desc: 'Alcançado', nomeCor: 'Azul', count: 22},
-	    				{desc: 'Cancelado', nomeCor: 'Cinza', count: 43},
-	    				{desc: 'Não Monitorado', nomeCor: 'Branco', count: 3}
-    				]
-    			},
-    			produto: {
-    				totalProduto: 319,
-    				status: [
-    					{desc: 'Satisfatório', nomeCor: 'Verde', count: 67},
-	    				{desc: 'Alerta', nomeCor: 'Amarelo', count: 32},
-	    				{desc: 'Crítico', nomeCor: 'Vermelho', count: 77},
-	    				{desc: 'Alcançado', nomeCor: 'Azul', count: 11},
-	    				{desc: 'Cancelado', nomeCor: 'Cinza', count: 43},
-	    				{desc: 'Não Monitorado', nomeCor: 'Branco', count: 89}
-    				]
-    			},
-    			atividade: {
-    				totalAtividade: 268,
-    				status: [
-    					{desc: 'Satisfatório', nomeCor: 'Verde', count: 99},
-	    				{desc: 'Alerta', nomeCor: 'Amarelo', count: 12},
-	    				{desc: 'Crítico', nomeCor: 'Vermelho', count: 56},
-	    				{desc: 'Alcançado', nomeCor: 'Azul', count: 22},
-	    				{desc: 'Cancelado', nomeCor: 'Cinza', count: 67},
-	    				{desc: 'Não Monitorado', nomeCor: 'Branco', count: 12}
-    				]
-    			}
-    		};
-
-    		callback(statusBar);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/pe-server/ecar/api/status',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var statusBar = ecarResponse.obj;
+                    callback(statusBar);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                console.log(response);
+            });
     	};
 
     	this.loadOEs = function(callback) {
-    		var oes = [
-    			{id: 1, sigla: 1, desc: 'OE 1', sel: false},
-				{id: 2, sigla: 2, desc: 'OE 2', sel: false},
-				{id: 3, sigla: 3, desc: 'OE 3', sel: false},
-				{id: 4, sigla: 4, desc: 'OE 4', sel: false},
-				{id: 5, sigla: 5, desc: 'OE 5', sel: false},
-				{id: 6, sigla: 6, desc: 'OE 6', sel: false},
-				{id: 7, sigla: 7, desc: 'OE 7', sel: false},
-				{id: 8, sigla: 8, desc: 'OE 8', sel: false},
-				{id: 9, sigla: 9, desc: 'OE 9', sel: false},
-				{id: 10, sigla: 10, desc: 'OE 10', sel: false},
-				{id: 11, sigla: 11, desc: 'OE 11', sel: false},
-				{id: 12, sigla: 12, desc: 'OE 12', sel: false},
-				{id: 13, sigla: 13, desc: 'OE 13', sel: false},
-				{id: 14, sigla: 14, desc: 'OE 14', sel: false},
-				{id: 15, sigla: 15, desc: 'OE 15', sel: false},
-				{id: 16, sigla: 16, desc: 'OE 16', sel: false},
-				{id: 17, sigla: 17, desc: 'OE 17', sel: false},
-				{id: 18, sigla: 18, desc: 'OE 18', sel: false},
-				{id: 19, sigla: 19, desc: 'OE 19', sel: false},
-				{id: 20, sigla: 20, desc: 'OE 20', sel: false},
-				{id: 21, sigla: 21, desc: 'OE 21', sel: false},
-				{id: 22, sigla: 22, desc: 'OE 22', sel: false},
-				{id: 23, sigla: 23, desc: 'OE 23', sel: false},
-				{id: 24, sigla: 24, desc: 'OE 24', sel: false}
-    		];
-
             $http({
                 method: 'POST',
                 url: 'http://localhost:8080/pe-server/ecar/api/lista-oes',
@@ -203,8 +149,6 @@
             }, function errorCallBack(response) {
                 console.log(response);
             });
-            
-            //callback(oes);
     	};
     }
 
@@ -215,7 +159,7 @@
             iniciativa: false,
             status: [],
             oes: [],
-            etiquetas: [{nome: 'Saúde mais perto de você', id: 10}]
+            etiquetas: []
         };
 
         this.listaOEs = function(callback) {
