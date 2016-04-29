@@ -6,6 +6,7 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.StatusDto;
 
@@ -14,5 +15,5 @@ public interface EcarSiteDao extends Dao{
 	public List<Etiqueta> loadEtiquetas() throws AkulaRuntimeException;
 	public List<StatusDto> loadStatusCount(Long codExe) throws AkulaRuntimeException;
 	public List<StatusDto> loadStatusCountNaoMonitorado(Long codExe) throws AkulaRuntimeException;
-	public List<ItemDto> loadListaItens(Long codExe, Estrutura estrutura) throws AkulaRuntimeException;
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 }

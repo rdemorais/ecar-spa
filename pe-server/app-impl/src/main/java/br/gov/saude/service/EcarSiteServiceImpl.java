@@ -13,6 +13,7 @@ import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.EtiquetaDto;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.StatusDto;
@@ -51,7 +52,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		return statusList;
 	}
 	
-	public List<ItemDto> loadListaItens() throws AkulaRuntimeException {
-		return ecarSiteDao.loadListaItens(1L, Estrutura.ATIVIDADE);
+	@Transactional
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+		return ecarSiteDao.loadListaItens(filtro, estrutura);
 	}
 }

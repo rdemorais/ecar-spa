@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import br.gov.saude.model.Estrutura;
 import br.gov.saude.web.dto.EtiquetaDto;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.StatusDto;
@@ -28,7 +30,7 @@ public class EcarServiceTest {
 	@Test
 	public void testListaOEs() {
 		List<OeDto> oes = ecarSiteService.listaOes();
-		logger.debug("Tamanho da listagem: " + oes.size());
+		logger.debug("Tamanho da listagem OES: " + oes.size());
 		Assert.assertEquals(24, oes.size());
 	}
 	
@@ -44,20 +46,70 @@ public class EcarServiceTest {
 		List<StatusDto> statusList = ecarSiteService.loadStatusCount(1L);
 		logger.debug("Tamanho da listagem de status: " + statusList.size());
 		
-		for (StatusDto statusDto : statusList) {
-			logger.debug(statusDto.toString());
-		}
 		Assert.assertTrue(statusList.size() >= 0);
 	}
 	
 	@Test
-	public void testLoadListaItens() {
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens();
+	public void testFiltroEstruturaMetaIniListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
 		
-		logger.debug("Tamanho da listagem de itens: " + listaItens.size());
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
 		
-		for (ItemDto itemDto : listaItens) {
-			logger.debug(itemDto.toString());
-		}
+		logger.debug("Tamanho da listagem de metas/iniciativas: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEstruturaProdutoListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+		
+		logger.debug("Tamanho da listagem de produtos: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEstruturaAtividadeListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
+		
+		logger.debug("Tamanho da listagem de atividades: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEstruturaApenasMetaListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setMeta(true);
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		
+		logger.debug("Tamanho da listagem - Apenas Metas: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEstruturaApenasIniciativaListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setIniciativa(true);
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		
+		logger.debug("Tamanho da listagem - Apenas Iniciativas: " + listaItens.size());
+	}
+	
+	@Test
+	public void testFiltroEstruturaApenasMetasIniciativaListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setIniciativa(true);
+		filtro.setMeta(true);
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		
+		logger.debug("Tamanho da listagem - Apenas Metas/Iniciativas: " + listaItens.size());
 	}
 }

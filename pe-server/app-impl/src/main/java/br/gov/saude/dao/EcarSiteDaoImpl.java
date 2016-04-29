@@ -8,6 +8,7 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.StatusDto;
 
@@ -82,7 +83,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ItemDto> loadListaItens(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
@@ -101,6 +102,9 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
 				hql.append("JOIN iett.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+				if((filtro.isIniciativa() || filtro.isMeta()) && !(filtro.isIniciativa() == true && filtro.isMeta() == true)) {
+					hql.append("AND iett.estrutura = :apenasMetaIniciativa ");
+				}
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
@@ -115,7 +119,17 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("AND mon.exercicio = :codExe");
 			
 			Query q = em.createQuery(hql.toString());
-			q.setParameter("codExe", codExe);
+			q.setParameter("codExe", filtro.getCodExe());
+			
+			if(!(filtro.isIniciativa() == true && filtro.isMeta() == true)) {
+				if(filtro.isIniciativa()) {
+					q.setParameter("apenasMetaIniciativa", Estrutura.INICIATIVA);
+				}
+				if(filtro.isMeta()) {
+					q.setParameter("apenasMetaIniciativa", Estrutura.META);
+				}
+			}
+			
 			
 			return q.getResultList();
 		} catch (Exception e) {
