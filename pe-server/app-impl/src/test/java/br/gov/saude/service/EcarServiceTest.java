@@ -1,5 +1,6 @@
 package br.gov.saude.service;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Assert;
@@ -112,4 +113,20 @@ public class EcarServiceTest {
 		
 		logger.debug("Tamanho da listagem - Apenas Metas/Iniciativas: " + listaItens.size());
 	}
+	
+	@Test
+	public void testFiltroOEsListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setOes(Arrays.asList(new Long(17), new Long(28))); //OE 01 e OE 12
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		/*
+		for (ItemDto itemDto : listaItens) {
+			logger.debug(itemDto.toString());
+		}
+		*/
+		logger.debug("Tamanho da listagem - Filtro OE 01: " + listaItens.size());
+	}
+	
 }

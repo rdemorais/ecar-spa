@@ -7,7 +7,7 @@ public class FiltroDto {
 	private boolean ppa = false;
 	private boolean meta = false;
 	private boolean iniciativa = false;
-	private List<OeDto> oes = new ArrayList<OeDto>();
+	private List<Long> oes = new ArrayList<Long>();
 	private List<EtiquetaDto> etiquetas = new ArrayList<EtiquetaDto>();
 	private Long codExe;
 	
@@ -29,10 +29,10 @@ public class FiltroDto {
 	public void setIniciativa(boolean iniciativa) {
 		this.iniciativa = iniciativa;
 	}
-	public List<OeDto> getOes() {
+	public List<Long> getOes() {
 		return oes;
 	}
-	public void setOes(List<OeDto> oes) {
+	public void setOes(List<Long> oes) {
 		this.oes = oes;
 	}
 	public List<EtiquetaDto> getEtiquetas() {

@@ -116,6 +116,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("WHERE TYPE(iett) IN (Atividade) ");	
 			}
 			
+			if(filtro.getOes().size() > 0) {
+				hql.append("AND oe.id IN :oes ");
+			}
+			
 			hql.append("AND mon.exercicio = :codExe");
 			
 			Query q = em.createQuery(hql.toString());
@@ -128,6 +132,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				if(filtro.isMeta()) {
 					q.setParameter("apenasMetaIniciativa", Estrutura.META);
 				}
+			}
+			
+			if(filtro.getOes().size() > 0) {
+				q.setParameter("oes", filtro.getOes());
 			}
 			
 			
