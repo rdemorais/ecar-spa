@@ -13,6 +13,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String ano;
 	private String oe;
 	private String oeShortName;
+	private String responsavel;
 	
 	private String sigla;
 	private String parecer;
@@ -22,7 +23,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	}
 	
 	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String mes, String ano, String oe, String sigla) {
+			String mes, String ano, String oe, String sigla, String resposavel) {
 		super();
 		this.id = id;
 		this.nomeCor = nomeCor;
@@ -35,11 +36,12 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.ano = ano;
 		this.oe = oe;
 		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
+		this.responsavel = resposavel;
 	}
 	
 	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String mes, String ano, String oe, String sigla, String parecer) {
-		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe, sigla);
+			String mes, String ano, String oe, String sigla, String parecer, String resposavel) {
+		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe, sigla, resposavel);
 		this.parecer = parecer;
 	}
 
@@ -116,12 +118,20 @@ public class ItemDto implements Comparable<ItemDto>{
 	public void setParecer(String parecer) {
 		this.parecer = parecer;
 	}
+	
+	public String getResponsavel() {
+		return responsavel;
+	}
+
+	public void setResponsavel(String responsavel) {
+		this.responsavel = responsavel;
+	}
 
 	@Override
 	public String toString() {
 		return "ItemDto [oe=" + oe + ", sigla=" + sigla + ", id=" + id + ", nivel=" + nivel + ", desc=" + desc
 				+ ", nomeCor=" + nomeCor + ", situacao=" + situacao + ", orgaoResp=" + orgaoResp + ", mes=" + mes
-				+ ", ano=" + ano + ", oeShortName=" + oeShortName + ", parecer=" + parecer + "]";
+				+ ", ano=" + ano + ", oeShortName=" + oeShortName + ", parecer=" + parecer + ", responsavel="+ responsavel +"]";
 	}
 
 	@Override

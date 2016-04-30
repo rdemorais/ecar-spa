@@ -101,10 +101,12 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("oe.sigla, ");
 			
 			hql.append("iett.siglaMi, ");
-			hql.append("mon.parecer) ");
+			hql.append("mon.parecer, ");
+			hql.append("usu.nome) ");
 			
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
+			hql.append("LEFT JOIN mon.usuario usu ");
 			
 			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
 				hql.append("JOIN iett.oe oe ");
@@ -155,7 +157,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
 			hql.append("iett.id, "); 
-			hql.append("LOWER(mon.nomeCor), ");
+			if(nMonitorado) {
+				hql.append("'branco', ");
+			}else {
+				hql.append("LOWER(mon.nomeCor), ");
+			}
 			hql.append("iett.nome, ");
 			hql.append("mon.descricaoSit, ");
 			hql.append("iett.estrutura, ");
@@ -163,9 +169,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
 			hql.append("oe.sigla, ");
-			hql.append("iett.siglaMi) ");
+			hql.append("iett.siglaMi, ");
+			hql.append("usu.nome) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
+			hql.append("LEFT JOIN mon.usuario usu ");
 			if(filtro.getEtiquetas().size() > 0) {
 				hql.append("JOIN iett.etiquetas etq ");
 			}

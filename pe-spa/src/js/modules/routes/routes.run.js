@@ -33,7 +33,7 @@
 
 
       $rootScope.$on('oauth:error', function(event, rejection) {
-        console.log(rejection.data.error);
+        /*
         // Ignore invalid_grant error - should be catched on LoginController.
         if ('invalid_grant' === rejection.data.error) {
           return;
@@ -42,10 +42,12 @@
         // Refresh token when a invalid_token error occurs.
         if ('invalid_token' === rejection.data.error) {
           return OAuth.getRefreshToken();
-        }
+        }*/
 
         // Redirect to /login with the error_reason.
+        OAuth.revokeToken();
         
+        $state.go('app.login');
       });
     }
     appRun.$inject = ['$rootScope', '$window', 'OAuth', '$state'];

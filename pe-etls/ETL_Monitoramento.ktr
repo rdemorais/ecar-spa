@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;28 13&#x3a;54&#x3a;14.680</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;04&#x2f;30 12&#x3a;56&#x3a;44.104</modified_date>
+  <modified_date>2016&#x2f;04&#x2f;30 18&#x3a;56&#x3a;46.075</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -104,12 +104,13 @@
   <hop> <from>Carrega Ietts</from><to>Monitoramento</to><enabled>Y</enabled> </hop>
   <hop> <from>Exercicios</from><to>Nao monitorados</to><enabled>Y</enabled> </hop>
   <hop> <from>Exercicios</from><to>Select ultimo parecer</to><enabled>Y</enabled> </hop>
-  <hop> <from>Nao monitorados</from><to>Atualiza nao monitorado</to><enabled>Y</enabled> </hop>
   <hop> <from>Select ultimo parecer</from><to>Atualiza ultimo parecer</to><enabled>Y</enabled> </hop>
   <hop> <from>Ordena Iett</from><to>Iett unico</to><enabled>Y</enabled> </hop>
   <hop> <from>Iett unico</from><to>Exercicios</to><enabled>Y</enabled> </hop>
   <hop> <from>Ult. parecer - N monitorado</from><to>Seq Mon</to><enabled>Y</enabled> </hop>
   <hop> <from>Seq Mon</from><to>Atualiza monitoramento</to><enabled>Y</enabled> </hop>
+  <hop> <from>Nao monitorados</from><to>Responsavel Cadastro</to><enabled>Y</enabled> </hop>
+  <hop> <from>Responsavel Cadastro</from><to>Atualiza nao monitorado</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Atualiza monitoramento</name>
@@ -302,10 +303,15 @@
         <rename>cod_exe</rename>
         <update>N</update>
       </value>
+      <value>
+        <name>cod_usu</name>
+        <rename>cod_usu</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>287</xloc>
+      <xloc>156</xloc>
       <yloc>207</yloc>
       <draw>Y</draw>
       </GUI>
@@ -778,6 +784,36 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>454</xloc>
       <yloc>104</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Responsavel Cadastro</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select cod_usu &#xa;from dbecardemas.tb_item_est_usutpfuac_iettutfa&#xa;where cod_iett &#x3d; &#x3f;&#xa;and cod_tpfa in &#x28;15, 17, 18, 19, 20, 21, 22&#x29;&#xa;--tpfa da configuracao atual</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>cod_iett</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>297</xloc>
+      <yloc>207</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

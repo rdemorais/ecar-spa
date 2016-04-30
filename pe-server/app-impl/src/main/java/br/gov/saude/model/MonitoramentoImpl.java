@@ -57,6 +57,10 @@ public class MonitoramentoImpl implements Monitoramento {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=IettImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_iett", referencedColumnName = "cod_iett")
 	private Iett iett;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
+	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
+	private Usuario usuario;
 
 	public Long getId() {
 		return id;
@@ -168,6 +172,14 @@ public class MonitoramentoImpl implements Monitoramento {
 
 	public void setIett(Iett iett) {
 		this.iett = iett;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 	
 }

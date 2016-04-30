@@ -134,11 +134,11 @@
         });  
 
         $scope.onSelectEt = function(et) {
-          pemsFilterService.addRemoveEtiqueta(et);
+          pemsFilterService.addRemoveEtiqueta(et.id);
         };
 
         $scope.onRemoveEt = function(et) {
-          pemsFilterService.addRemoveEtiqueta(et);
+          pemsFilterService.addRemoveEtiqueta(et.id);
         };
       }
     }

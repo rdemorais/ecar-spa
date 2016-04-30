@@ -31,4 +31,6 @@ public interface Monitoramento {
 	public void setNaoMonitorado(String naoMonitorado);
 	public Iett getIett();
 	public void setIett(Iett iett);
+	public Usuario getUsuario();
+	public void setUsuario(Usuario usuario);
 }

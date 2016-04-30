@@ -5,8 +5,8 @@
         .service('pemsService', pemsService)
         .service('pemsFilterService', pemsFilterService);
 
-    pemsService.$inject = ['$http', '$q']
-    function pemsService($http, $q) {
+    pemsService.$inject = ['$http', '$q', '$rootScope']
+    function pemsService($http, $q, $rootScope) {
 
         var fixedArrays = {
             oes: []
@@ -26,7 +26,7 @@
                     //tratar erro
                 }
             }, function errorCallBack(response) {
-                console.log(response);
+                $rootScope.$emit('oauth:error', response);
             });
         };
 
@@ -88,7 +88,7 @@
                     //tratar erro
                 }
             }, function errorCallBack(response) {
-                console.log(response);
+                $rootScope.$emit('oauth:error', response);
             });            
     	};
 
@@ -127,7 +127,7 @@
                     //tratar erro
                 }
             }, function errorCallBack(response) {
-                console.log(response);
+                $rootScope.$emit('oauth:error', response);
             });
     	};
 
@@ -145,7 +145,7 @@
                     //tratar erro
                 }
             }, function errorCallBack(response) {
-                console.log(response);
+                $rootScope.$emit('oauth:error', response);
             });
     	};
 
@@ -168,7 +168,7 @@
                         //tratar erro
                     }
                 }, function errorCallBack(response) {
-                    console.log(response);
+                    $rootScope.$emit('oauth:error', response);
                 });
             }else {
                 callback(fixedArrays.oes);
