@@ -13,7 +13,7 @@
             .media
               a.pull-left(href='', ng-click="itemSelecionado(item.id)")
                 .media-object.img-responsive(ng-class="'img-status-'+item.nomeCor")
-                .small.text-muted {{item.ciclo}}
+                .small.text-muted {{item.mes}}/{{item.ano}}
               .media-body
                 h5.media-heading 
                   a(href="", ng-click="itemSelecionado(item.id)").text-inverse {{item.desc}}

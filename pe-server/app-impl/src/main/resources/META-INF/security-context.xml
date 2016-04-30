@@ -104,7 +104,7 @@
 		class="org.springframework.security.oauth2.provider.token.DefaultTokenServices">
 		<beans:property name="tokenStore" ref="tokenStore" />
 		<beans:property name="supportRefreshToken" value="true" />
-		<beans:property name="accessTokenValiditySeconds" value="120" />
+		<beans:property name="accessTokenValiditySeconds" value="28800" /> <!-- token com 8h de validade -->
 		<beans:property name="clientDetailsService" ref="clientDetails" />
 	</beans:bean>
 

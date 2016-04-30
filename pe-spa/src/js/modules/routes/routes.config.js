@@ -54,10 +54,12 @@
           resolve: {}
         })
         .state('app.dash-item', {
+          params: {'itemId': null},
           url: '/item-dash',
           templateUrl: Route.base('item-dash.html'),
           resolve: {
-            assets: Route.require('slimscroll')
+            assets: Route.require('slimscroll'),
+            itemId: ['$stateParams', function($stateParams) {return $stateParams.itemId}]
           }
         })
     }

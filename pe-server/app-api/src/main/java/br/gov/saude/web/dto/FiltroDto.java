@@ -78,7 +78,9 @@ public class FiltroDto {
 	@Override
 	public String toString() {
 		return "FiltroDto [ppa=" + ppa + ", meta=" + meta + ", iniciativa=" + iniciativa + ", oes=" + oes + ", status="
-				+ status + ", etiquetas=" + etiquetas + ", codExe=" + codExe + "]";
+				+ status + ", etiquetas=" + etiquetas + ", codExe=" + codExe + ", codIett=" + codIett + ", mes=" + mes
+				+ ", ano=" + ano + "]";
 	}
+	
 	
 }

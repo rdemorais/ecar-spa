@@ -67,11 +67,10 @@
         }
     }
 
-    itemDashController.$inject = ['$scope', '$state', 'pemsService'];
-    function itemDashController($scope, $state, pemsService) {
+    itemDashController.$inject = ['$scope', '$state', '$stateParams', 'pemsService'];
+    function itemDashController($scope, $state, $stateParams, pemsService) {
         var vm = this;
-
-        pemsService.loadItem(1, function(item) {
+        pemsService.loadItem($stateParams.itemId, function(item) {
             vm.item = item;
         });
     }

@@ -153,12 +153,12 @@ public class EcarServiceTest {
 	public void testLoadItem() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		filtro.setCodIett(41L);
+		filtro.setCodIett(44L);
 		
 		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.INICIATIVA);
 		
 		Assert.assertNotNull(item);
 		
-		logger.debug("Item carregado com sucesso: " + item.getDesc());
+		logger.debug("Item carregado com sucesso: " + item.toString());
 	}
 }

@@ -180,8 +180,8 @@
           });
         }
 
-        $scope.itemSelecionado = function(itemId) {
-          $state.go("app.dash-item");
+        $scope.itemSelecionado = function(_itemId) {
+          $state.go("app.dash-item", {itemId: _itemId});
         }
 
         $scope.$on('pems:pesquisar-lista', function(event) {

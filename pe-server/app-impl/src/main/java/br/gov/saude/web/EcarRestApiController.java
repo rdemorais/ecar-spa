@@ -44,6 +44,19 @@ public class EcarRestApiController {
 		return EcarResponse.ok(oes);
 	}
 	
+	@RequestMapping(value="/load-item", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadItem(@RequestBody FiltroDto filtro) {
+		logger.debug(filtro.toString());
+		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.INICIATIVA);
+		if(item != null) {
+			logger.debug("retornando item: " + item.toString());
+		}
+		
+		return EcarResponse.ok(item);
+	}
+	
 	@RequestMapping(value="/lista-itens", 
 			method=RequestMethod.POST)
 	@ResponseBody
