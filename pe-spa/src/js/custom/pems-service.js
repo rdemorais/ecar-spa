@@ -5,8 +5,8 @@
         .service('pemsService', pemsService)
         .service('pemsFilterService', pemsFilterService);
 
-    pemsService.$inject = ['$http']
-    function pemsService($http, pemsFilterService) {
+    pemsService.$inject = ['$http', '$q']
+    function pemsService($http, $q) {
 
         var fixedArrays = {
             oes: []
@@ -97,10 +97,11 @@
     		callback(listaProdutos);
     	};
 
-    	this.loadListaItens = function(callback) {
+    	this.loadListaItens = function(filtro, callback) {
     		$http({
                 method: 'POST',
                 url: 'http://localhost:8080/pe-server/ecar/api/lista-itens',
+                data: filtro,
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             }).then(function successCallBack(response) {
                 var ecarResponse = response.data;
@@ -160,14 +161,15 @@
     	};
     }
 
-    function pemsFilterService(pemsService) {
+    function pemsFilterService() {
         var filtros = {
             ppa: false,
             meta: false,
             iniciativa: false,
             status: [],
             oes: [],
-            etiquetas: []
+            etiquetas: [],
+            codExe: 1
         };
 
         this.clear = function() {

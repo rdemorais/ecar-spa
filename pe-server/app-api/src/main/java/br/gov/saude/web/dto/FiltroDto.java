@@ -54,4 +54,10 @@ public class FiltroDto {
 	public void setStatus(List<Long> status) {
 		this.status = status;
 	}
+	@Override
+	public String toString() {
+		return "FiltroDto [ppa=" + ppa + ", meta=" + meta + ", iniciativa=" + iniciativa + ", oes=" + oes + ", status="
+				+ status + ", etiquetas=" + etiquetas + ", codExe=" + codExe + "]";
+	}
+	
 }

@@ -12,8 +12,8 @@
         .controller('itemDashController', itemDashController)
         .controller('loginController', loginController);
     
-    loginController.$inject = ['$scope', '$state', 'OAuth'];
-    function loginController($scope, $state, OAuth) {
+    loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService'];
+    function loginController($scope, $state, OAuth, pemsService) {
 
         $scope.login = function() {
 
@@ -22,6 +22,8 @@
                 password: 'passwd'
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
+                    pemsService.loadOEs(function(oes){});
+
                     $state.go('app.dashboard');
                 }
             });
@@ -46,12 +48,11 @@
 
         $scope.limparFiltros = function() {
             pemsFilterService.clear();
-            console.log('sds');
         };
     }
 
-    listaItensController.$inject = ['$scope', '$state', 'pemsFilterService'];
-    function listaItensController($scope, $state, pemsFilterService) {
+    listaItensController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService'];
+    function listaItensController($scope, $state, pemsFilterService, pemsService) {
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
@@ -59,7 +60,10 @@
         };
 
         $scope.pesquisar = function() {
-            
+            pemsFilterService.setPpa($scope.filtro.ppa);
+            pemsFilterService.setMeta($scope.filtro.meta);
+            pemsFilterService.setIniciativa($scope.filtro.iniciativa);
+            $scope.$broadcast('pems:pesquisar-lista');
         }
     }
 

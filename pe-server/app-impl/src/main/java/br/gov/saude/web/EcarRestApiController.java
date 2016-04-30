@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,11 +47,8 @@ public class EcarRestApiController {
 	@RequestMapping(value="/lista-itens", 
 			method=RequestMethod.POST)
 	@ResponseBody
-	public EcarResponse loadListaItens() {
-		FiltroDto filtro = new FiltroDto();
-		filtro.setCodExe(1L);
+	public EcarResponse loadListaItens(@RequestBody FiltroDto filtro) {
 		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
-		
 		logger.debug("retornando lista de itens: " + itens.size());
 		
 		return EcarResponse.ok(itens);

@@ -1,8 +1,9 @@
 .panel.panel-default
   .panel-heading
     | {{listaItens.length}}
-    span(ng-if="listaItens.length > 1") itens encontrados
+    span(ng-if="listaItens.length == 0") Nenhum item foi encontrado para os parâmetros de busca
     span(ng-if="listaItens.length == 1") item encontrado
+    span(ng-if="listaItens.length > 1") itens encontrados
   // START table-responsive
   .table-responsive
     table.table.table-hover

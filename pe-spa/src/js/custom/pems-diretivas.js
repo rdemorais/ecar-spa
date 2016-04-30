@@ -159,7 +159,7 @@
     }
 
     function pemsListaItens() {
-      controller.$inject = ['$scope', '$element', 'pemsService', '$state'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', '$state'];
       return {
         restrict: 'E',
         scope: {
@@ -169,21 +169,32 @@
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, $state) {
+      function controller($scope, $element, pemsService, pemsFilterService, $state) {
         if($scope.nivel == 1) {
-          pemsService.loadListaItens(function(listaItens) {
+          pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
             $scope.listaItens = listaItens;
           });
         }else if($scope.nivel == 2) {
-          pemsService.loadProdutos(function(listaItens) {
+          pemsService.loadProdutos(pemsFilterService.getFiltros(), function(listaItens) {
             $scope.listaItens = listaItens;
           });
         }
 
         $scope.itemSelecionado = function(itemId) {
-          console.log(itemId);
           $state.go("app.dash-item");
         }
+
+        $scope.$on('pems:pesquisar-lista', function(event) {
+          if($scope.nivel == 1) {
+            pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
+              $scope.listaItens = listaItens;
+            });
+          }else if($scope.nivel == 2) {
+            pemsService.loadProdutos(pemsFilterService.getFiltros(), function(listaItens) {
+              $scope.listaItens = listaItens;
+            });
+          }
+        });
       }
     }
 
