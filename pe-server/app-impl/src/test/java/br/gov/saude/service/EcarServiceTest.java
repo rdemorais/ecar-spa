@@ -149,4 +149,16 @@ public class EcarServiceTest {
 		logger.debug("Tamanho da listagem - Filtro Etiquetas: " + listaItens.size());
 	}
 	
+	@Test
+	public void testLoadItem() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setCodIett(41L);
+		
+		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.INICIATIVA);
+		
+		Assert.assertNotNull(item);
+		
+		logger.debug("Item carregado com sucesso: " + item.getDesc());
+	}
 }

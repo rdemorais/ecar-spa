@@ -48,6 +48,10 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		return statusService.loadStatusBar(codExe);
 	}
 	
+	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+		return ecarSiteDao.loadItem(filtro, estrutura);
+	}
+	
 	@Transactional
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		return ecarSiteDao.loadListaItens(filtro, estrutura);

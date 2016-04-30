@@ -68,10 +68,34 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;21 23&#x3a;14&#x3a;02.741</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;04&#x2f;28 23&#x3a;42&#x3a;31.825</modified_date>
+  <modified_date>2016&#x2f;04&#x2f;30 12&#x3a;34&#x3a;19.475</modified_date>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>eCar 2016</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>ecar2016</database>
+    <port>5432</port>
+    <username>sa_ecar</username>
+    <password>Encrypted 2be98afc86aa7f28efc0ffd619380aedc</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Atualiza OE</from><to>Meta-Iniciativa</to><enabled>Y</enabled> </hop>
   <hop> <from>Meta-Iniciativa</from><to>Campos tb_meta_iniciativa</to><enabled>Y</enabled> </hop>
@@ -89,8 +113,8 @@
   <hop> <from>Atualiza Iett Atv</from><to>Atualiza tb_atividade</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>OEs</name>
-    <type>TableInput</type>
+    <name>Atividades</name>
+    <type>DBJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -100,16 +124,188 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <sql>select cod_iett as cod_oe,&#xa;sigla_iett as sigla_oe,&#xa;nome_iett as nome_oe,&#xa;&#x27;OE&#x27; as ds_estrutura&#xa;from dbecardemas.tb_item_estrutura_iett &#xa;where nivel_iett &#x3d; 1&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;order by sigla_iett</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
+    <rowlimit>0</rowlimit>
+    <sql>select iett.cod_iett as cod_atv,&#xa;sigla_iett as sigla_atv,&#xa;nome_iett as nome_atv,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;&#x27;ATIVIDADE&#x27; as ds_estrutura_atv&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 4&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>cod_pi</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>100</xloc>
+      <xloc>218</xloc>
+      <yloc>142</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Atualiza Iett</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbsitedemas2016</schema>
+      <table>tb_iett</table>
+      <key>
+        <name>cod_oe</name>
+        <field>cod_iett</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_iett</name>
+        <rename>cod_oe</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ds_estrutura</name>
+        <rename>ds_estrutura</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>207</xloc>
       <yloc>59</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Atualiza Iett Atv</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbsitedemas2016</schema>
+      <table>tb_iett</table>
+      <key>
+        <name>cod_atv</name>
+        <field>cod_iett</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_iett</name>
+        <rename>cod_atv</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ds_estrutura</name>
+        <rename>ds_estrutura_atv</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>102</xloc>
+      <yloc>216</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Atualiza Iett Meta</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbsitedemas2016</schema>
+      <table>tb_iett</table>
+      <key>
+        <name>cod_mi</name>
+        <field>cod_iett</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_iett</name>
+        <rename>cod_mi</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ds_estrutura</name>
+        <rename>ds_estrutura_mi</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>687</xloc>
+      <yloc>60</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Atualiza Iett Prod</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbsitedemas2016</schema>
+      <table>tb_iett</table>
+      <key>
+        <name>cod_pi</name>
+        <field>cod_iett</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_iett</name>
+        <rename>cod_pi</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ds_estrutura</name>
+        <rename>ds_estrutura_pi</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>524</xloc>
+      <yloc>142</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -156,36 +352,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>313</xloc>
-      <yloc>59</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Meta-Iniciativa</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>eCar 2016</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_mi,&#xa;sigla_iett as sigla_mi,&#xa;nome_iett as nome_mi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;CASE WHEN ett.cod_ett &#x3d; 2 THEN &#x27;INICIATIVA&#x27;&#xa;	 WHEN ett.cod_ett &#x3d; 5 THEN &#x27;META&#x27;&#xa;END as ds_estrutura_mi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 2&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>cod_oe</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>434</xloc>
       <yloc>59</yloc>
       <draw>Y</draw>
       </GUI>
@@ -274,104 +440,10 @@
     </step>
 
   <step>
-    <name>Campos tb_meta_iniciativa</name>
-    <type>SelectValues</type>
+    <name>Atualiza tb_atividade</name>
+    <type>InsertUpdate</type>
     <description/>
     <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cod_oe</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_mi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sigla_mi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>nome_mi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sigla_ett</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>data_inicio</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>data_termino</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_org</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sigla_org</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_usu</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ds_estrutura_mi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>data_inicio</name>
-        <rename>data_inicio</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>data_termino</name>
-        <rename>data_termino</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>574</xloc>
-      <yloc>59</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Produto Intermediario</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -379,110 +451,67 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_pi,&#xa;sigla_iett as sigla_pi,&#xa;nome_iett as nome_pi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;&#x27;PRODUTO_INTERMEDIARIO&#x27; as ds_estrutura_pi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 3&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>cod_mi</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
+    <commit>1</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>dbsitedemas2016</schema>
+      <table>tb_atividade</table>
+      <key>
+        <name>cod_atv</name>
+        <field>cod_iett</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_pi</name>
+        <rename>cod_pi</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_iett</name>
+        <rename>cod_atv</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>sigla_atv</name>
+        <rename>sigla_atv</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nome_atv</name>
+        <rename>nome_atv</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>data_inicio</name>
+        <rename>data_inicio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>data_termino</name>
+        <rename>data_termino</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_org</name>
+        <rename>cod_org</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sigla_org</name>
+        <rename>sigla_org</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_usu</name>
+        <rename>cod_usu</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>790</xloc>
-      <yloc>142</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Campos tb_prod_inter</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cod_mi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_pi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sigla_pi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>nome_pi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>data_inicio_1</name>
-        <rename>data_inicio</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>data_termino_1</name>
-        <rename>data_termino</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_org_1</name>
-        <rename>cod_org</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>sigla_org_1</name>
-        <rename>sigla_org</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>cod_usu_1</name>
-        <rename>cod_usu</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ds_estrutura_pi</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>data_inicio</name>
-        <rename>data_inicio</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>      <meta>        <name>data_termino</name>
-        <rename>data_termino</rename>
-        <type>Date</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>662</xloc>
-      <yloc>142</yloc>
+      <xloc>102</xloc>
+      <yloc>282</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -559,36 +588,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>385</xloc>
-      <yloc>142</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Atividades</name>
-    <type>DBJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>eCar 2016</connection>
-    <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_atv,&#xa;sigla_iett as sigla_atv,&#xa;nome_iett as nome_atv,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;&#x27;ATIVIDADE&#x27; as ds_estrutura_atv&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 4&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
-    <outer_join>N</outer_join>
-    <replace_vars>N</replace_vars>
-    <parameter>
-      <field>
-        <name>cod_pi</name>
-        <type>Integer</type>
-      </field>
-    </parameter>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
       <yloc>142</yloc>
       <draw>Y</draw>
       </GUI>
@@ -689,8 +688,8 @@
     </step>
 
   <step>
-    <name>Atualiza tb_atividade</name>
-    <type>InsertUpdate</type>
+    <name>Campos tb_meta_iniciativa</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -699,201 +698,182 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>eCar 2016</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbsitedemas2016</schema>
-      <table>tb_atividade</table>
-      <key>
-        <name>cod_atv</name>
-        <field>cod_iett</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>cod_pi</name>
-        <rename>cod_pi</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_iett</name>
-        <rename>cod_atv</rename>
-        <update>N</update>
-      </value>
-      <value>
-        <name>sigla_atv</name>
-        <rename>sigla_atv</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>nome_atv</name>
-        <rename>nome_atv</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>data_inicio</name>
+    <fields>      <field>        <name>cod_oe</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_mi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sigla_mi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>nome_mi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sigla_ett</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>data_inicio</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>data_termino</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_org</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sigla_org</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_usu</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ds_estrutura_mi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>data_inicio</name>
         <rename>data_inicio</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>data_termino</name>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>data_termino</name>
         <rename>data_termino</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_org</name>
-        <rename>cod_org</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>sigla_org</name>
-        <rename>sigla_org</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>cod_usu</name>
-        <rename>cod_usu</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>102</xloc>
-      <yloc>282</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Atualiza Iett</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>eCar 2016</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbsitedemas2016</schema>
-      <table>tb_iett</table>
-      <key>
-        <name>cod_oe</name>
-        <field>cod_iett</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>cod_iett</name>
-        <rename>cod_oe</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ds_estrutura</name>
-        <rename>ds_estrutura</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>207</xloc>
+      <xloc>574</xloc>
       <yloc>59</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Atualiza Iett Meta</name>
-    <type>InsertUpdate</type>
+    <name>Campos tb_prod_inter</name>
+    <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>eCar 2016</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbsitedemas2016</schema>
-      <table>tb_iett</table>
-      <key>
-        <name>cod_mi</name>
-        <field>cod_iett</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>cod_iett</name>
-        <rename>cod_mi</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ds_estrutura</name>
-        <rename>ds_estrutura_mi</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
+    <fields>      <field>        <name>cod_mi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_pi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sigla_pi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>nome_pi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>data_inicio_1</name>
+        <rename>data_inicio</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>data_termino_1</name>
+        <rename>data_termino</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_org_1</name>
+        <rename>cod_org</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>sigla_org_1</name>
+        <rename>sigla_org</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>cod_usu_1</name>
+        <rename>cod_usu</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ds_estrutura_pi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>data_inicio</name>
+        <rename>data_inicio</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>data_termino</name>
+        <rename>data_termino</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>687</xloc>
-      <yloc>60</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Atualiza Iett Prod</name>
-    <type>InsertUpdate</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>eCar 2016</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbsitedemas2016</schema>
-      <table>tb_iett</table>
-      <key>
-        <name>cod_pi</name>
-        <field>cod_iett</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>cod_iett</name>
-        <rename>cod_pi</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ds_estrutura</name>
-        <rename>ds_estrutura_pi</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>524</xloc>
+      <xloc>662</xloc>
       <yloc>142</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Atualiza Iett Atv</name>
-    <type>InsertUpdate</type>
+    <name>Meta-Iniciativa</name>
+    <type>DBJoin</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -903,32 +883,76 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <commit>1</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema>dbsitedemas2016</schema>
-      <table>tb_iett</table>
-      <key>
-        <name>cod_atv</name>
-        <field>cod_iett</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>cod_iett</name>
-        <rename>cod_atv</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ds_estrutura</name>
-        <rename>ds_estrutura_atv</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <rowlimit>0</rowlimit>
+    <sql>select iett.cod_iett as cod_mi,&#xa;sigla_iett as sigla_mi,&#xa;nome_iett as nome_mi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;CASE WHEN ett.cod_ett &#x3d; 2 THEN &#x27;INICIATIVA&#x27;&#xa;	 WHEN ett.cod_ett &#x3d; 5 THEN &#x27;META&#x27;&#xa;END as ds_estrutura_mi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 2&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>cod_oe</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>102</xloc>
-      <yloc>216</yloc>
+      <xloc>434</xloc>
+      <yloc>59</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>OEs</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <sql>select cod_iett as cod_oe,&#xa;sigla_iett as sigla_oe,&#xa;nome_iett as nome_oe,&#xa;&#x27;OE&#x27; as ds_estrutura&#xa;from dbecardemas.tb_item_estrutura_iett &#xa;where nivel_iett &#x3d; 1&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;order by sigla_iett</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>100</xloc>
+      <yloc>59</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Produto Intermediario</name>
+    <type>DBJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <rowlimit>0</rowlimit>
+    <sql>select iett.cod_iett as cod_pi,&#xa;sigla_iett as sigla_pi,&#xa;nome_iett as nome_pi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;&#x27;PRODUTO_INTERMEDIARIO&#x27; as ds_estrutura_pi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 3&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <outer_join>N</outer_join>
+    <replace_vars>N</replace_vars>
+    <parameter>
+      <field>
+        <name>cod_mi</name>
+        <type>Integer</type>
+      </field>
+    </parameter>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>790</xloc>
+      <yloc>142</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

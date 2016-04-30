@@ -8,7 +8,7 @@
   .table-responsive
     table.table.table-hover
       tbody
-        tr(ng-repeat="item in listaItens")
+        tr.animated.fadeInUp(ng-repeat="item in listaItens")
           td
             .media
               a.pull-left(href='', ng-click="itemSelecionado(item.id)")

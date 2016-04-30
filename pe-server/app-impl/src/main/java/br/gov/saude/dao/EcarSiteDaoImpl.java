@@ -86,6 +86,68 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 		}
 	}
 	
+	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
+			hql.append("iett.id, "); 
+			hql.append("LOWER(mon.nomeCor), ");
+			hql.append("iett.nome, ");
+			hql.append("mon.descricaoSit, ");
+			hql.append("iett.estrutura, ");
+			hql.append("iett.siglaOrg, ");
+			hql.append("mon.mes, ");
+			hql.append("mon.ano, ");
+			hql.append("oe.sigla, ");
+			
+			hql.append("iett.sigla, ");
+			hql.append("mon.parecer) ");
+			
+			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.iett iett ");
+			
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("JOIN iett.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("JOIN iett.metaIniciativa mi ");
+				hql.append("JOIN mi.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (ProdutoIntermediario) ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("JOIN iett.produtoIntermediario pi ");
+				hql.append("JOIN pi.metaIniciativa mi ");
+				hql.append("JOIN mi.oe oe ");
+				hql.append("WHERE TYPE(iett) IN (Atividade) ");	
+			}
+			
+			hql.append("AND mon.exercicio = :codExe ");
+			hql.append("AND iett.id = :codIett ");
+			
+			if(filtro.getMes() != null && filtro.getAno() != null) {
+				hql.append("AND mon.mes = :mes ");
+				hql.append("AND mon.ano = :ano ");
+			}else {
+				hql.append("AND mon.ultimoParecer = 'Y' ");
+			}
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("codExe", filtro.getCodExe());
+			q.setParameter("codIett", filtro.getCodIett());
+			
+			if(filtro.getMes() != null && filtro.getAno() != null) {
+				q.setParameter("mes", filtro.getMes());
+				q.setParameter("ano", filtro.getAno());
+			}
+			
+			return (ItemDto) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage(), e);
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		try {

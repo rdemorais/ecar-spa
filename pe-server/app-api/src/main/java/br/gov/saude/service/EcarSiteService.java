@@ -14,5 +14,6 @@ public interface EcarSiteService {
 	public List<OeDto> listaOes() throws AkulaRuntimeException;
 	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException;
 	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException;
+	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 }

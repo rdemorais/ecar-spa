@@ -9,9 +9,13 @@ public class ItemDto {
 	private String situacao;
 	private String nivel;
 	private String orgaoResp;
-	private String ciclo;
+	private String mes;
+	private String ano;
 	private String oe;
 	private String oeShortName;
+	
+	private String sigla;
+	private String parecer;
 	
 	public ItemDto() {
 		
@@ -26,9 +30,17 @@ public class ItemDto {
 		this.situacao = situacao;
 		this.nivel = estrutura.name().toLowerCase();
 		this.orgaoResp = orgaoResp;
-		this.ciclo = mes + "/" + ano;
+		this.mes = mes;
+		this.ano = ano;
 		this.oe = oe;
 		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
+	}
+	
+	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
+			String mes, String ano, String oe, String sigla, String parecer) {
+		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe);
+		this.sigla = sigla;
+		this.parecer = parecer;
 	}
 
 	public Long getId() {
@@ -67,12 +79,19 @@ public class ItemDto {
 	public void setOrgaoResp(String orgaoResp) {
 		this.orgaoResp = orgaoResp;
 	}
-	public String getCiclo() {
-		return ciclo;
+	public String getMes() {
+		return mes;
 	}
-	public void setCiclo(String ciclo) {
-		this.ciclo = ciclo;
+	public void setMes(String mes) {
+		this.mes = mes;
 	}
+	public String getAno() {
+		return ano;
+	}
+	public void setAno(String ano) {
+		this.ano = ano;
+	}
+
 	public String getOe() {
 		return oe;
 	}
@@ -85,11 +104,23 @@ public class ItemDto {
 	public void setOeShortName(String oeShortName) {
 		this.oeShortName = oeShortName;
 	}
+	public String getSigla() {
+		return sigla;
+	}
+	public void setSigla(String sigla) {
+		this.sigla = sigla;
+	}
+	public String getParecer() {
+		return parecer;
+	}
+	public void setParecer(String parecer) {
+		this.parecer = parecer;
+	}
+
 	@Override
 	public String toString() {
-		return "ItemDto [id=" + id + ", nomeCor=" + nomeCor + ", desc=" + desc + ", situacao=" + situacao
-				+ ", nivel=" + nivel + ", orgaoResp=" + orgaoResp + ", ciclo=" + ciclo + ", oe=" + oe
-				+ ", oeShortName=" + oeShortName + "]";
+		return "ItemDto [id=" + id + ", nomeCor=" + nomeCor + ", desc=" + desc + ", situacao=" + situacao + ", nivel="
+				+ nivel + ", orgaoResp=" + orgaoResp + ", mes=" + mes + ", ano=" + ano + ", oe=" + oe + ", oeShortName="
+				+ oeShortName + ", sigla=" + sigla + ", parecer=" + parecer + "]";
 	}
-	
 }
