@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	
 	@Column(name="sigla_mi")
-	private String sigla;
+	private String siglaMi;
 	
 	@Column(name="nome_mi")
 	private String nome;
@@ -42,12 +42,12 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	@JoinColumn(name = "cod_oe", referencedColumnName = "cod_iett")
 	private OE oe;
 
-	public String getSigla() {
-		return sigla;
+	public String getSiglaMi() {
+		return siglaMi;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setSiglaMi(String siglaMi) {
+		this.siglaMi = siglaMi;
 	}
 
 	public String getNome() {

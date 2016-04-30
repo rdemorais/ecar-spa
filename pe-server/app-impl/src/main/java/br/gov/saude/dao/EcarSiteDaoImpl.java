@@ -100,7 +100,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("mon.ano, ");
 			hql.append("oe.sigla, ");
 			
-			hql.append("iett.sigla, ");
+			hql.append("iett.siglaMi, ");
 			hql.append("mon.parecer) ");
 			
 			hql.append("FROM Monitoramento mon ");
@@ -149,7 +149,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
@@ -162,7 +162,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			hql.append("iett.siglaOrg, ");
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
-			hql.append("oe.sigla) ");
+			hql.append("oe.sigla, ");
+			hql.append("iett.siglaMi) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			if(filtro.getEtiquetas().size() > 0) {
@@ -198,8 +199,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("AND etq.id IN :etiquetas ");
 			}
 			
+			if(nMonitorado) {
+				hql.append("AND mon.naoMonitorado = 'Y' ");
+			}else {
+				hql.append("AND mon.ultimoParecer = 'Y' ");
+			}
+			
 			hql.append("AND mon.exercicio = :codExe ");
-			hql.append("AND mon.ultimoParecer = 'Y' ");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", filtro.getCodExe());
@@ -231,4 +237,5 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
+	
 }

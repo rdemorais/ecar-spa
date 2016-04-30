@@ -1,5 +1,7 @@
 package br.gov.saude.service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -54,6 +56,15 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Transactional
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
-		return ecarSiteDao.loadListaItens(filtro, estrutura);
+		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false);
+		List<ItemDto> nMonitorados = ecarSiteDao.loadListaItens(filtro, estrutura, true);
+		
+		List<ItemDto> itens = new ArrayList<ItemDto>(monitorados);
+		
+		itens.addAll(nMonitorados);
+		
+		Collections.sort(itens);
+		
+		return itens;
 	}
 }

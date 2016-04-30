@@ -2,7 +2,7 @@ package br.gov.saude.web.dto;
 
 import br.gov.saude.model.Estrutura;
 
-public class ItemDto {
+public class ItemDto implements Comparable<ItemDto>{
 	private Long id;
 	private String nomeCor;
 	private String desc;
@@ -22,10 +22,11 @@ public class ItemDto {
 	}
 	
 	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String mes, String ano, String oe) {
+			String mes, String ano, String oe, String sigla) {
 		super();
 		this.id = id;
 		this.nomeCor = nomeCor;
+		this.sigla = sigla;
 		this.desc = desc;
 		this.situacao = situacao;
 		this.nivel = estrutura.name().toLowerCase();
@@ -38,8 +39,7 @@ public class ItemDto {
 	
 	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
 			String mes, String ano, String oe, String sigla, String parecer) {
-		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe);
-		this.sigla = sigla;
+		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe, sigla);
 		this.parecer = parecer;
 	}
 
@@ -119,8 +119,19 @@ public class ItemDto {
 
 	@Override
 	public String toString() {
-		return "ItemDto [id=" + id + ", nomeCor=" + nomeCor + ", desc=" + desc + ", situacao=" + situacao + ", nivel="
-				+ nivel + ", orgaoResp=" + orgaoResp + ", mes=" + mes + ", ano=" + ano + ", oe=" + oe + ", oeShortName="
-				+ oeShortName + ", sigla=" + sigla + ", parecer=" + parecer + "]";
+		return "ItemDto [oe=" + oe + ", sigla=" + sigla + ", id=" + id + ", nivel=" + nivel + ", desc=" + desc
+				+ ", nomeCor=" + nomeCor + ", situacao=" + situacao + ", orgaoResp=" + orgaoResp + ", mes=" + mes
+				+ ", ano=" + ano + ", oeShortName=" + oeShortName + ", parecer=" + parecer + "]";
 	}
+
+	@Override
+	public int compareTo(ItemDto o) {
+		int vOe = this.oe.compareTo(o.oe);
+		if(vOe == 0) {
+			int vMi = this.sigla.compareTo(o.sigla);
+			return vMi;
+		}
+		return vOe;
+	}
+	
 }

@@ -54,7 +54,11 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
-		
+		/*
+		for (ItemDto itemDto : listaItens) {
+			logger.debug(itemDto.toString());
+		}
+		*/
 		logger.debug("Tamanho da listagem de metas/iniciativas: " + listaItens.size());
 	}
 	
@@ -119,11 +123,6 @@ public class EcarServiceTest {
 		filtro.setOes(Arrays.asList(new Long(17))); //OE 01 
 		
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
-		/*
-		for (ItemDto itemDto : listaItens) {
-			logger.debug(itemDto.toString());
-		}
-		*/
 		logger.debug("Tamanho da listagem - Filtro OE 01: " + listaItens.size());
 	}
 	

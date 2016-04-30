@@ -16,7 +16,7 @@
                 .small.text-muted {{item.mes}}/{{item.ano}}
               .media-body
                 h5.media-heading 
-                  a(href="", ng-click="itemSelecionado(item.id)").text-inverse {{item.desc}}
+                  a(href="", ng-click="itemSelecionado(item.id)").text-inverse {{item.sigla}} - {{item.desc}}
                 .pull-right.text-muted 
                   strong Situação:
                   |&nbsp; {{item.situacao}}

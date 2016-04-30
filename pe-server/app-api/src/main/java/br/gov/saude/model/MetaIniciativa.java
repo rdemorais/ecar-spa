@@ -3,8 +3,8 @@ package br.gov.saude.model;
 import java.util.Date;
 
 public interface MetaIniciativa {
-	public String getSigla();
-	public void setSigla(String sigla);
+	public String getSiglaMi();
+	public void setSiglaMi(String siglaMi);
 	public String getNome();
 	public void setNome(String nome);
 	public Date getDataInicio();

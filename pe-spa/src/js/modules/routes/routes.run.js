@@ -33,6 +33,7 @@
 
 
       $rootScope.$on('oauth:error', function(event, rejection) {
+        console.log(rejection.data.error);
         // Ignore invalid_grant error - should be catched on LoginController.
         if ('invalid_grant' === rejection.data.error) {
           return;
@@ -44,7 +45,7 @@
         }
 
         // Redirect to /login with the error_reason.
-        console.log(rejection.data.error);
+        
       });
     }
     appRun.$inject = ['$rootScope', '$window', 'OAuth', '$state'];
