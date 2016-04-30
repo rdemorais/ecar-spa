@@ -15,7 +15,7 @@
         this.loadEtiquetas = function(callback) {
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/pe-server/ecar/api/etiquetas',
+                url: $rootScope.app.baseUrl + '/etiquetas',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             }).then(function successCallBack(response) {
                 var ecarResponse = response.data;
@@ -76,7 +76,7 @@
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/pe-server/ecar/api/load-item',
+                url: $rootScope.app.baseUrl + '/load-item',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
                 data: {codIett: itemId, codExe: 1}
             }).then(function successCallBack(response) {
@@ -115,7 +115,7 @@
     	this.loadListaItens = function(filtro, callback) {
     		$http({
                 method: 'POST',
-                url: 'http://localhost:8080/pe-server/ecar/api/lista-itens',
+                url: $rootScope.app.baseUrl + '/lista-itens',
                 data: filtro,
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             }).then(function successCallBack(response) {
@@ -134,7 +134,7 @@
     	this.loadStatus = function(callback) {
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/pe-server/ecar/api/status',
+                url: $rootScope.app.baseUrl + '/status',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             }).then(function successCallBack(response) {
                 var ecarResponse = response.data;
@@ -153,7 +153,7 @@
             if(fixedArrays.oes.length == 0) {
                 $http({
                     method: 'POST',
-                    url: 'http://localhost:8080/pe-server/ecar/api/lista-oes',
+                    url: $rootScope.app.baseUrl + '/lista-oes',
                     headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
                 }).then(function successCallBack(response) {
                     var ecarResponse = response.data;

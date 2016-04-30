@@ -22,7 +22,10 @@
                   |&nbsp; {{item.situacao}}
                 p.text-muted 
                   strong Responsável pelo parecer: 
-                  |&nbsp;{{item.responsavel}} - {{item.orgaoResp}}
+                  |&nbsp;{{item.responsavel}}
+                p.text-muted
+                  strong Órgão Responsável:
+                  |&nbsp; {{item.orgaoResp}}
 
                 .mr.label(ng-class="'label-'+item.oeShortName") {{item.oe}}
                 .mr.label(ng-class="'label-'+item.nivel") {{item.nivel}}

@@ -68,7 +68,12 @@
 .label-oe(24);
 
 .label-oe(@n, @i: 1) when (@i =< @n) {
-  .label-oe@{i} {
+  .label-oe0@{i} when (@i =< 9) {
+    @varia: "label-oe@{i}-bg";
+    .label-variant(@@varia);
+  }
+
+  .label-oe@{i} when (@i > 9) {
     @varia: "label-oe@{i}-bg";
     .label-variant(@@varia);
   }
