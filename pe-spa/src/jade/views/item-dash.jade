@@ -19,8 +19,8 @@
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 
-					.label(ng-class="'label-'+itemDash.item.nivel") {{itemDash.item.nivel}}
-					|&nbsp; {{itemDash.item.sigla}} - {{itemDash.item.desc}}
+					span(ng-class="'text-'+itemDash.item.nivel") {{itemDash.item.nivel}}
+					|&nbsp; {{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
 				.smoothy
 					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 				strong Anexos:
@@ -30,8 +30,12 @@
 				accordion-heading Indicadores
 				p
 					pems-indicadores(indicadores="itemDash.item.indicadores")
-			accordion-group(is-open='false')
-				accordion-heading Produtos intermediários
-				p
+			accordion-group(is-open='false', ng-if="itemDash.item.nivel != 'atividade'")
+				accordion-heading(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'") Produtos intermediários
+				accordion-heading(ng-if="itemDash.item.nivel == 'produto_intermediario'") Atividades
+				p(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'")
 					scrollable.pt(height=350)
-						pems-lista-itens(nivel=2)
+						pems-lista-itens(nivel='PRODUTO_INTERMEDIARIO')
+				p(ng-if="itemDash.item.nivel == 'produto_intermediario'")
+					scrollable.pt(height=350)
+						pems-lista-itens(nivel='ATIVIDADE')

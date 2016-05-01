@@ -49,7 +49,11 @@ public class EcarRestApiController {
 	@ResponseBody
 	public EcarResponse loadItem(@RequestBody FiltroDto filtro) {
 		logger.debug(filtro.toString());
-		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.INICIATIVA);
+		Estrutura estrutura = Estrutura.INICIATIVA;
+		if(filtro.getNivel() != null) {
+			estrutura = Estrutura.valueOf(filtro.getNivel());
+		}
+		ItemDto item = ecarSiteService.loadItem(filtro, estrutura);
 		if(item != null) {
 			logger.debug("retornando item: " + item.toString());
 		}

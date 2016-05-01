@@ -170,27 +170,35 @@
       };
 
       function controller($scope, $element, pemsService, pemsFilterService, $state) {
-        if($scope.nivel == 1) {
+        if($scope.nivel == 'META') {
           pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
             $scope.listaItens = listaItens;
           });
-        }else if($scope.nivel == 2) {
+        }else if($scope.nivel == 'PRODUTO_INTERMEDIARIO') {
           pemsService.loadProdutos(pemsFilterService.getFiltros(), function(listaItens) {
+            $scope.listaItens = listaItens;
+          });
+        }else if($scope.nivel == 'ATIVIDADE') {
+          pemsService.loadAtividades(pemsFilterService.getFiltros(), function(listaItens) {
             $scope.listaItens = listaItens;
           });
         }
 
         $scope.itemSelecionado = function(_itemId) {
-          $state.go("app.dash-item", {itemId: _itemId});
+          $state.go("app.dash-item", {itemId: _itemId, nivel: $scope.nivel});
         }
 
         $scope.$on('pems:pesquisar-lista', function(event) {
-          if($scope.nivel == 1) {
+          if($scope.nivel == 'META') {
             pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
               $scope.listaItens = listaItens;
             });
-          }else if($scope.nivel == 2) {
+          } else if($scope.nivel == 'PRODUTO_INTERMEDIARIO') {
             pemsService.loadProdutos(pemsFilterService.getFiltros(), function(listaItens) {
+              $scope.listaItens = listaItens;
+            });
+          } else if($scope.nivel == 'ATIVIDADE') {
+            pemsService.loadAtividades(pemsFilterService.getFiltros(), function(listaItens) {
               $scope.listaItens = listaItens;
             });
           }

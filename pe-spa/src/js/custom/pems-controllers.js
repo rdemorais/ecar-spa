@@ -70,7 +70,9 @@
     itemDashController.$inject = ['$scope', '$state', '$stateParams', 'pemsService', 'pemsFilterService'];
     function itemDashController($scope, $state, $stateParams, pemsService, pemsFilterService) {
         var vm = this;
+
         pemsFilterService.getFiltros().codIett = $stateParams.itemId;
+        pemsFilterService.getFiltros().nivel = $stateParams.nivel;
         pemsService.loadItem(pemsFilterService.getFiltros(), function(item) {
             vm.item = item;
         });

@@ -92,8 +92,23 @@
             });            
     	};
 
-    	this.loadAtividades = function() {
-
+    	this.loadAtividades = function(filtro, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/lista-itens-atv',
+                data: filtro,
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var listaItens = ecarResponse.obj;
+                    callback(listaItens);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
     	};
 
     	this.loadProdutos = function(filtro, callback) {
@@ -188,7 +203,8 @@
             oes: [],
             etiquetas: [],
             codExe: 1,
-            codIett: -1
+            codIett: -1,
+            nivel: null
         };
 
         this.clear = function() {

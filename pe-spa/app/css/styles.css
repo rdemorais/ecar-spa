@@ -14,6 +14,18 @@
   width: auto;
   height: auto;
 }
+.text-meta {
+  color: #337ab7;
+}
+.text-iniciativa {
+  color: #fe5621;
+}
+.text-produto_intermediario {
+  color: #f0ad4e;
+}
+.text-atividade {
+  color: #7C82CC;
+}
 .img-status-verde {
   background-image: url("../img/status1.gif");
   width: 46px !important;

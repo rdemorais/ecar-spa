@@ -260,13 +260,15 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			q.setParameter("codExe", filtro.getCodExe());
 			
-			if(!(filtro.isIniciativa() == true && filtro.isMeta() == true)) {
-				if(filtro.isIniciativa()) {
-					q.setParameter("apenasMetaIniciativa", Estrutura.INICIATIVA);
-				}
-				if(filtro.isMeta()) {
-					q.setParameter("apenasMetaIniciativa", Estrutura.META);
-				}
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				if(!(filtro.isIniciativa() == true && filtro.isMeta() == true)) {
+					if(filtro.isIniciativa()) {
+						q.setParameter("apenasMetaIniciativa", Estrutura.INICIATIVA);
+					}
+					if(filtro.isMeta()) {
+						q.setParameter("apenasMetaIniciativa", Estrutura.META);
+					}
+				}	
 			}
 			
 			if(filtro.getOes().size() > 0) {

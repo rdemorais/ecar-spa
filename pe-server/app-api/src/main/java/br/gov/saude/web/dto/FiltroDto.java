@@ -14,6 +14,7 @@ public class FiltroDto {
 	private Long codIett;
 	private String mes;
 	private String ano;
+	private String nivel;
 	
 	public boolean isPpa() {
 		return ppa;
@@ -75,12 +76,18 @@ public class FiltroDto {
 	public void setAno(String ano) {
 		this.ano = ano;
 	}
+	
+	public String getNivel() {
+		return nivel;
+	}
+	public void setNivel(String nivel) {
+		this.nivel = nivel;
+	}
 	@Override
 	public String toString() {
 		return "FiltroDto [ppa=" + ppa + ", meta=" + meta + ", iniciativa=" + iniciativa + ", oes=" + oes + ", status="
 				+ status + ", etiquetas=" + etiquetas + ", codExe=" + codExe + ", codIett=" + codIett + ", mes=" + mes
-				+ ", ano=" + ano + "]";
+				+ ", ano=" + ano + ", nivel=" + nivel + "]";
 	}
-	
 	
 }
