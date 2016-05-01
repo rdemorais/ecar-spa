@@ -233,6 +233,9 @@
           case 'perc':
             ret = numbro(text).format('0.00%');
             break;
+          case 'perc-st':
+            ret = numbro(text).format('0');
+            break;  
         }
 
         return ret;

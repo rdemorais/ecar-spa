@@ -986,6 +986,97 @@
   text-align: center;
   margin-bottom: 5px;
 }
+.databox {
+  display: inline-block;
+  width: 100%;
+  height: 65px;
+  padding: 0;
+  font-size: 0;
+  vertical-align: top;
+  min-width: 130px;
+}
+.databox .radius-bordered {
+  -webkit-border-radius: 3px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 3px;
+  -moz-background-clip: padding;
+  border-radius: 3px;
+  background-clip: padding-box;
+}
+.databox .databox-left {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  text-align: center;
+  margin: 0;
+  width: 65px;
+  height: 65px;
+}
+.databox .radius-bordered .databox-left {
+  -webkit-border-radius: 3px 0 0 3px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 3px 0 0 3px;
+  -moz-background-clip: padding;
+  border-radius: 3px 0 0 3px;
+  background-clip: padding-box;
+}
+.databox .databox-right {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0;
+  -lh-property: 0;
+  width: -webkit-calc(35%);
+  width: -moz-calc(35%);
+  width: calc(35%);
+  height: 65px;
+  padding: 5px 10px;
+}
+.databox .radius-bordered .databox-right {
+  -webkit-border-radius: 0 3px 3px 0;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 0 3px 3px 0;
+  -moz-background-clip: padding;
+  border-radius: 0 3px 3px 0;
+  background-clip: padding-box;
+}
+.databox .databox-piechart {
+  padding-top: 5px;
+  margin: 0 auto;
+  display: inline-block;
+  line-height: 18px;
+}
+.databox .databox-piechart span {
+  font-size: 13px;
+}
+.databox .databox-number {
+  display: block;
+  font-size: 17px;
+  line-height: 26px;
+  margin: 2px;
+  position: relative;
+}
+.databox .databox-text {
+  display: block;
+  font-size: 12px;
+  margin: 4px 0 2px;
+  position: relative;
+}
+.databox .databox-stat {
+  display: inline-block;
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  padding: 2px 5px;
+}
+.databox .databox-stat .radius-bordered {
+  -webkit-border-radius: 3px;
+  -webkit-background-clip: padding-box;
+  -moz-border-radius: 3px;
+  -moz-background-clip: padding;
+  border-radius: 3px;
+  background-clip: padding-box;
+}
 /**
    Component: bootstrap-reset.less
 */

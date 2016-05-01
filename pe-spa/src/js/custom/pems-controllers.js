@@ -18,8 +18,8 @@
         $scope.login = function() {
 
             OAuth.getAccessToken({
-                username: 'angular-oauth',
-                password: 'passwd'
+                username: 'admin',
+                password: 'serenaya'
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
                     pemsService.loadOEs(function(oes){});

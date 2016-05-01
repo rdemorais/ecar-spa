@@ -14,24 +14,34 @@
       .col-sm-12.col-xs-12
         .row.row-table
           .h5.pull-right.mr-xl Total: {{statusBar.iniciativa.total}}
-          .h4.animated.fadeInUp Iniciativas
-        .row.row-flush.text-center
-          .col-xs-4(ng-repeat="st in statusBar.iniciativa.status")
-            p {{st.desc}}
-              .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
-                span {{st.count}}
+          .h4.animated.fadeInUp Metas
+        .row.row-flush
+          .col-xs-4(ng-repeat="st in statusBar.meta.status")
+            .databox.radius-bordered
+              .databox-left
+                .databox-piechart
+                  .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
+                    span {{st.percentual |format: 'perc-st'}}%
+              .databox-right
+                .databox-number {{st.count}}
+                .databox-text {{st.desc}}
                
   .col-md-8(ng-if="hpanel[1]")
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
           .h5.pull-right.mr-xl Total: {{statusBar.meta.total}}
-          .h4.animated.fadeInDown Metas
-        .row.row-flush.text-center
-          .col-xs-4(ng-repeat="st in statusBar.meta.status")
-            p {{st.desc}}
-              .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
-                span {{st.count}}
+          .h4.animated.fadeInDown Iniciativas
+        .row.row-flush
+          .col-xs-4(ng-repeat="st in statusBar.iniciativa.status")
+            .databox.radius-bordered
+              .databox-left
+                .databox-piechart
+                  .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
+                    span {{st.percentual |format: 'perc-st'}}%
+              .databox-right
+                .databox-number {{st.count}}
+                .databox-text {{st.desc}}
                 
   .col-md-8(ng-if="hpanel[2]")
     .row.row-table
@@ -39,11 +49,16 @@
         .row.row-table
           .h5.pull-right.mr-xl Total: {{statusBar.produto.total}}
           .h4.animated.fadeInUp Produtos Intermediários
-        .row.row-flush.text-center
+        .row.row-flush
           .col-xs-4(ng-repeat="st in statusBar.produto.status")
-            p {{st.desc}}
-              .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
-                span {{st.count}}
+            .databox.radius-bordered
+              .databox-left
+                .databox-piechart
+                  .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
+                    span {{st.percentual |format: 'perc-st'}}%
+              .databox-right
+                .databox-number {{st.count}}
+                .databox-text {{st.desc}}
               
   .col-md-8(ng-if="hpanel[3]")
     .row.row-table
@@ -51,9 +66,14 @@
         .row.row-table
           .h5.pull-right.mr-xl Total: {{statusBar.atividade.total}}
           .h4.animated.fadeInDown Atividades
-        .row.row-flush.text-center
+        .row.row-flush
           .col-xs-4(ng-repeat="st in statusBar.atividade.status")
-            p {{st.desc}}
-              .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
-                span {{st.count}}
+            .databox.radius-bordered
+              .databox-left
+                .databox-piechart
+                  .easypie(easypiechart='', options='st.pieOptions', percent='st.percentual')
+                    span {{st.percentual |format: 'perc-st'}}%
+              .databox-right
+                .databox-number {{st.count}}
+                .databox-text {{st.desc}}
           
