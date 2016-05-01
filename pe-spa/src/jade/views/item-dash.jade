@@ -3,9 +3,11 @@
 	.col-lg-10
 		.panel.panel-default
 			.panel-body
-				.col-md-1
-					.label(ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
-				.col-md-5 
+				.col-md-2
+					.mr.label(ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
+					a.mr.label.label-meta(ng-if="itemDash.item.estruturaSuperior == 'meta' && itemDash.item.nivel != 'meta'") M {{itemDash.item.siglaMi}}
+					a.mr.label.label-iniciativa(ng-if="itemDash.item.estruturaSuperior == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") I {{itemDash.item.siglaMi}}
+				.col-md-4 
 					strong Responsável:
 					|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
 				.col-md-3
@@ -19,8 +21,13 @@
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 
-					span(ng-class="'text-'+itemDash.item.nivel") {{itemDash.item.nivel}}
-					|&nbsp; {{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
+					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'meta'") Meta
+					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'iniciativa'") Iniciativa
+					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'produto_intermediario'") Produto Intermediário
+					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'atividade'") Atividade
+					span(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'"){{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
+					span(ng-if="itemDash.item.nivel == 'produto_intermediario'") {{itemDash.item.siglaPi}} - {{itemDash.item.desc}}
+					span(ng-if="itemDash.item.nivel == 'atividade'") {{itemDash.item.siglaAtv}} - {{itemDash.item.desc}}
 				.smoothy
 					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 				strong Anexos:

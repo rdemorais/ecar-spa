@@ -15,6 +15,7 @@
         <class>br.gov.saude.model.ProdutoIntermediarioImpl</class>
         <class>br.gov.saude.model.AtividadeImpl</class>
         <class>br.gov.saude.model.UsuarioImpl</class>
+        <class>br.gov.saude.model.UsuarioSentinelaImpl</class>
         
         <exclude-unlisted-classes/>
          

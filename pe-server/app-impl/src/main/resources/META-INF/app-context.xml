@@ -14,9 +14,11 @@
                            
 	<bean id="akulaPropertyFile" class="br.gov.saude.config.AkulaPropertyFileImpl"/>
 	<bean id="ecarSiteDao" class="br.gov.saude.dao.EcarSiteDaoImpl"/>
+	<bean id="ecarSentinelaDao" class="br.gov.saude.dao.EcarSentinelaDaoImpl"/>
 	<bean id="convertService" class="br.gov.saude.service.ConvertServiceImpl"/>
 	<bean id="ecarSiteService" class="br.gov.saude.service.EcarSiteServiceImpl"/>
 	<bean id="statusService" class="br.gov.saude.service.StatusServiceImpl"/>
+	<bean id="sentinelaPasswordHash" class="br.gov.saude.impl.auth.SentinelaPasswordHashImpl"/>
 	
 	<!-- Configuração de acesso ao banco -->
 	<bean
