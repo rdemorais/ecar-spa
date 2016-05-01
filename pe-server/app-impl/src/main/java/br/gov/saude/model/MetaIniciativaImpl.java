@@ -20,7 +20,7 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	private String siglaMi;
 	
 	@Column(name="nome_mi")
-	private String nome;
+	private String nomeMi;
 	
 	@Column(name="data_inicio")
 	private Date dataInicio;
@@ -32,7 +32,7 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	private Long codOrg;
 	
 	@Column(name="sigla_org")
-	private String siglaOrg;
+	private String siglaOrgMi;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -49,13 +49,13 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	public void setSiglaMi(String siglaMi) {
 		this.siglaMi = siglaMi;
 	}
-
-	public String getNome() {
-		return nome;
+	
+	public String getNomeMi() {
+		return nomeMi;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeMi(String nomeMi) {
+		this.nomeMi = nomeMi;
 	}
 
 	public Date getDataInicio() {
@@ -82,12 +82,12 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 		this.codOrg = codOrg;
 	}
 
-	public String getSiglaOrg() {
-		return siglaOrg;
+	public String getSiglaOrgMi() {
+		return siglaOrgMi;
 	}
 
-	public void setSiglaOrg(String siglaOrg) {
-		this.siglaOrg = siglaOrg;
+	public void setSiglaOrgMi(String siglaOrgMi) {
+		this.siglaOrgMi = siglaOrgMi;
 	}
 
 	public Usuario getUsuario() {

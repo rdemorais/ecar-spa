@@ -17,10 +17,10 @@ import javax.persistence.Table;
 public class AtividadeImpl extends IettImpl implements Atividade{
 	
 	@Column(name="sigla_atv")
-	private String sigla;
+	private String siglaAtv;
 	
 	@Column(name="nome_atv")
-	private String nome;
+	private String nomeAtv;
 	
 	@Column(name="data_inicio")
 	private Date dataInicio;
@@ -32,7 +32,7 @@ public class AtividadeImpl extends IettImpl implements Atividade{
 	private Long codOrg;
 	
 	@Column(name="sigla_org")
-	private String siglaOrg;
+	private String siglaOrgAtv;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -42,20 +42,20 @@ public class AtividadeImpl extends IettImpl implements Atividade{
 	@JoinColumn(name = "cod_pi", referencedColumnName = "cod_iett")
 	private ProdutoIntermediario produtoIntermediario;
 
-	public String getSigla() {
-		return sigla;
+	public String getSiglaAtv() {
+		return siglaAtv;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setSiglaAtv(String siglaAtv) {
+		this.siglaAtv = siglaAtv;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getNomeAtv() {
+		return nomeAtv;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomeAtv(String nomeAtv) {
+		this.nomeAtv = nomeAtv;
 	}
 
 	public Date getDataInicio() {
@@ -81,13 +81,13 @@ public class AtividadeImpl extends IettImpl implements Atividade{
 	public void setCodOrg(Long codOrg) {
 		this.codOrg = codOrg;
 	}
-
-	public String getSiglaOrg() {
-		return siglaOrg;
+	
+	public String getSiglaOrgAtv() {
+		return siglaOrgAtv;
 	}
 
-	public void setSiglaOrg(String siglaOrg) {
-		this.siglaOrg = siglaOrg;
+	public void setSiglaOrgAtv(String siglaOrgAtv) {
+		this.siglaOrgAtv = siglaOrgAtv;
 	}
 
 	public Usuario getUsuario() {

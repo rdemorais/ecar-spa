@@ -90,19 +90,39 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 		try {
 			StringBuffer hql = new StringBuffer();
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
+			hql.append("iett.id, ");
 			hql.append("iett.id, "); 
 			hql.append("LOWER(mon.nomeCor), ");
-			hql.append("iett.nome, ");
+			
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("iett.nomeMi, ");
+				hql.append("iett.siglaOrgMi, ");	
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("iett.nomePi, ");
+				hql.append("iett.siglaOrgPi, ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("iett.nomeAtv, ");
+				hql.append("iett.siglaOrgAtv, ");
+			}
+			
 			hql.append("mon.descricaoSit, ");
 			hql.append("iett.estrutura, ");
-			hql.append("iett.siglaOrg, ");
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
 			hql.append("oe.sigla, ");
-			
-			hql.append("iett.siglaMi, ");
+			hql.append("usu.nome, ");
 			hql.append("mon.parecer, ");
-			hql.append("usu.nome) ");
+			
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("iett.siglaMi) ");
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("mi.siglaMi, ");
+				hql.append("iett.siglaPi) ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("mi.siglaMi, ");
+				hql.append("pi.siglaPi, ");
+				hql.append("iett.siglaAtv) ");
+			}
 			
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
@@ -162,15 +182,36 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			}else {
 				hql.append("LOWER(mon.nomeCor), ");
 			}
-			hql.append("iett.nome, ");
+			
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("iett.nomeMi, ");
+				hql.append("iett.siglaOrgMi, ");	
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("iett.nomePi, ");
+				hql.append("iett.siglaOrgPi, ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("iett.nomeAtv, ");
+				hql.append("iett.siglaOrgAtv, ");
+			}
+			
 			hql.append("mon.descricaoSit, ");
 			hql.append("iett.estrutura, ");
-			hql.append("iett.siglaOrg, ");
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
 			hql.append("oe.sigla, ");
-			hql.append("iett.siglaMi, ");
-			hql.append("usu.nome) ");
+			hql.append("usu.nome, ");
+			
+			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
+				hql.append("iett.siglaMi) ");
+			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
+				hql.append("mi.siglaMi, ");
+				hql.append("iett.siglaPi) ");
+			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
+				hql.append("mi.siglaMi, ");
+				hql.append("pi.siglaPi, ");
+				hql.append("iett.siglaAtv) ");
+			}
+			
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("LEFT JOIN mon.usuario usu ");

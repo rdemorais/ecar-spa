@@ -115,14 +115,14 @@
     }
 
     function pemsEtiquetas() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', '$timeout', 'pemsService', 'pemsFilterService'];
       return {
         restrict: 'E',
         templateUrl: 'app/views/cached/etiquetas.html',
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, pemsFilterService) {
+      function controller($scope, $element, $timeout, pemsService, pemsFilterService) {
         $scope.uiselectEt = {
           etiquetas: [],
           etSelectionadas: []

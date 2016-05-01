@@ -15,19 +15,39 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String oeShortName;
 	private String responsavel;
 	
-	private String sigla;
+	private String siglaMi;
+	private String siglaPi;
+	private String siglaAtv;
 	private String parecer;
 	
 	public ItemDto() {
 		
 	}
 	
-	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String mes, String ano, String oe, String sigla, String resposavel) {
+	public ItemDto(Long ind, Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String parecer, String siglaMi) {
+		this(id, nomeCor, desc, orgaoResp, situacao, estrutura, mes, ano, oe, responsavel, siglaMi);
+		this.parecer = parecer;
+	}
+	
+	public ItemDto(Long ind, Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String parecer, String siglaMi, String siglaPi) {
+		this(id, nomeCor, desc, orgaoResp, situacao, estrutura, mes, ano, oe, responsavel, siglaMi, siglaPi);
+		this.parecer = parecer;
+	}
+	
+	public ItemDto(Long ind, Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String parecer, String siglaMi, String siglaPi, String siglaAtv) {
+		this(id, nomeCor, desc, orgaoResp, situacao, estrutura, mes, ano, oe, responsavel, siglaMi, siglaPi, siglaAtv);
+		this.parecer = parecer;
+	}
+	
+	public ItemDto(Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String siglaMi) {
 		super();
 		this.id = id;
 		this.nomeCor = nomeCor;
-		this.sigla = sigla;
+		this.siglaMi = siglaMi;
 		this.desc = desc;
 		this.situacao = situacao;
 		this.nivel = estrutura.name().toLowerCase();
@@ -36,14 +56,47 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.ano = ano;
 		this.oe = oe;
 		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
-		this.responsavel = resposavel;
+		this.responsavel = responsavel;
 	}
 	
-	public ItemDto(Long id, String nomeCor, String desc, String situacao, Estrutura estrutura, String orgaoResp,
-			String mes, String ano, String oe, String sigla, String parecer, String resposavel) {
-		this(id, nomeCor, desc, situacao, estrutura, orgaoResp, mes, ano, oe, sigla, resposavel);
-		this.parecer = parecer;
+	public ItemDto(Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String siglaMi, String siglaPi) {
+		super();
+		this.id = id;
+		this.nomeCor = nomeCor;
+		this.siglaMi = siglaMi;
+		this.siglaPi = siglaPi;
+		this.desc = desc;
+		this.situacao = situacao;
+		this.nivel = estrutura.name().toLowerCase();
+		this.orgaoResp = orgaoResp;
+		this.mes = mes;
+		this.ano = ano;
+		this.oe = oe;
+		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
+		this.responsavel = responsavel;
 	}
+	
+	public ItemDto(Long id, String nomeCor, String desc, String orgaoResp, String situacao, Estrutura estrutura,
+			String mes, String ano, String oe, String responsavel, String siglaMi, String siglaPi, String siglaAtv) {
+		super();
+		this.id = id;
+		this.nomeCor = nomeCor;
+		this.siglaMi = siglaMi;
+		this.siglaPi = siglaPi;
+		this.siglaAtv = siglaAtv;
+		this.desc = desc;
+		this.situacao = situacao;
+		this.nivel = estrutura.name().toLowerCase();
+		this.orgaoResp = orgaoResp;
+		this.mes = mes;
+		this.ano = ano;
+		this.oe = oe;
+		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
+		this.responsavel = responsavel;
+	}
+	
+	
 
 	public Long getId() {
 		return id;
@@ -106,12 +159,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	public void setOeShortName(String oeShortName) {
 		this.oeShortName = oeShortName;
 	}
-	public String getSigla() {
-		return sigla;
-	}
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
-	}
+	
 	public String getParecer() {
 		return parecer;
 	}
@@ -126,20 +174,59 @@ public class ItemDto implements Comparable<ItemDto>{
 	public void setResponsavel(String responsavel) {
 		this.responsavel = responsavel;
 	}
+	
+	public String getSiglaMi() {
+		return siglaMi;
+	}
+
+	public void setSiglaMi(String siglaMi) {
+		this.siglaMi = siglaMi;
+	}
+
+	public String getSiglaPi() {
+		return siglaPi;
+	}
+
+	public void setSiglaPi(String siglaPi) {
+		this.siglaPi = siglaPi;
+	}
+
+	public String getSiglaAtv() {
+		return siglaAtv;
+	}
+
+	public void setSiglaAtv(String siglaAtv) {
+		this.siglaAtv = siglaAtv;
+	}
 
 	@Override
 	public String toString() {
-		return "ItemDto [oe=" + oe + ", sigla=" + sigla + ", id=" + id + ", nivel=" + nivel + ", desc=" + desc
-				+ ", nomeCor=" + nomeCor + ", situacao=" + situacao + ", orgaoResp=" + orgaoResp + ", mes=" + mes
-				+ ", ano=" + ano + ", oeShortName=" + oeShortName + ", parecer=" + parecer + ", responsavel="+ responsavel +"]";
+		return "ItemDto [oe=" + oe + ", siglaMi=" + siglaMi + ", siglaPi=" + siglaPi + ", siglaAtv=" + siglaAtv
+				+ ", desc=" + desc + ", id=" + id + ", nomeCor=" + nomeCor + ", situacao=" + situacao + ", nivel="
+				+ nivel + ", orgaoResp=" + orgaoResp + ", mes=" + mes + ", ano=" + ano + ", oeShortName=" + oeShortName
+				+ ", responsavel=" + responsavel + ", parecer=" + parecer + "]";
 	}
 
 	@Override
 	public int compareTo(ItemDto o) {
 		int vOe = this.oe.compareTo(o.oe);
 		if(vOe == 0) {
-			int vMi = this.sigla.compareTo(o.sigla);
-			return vMi;
+			if(this.siglaMi != null) {
+				int vMi = this.siglaMi.compareTo(o.siglaMi);
+				if(vMi == 0) {
+					if(this.siglaPi != null) {
+						int vPi = this.siglaPi.compareTo(o.siglaPi);
+						if(vPi == 0) {
+							if(this.siglaAtv != null) {
+								return this.siglaAtv.compareTo(o.siglaAtv);								
+							}
+						}
+						return vPi;	
+					}
+				}
+				return vMi;
+			}
+			
 		}
 		return vOe;
 	}

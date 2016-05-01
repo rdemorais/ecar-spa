@@ -17,10 +17,10 @@ import javax.persistence.Table;
 public class ProdutoIntermediarioImpl extends IettImpl implements ProdutoIntermediario{
 	
 	@Column(name="sigla_pi")
-	private String sigla;
+	private String siglaPi;
 	
 	@Column(name="nome_pi")
-	private String nome;
+	private String nomePi;
 	
 	@Column(name="data_inicio")
 	private Date dataInicio;
@@ -32,7 +32,7 @@ public class ProdutoIntermediarioImpl extends IettImpl implements ProdutoInterme
 	private Long codOrg;
 	
 	@Column(name="sigla_org")
-	private String siglaOrg;
+	private String siglaOrgPi;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -42,20 +42,20 @@ public class ProdutoIntermediarioImpl extends IettImpl implements ProdutoInterme
 	@JoinColumn(name = "cod_mi", referencedColumnName = "cod_iett")
 	private MetaIniciativa metaIniciativa;
 
-	public String getSigla() {
-		return sigla;
+	public String getSiglaPi() {
+		return siglaPi;
 	}
 
-	public void setSigla(String sigla) {
-		this.sigla = sigla;
+	public void setSiglaPi(String siglaPi) {
+		this.siglaPi = siglaPi;
+	}
+	
+	public String getNomePi() {
+		return nomePi;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setNomePi(String nomePi) {
+		this.nomePi = nomePi;
 	}
 
 	public Date getDataInicio() {
@@ -81,13 +81,13 @@ public class ProdutoIntermediarioImpl extends IettImpl implements ProdutoInterme
 	public void setCodOrg(Long codOrg) {
 		this.codOrg = codOrg;
 	}
-
-	public String getSiglaOrg() {
-		return siglaOrg;
+	
+	public String getSiglaOrgPi() {
+		return siglaOrgPi;
 	}
 
-	public void setSiglaOrg(String siglaOrg) {
-		this.siglaOrg = siglaOrg;
+	public void setSiglaOrgPi(String siglaOrgPi) {
+		this.siglaOrgPi = siglaOrgPi;
 	}
 
 	public Usuario getUsuario() {
