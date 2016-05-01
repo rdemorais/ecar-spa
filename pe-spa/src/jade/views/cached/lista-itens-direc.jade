@@ -16,7 +16,13 @@
                 .small.text-muted {{item.mes}}/{{item.ano}}
               .media-body
                 h5.media-heading 
-                  a(href="", ng-click="itemSelecionado(item.id)").text-inverse {{item.sigla}} - {{item.desc}}
+                  a(href="", ng-click="itemSelecionado(item.id)").text-inverse 
+                    .span(ng-if="item.siglaMi !== undefined && (item.nivel == 'meta' || item.nivel == 'iniciativa')") {{item.siglaMi}} 
+                      |- {{item.desc}}
+                    .span(ng-if="item.siglaPi !== undefined && item.nivel == 'produto_intermediario'") {{item.siglaPi}} 
+                      |- {{item.desc}}
+                    .span(ng-if="item.siglaAtv !== undefined && item.nivel == 'atividade'") {{item.siglaAtv}} 
+                      |- {{item.desc}}
                 .pull-right.text-muted 
                   strong Situação:
                   |&nbsp; {{item.situacao}}
@@ -28,4 +34,6 @@
                   |&nbsp; {{item.orgaoResp}}
 
                 .mr.label(ng-class="'label-'+item.oeShortName") {{item.oe}}
+                .mr.label(ng-if="item.nivel == 'produto_intermediario' && item.estruturaSuperior == 'meta'", ng-class="'label-'+item.estruturaSuperior") M {{item.siglaMi}}
+                .mr.label(ng-if="item.nivel == 'produto_intermediario' && item.estruturaSuperior == 'iniciativa'", ng-class="'label-'+item.estruturaSuperior") I {{item.siglaMi}}
                 .mr.label(ng-class="'label-'+item.nivel") {{item.nivel}}

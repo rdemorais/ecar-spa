@@ -152,9 +152,9 @@ public class EcarServiceTest {
 	public void testLoadItem() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		filtro.setCodIett(43L);
+		filtro.setCodIett(321L);
 		
-		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.ATIVIDADE);
+		ItemDto item = ecarSiteService.loadItem(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
 		
 		Assert.assertNotNull(item);
 		

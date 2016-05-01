@@ -30,7 +30,7 @@
             });
         };
 
-    	this.loadItem = function(itemId, callback) {
+    	this.loadItem = function(filtro, callback) {
     		var item = {
                 oe: 'OE 2',
                 oeShortName: 'oe2',
@@ -78,7 +78,7 @@
                 method: 'POST',
                 url: $rootScope.app.baseUrl + '/load-item',
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
-                data: {codIett: itemId, codExe: 1}
+                data: filtro
             }).then(function successCallBack(response) {
                 var ecarResponse = response.data;
                 if(ecarResponse.status == 'success') {
@@ -95,21 +95,24 @@
     	this.loadAtividades = function() {
 
     	};
+
     	this.loadProdutos = function(filtro, callback) {
-    		var listaProdutos = {
-    			total: 6,
-    			lista: [
-    				{oe: 'OE 1', oeShortName: 'oe1', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'verde', ciclo: '03/2016', id: 345},
-    				{oe: 'OE 2', oeShortName: 'oe2', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'amarelo', ciclo: '03/2016', id: 33},
-    				{oe: 'OE 3', oeShortName: 'oe3', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'cinza', ciclo: '03/2016', id: 12},
-    				{oe: 'OE 4', oeShortName: 'oe4', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'vermelho', ciclo: '03/2016', id: 45},
-    				{oe: 'OE 5', oeShortName: 'oe5', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'azul', ciclo: '03/2016', id: 78},
-    				{oe: 'OE 6', oeShortName: 'oe6', desc: 'Texto do produto', nivel: 'produto', responsavel: 'Rafael de Morais', orgaoResp: 'SE', nomeCor: 'branco', ciclo: '03/2016', id: 32}
-
-    			]
-    		};
-
-    		callback(listaProdutos);
+    		$http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/lista-itens-pi',
+                data: filtro,
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var listaItens = ecarResponse.obj;
+                    callback(listaItens);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
     	};
 
     	this.loadListaItens = function(filtro, callback) {
@@ -184,7 +187,8 @@
             status: [],
             oes: [],
             etiquetas: [],
-            codExe: 1
+            codExe: 1,
+            codIett: -1
         };
 
         this.clear = function() {

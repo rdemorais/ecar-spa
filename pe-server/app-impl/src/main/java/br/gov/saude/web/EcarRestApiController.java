@@ -62,7 +62,27 @@ public class EcarRestApiController {
 	@ResponseBody
 	public EcarResponse loadListaItens(@RequestBody FiltroDto filtro) {
 		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
-		logger.debug("retornando lista de itens: " + itens.size());
+		logger.debug("retornando lista de itens - MI: " + itens.size());
+		
+		return EcarResponse.ok(itens);
+	}
+	
+	@RequestMapping(value="/lista-itens-pi", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadListaItensPi(@RequestBody FiltroDto filtro) {
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+		logger.debug("retornando lista de itens - PI: " + itens.size());
+		
+		return EcarResponse.ok(itens);
+	}
+	
+	@RequestMapping(value="/lista-itens-atv", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadListaItensAtv(@RequestBody FiltroDto filtro) {
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
+		logger.debug("retornando lista de itens - ATV: " + itens.size());
 		
 		return EcarResponse.ok(itens);
 	}

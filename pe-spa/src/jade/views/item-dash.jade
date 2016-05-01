@@ -19,8 +19,8 @@
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 
-					span.text-success {{itemDash.item.nivel}}: 
-					|&nbsp;{{itemDash.item.sigla}} - {{itemDash.item.desc}}
+					.label(ng-class="'label-'+itemDash.item.nivel") {{itemDash.item.nivel}}
+					|&nbsp; {{itemDash.item.sigla}} - {{itemDash.item.desc}}
 				.smoothy
 					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 				strong Anexos:
