@@ -19,6 +19,7 @@
 	<bean id="ecarSiteService" class="br.gov.saude.service.EcarSiteServiceImpl"/>
 	<bean id="statusService" class="br.gov.saude.service.StatusServiceImpl"/>
 	<bean id="sentinelaPasswordHash" class="br.gov.saude.impl.auth.SentinelaPasswordHashImpl"/>
+	<bean id="ecarReport" class="br.gov.saude.report.EcarReportImpl"/>
 	
 	<!-- Configuração de acesso ao banco -->
 	<bean
