@@ -232,6 +232,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("AND pi.id = :codIett ");
 			}
 			
+			if(filtro.isPpa()) {
+				
+			}
+			
 			if(filtro.getOes().size() > 0) {
 				hql.append("AND oe.id IN :oes ");
 			}
