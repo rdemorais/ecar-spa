@@ -1,11 +1,4 @@
 .row
-	.col-lg-2
-		.img-status-verde.clickable(ng-click="selStatus('verde')")
-	.col-lg-2.clickable
-		.img-status-amarelo.clickable(ng-click="selStatus('amarelo')")
-	.col-lg-2.clickable
-		.img-status-vermelho.clickable(ng-click="selStatus('vermelho')")
-	.col-lg-2.clickable
-		.img-status-azul.clickable(ng-click="selStatus('azul')")
-	.col-lg-2.clickable
-		.img-status-cinza.clickable(ng-click="selStatus('cinza')")
+	.col-lg-2(ng-repeat="st in listaStatus")
+		.clickable(ng-click="selStatus(st)", ng-class="st.clazz", ng-if="!st.sel")
+		.clickable(ng-click="selStatus(st)", ng-class="st.clazzSel", ng-if="st.sel")

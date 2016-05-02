@@ -1,4 +1,5 @@
 @import "../../bootstrap/variables";
+@import "../utils/utils-background";
 
 @img-back-sus: "../img/fundoinicio.png";
 @img-verde: "../img/status1.gif";
@@ -7,6 +8,22 @@
 @img-azul: "../img/status4.gif";
 @img-cinza: "../img/status5.gif";
 @img-branco: "../img/status0.gif";
+
+.bg-meta { 
+  .make-bg('meta-bg');
+}
+
+.bg-iniciativa { 
+  .make-bg('iniciativa-bg');
+}
+
+.bg-produto { 
+  .make-bg('produto-bg');
+}
+
+.bg-atividade { 
+  .make-bg('atividade-bg');
+}
 
 .img-fundo-sus {
 	background-image: url(@img-back-sus);
@@ -35,19 +52,36 @@
 	background-image: url(@img);
 	width: 46px !important;
 	height: 46px !important;
+	&:hover {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+}
+
+.img-status-sel(@img) {
+	background-image: url(@img);
+	width: 46px !important;
+	height: 46px !important;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .img-status-verde {.img-status(@img-verde);}
+.img-status-verde-sel {.img-status-sel(@img-verde);}
 
 .img-status-amarelo {.img-status(@img-amarelo);}
+.img-status-amarelo-sel {.img-status-sel(@img-amarelo);}
 
 .img-status-vermelho {.img-status(@img-vermelho);}
+.img-status-vermelho-sel {.img-status-sel(@img-vermelho);}
 
 .img-status-azul {.img-status(@img-azul);}
+.img-status-azul-sel {.img-status-sel(@img-azul);}
 
 .img-status-cinza {.img-status(@img-cinza);}
+.img-status-cinza-sel {.img-status-sel(@img-cinza);}
 
 .img-status-branco {.img-status(@img-branco);}
+.img-status-branco-sel {.img-status-sel(@img-branco);}
+
 
 .img-status-dash(@img) {
 	background-image: url(@img);

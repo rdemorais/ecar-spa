@@ -1,19 +1,19 @@
 .row(ng-init="hpanel = [true, false, false, false]")
   .col-md-4
     .row.row-flush.text-center.text-muted.m0
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [true, false, false, false]", ng-class="{'bg-primary': hpanel[0]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [true, false, false, false]", ng-class="{'bg-meta': hpanel[0]}")
         em.icon-pie-graph.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, true, false, false]", ng-class="{'bg-purple': hpanel[1]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, true, false, false]", ng-class="{'bg-iniciativa': hpanel[1]}")
         em.icon-head.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, true, false]", ng-class="{'bg-pink': hpanel[2]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, true, false]", ng-class="{'bg-produto': hpanel[2]}")
         em.icon-share.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, false, true]", ng-class="{'bg-amber': hpanel[3]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, false, true]", ng-class="{'bg-atividade': hpanel[3]}")
         em.icon-briefcase.fa-2x.mv    
   .col-md-8(ng-if="hpanel[0]")
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.iniciativa.total}}
+          .h5.pull-right.mr-xl Total: {{statusBar.meta.total}}
           .h4.animated.fadeInUp Metas
         .row.row-flush
           .col-xs-4(ng-repeat="st in statusBar.meta.status")
@@ -30,7 +30,7 @@
     .row.row-table
       .col-sm-12.col-xs-12
         .row.row-table
-          .h5.pull-right.mr-xl Total: {{statusBar.meta.total}}
+          .h5.pull-right.mr-xl Total: {{statusBar.iniciativa.total}}
           .h4.animated.fadeInDown Iniciativas
         .row.row-flush
           .col-xs-4(ng-repeat="st in statusBar.iniciativa.status")

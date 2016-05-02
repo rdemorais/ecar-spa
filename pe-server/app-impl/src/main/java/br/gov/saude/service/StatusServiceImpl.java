@@ -43,6 +43,7 @@ public class StatusServiceImpl implements StatusService{
 				if(statusP.getNomeCor().equals(statusNMDto.getNomeCor())) {
 					statusP.setCount(statusNMDto.getCount());
 					count += statusNMDto.getCount();
+					break;
 				}
 			}
 		}

@@ -47,7 +47,7 @@
         };
 
         $scope.limparFiltros = function() {
-            pemsFilterService.clear();
+            //pemsFilterService.clear();
         };
     }
 

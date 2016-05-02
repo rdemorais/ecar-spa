@@ -152,8 +152,11 @@
       };
 
       function controller($scope, $element, pemsService, pemsFilterService) {
-        $scope.selStatus = function(nomeCor) {
-          pemsFilterService.addRemoveStatus(nomeCor);
+        $scope.listaStatus = pemsFilterService.listaStatusFiltros();
+
+        $scope.selStatus = function(status) {
+          status.sel = !status.sel;
+          pemsFilterService.addRemoveStatus(status.codCor);
         }
       }
     }

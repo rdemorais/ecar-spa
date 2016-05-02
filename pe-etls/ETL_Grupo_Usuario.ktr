@@ -68,10 +68,34 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;21 22&#x3a;31&#x3a;42.779</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;04&#x2f;28 23&#x3a;42&#x3a;29.678</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;01 21&#x3a;23&#x3a;26.100</modified_date>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>eCar 2016</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>ecar2016</database>
+    <port>5432</port>
+    <username>sa_ecar</username>
+    <password>Encrypted 2be98afc86aa7f28efc0ffd619380aedc</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
   <hop> <from>Carregar permissoes usuarios</from><to>Insert &#x2f; Update</to><enabled>Y</enabled> </hop>
   </order>
