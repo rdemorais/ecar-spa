@@ -25,7 +25,7 @@
 					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'iniciativa'") Iniciativa
 					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'produto_intermediario'") Produto Intermediário
 					span(ng-class="'text-'+itemDash.item.nivel", ng-if="itemDash.item.nivel == 'atividade'") Atividade
-					span(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'"){{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
+					span(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'") {{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
 					span(ng-if="itemDash.item.nivel == 'produto_intermediario'") {{itemDash.item.siglaPi}} - {{itemDash.item.desc}}
 					span(ng-if="itemDash.item.nivel == 'atividade'") {{itemDash.item.siglaAtv}} - {{itemDash.item.desc}}
 				.smoothy

@@ -4926,6 +4926,13 @@ a.label:focus {
 .label-iniciativa[href]:focus {
   background-color: #eb3901;
 }
+.label-produto_intermediario {
+  background-color: #f0ad4e;
+}
+.label-produto_intermediario[href]:hover,
+.label-produto_intermediario[href]:focus {
+  background-color: #ec971f;
+}
 .label-oe01 {
   background-color: #F16477;
 }

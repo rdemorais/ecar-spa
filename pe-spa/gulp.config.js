@@ -71,8 +71,8 @@ module.exports = function($, usehtml) {
       path: '.',
       css: [$.minifyCss({ processImport: false }), 'concat', $.rev()],
       // html: [$.minifyHtml({empty: true})],
-      vendor: [$.uglify( {preserveComments:'some'} ), $.rev()],
-      js: [$.ngAnnotate(), $.uglify( {preserveComments:'some'} ), $.rev()]
+      vendor: [$.uglify( {preserveComments:'some'} ).on('error', function(){}), $.rev()]
+      //js: [$.ngAnnotate(), $.uglify( {preserveComments:'some'} ).on('error', function(){console.log("ERRORR")}), $.rev()]
     }
   };
 

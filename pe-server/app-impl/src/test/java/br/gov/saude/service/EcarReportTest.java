@@ -32,12 +32,13 @@ public class EcarReportTest {
 	public void gerarReportGerencialTest() throws IOException {
 		logger.debug("Gerando relatorio...");
 		byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper", new ArrayList<Object>());
-		
+
 		File reportFile = new File("/Users/rafaeldemorais/ecarReport.pdf");
 		reportFile.createNewFile();
 		
 		BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(reportFile));
 		stream.write(bytes);
+		stream.flush();
         stream.close();
 	}
 }
