@@ -1,8 +1,12 @@
 package br.gov.saude.service;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -10,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
+import br.gov.saude.exc.AkulaServiceRuntimeException;
+import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -29,6 +36,32 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	private StatusService statusService;
+	
+	@Autowired
+	private EcarReport ecarReport;
+	
+	@Autowired
+	public EcarFileSystem ecarFileSystem;
+	
+	public byte[] gerarRelatorioGerencial(FiltroDto filtro) throws AkulaRuntimeException {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		List<Object> conteudo = new ArrayList<Object>();
+		
+		try {
+			BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
+			
+			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META);
+			
+			conteudo.add(convertService.createPEGerencial(listaItens));
+			parametros.put("logo", image);
+			
+			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
+			
+			return bytes;
+		} catch (IOException e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	@Transactional
 	public List<OeDto> listaOes() throws AkulaRuntimeException {

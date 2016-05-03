@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-03T00:55:00 -->
+<!-- 2016-05-03T15:11:06 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
 		<queryString>
 			<![CDATA[]]>
 		</queryString>
-		<field name="siglaMi" class="java.lang.String">
-			<fieldDescription><![CDATA[]]></fieldDescription>
-		</field>
+		<field name="sigla" class="java.lang.String"/>
 		<field name="desc" class="java.lang.String"/>
+		<field name="imgStatus" class="java.lang.Object"/>
+		<field name="responsavel" class="java.lang.String"/>
+		<field name="orgaoResp" class="java.lang.String"/>
+		<field name="situacao" class="java.lang.String"/>
+		<field name="ciclo" class="java.lang.String"/>
+		<field name="oe" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="logo" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<field name="listaItens" class="java.util.List"/>
+	<field name="filtros" class="java.lang.String"/>
+	<field name="exercicio" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<pageHeader>
-		<band height="20" splitType="Stretch">
+		<band height="56" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<rectangle>
 				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" backcolor="#3F51B5" uuid="163d8d32-4518-4332-a672-ca24bac4c3a9">
@@ -46,27 +52,188 @@
 				</reportElement>
 				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
 			</image>
+			<staticText>
+				<reportElement x="0" y="21" width="272" height="15" uuid="9826ed07-09bf-45db-87b3-4eca0a2d0f50">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="9"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE MONITORAMENTO - GERENCIAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="39" width="524" height="15" forecolor="#3B3939" uuid="a355dee3-5f32-4308-92d9-60867efd7595">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{filtros}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="36" width="555" height="1" forecolor="#000000" uuid="ea335e1d-06a7-4611-b9d8-9d9d47f28cff">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="516" y="21" width="38" height="15" forecolor="#2B8A2C" uuid="311f06d7-c294-46a8-8d3c-def4a3856bc7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exercicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="39" width="30" height="15" forecolor="#787575" uuid="3bffe90a-c7f6-4a22-bae8-07aeb8e0579c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<text><![CDATA[Filtros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="21" width="40" height="15" forecolor="#787575" uuid="8a651e84-5469-40ed-8f30-9900937461e2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<text><![CDATA[Exercício:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="55" width="555" height="1" uuid="17581bb3-f76e-4ea8-aea0-3f6d766e1bd8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#525050"/>
+				</graphicElement>
+			</line>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="83" splitType="Stretch">
 			<componentElement>
-				<reportElement x="0" y="20" width="555" height="80" uuid="5fefd4e1-5c66-40b5-844b-bd567156206c">
+				<reportElement x="0" y="3" width="555" height="80" uuid="5fefd4e1-5c66-40b5-844b-bd567156206c">
 					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value="lstListaItens"/>
 				</reportElement>
-				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+				<jr:list xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" printOrder="Vertical">
 					<datasetRun subDataset="dsItens" uuid="9d5bf101-f32e-4b77-b707-510eaeee1265">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($F{listaItens})]]></dataSourceExpression>
 					</datasetRun>
 					<jr:listContents height="80" width="555">
-						<textField>
-							<reportElement x="50" y="10" width="60" height="20" uuid="de0b2e25-56a6-436f-b55d-0323a60c4b9f"/>
-							<textFieldExpression><![CDATA[$F{siglaMi}]]></textFieldExpression>
+						<textField isBlankWhenNull="true">
+							<reportElement x="50" y="6" width="11" height="14" uuid="de0b2e25-56a6-436f-b55d-0323a60c4b9f">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Helvetica" size="9" isBold="true"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 						</textField>
-						<textField>
-							<reportElement x="110" y="10" width="440" height="20" uuid="a9ff8525-21ed-4ea2-81e8-bd09807ba2b5"/>
+						<textField isStretchWithOverflow="true">
+							<reportElement x="66" y="6" width="484" height="14" uuid="a9ff8525-21ed-4ea2-81e8-bd09807ba2b5"/>
+							<textElement>
+								<font fontName="Helvetica" size="9" isBold="true"/>
+								<paragraph lineSpacing="Single" lineSpacingSize="1.5"/>
+							</textElement>
 							<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
 						</textField>
+						<image>
+							<reportElement x="6" y="6" width="38" height="38" uuid="7b319c93-44f5-4d51-82cd-a1cf308992d1">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							</reportElement>
+							<imageExpression><![CDATA[$F{imgStatus}]]></imageExpression>
+						</image>
+						<staticText>
+							<reportElement x="61" y="6" width="5" height="14" uuid="2ee86247-67d0-43ec-9ce1-2c050853e515">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<textElement textAlignment="Center" verticalAlignment="Top">
+								<font fontName="Helvetica" size="9"/>
+							</textElement>
+							<text><![CDATA[-]]></text>
+						</staticText>
+						<staticText>
+							<reportElement x="50" y="37" width="110" height="14" forecolor="#757373" uuid="b2d92dd0-cefb-4b09-96bd-56e2843266ec">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Helvetica" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Responsável pelo parecer:]]></text>
+						</staticText>
+						<textField isBlankWhenNull="true">
+							<reportElement x="160" y="37" width="230" height="14" forecolor="#757373" uuid="75ee9bb8-7969-4a58-a314-c7e808b3f32b"/>
+							<textElement>
+								<font fontName="Helvetica" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{responsavel}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="50" y="51" width="110" height="14" forecolor="#757373" uuid="3ffacf65-8135-4ada-93dc-1413f4b020d8">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Helvetica" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Órgão responsável:]]></text>
+						</staticText>
+						<textField isBlankWhenNull="true">
+							<reportElement x="160" y="51" width="230" height="14" forecolor="#757373" uuid="e7be2c3c-e32d-45e2-b861-7e89ca705c72"/>
+							<textElement>
+								<font fontName="Helvetica" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{orgaoResp}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="410" y="37" width="40" height="14" forecolor="#757373" uuid="b25e4455-998d-487c-af3b-f104611f91aa">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="Helvetica" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[Situação:]]></text>
+						</staticText>
+						<textField isBlankWhenNull="true">
+							<reportElement x="450" y="37" width="100" height="14" forecolor="#757373" uuid="5172db8e-84f2-4505-8d21-edb50f74f2cb"/>
+							<textElement>
+								<font fontName="Helvetica" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
+						</textField>
+						<textField isBlankWhenNull="true">
+							<reportElement x="6" y="44" width="38" height="14" forecolor="#757373" uuid="40aaaf6a-f3b7-49b2-bbab-b8246d36d13b"/>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Helvetica" size="7"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
+						</textField>
+						<line>
+							<reportElement x="0" y="79" width="555" height="1" forecolor="#CFCFCF" uuid="80c1e369-6717-45ce-92d1-98d84decbdee">
+								<property name="local_mesure_unitheight" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</reportElement>
+						</line>
+						<textField>
+							<reportElement x="50" y="67" width="30" height="10" backcolor="#FFFFFF" uuid="0c72a653-758f-4cb3-81d4-f6fbd3f4d9b3">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							</reportElement>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Helvetica" size="7"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{oe}]]></textFieldExpression>
+						</textField>
+						<rectangle>
+							<reportElement x="90" y="66" width="30" height="13" uuid="cd82b480-3a75-48b3-9621-445cb9d42e32"/>
+							<graphicElement>
+								<pen lineWidth="0.0"/>
+							</graphicElement>
+						</rectangle>
 					</jr:listContents>
 				</jr:list>
 			</componentElement>
@@ -75,7 +242,7 @@
 	<pageFooter>
 		<band height="22" splitType="Stretch">
 			<line>
-				<reportElement x="1" y="2" width="553" height="1" forecolor="#CFCFCF" uuid="9ab28aa4-574e-490f-8d44-09b5b18de374">
+				<reportElement x="0" y="2" width="555" height="1" forecolor="#CFCFCF" uuid="9ab28aa4-574e-490f-8d44-09b5b18de374">
 					<property name="local_mesure_unitheight" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>

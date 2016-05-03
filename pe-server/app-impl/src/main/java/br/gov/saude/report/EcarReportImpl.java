@@ -2,7 +2,6 @@ package br.gov.saude.report;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +10,10 @@ import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ResourceLoaderAware;
-import org.springframework.core.io.ResourceLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.exc.AkulaServiceRuntimeException;
+import br.gov.saude.file.EcarFileSystem;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -23,15 +22,14 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.util.JRLoader;
 
-public class EcarReportImpl implements EcarReport, ResourceLoaderAware{
+public class EcarReportImpl implements EcarReport{
 	private static final Logger logger = LoggerFactory.getLogger(EcarReportImpl.class);
 	
-	private ResourceLoader resourceLoader;
-	
-	private static String ECAR_REPORT_DIR = "classpath:reports/eCarPEReports/";
+	@Autowired
+	public EcarFileSystem ecarFileSystem;
 	
 	public BufferedImage getImageFromContext(String name) throws IOException {
-		return ImageIO.read(findFileInputStream(ECAR_REPORT_DIR, name));
+		return ImageIO.read(ecarFileSystem.findFileInputStream(name));
 	}
 	
 	public byte[] generateReportPDF(String reportName, List<Object> conteudo)
@@ -48,7 +46,7 @@ public class EcarReportImpl implements EcarReport, ResourceLoaderAware{
 			JasperPrint reportPrint;
 			JRBeanCollectionDataSource jrBean;
 			
-			report = (JasperReport) JRLoader.loadObject(findFileInputStream(ECAR_REPORT_DIR, reportName));
+			report = (JasperReport) JRLoader.loadObject(ecarFileSystem.findFileInputStream(reportName));
 			
 			jrBean = new JRBeanCollectionDataSource(conteudo);
 			
@@ -61,14 +59,5 @@ public class EcarReportImpl implements EcarReport, ResourceLoaderAware{
 		} catch (IOException e) {
 			throw new AkulaServiceRuntimeException(e.getMessage(), e);
 		}
-	}
-	
-	private InputStream findFileInputStream(String local, String fileName) throws IOException {
-		return resourceLoader.getResource(local+fileName).getInputStream();
-	}
-
-	@Override
-	public void setResourceLoader(ResourceLoader resourceLoader) {
-		this.resourceLoader = resourceLoader;
 	}
 }

@@ -11,6 +11,7 @@ import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public interface EcarSiteService {
+	public byte[] gerarRelatorioGerencial(FiltroDto filtro) throws AkulaRuntimeException;
 	public List<OeDto> listaOes() throws AkulaRuntimeException;
 	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException;
 	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException;
