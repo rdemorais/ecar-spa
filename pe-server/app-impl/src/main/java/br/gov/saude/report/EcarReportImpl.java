@@ -1,10 +1,13 @@
 package br.gov.saude.report;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +29,10 @@ public class EcarReportImpl implements EcarReport, ResourceLoaderAware{
 	private ResourceLoader resourceLoader;
 	
 	private static String ECAR_REPORT_DIR = "classpath:reports/eCarPEReports/";
+	
+	public BufferedImage getImageFromContext(String name) throws IOException {
+		return ImageIO.read(findFileInputStream(ECAR_REPORT_DIR, name));
+	}
 	
 	public byte[] generateReportPDF(String reportName, List<Object> conteudo)
 			throws AkulaServiceRuntimeException {

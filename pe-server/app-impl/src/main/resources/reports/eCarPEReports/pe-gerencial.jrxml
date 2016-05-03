@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-02T16:47:47 -->
+<!-- 2016-05-03T00:35:51 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="logo" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="79" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="360" height="30" uuid="a3d615d6-df49-4e8a-a723-7f7a0a40a707"/>
-				<text><![CDATA[Teste de Relatório enviado para AngularJS a partir de uma chamada Ajax]]></text>
-			</staticText>
-		</band>
-	</title>
 	<pageHeader>
-		<band height="60" splitType="Stretch">
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 			<rectangle>
-				<reportElement x="220" y="10" width="194" height="40" uuid="163d8d32-4518-4332-a672-ca24bac4c3a9"/>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" backcolor="#3F51B5" uuid="163d8d32-4518-4332-a672-ca24bac4c3a9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
 			</rectangle>
+			<staticText>
+				<reportElement x="40" y="0" width="370" height="20" forecolor="#FFFFFF" uuid="86c5b6cf-cc82-4303-8ad8-85ed1b8e5103"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="9"/>
+				</textElement>
+				<text><![CDATA[PLANEJAMENTO ESTRATÉGICO DO MINISTÉRIO DA SAÚDE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="11" y="1" width="19" height="19" uuid="9783c590-9e75-40a5-ab12-bab07778fa64">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
-	<columnHeader>
-		<band height="61" splitType="Stretch"/>
-	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch"/>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="22" splitType="Stretch">
+			<line>
+				<reportElement x="1" y="2" width="553" height="1" forecolor="#CFCFCF" uuid="9ab28aa4-574e-490f-8d44-09b5b18de374">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="520" y="5" width="20" height="14" forecolor="#C7C7C7" uuid="db9e80c5-991a-49e5-b0c9-80b8a0efd4ad"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="540" y="5" width="14" height="14" forecolor="#C7C7C7" uuid="f395b7ed-e676-4586-8c58-b91fa95118d0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " +  $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>
