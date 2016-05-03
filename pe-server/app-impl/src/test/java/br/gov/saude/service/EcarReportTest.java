@@ -32,8 +32,6 @@ public class EcarReportTest {
 		filtro.setCodExe(1L);
 		byte[] bytes = ecarSiteService.gerarRelatorioGerencial(filtro);
 		
-		logger.debug(bytes.length + "");
-
 		File reportFile = new File("/Users/rafaeldemorais/ecarReport.pdf");
 		reportFile.createNewFile();
 		

@@ -56,7 +56,7 @@
 
 	</bean>
 
-	<!-- Forwards requests to the "/" resource to the "welcome" view -->
+	<!-- Forwards requests to the "/" resource to the "welcome" view 
 	<mvc:view-controller path="/" view-name="/app/welcome" />
-
+	-->
 </beans>

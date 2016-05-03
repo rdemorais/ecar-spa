@@ -2,8 +2,10 @@ package br.gov.saude.service;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,6 +48,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	public byte[] gerarRelatorioGerencial(FiltroDto filtro) throws AkulaRuntimeException {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Object> conteudo = new ArrayList<Object>();
+		SimpleDateFormat sdfDataH = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		try {
 			BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
@@ -58,6 +61,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			parametros.put("logo", image);
 			parametros.put("logoEcar", logoEcar);
 			parametros.put("logoHeader", logoHeader);
+			parametros.put("dataAtual", sdfDataH.format(new Date()));
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
 			

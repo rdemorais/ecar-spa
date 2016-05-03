@@ -49,6 +49,7 @@ public class ConvertServiceImpl implements ConvertService{
 		itemReport.setResponsavel(itemDto.getResponsavel());
 		itemReport.setOrgaoResp(itemDto.getOrgaoResp());
 		itemReport.setSituacao(itemDto.getSituacao());
+		itemReport.setNivel(itemDto.getNivel());
 		
 		return itemReport;
 	}
