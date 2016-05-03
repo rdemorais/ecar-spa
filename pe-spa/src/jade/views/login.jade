@@ -9,13 +9,13 @@ container.container-sm(ng-controller="loginController")
           form(role='form').mb-lg.p
             .row
               .form-group.has-feedback.mb
-                input.form-control(type='text', placeholder='Usuário', autocomplete="off")
+                input.form-control(type='text', placeholder='Usuário', autocomplete="off", ng-model="login")
                 span.fa.fa-user.form-control-feedback.text-muted
               br
               .form-group.has-feedback
-                input.form-control(type='password', placeholder='Senha')
+                input.form-control(type='password', placeholder='Senha', ng-model="senha")
                 span.fa.fa-lock.form-control-feedback.text-muted
               .form-group
-                button.btn.btn-block.btn-info.mb(type='button', ng-click="login()") Entrar
+                button.btn.btn-block.btn-info.mb(type='button', ng-click="loginEcar()") Entrar
 
               

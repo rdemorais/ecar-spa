@@ -14,12 +14,13 @@
     
     loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService'];
     function loginController($scope, $state, OAuth, pemsService) {
-
-        $scope.login = function() {
+        $scope.login = '';
+        $scope.senha = '';
+        $scope.loginEcar = function() {
             
             OAuth.getAccessToken({
-                username: 'admin',
-                password: 'serenaya'
+                username: $scope.login,
+                password: $scope.senha
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
                     pemsService.loadOEs(function(oes){});

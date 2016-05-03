@@ -19,6 +19,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.report.EcarReport;
+import br.gov.saude.report.PEGerencial;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 
@@ -40,6 +41,7 @@ public class EcarReportTest {
 		
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Object> conteudo = new ArrayList<Object>();
+		PEGerencial peGerencial = new PEGerencial();
 		
 		BufferedImage image = ecarReport.getImageFromContext("logo_small.gif");
 		
@@ -47,8 +49,9 @@ public class EcarReportTest {
 		filtro.setCodExe(1L);
 		
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		peGerencial.setListaItens(listaItens);
 		
-		conteudo.add(listaItens);
+		conteudo.add(peGerencial);
 		parametros.put("logo", image);
 		
 		byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
