@@ -16,7 +16,7 @@
     function loginController($scope, $state, OAuth, pemsService) {
 
         $scope.login = function() {
-
+            
             OAuth.getAccessToken({
                 username: 'admin',
                 password: 'serenaya'

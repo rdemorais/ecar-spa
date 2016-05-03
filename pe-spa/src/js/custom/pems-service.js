@@ -12,6 +12,20 @@
             oes: []
         };
 
+        this.downloadRelatorio = function() {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/download-rel',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                var fileURL = URL.createObjectURL(file);
+                window.open(fileURL);
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        }
+
         this.loadEtiquetas = function(callback) {
             $http({
                 method: 'POST',

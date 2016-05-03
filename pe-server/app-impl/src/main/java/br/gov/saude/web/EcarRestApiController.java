@@ -121,7 +121,7 @@ public class EcarRestApiController {
 	}
 	
 	@RequestMapping(value="/download-rel", 
-			method=RequestMethod.GET)
+			method=RequestMethod.POST)
 	public void downloadRelatorio(HttpServletResponse response) {
 		
 		byte[] data = ecarReport.generateReportPDF("pe-gerencial.jasper", new ArrayList<Object>());
