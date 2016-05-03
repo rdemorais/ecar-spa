@@ -192,9 +192,7 @@
         }
 
         $scope.gerarRelatorioGerencial = function() {
-          pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros(), function(fileURL) {
-            window.open(fileURL);
-          });
+          pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());
         }
 
         $scope.$on('pems:pesquisar-lista', function(event) {
