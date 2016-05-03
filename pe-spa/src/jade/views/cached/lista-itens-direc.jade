@@ -1,5 +1,6 @@
 .panel.panel-default
   .panel-heading
+    a.pull-right.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioGerencial()")
     | {{listaItens.length}}
     span(ng-if="listaItens.length == 0") Nenhum item foi encontrado para os parâmetros de busca
     span(ng-if="listaItens.length == 1") item encontrado

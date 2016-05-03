@@ -12,15 +12,16 @@
             oes: []
         };
 
-        this.downloadRelatorio = function() {
+        this.gerarRelatorioGerencial = function(filtro, callback) {
             $http({
                 method: 'POST',
-                url: $rootScope.app.baseUrl + '/download-rel',
-                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+                url: $rootScope.app.baseUrl + '/download-rel-gerencial',
+                data: filtro
             }).then(function successCallBack(response) {
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 var fileURL = URL.createObjectURL(file);
-                window.open(fileURL);
+                callback(fileURL);
+                //window.open(fileURL);
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);
             });

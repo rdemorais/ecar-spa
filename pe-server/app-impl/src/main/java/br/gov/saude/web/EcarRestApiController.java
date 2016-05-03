@@ -1,7 +1,6 @@
 package br.gov.saude.web;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
-import br.gov.saude.report.EcarReport;
 import br.gov.saude.service.EcarSiteService;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
@@ -33,9 +32,6 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
-	
-	@Autowired
-	private EcarReport ecarReport;
 	
 	@RequestMapping(value="/lista-oes", 
 			method=RequestMethod.POST)
@@ -120,21 +116,23 @@ public class EcarRestApiController {
 		return EcarResponse.ok(etiquetas);
 	}
 	
-	@RequestMapping(value="/download-rel", 
+	@RequestMapping(value="/download-rel-gerencial", 
 			method=RequestMethod.POST)
-	public void downloadRelatorio(HttpServletResponse response) {
+	public void downloadRelatorio(HttpServletResponse response, @RequestBody FiltroDto filtro) {
 		
-		byte[] data = ecarReport.generateReportPDF("pe-gerencial.jasper", new ArrayList<Object>());
-		
-		response.setContentType("application/pdf");
-		response.setHeader("Content-disposition", "attachment; filename=eCar.pdf");
-	    response.setContentLength(data.length);
-	    
 	    try {
+	    	byte[] data = ecarSiteService.gerarRelatorioGerencial(filtro);
+			
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition", "attachment; filename=relatorioGerencial.pdf");
+		    response.setContentLength(data.length);
+		    
 			response.getOutputStream().write(data);
 			response.getOutputStream().flush();
+			response.getOutputStream().close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AkulaRuntimeException e) {
 			e.printStackTrace();
 		}
         
