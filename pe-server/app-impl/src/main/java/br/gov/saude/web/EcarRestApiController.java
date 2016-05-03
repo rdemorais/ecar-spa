@@ -1,6 +1,10 @@
 package br.gov.saude.web;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.gov.saude.model.Estrutura;
+import br.gov.saude.report.EcarReport;
 import br.gov.saude.service.EcarSiteService;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
@@ -28,6 +33,9 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
+	
+	@Autowired
+	private EcarReport ecarReport;
 	
 	@RequestMapping(value="/lista-oes", 
 			method=RequestMethod.POST)
@@ -111,4 +119,26 @@ public class EcarRestApiController {
 		
 		return EcarResponse.ok(etiquetas);
 	}
+	
+	@RequestMapping(value="/download-rel", 
+			method=RequestMethod.GET)
+	public void downloadRelatorio(HttpServletResponse response) {
+		
+		byte[] data = ecarReport.generateReportPDF("pe-gerencial.jasper", new ArrayList<Object>());
+		
+		response.setContentType("application/pdf");
+		response.setHeader("Content-disposition", "attachment; filename=eCar.pdf");
+	    response.setContentLength(data.length);
+	    
+	    try {
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
+	
+	
 }

@@ -24,8 +24,7 @@
 		<param-value>
 			/WEB-INF/akula-spring-app-servlet.xml,
 			classpath:/META-INF/app-context.xml,
-			classpath:/META-INF/security-context.xml,
-			classpath:/META-INF/sentinela-app-context.xml
+			classpath:/META-INF/security-context.xml
 		</param-value>
 	</context-param>
 	
