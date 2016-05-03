@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-03T15:11:06 -->
+<!-- 2016-05-03T16:16:36 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -17,6 +17,8 @@
 		<field name="oe" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="logoEcar" class="java.lang.Object"/>
+	<parameter name="logoHeader" class="java.lang.Object"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -111,6 +113,10 @@
 					<pen lineWidth="0.5" lineColor="#525050"/>
 				</graphicElement>
 			</line>
+			<image>
+				<reportElement x="460" y="0" width="94" height="20" uuid="5b307148-32c0-4ee0-8188-cbdc4ebb6a50"/>
+				<imageExpression><![CDATA[$P{logoHeader}]]></imageExpression>
+			</image>
 		</band>
 	</pageHeader>
 	<detail>
@@ -240,7 +246,7 @@
 		</band>
 	</detail>
 	<pageFooter>
-		<band height="22" splitType="Stretch">
+		<band height="30" splitType="Stretch">
 			<line>
 				<reportElement x="0" y="2" width="555" height="1" forecolor="#CFCFCF" uuid="9ab28aa4-574e-490f-8d44-09b5b18de374">
 					<property name="local_mesure_unitheight" value="pixel"/>
@@ -261,6 +267,13 @@
 				</textElement>
 				<textFieldExpression><![CDATA[" de " +  $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
+			<image>
+				<reportElement x="0" y="5" width="50" height="25" uuid="347de997-4578-46f7-8d65-ce470847f1de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logoEcar}]]></imageExpression>
+			</image>
 		</band>
 	</pageFooter>
 </jasperReport>

@@ -49,11 +49,15 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		
 		try {
 			BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
+			BufferedImage logoEcar = ecarFileSystem.getImageFromContext("ecarLogo.png");
+			BufferedImage logoHeader = ecarFileSystem.getImageFromContext("header_logos.gif");
 			
 			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META);
 			
 			conteudo.add(convertService.createPEGerencial(listaItens));
 			parametros.put("logo", image);
+			parametros.put("logoEcar", logoEcar);
+			parametros.put("logoHeader", logoHeader);
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
 			
