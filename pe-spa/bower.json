@@ -12,8 +12,6 @@
     "theme",
     "dashboard"
   ],
-  "license": "https://wrapbootstrap.com/help/licenses",
-  "private": true,
   "dependencies": {
     "angular-loading-bar": "0.7.1",
     "angular-translate": "2.8.0",
@@ -38,7 +36,10 @@
     "angular-touch": "1.4.6",
     "angular-resource": "1.4.6",
     "angular-sanitize": "1.4.6",
-    "modernizr": "2.8.3"
+    "modernizr": "2.8.3",
+    "angular-spinner": "^0.8.1",
+    "numbro": "^1.7.1",
+    "ui-select": "angular-ui-select#^0.16.1"
   },
   "resolutions": {
     "angular": "1.4.6",

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
+<!-- 2016-05-04T10:36:34 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="logo" class="java.lang.Object"/>
+	<parameter name="logoEcar" class="java.lang.Object"/>
+	<parameter name="logoHeader" class="java.lang.Object"/>
+	<parameter name="dataAtual" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="listaItens" class="java.util.List"/>
+	<field name="filtros" class="java.lang.String"/>
+	<field name="exercicio" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="56" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" backcolor="#3F51B5" uuid="163d8d32-4518-4332-a672-ca24bac4c3a9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="40" y="0" width="370" height="20" forecolor="#FFFFFF" uuid="86c5b6cf-cc82-4303-8ad8-85ed1b8e5103"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="9"/>
+				</textElement>
+				<text><![CDATA[PLANEJAMENTO ESTRATÉGICO DO MINISTÉRIO DA SAÚDE]]></text>
+			</staticText>
+			<image>
+				<reportElement x="11" y="1" width="19" height="19" uuid="9783c590-9e75-40a5-ab12-bab07778fa64">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="21" width="272" height="15" uuid="9826ed07-09bf-45db-87b3-4eca0a2d0f50">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="9"/>
+				</textElement>
+				<text><![CDATA[RELATÓRIO DE MONITORAMENTO - EXECUTIVO]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="30" y="39" width="524" height="15" forecolor="#3B3939" uuid="a355dee3-5f32-4308-92d9-60867efd7595">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{filtros}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="36" width="555" height="1" forecolor="#000000" uuid="ea335e1d-06a7-4611-b9d8-9d9d47f28cff">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="516" y="21" width="38" height="15" forecolor="#2B8A2C" uuid="311f06d7-c294-46a8-8d3c-def4a3856bc7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{exercicio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="39" width="30" height="15" forecolor="#787575" uuid="3bffe90a-c7f6-4a22-bae8-07aeb8e0579c">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<text><![CDATA[Filtros:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="21" width="40" height="15" forecolor="#787575" uuid="8a651e84-5469-40ed-8f30-9900937461e2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Helvetica" size="8"/>
+				</textElement>
+				<text><![CDATA[Exercício:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="55" width="555" height="1" uuid="17581bb3-f76e-4ea8-aea0-3f6d766e1bd8">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#525050"/>
+				</graphicElement>
+			</line>
+			<image>
+				<reportElement x="460" y="0" width="94" height="20" uuid="5b307148-32c0-4ee0-8188-cbdc4ebb6a50"/>
+				<imageExpression><![CDATA[$P{logoHeader}]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="83" splitType="Stretch"/>
+	</detail>
+	<pageFooter>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="2" width="555" height="1" forecolor="#CFCFCF" uuid="9ab28aa4-574e-490f-8d44-09b5b18de374">
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
+			<textField>
+				<reportElement x="520" y="5" width="20" height="14" forecolor="#C7C7C7" uuid="db9e80c5-991a-49e5-b0c9-80b8a0efd4ad"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="540" y="5" width="14" height="14" forecolor="#C7C7C7" uuid="f395b7ed-e676-4586-8c58-b91fa95118d0"/>
+				<textElement textAlignment="Left">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" de " +  $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="0" y="5" width="50" height="25" uuid="347de997-4578-46f7-8d65-ce470847f1de">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA[$P{logoEcar}]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="220" y="5" width="116" height="14" forecolor="#C7C7C7" uuid="259c574a-5ddd-4097-a4aa-e19c1829760f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Emitido em " + $P{dataAtual}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

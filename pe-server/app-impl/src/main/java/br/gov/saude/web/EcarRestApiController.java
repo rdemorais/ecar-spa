@@ -127,8 +127,6 @@ public class EcarRestApiController {
 			response.setHeader("Content-disposition", "attachment; filename=relatorioGerencial.pdf");
 		    response.setContentLength(data.length);
 		    
-		    logger.debug(data.length + "");
-		    
 			response.getOutputStream().write(data);
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
