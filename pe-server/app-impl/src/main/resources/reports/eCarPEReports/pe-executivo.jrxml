@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-04T13:39:43 -->
+<!-- 2016-05-04T18:42:44 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -34,6 +34,9 @@
 	<field name="sigla" class="java.lang.String"/>
 	<field name="desc" class="java.lang.String"/>
 	<field name="parecer" class="java.lang.String"/>
+	<field name="imgStatus" class="java.lang.Object"/>
+	<field name="siglaMi" class="java.lang.String"/>
+	<field name="estruturaSuperior" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -119,7 +122,7 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="3">
-				<reportElement mode="Opaque" x="54" y="47" width="22" height="10" backcolor="#BBD16D" uuid="b4efa36d-4203-40f4-9d28-8cc46ed6133e">
+				<reportElement mode="Opaque" x="54" y="47" width="22" height="10" backcolor="#F0AD4E" uuid="b4efa36d-4203-40f4-9d28-8cc46ed6133e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -148,7 +151,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="103" y="47" width="60" height="10" uuid="c1d858b4-ee7e-444a-be61-7db9f294783f">
+				<reportElement x="80" y="47" width="60" height="10" uuid="c1d858b4-ee7e-444a-be61-7db9f294783f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -156,15 +159,6 @@
 				</textElement>
 				<text><![CDATA[Responsável:]]></text>
 			</staticText>
-			<rectangle radius="3">
-				<reportElement mode="Opaque" x="78" y="47" width="22" height="10" backcolor="#BBD16D" uuid="41dacd46-f06a-411e-b6e2-012152e8ef30">
-					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-				</reportElement>
-				<graphicElement>
-					<pen lineWidth="0.0"/>
-				</graphicElement>
-			</rectangle>
 			<rectangle radius="3">
 				<reportElement mode="Opaque" x="6" y="47" width="22" height="10" backcolor="#7A91A3" uuid="af50c69b-7437-4abf-9528-c76651f70c41">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
@@ -191,6 +185,7 @@
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
 				</reportElement>
+				<imageExpression><![CDATA[$F{imgStatus}]]></imageExpression>
 			</image>
 			<rectangle radius="3">
 				<reportElement mode="Opaque" x="6" y="47" width="22" height="10" backcolor="#60C5BA" uuid="5ea18a0f-90e2-4ab3-b1fc-bd170ab8e9cb">
@@ -223,7 +218,7 @@
 				</graphicElement>
 			</rectangle>
 			<textField isBlankWhenNull="true">
-				<reportElement x="164" y="47" width="192" height="10" uuid="5ae07172-8311-4916-8fd3-0c169fcd0f4b">
+				<reportElement x="144" y="47" width="206" height="10" uuid="5ae07172-8311-4916-8fd3-0c169fcd0f4b">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
@@ -263,7 +258,7 @@
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="358" y="47" width="41" height="10" uuid="bd3ed5c5-c1f8-4122-9a9b-d2070a6336c3">
+				<reportElement x="350" y="47" width="41" height="10" uuid="bd3ed5c5-c1f8-4122-9a9b-d2070a6336c3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
@@ -329,9 +324,10 @@
 				</graphicElement>
 			</rectangle>
 			<rectangle radius="3">
-				<reportElement mode="Opaque" x="30" y="47" width="22" height="10" backcolor="#BBD16D" uuid="411c042c-8ce3-4663-ad0c-cfc4851e1c9e">
+				<reportElement mode="Opaque" x="30" y="47" width="22" height="10" backcolor="#337AB7" uuid="411c042c-8ce3-4663-ad0c-cfc4851e1c9e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{nivel}.equals("produto_intermediario") || $F{nivel}.equals("atividade")]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
@@ -367,7 +363,7 @@
 				<text><![CDATA[Ciclo:]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="401" y="47" width="57" height="10" uuid="49c24192-f623-4450-95be-fcdb543bed0a"/>
+				<reportElement x="391" y="47" width="69" height="10" uuid="49c24192-f623-4450-95be-fcdb543bed0a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Helvetica" size="7"/>
 				</textElement>
@@ -472,7 +468,7 @@
 			</staticText>
 			<staticText>
 				<reportElement x="6" y="67" width="104" height="10" forecolor="#7C82CC" uuid="7ab1fd38-2a92-42a1-8167-72239e0b0378">
-					<printWhenExpression><![CDATA[$F{nivel}.equals("produto_intermediario")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$F{nivel}.equals("atividade")]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Helvetica" size="8" isBold="true"/>
@@ -511,6 +507,17 @@
 					<pen lineWidth="0.5" lineColor="#525050"/>
 				</graphicElement>
 			</line>
+			<textField>
+				<reportElement x="30" y="47" width="22" height="10" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="f3904378-b50a-40d9-9143-f276fc1e2c5f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[$F{nivel}.equals("produto_intermediario") || $F{nivel}.equals("atividade")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["M " + $F{siglaMi}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<detail>

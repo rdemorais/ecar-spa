@@ -18,6 +18,10 @@ public class PEExecutivo {
 	private String nivel;
 	private String parecer;
 	
+	private String siglaMi;
+	private String siglaPi;
+	private String siglaAtv;
+	
 	private List<ItemReport> listaItens = new ArrayList<ItemReport>();
 	
 	public String getExercicio() {
@@ -114,6 +118,30 @@ public class PEExecutivo {
 
 	public void setParecer(String parecer) {
 		this.parecer = parecer;
+	}
+
+	public String getSiglaMi() {
+		return siglaMi;
+	}
+
+	public void setSiglaMi(String siglaMi) {
+		this.siglaMi = siglaMi;
+	}
+
+	public String getSiglaPi() {
+		return siglaPi;
+	}
+
+	public void setSiglaPi(String siglaPi) {
+		this.siglaPi = siglaPi;
+	}
+
+	public String getSiglaAtv() {
+		return siglaAtv;
+	}
+
+	public void setSiglaAtv(String siglaAtv) {
+		this.siglaAtv = siglaAtv;
 	}
 	
 }

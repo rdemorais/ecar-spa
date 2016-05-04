@@ -67,8 +67,31 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		
 		try {
 			parametros = gerarParametros();
-			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
-			ItemDto item = loadItem(filtro, Estrutura.META);
+			Estrutura nivelPai = Estrutura.valueOf(filtro.getNivel().toUpperCase());
+			ItemDto item = null;
+			List<ItemDto> listaItens = null;
+			
+			switch (nivelPai) {
+			case META:
+				item = loadItem(filtro, Estrutura.META);
+				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+				break;
+			case INICIATIVA:
+				item = loadItem(filtro, Estrutura.INICIATIVA);
+				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+				break;
+			case PRODUTO_INTERMEDIARIO:
+				item = loadItem(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+				listaItens = loadListaItens(filtro, Estrutura.ATIVIDADE);
+				break;
+			case ATIVIDADE:
+				item = loadItem(filtro, Estrutura.ATIVIDADE);
+				listaItens = new ArrayList<ItemDto>();
+				break;
+			default:
+				break;
+			}
+			
 			
 			conteudo.add(convertService.createPEExecutivo(item, listaItens));
 			

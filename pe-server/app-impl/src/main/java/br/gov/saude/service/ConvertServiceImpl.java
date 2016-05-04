@@ -35,6 +35,10 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setSituacao(itemDto.getSituacao());
 		peExecutivo.setNivel(itemDto.getNivel());
 		peExecutivo.setParecer(itemDto.getParecer());
+		peExecutivo.setSiglaMi(itemDto.getSiglaMi());
+		peExecutivo.setSiglaPi(itemDto.getSiglaPi());
+		peExecutivo.setSiglaAtv(itemDto.getSiglaAtv());
+		peExecutivo.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getNomeCor() + ".gif"));
 		
 		peExecutivo.setListaItens(convertItem(listaItens));
 		
@@ -63,7 +67,13 @@ public class ConvertServiceImpl implements ConvertService{
 		ItemReport itemReport = new ItemReport();
 		itemReport.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getNomeCor() + ".gif"));
 		itemReport.setOe(itemDto.getOe());
-		itemReport.setSigla(itemDto.getSiglaMi());
+		if(itemDto.getNivel().equals("meta") || itemDto.getNivel().equals("iniciativa")) {
+			itemReport.setSigla(itemDto.getSiglaMi());
+		}else if(itemDto.getNivel().equals("produto_intermediario")) {
+			itemReport.setSigla(itemDto.getSiglaPi());
+		}else if(itemDto.getNivel().equals("atividade")) {
+			itemReport.setSigla(itemDto.getSiglaAtv());
+		}
 		itemReport.setDesc(itemDto.getDesc());
 		itemReport.setCiclo(itemDto.getMes() + "/" + itemDto.getAno());
 		itemReport.setResponsavel(itemDto.getResponsavel());
