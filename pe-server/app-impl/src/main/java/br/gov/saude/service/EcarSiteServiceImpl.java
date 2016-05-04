@@ -45,23 +45,50 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	@Autowired
 	public EcarFileSystem ecarFileSystem;
 	
+	private Map<String, Object> gerarParametros() throws IOException {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		SimpleDateFormat sdfDataH = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		
+		BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
+		BufferedImage logoEcar = ecarFileSystem.getImageFromContext("ecarLogo.png");
+		BufferedImage logoHeader = ecarFileSystem.getImageFromContext("header_logos.gif");
+		
+		parametros.put("logo", image);
+		parametros.put("logoEcar", logoEcar);
+		parametros.put("logoHeader", logoHeader);
+		parametros.put("dataAtual", sdfDataH.format(new Date()));
+		
+		return parametros;
+	}
+	
+	public byte[] gerarRelatorioExecutivo(FiltroDto filtro) throws AkulaRuntimeException {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		List<Object> conteudo = new ArrayList<Object>();
+		
+		try {
+			parametros = gerarParametros();
+			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+			ItemDto item = loadItem(filtro, Estrutura.META);
+			
+			conteudo.add(convertService.createPEExecutivo(item, listaItens));
+			
+			byte[] bytes = ecarReport.generateReportPDF("pe-executivo.jasper",  parametros, conteudo);
+			
+			return bytes;
+		} catch (IOException e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		}
+	}
+	
 	public byte[] gerarRelatorioGerencial(FiltroDto filtro) throws AkulaRuntimeException {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Object> conteudo = new ArrayList<Object>();
-		SimpleDateFormat sdfDataH = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		try {
-			BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
-			BufferedImage logoEcar = ecarFileSystem.getImageFromContext("ecarLogo.png");
-			BufferedImage logoHeader = ecarFileSystem.getImageFromContext("header_logos.gif");
-			
+			parametros = gerarParametros();
 			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META);
 			
 			conteudo.add(convertService.createPEGerencial(listaItens));
-			parametros.put("logo", image);
-			parametros.put("logoEcar", logoEcar);
-			parametros.put("logoHeader", logoHeader);
-			parametros.put("dataAtual", sdfDataH.format(new Date()));
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
 			

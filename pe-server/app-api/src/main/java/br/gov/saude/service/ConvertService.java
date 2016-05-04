@@ -7,12 +7,14 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.report.ItemReport;
+import br.gov.saude.report.PEExecutivo;
 import br.gov.saude.report.PEGerencial;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 
 public interface ConvertService {
+	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens) throws IOException;
 	public PEGerencial createPEGerencial(List<ItemDto> listaItens) throws IOException;
 	public List<ItemReport> convertItem(List<ItemDto> listaItens) throws IOException;
 	public ItemReport convertItem(ItemDto itemDto) throws IOException;

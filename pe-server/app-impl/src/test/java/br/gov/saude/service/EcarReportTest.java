@@ -40,4 +40,22 @@ public class EcarReportTest {
 		stream.flush();
         stream.close();
 	}
+	
+	@Test
+	public void gerarReportExecutivoTest() throws IOException {
+		logger.debug("Gerando relatorio executivo...");
+		
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setCodIett(44L);
+		byte[] bytes = ecarSiteService.gerarRelatorioExecutivo(filtro);
+		
+		File reportFile = new File("/Users/rafaeldemorais/ecarReportExecutivo.pdf");
+		reportFile.createNewFile();
+		
+		FileOutputStream stream = new FileOutputStream(reportFile);
+		stream.write(bytes);
+		stream.flush();
+        stream.close();
+	}
 }

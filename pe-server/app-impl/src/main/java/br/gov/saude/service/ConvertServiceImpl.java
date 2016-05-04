@@ -11,6 +11,7 @@ import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.report.ItemReport;
+import br.gov.saude.report.PEExecutivo;
 import br.gov.saude.report.PEGerencial;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -20,6 +21,25 @@ public class ConvertServiceImpl implements ConvertService{
 	
 	@Autowired
 	private EcarFileSystem ecarFileSystem;
+	
+	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens) throws IOException {
+		PEExecutivo peExecutivo = new PEExecutivo();
+		
+		peExecutivo.setExercicio("2016");
+		peExecutivo.setOe(itemDto.getOe());
+		peExecutivo.setSigla(itemDto.getSiglaMi());
+		peExecutivo.setDesc(itemDto.getDesc());
+		peExecutivo.setCiclo(itemDto.getMes() + "/" + itemDto.getAno());
+		peExecutivo.setResponsavel(itemDto.getResponsavel());
+		peExecutivo.setOrgaoResp(itemDto.getOrgaoResp());
+		peExecutivo.setSituacao(itemDto.getSituacao());
+		peExecutivo.setNivel(itemDto.getNivel());
+		peExecutivo.setParecer(itemDto.getParecer());
+		
+		peExecutivo.setListaItens(convertItem(listaItens));
+		
+		return peExecutivo;
+	}
 	
 	public PEGerencial createPEGerencial(List<ItemDto> listaItens) throws IOException {
 		PEGerencial peGerencial = new PEGerencial();

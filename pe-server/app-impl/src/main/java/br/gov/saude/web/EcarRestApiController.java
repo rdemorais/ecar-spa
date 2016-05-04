@@ -116,6 +116,28 @@ public class EcarRestApiController {
 		return EcarResponse.ok(etiquetas);
 	}
 	
+	@RequestMapping(value="/download-rel-executivo", 
+			method=RequestMethod.POST)
+	public void downloadRelatorioExecutivo(HttpServletResponse response, @RequestBody FiltroDto filtro) {
+		
+	    try {
+	    	byte[] data = ecarSiteService.gerarRelatorioGerencial(filtro);
+			
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition", "attachment; filename=relatorioExecutivo.pdf");
+		    response.setContentLength(data.length);
+		    
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (AkulaRuntimeException e) {
+			e.printStackTrace();
+		}
+        
+	}
+	
 	@RequestMapping(value="/download-rel-gerencial", 
 			method=RequestMethod.POST)
 	public void downloadRelatorio(HttpServletResponse response, @RequestBody FiltroDto filtro) {

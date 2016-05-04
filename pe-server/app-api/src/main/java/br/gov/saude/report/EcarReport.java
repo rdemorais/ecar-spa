@@ -1,7 +1,5 @@
 package br.gov.saude.report;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
