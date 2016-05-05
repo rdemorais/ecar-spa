@@ -191,10 +191,6 @@
           $state.go("app.dash-item", {itemId: _itemId, nivel: $scope.nivel});
         }
 
-        $scope.gerarRelatorioGerencial = function() {
-          pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());
-        }
-
         $scope.$on('pems:pesquisar-lista', function(event) {
           if($scope.nivel == 'META') {
             pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {

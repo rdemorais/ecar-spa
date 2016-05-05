@@ -32,7 +32,9 @@
 								span.fa.fa-check
 								| Apenas Iniciativas
 				.row.row-table
-					.col-sm-12.col-xs-12
+					.col-sm-6.col-xs-12
 						button.mr.btn.btn-primary.btn-fw.mt-xl(ng-click="pesquisar()") Pesquisar
+					.col-sm-6.col-xs-6
+						a.pull-right.mt-xl.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioGerencial()")
 	.col-lg-8.fw-boxed
 		pems-lista-itens(nivel='META')

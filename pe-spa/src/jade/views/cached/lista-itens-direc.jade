@@ -1,6 +1,5 @@
 .panel.panel-default
   .panel-heading
-    a.pull-right.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioGerencial()")
     | {{listaItens.length}}
     span(ng-if="listaItens.length == 0") Nenhum item foi encontrado para os parâmetros de busca
     span(ng-if="listaItens.length == 1") item encontrado
@@ -35,6 +34,7 @@
                   |&nbsp; {{item.orgaoResp}}
 
                 .mr.label(ng-class="'label-'+item.oeShortName") {{item.oe}}
-                .mr.label(ng-if="item.nivel == 'produto_intermediario' && item.estruturaSuperior == 'meta'", ng-class="'label-'+item.estruturaSuperior") M {{item.siglaMi}}
-                .mr.label(ng-if="item.nivel == 'produto_intermediario' && item.estruturaSuperior == 'iniciativa'", ng-class="'label-'+item.estruturaSuperior") I {{item.siglaMi}}
-                .mr.label(ng-class="'label-'+item.nivel") {{item.nivel}}
+                .mr.label.label-meta(ng-if="item.estruturaProduto == 'meta' && item.nivel != 'meta'") M {{item.siglaMi}}
+                .mr.label.label-iniciativa(ng-if="item.estruturaProduto == 'iniciativa' && item.nivel != 'iniciativa'") I {{item.siglaMi}}
+                .mr.label.label-produto_intermediario(ng-if="item.estruturaSuperior == 'produto_intermediario'") PI {{item.siglaPi}}
+                .mr.label(ng-class="'label-'+item.nivel", ng-if="item.nivel == 'meta' || item.nivel == 'iniciativa'") {{item.nivel}}

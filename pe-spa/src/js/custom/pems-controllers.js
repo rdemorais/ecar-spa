@@ -62,6 +62,10 @@
             iniciativa: pemsFilterService.getFiltros().iniciativa
         };
 
+        $scope.gerarRelatorioGerencial = function() {
+          pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());
+        }
+
         $scope.pesquisar = function() {
             pemsFilterService.setPpa($scope.filtro.ppa);
             pemsFilterService.setMeta($scope.filtro.meta);
@@ -73,6 +77,14 @@
     itemDashController.$inject = ['$scope', '$state', '$stateParams', 'pemsService', 'pemsFilterService'];
     function itemDashController($scope, $state, $stateParams, pemsService, pemsFilterService) {
         var vm = this;
+
+        $scope.itemSelecionadoDash = function(_itemId, _nivel) {
+            $state.go("app.dash-item", {itemId: _itemId, nivel: _nivel});
+        }
+
+        $scope.retornarListaItens = function() {
+            $state.go("app.lista-itens");
+        }
 
         pemsFilterService.getFiltros().codIett = $stateParams.itemId;
         pemsFilterService.getFiltros().nivel = $stateParams.nivel;

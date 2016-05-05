@@ -4,9 +4,10 @@
 		.panel.panel-default
 			.panel-body
 				.col-md-2
-					.mr.label(ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
-					a.mr.label.label-meta(ng-if="itemDash.item.estruturaSuperior == 'meta' && itemDash.item.nivel != 'meta'") M {{itemDash.item.siglaMi}}
-					a.mr.label.label-iniciativa(ng-if="itemDash.item.estruturaSuperior == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") I {{itemDash.item.siglaMi}}
+					a.mr.label(ng-click="retornarListaItens()", ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
+					a.mr.label.label-meta(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'META')", ng-if="itemDash.item.estruturaProduto == 'meta' && itemDash.item.nivel != 'meta'") M {{itemDash.item.siglaMi}}
+					a.mr.label.label-iniciativa(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'INICIATIVA')", ng-if="itemDash.item.estruturaProduto == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") I {{itemDash.item.siglaMi}}
+					a.mr.label.label-produto_intermediario(ng-click="itemSelecionadoDash(itemDash.item.codPi, 'PRODUTO_INTERMEDIARIO')", ng-if="itemDash.item.estruturaSuperior == 'produto_intermediario'") PI {{itemDash.item.siglaPi}}
 				.col-md-4 
 					strong Responsável:
 					|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
