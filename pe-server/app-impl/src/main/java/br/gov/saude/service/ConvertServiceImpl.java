@@ -38,6 +38,8 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setSiglaMi(itemDto.getSiglaMi());
 		peExecutivo.setSiglaPi(itemDto.getSiglaPi());
 		peExecutivo.setSiglaAtv(itemDto.getSiglaAtv());
+		peExecutivo.setEstruturaProduto(itemDto.getEstruturaProduto());
+		peExecutivo.setEstruturaSuperior(itemDto.getEstruturaSuperior());
 		peExecutivo.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getNomeCor() + ".gif"));
 		
 		peExecutivo.setListaItens(convertItem(listaItens));

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-04T18:42:44 -->
+<!-- 2016-05-04T21:39:21 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -37,6 +37,7 @@
 	<field name="imgStatus" class="java.lang.Object"/>
 	<field name="siglaMi" class="java.lang.String"/>
 	<field name="estruturaSuperior" class="java.lang.String"/>
+	<field name="estruturaProduto" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -327,7 +328,9 @@
 				<reportElement mode="Opaque" x="30" y="47" width="22" height="10" backcolor="#337AB7" uuid="411c042c-8ce3-4663-ad0c-cfc4851e1c9e">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$F{nivel}.equals("produto_intermediario") || $F{nivel}.equals("atividade")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($F{nivel}.equals("produto_intermediario") || 
+	$F{nivel}.equals("atividade")
+) && $F{estruturaProduto}.equals("meta")]]></printWhenExpression>
 				</reportElement>
 				<graphicElement>
 					<pen lineWidth="0.0"/>
@@ -507,16 +510,43 @@
 					<pen lineWidth="0.5" lineColor="#525050"/>
 				</graphicElement>
 			</line>
+			<rectangle radius="3">
+				<reportElement mode="Opaque" x="30" y="47" width="22" height="10" backcolor="#FE5621" uuid="8efc586e-bd05-449d-8e43-fde4f104f9dc">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[($F{nivel}.equals("produto_intermediario") || 
+	$F{nivel}.equals("atividade")
+) && $F{estruturaProduto}.equals("iniciativa")]]></printWhenExpression>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
 			<textField>
 				<reportElement x="30" y="47" width="22" height="10" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="f3904378-b50a-40d9-9143-f276fc1e2c5f">
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<printWhenExpression><![CDATA[$F{nivel}.equals("produto_intermediario") || $F{nivel}.equals("atividade")]]></printWhenExpression>
+					<printWhenExpression><![CDATA[($F{nivel}.equals("produto_intermediario") || 
+	$F{nivel}.equals("atividade")
+) && $F{estruturaProduto}.equals("meta")]]></printWhenExpression>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Helvetica" size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["M " + $F{siglaMi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="30" y="47" width="22" height="10" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="0c142c13-aa12-4e98-bfa3-a4877ad042f2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<printWhenExpression><![CDATA[($F{nivel}.equals("produto_intermediario") || 
+	$F{nivel}.equals("atividade")
+) && $F{estruturaProduto}.equals("iniciativa")]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Helvetica" size="6" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["I " + $F{siglaMi}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>

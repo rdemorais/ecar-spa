@@ -52,13 +52,12 @@ public class EcarServiceTest {
 	public void testFiltroEstruturaMetaIniListaItens() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
 		/*
 		for (ItemDto itemDto : listaItens) {
 			logger.debug(itemDto.toString());
-		}
-		*/
+		}*/
+		
 		logger.debug("Tamanho da listagem de metas/iniciativas: " + listaItens.size());
 	}
 	
@@ -66,7 +65,7 @@ public class EcarServiceTest {
 	public void testFiltroEstruturaProdutoListaItens() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		
+		filtro.setCodIett(44L);
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
 		
 		logger.debug("Tamanho da listagem de produtos: " + listaItens.size());
@@ -76,7 +75,7 @@ public class EcarServiceTest {
 	public void testFiltroEstruturaAtividadeListaItens() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		
+		filtro.setCodIett(321L);
 		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
 		
 		logger.debug("Tamanho da listagem de atividades: " + listaItens.size());

@@ -17,6 +17,8 @@ public class PEExecutivo {
 	private String ciclo;
 	private String nivel;
 	private String parecer;
+	private String estruturaProduto;
+	private String estruturaSuperior;
 	
 	private String siglaMi;
 	private String siglaPi;
@@ -24,6 +26,22 @@ public class PEExecutivo {
 	
 	private List<ItemReport> listaItens = new ArrayList<ItemReport>();
 	
+	public String getEstruturaSuperior() {
+		return estruturaSuperior;
+	}
+
+	public void setEstruturaSuperior(String estruturaSuperior) {
+		this.estruturaSuperior = estruturaSuperior;
+	}
+
+	public String getEstruturaProduto() {
+		return estruturaProduto;
+	}
+
+	public void setEstruturaProduto(String estruturaProduto) {
+		this.estruturaProduto = estruturaProduto;
+	}
+
 	public String getExercicio() {
 		return exercicio;
 	}
