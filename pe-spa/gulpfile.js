@@ -150,8 +150,30 @@ gulp.task('plato', function(done) {
 });
 
 //---------------
+// Copiar para pe-server
+//---------------
+gulp.task('pe-server-dist-app', function(done) {
+    log('Copiando pe-spa/app/* para pe-server...');
+    return gulp
+      .src(['app/**/*'])
+      .pipe(gulp.dest('../pe-server/app-web/src/main/webapp/app'));
+});
+
+gulp.task('pe-server-dist-index', function(done) {
+    log('Copiando pe-spa/index.html para pe-server...');
+    return gulp
+      .src(['index.html'])
+      .pipe(gulp.dest('../pe-server/app-web/src/main/webapp'));
+});
+
+//---------------
 // MAIN TASKS
 //---------------
+
+// build for production
+gulp.task('deploy-pems', [], function(cb){
+  runSequence('clean', 'production', 'compile', 'clean-build', 'pe-server-dist-app', 'pe-server-dist-index', cb);
+});
 
 // build for production
 gulp.task('build', [], function(cb){
