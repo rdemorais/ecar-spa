@@ -18,7 +18,9 @@
 					strong Ciclo:
 					small {{itemDash.item.mes}}/{{itemDash.item.ano}}
 				.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
-					
+		.panel.panel-default
+			.panel-body
+					a.pull-right.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioExecutivo()")
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 

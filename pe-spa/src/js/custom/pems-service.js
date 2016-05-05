@@ -12,6 +12,36 @@
             oes: []
         };
 
+        this.gerarRelatorioExecutivo = function(filtro) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/download-rel-executivo',
+                headers: {
+                    accept: 'application/pdf'
+                },
+                responseType: 'arraybuffer',
+                data: filtro
+            }).then(function successCallBack(response) {
+                
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                
+                var fileURL = URL.createObjectURL(file);
+                //callback(fileURL);
+                window.open(fileURL);
+                
+                /*
+                var anchor = angular.element('<a/>');
+                anchor.attr({
+                    href: 'data:attachment/pdf;charset=utf-8,' + fileURL,
+                    target: '_blank',
+                    download: 'ecar-retatorio-gerencial.pdf'
+                 })[0].click();
+                */
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        }
+
         this.gerarRelatorioGerencial = function(filtro) {
             $http({
                 method: 'POST',

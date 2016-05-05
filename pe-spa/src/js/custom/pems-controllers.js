@@ -86,6 +86,10 @@
             $state.go("app.lista-itens");
         }
 
+        $scope.gerarRelatorioExecutivo = function() {
+            pemsService.gerarRelatorioExecutivo(pemsFilterService.getFiltros());
+        }
+
         pemsFilterService.getFiltros().codIett = $stateParams.itemId;
         pemsFilterService.getFiltros().nivel = $stateParams.nivel;
         pemsService.loadItem(pemsFilterService.getFiltros(), function(item) {

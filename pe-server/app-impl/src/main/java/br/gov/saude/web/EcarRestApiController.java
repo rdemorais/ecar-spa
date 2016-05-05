@@ -121,7 +121,7 @@ public class EcarRestApiController {
 	public void downloadRelatorioExecutivo(HttpServletResponse response, @RequestBody FiltroDto filtro) {
 		
 	    try {
-	    	byte[] data = ecarSiteService.gerarRelatorioGerencial(filtro);
+	    	byte[] data = ecarSiteService.gerarRelatorioExecutivo(filtro);
 			
 			response.setContentType("application/pdf");
 			response.setHeader("Content-disposition", "attachment; filename=relatorioExecutivo.pdf");
