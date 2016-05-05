@@ -162,7 +162,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("AND mon.mes = :mes ");
 				hql.append("AND mon.ano = :ano ");
 			}else {
-				hql.append("AND mon.ultimoParecer = 'Y' ");
+				hql.append("AND (mon.ultimoParecer = 'Y' OR mon.naoMonitorado = 'Y')");
 			}
 			
 			Query q = em.createQuery(hql.toString());
