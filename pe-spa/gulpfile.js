@@ -166,13 +166,20 @@ gulp.task('pe-server-dist-index', function(done) {
       .pipe(gulp.dest('../pe-server/app-web/src/main/webapp'));
 });
 
+gulp.task('pe-server-dist-bower', function(done) {
+    log('Copiando pe-spa/bower_components para pe-server...');
+    return gulp
+      .src(['bower_components/**/*'])
+      .pipe(gulp.dest('../pe-server/app-web/src/main/webapp/bower_components'));
+});
+
 //---------------
 // MAIN TASKS
 //---------------
 
 // build for production
 gulp.task('deploy-pems', [], function(cb){
-  runSequence('clean', 'production', 'compile', 'clean-build', 'pe-server-dist-app', 'pe-server-dist-index', cb);
+  runSequence('clean', 'production', 'compile', 'clean-build', 'pe-server-dist-app', 'pe-server-dist-index', 'pe-server-dist-bower', cb);
 });
 
 // build for production
