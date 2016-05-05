@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;21 21&#x3a;53&#x3a;08.179</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;01 21&#x3a;21&#x3a;52.059</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;05 17&#x3a;22&#x3a;45.410</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -115,7 +115,7 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>dbsitedemas2016</schema>
+      <schema>dbsitedemas</schema>
       <table>tb_usuario_usu</table>
       <key>
         <name>cod_usu</name>

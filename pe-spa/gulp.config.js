@@ -29,7 +29,6 @@ module.exports = function($, usehtml) {
     html: {
       index: [srcHTML + 'index' + markupExt],
       views: [srcHTML + '**/*' + markupExt, '!'+srcHTML + 'index' + markupExt],
-      templates: [srcHTML + 'views/cached/*' + markupExt],
       all: [srcHTML + '**/*' + markupExt]
     },
     less: {

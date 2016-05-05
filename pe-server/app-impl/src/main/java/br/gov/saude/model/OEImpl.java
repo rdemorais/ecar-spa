@@ -6,7 +6,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity(name="OE")
-@Table(name="tb_oe", schema="dbsitedemas2016")
+@Table(name="tb_oe", schema="dbsitedemas")
 @PrimaryKeyJoinColumn(name="cod_iett")
 public class OEImpl extends IettImpl implements OE{
 	

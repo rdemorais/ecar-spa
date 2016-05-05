@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="Etiqueta")
-@Table(name="tb_etiqueta", schema="dbsitedemas2016")
+@Table(name="tb_etiqueta", schema="dbsitedemas")
 public class EtiquetaImpl implements Etiqueta{
 	@Id
 	@Column(name="cod_etiqueta")

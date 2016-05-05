@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity(name="Iett")
-@Table(name="tb_iett", schema="dbsitedemas2016")
+@Table(name="tb_iett", schema="dbsitedemas")
 @Inheritance(strategy = InheritanceType.JOINED)
 public class IettImpl implements Iett{
 	@Id

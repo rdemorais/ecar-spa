@@ -54,9 +54,9 @@ gulp.task('markup', ['index', 'views']);
   
 gulp.task('views', buildMarkup(config.html.views, config.dist) );
   
-gulp.task('index', ['templatecache'], buildMarkup(config.html.index, '.', false, true) );
-
-gulp.task('templatecache', ['clean-scripts'], buildMarkup(config.html.templates, config.dist + 'js', true) );
+gulp.task('index',  buildMarkup(config.html.index, '.', false, true) );
+//['templatecache'],
+//gulp.task('templatecache', ['clean-scripts'], buildMarkup(config.html.templates, config.dist + 'js', true) );
 
 
 // SERVER
@@ -82,10 +82,10 @@ gulp.task('watch', function() {
   gulp.watch([config.less.watch, config.less.styles], ['styles']);
   gulp.watch(config.bootstrap, ['bootstrap']);
   gulp.watch(config.html.all, ['markup']);
-  gulp.watch(config.html.templates, ['templatecache'])
-
+  //gulp.watch(config.html.templates, ['templatecache'])
+  //config.html.templates
   gulp
-    .watch([].concat(config.less.watch, config.html.views, config.html.templates, config.js))
+    .watch([].concat(config.less.watch, config.html.views, config.js))
     .on('change', function(event) {
       setTimeout(function() {
         $.livereload.changed( event.path );
@@ -180,9 +180,9 @@ gulp.task('compile', function(cb){
     runSequence(
         'bootstrap',
         'styles',
-        'templatecache',
         'markup',
     cb);
+    //'templatecache',
 });
 
 

@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="Monitoramento")
-@Table(name="tb_monitoramento", schema="dbsitedemas2016")
+@Table(name="tb_monitoramento", schema="dbsitedemas")
 public class MonitoramentoImpl implements Monitoramento {
 	@Id
 	@Column(name="cod_monitoramento")

@@ -12,7 +12,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity(name="Atividade")
-@Table(name="tb_atividade", schema="dbsitedemas2016")
+@Table(name="tb_atividade", schema="dbsitedemas")
 @PrimaryKeyJoinColumn(name="cod_iett")
 public class AtividadeImpl extends IettImpl implements Atividade{
 	

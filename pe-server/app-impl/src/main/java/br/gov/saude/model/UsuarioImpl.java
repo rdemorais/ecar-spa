@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity(name="Usuario")
-@Table(name="tb_usuario_usu", schema="dbsitedemas2016")
+@Table(name="tb_usuario_usu", schema="dbsitedemas")
 public class UsuarioImpl implements Usuario{
 	@Id
 	@Column(name="co_usuario")

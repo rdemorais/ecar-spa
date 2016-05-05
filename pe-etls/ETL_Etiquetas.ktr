@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;28 13&#x3a;13&#x3a;15.635</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;01 21&#x3a;25&#x3a;28.043</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;05 17&#x3a;25&#x3a;09.653</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -116,7 +116,7 @@
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>dbsitedemas2016</schema>
+      <schema>dbsitedemas</schema>
       <table>tb_etiqueta</table>
       <key>
         <name>cod_iett</name>
@@ -216,7 +216,7 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <sql>select cod_iett&#xa;from dbsitedemas2016.tb_iett</sql>
+    <sql>select cod_iett&#xa;from dbsitedemas.tb_iett</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>

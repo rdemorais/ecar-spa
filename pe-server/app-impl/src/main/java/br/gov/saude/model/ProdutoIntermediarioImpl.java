@@ -12,7 +12,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 @Entity(name="ProdutoIntermediario")
-@Table(name="tb_prod_inter", schema="dbsitedemas2016")
+@Table(name="tb_prod_inter", schema="dbsitedemas")
 @PrimaryKeyJoinColumn(name="cod_iett")
 public class ProdutoIntermediarioImpl extends IettImpl implements ProdutoIntermediario{
 	
