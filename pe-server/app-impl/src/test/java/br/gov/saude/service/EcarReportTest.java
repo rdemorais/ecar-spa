@@ -47,9 +47,11 @@ public class EcarReportTest {
 		
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
+		filtro.setCodIett(44L);
 		//filtro.setCodIett(321L);
-		filtro.setCodIett(319L);
-		filtro.setNivel("produto_intermediario");
+		//filtro.setCodIett(319L);
+		//filtro.setCodIett(322L);
+		filtro.setNivel("meta");
 		
 		byte[] bytes = ecarSiteService.gerarRelatorioExecutivo(filtro);
 		
