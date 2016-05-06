@@ -12,7 +12,7 @@
 	<groupId>br.gov.saude</groupId>
 	<artifactId>app-impl</artifactId>
 	<version>1.0</version>
-	
+
 	<packaging>jar</packaging>
 
 	<name>app-impl</name>
@@ -102,5 +102,21 @@
 				</dependencies>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>app.properties</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
 </project>

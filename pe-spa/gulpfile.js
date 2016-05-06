@@ -170,7 +170,7 @@ gulp.task('pe-server-dist-bower', function(done) {
     log('Copiando pe-spa/bower_components para pe-server...');
     return gulp
       .src(['bower_components/**/*'])
-      .pipe(gulp.dest('../pe-server/app-web/src/main/webapp/bower_components'));
+      .pipe(gulp.dest('../pe-server/app-web/src/main/resources/bower_components'));
 });
 
 //---------------

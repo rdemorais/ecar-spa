@@ -205,7 +205,7 @@
           </configuration>
         </plugin>
       </plugins>
-    </pluginManagement>
+    </pluginManagement>  
   </build>
 
   <modules>

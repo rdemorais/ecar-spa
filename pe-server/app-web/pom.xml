@@ -8,7 +8,7 @@
 		<artifactId>pe-server</artifactId>
 		<version>1.0</version>
 	</parent>
-	
+
 	<groupId>br.gov.saude</groupId>
 	<artifactId>app-web</artifactId>
 	<version>1.0</version>
@@ -65,7 +65,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>pe-server</finalName>
+		<finalName>pems</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -86,6 +86,49 @@
 					<path>[CONTEXTO]</path>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<targetPath>/</targetPath>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</resource>
+						<resource>
+							<filtering>false</filtering>
+							<targetPath>/</targetPath>
+							<directory>src/main/resources</directory>
+							<includes>
+								<include>**/*</include>
+							</includes>
+						</resource>
+					</webResources>
+				</configuration>
+			</plugin>
 		</plugins>
+		<!-- 
+		<resources>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/application.js</include>
+				</includes>
+			</resource>
+			<resource>
+				<directory>src/main/webapp</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*</include>
+				</includes>
+			</resource>
+		</resources>
+		 -->
 	</build>
 </project>
