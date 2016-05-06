@@ -13,8 +13,8 @@
     function routesConfig($locationProvider, $stateProvider, $urlRouterProvider, Route, OAuthProvider) {
 
       OAuthProvider.configure({
-        //baseUrl: '${pems-url}/pems',
-        baseUrl: 'http://localhost:8080/pems',
+        baseUrl: '${pems-url}/pems',
+        //baseUrl: 'http://localhost:8080/pems',
         clientId: 'restapp',
         clientSecret: 'secret',
         grantPath: '/oauth/token',
