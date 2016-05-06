@@ -155,8 +155,8 @@
         $scope.listaStatus = pemsFilterService.listaStatusFiltros();
 
         $scope.selStatus = function(status) {
-          status.sel = !status.sel;
           pemsFilterService.addRemoveStatus(status.codCor);
+          status.sel = !status.sel;
         }
       }
     }

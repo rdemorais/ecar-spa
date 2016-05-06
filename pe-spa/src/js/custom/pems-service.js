@@ -267,6 +267,9 @@
             nivel: null
         };
 
+        var listaStatusFiltrosGerada = false;
+        var listaStFiltrosSel;
+
         this.clear = function() {
             filtros = {
                 ppa: false,
@@ -322,13 +325,20 @@
         };
 
         this.listaStatusFiltros = function() {
-            return [
+            var listaStFiltros = [
                     {clazz: 'img-status-verde', clazzSel: 'img-status-verde-sel', codCor: 1, sel: false},
                     {clazz: 'img-status-amarelo', clazzSel: 'img-status-amarelo-sel', codCor: 2, sel: false},
                     {clazz: 'img-status-vermelho', clazzSel: 'img-status-vermelho-sel', codCor: 3, sel: false},
                     {clazz: 'img-status-azul', clazzSel: 'img-status-azul-sel', codCor: 10, sel: false},
                     {clazz: 'img-status-cinza', clazzSel: 'img-status-cinza-sel', codCor: 11, sel: false},
-                ]
+                ];
+            
+            if(!listaStatusFiltrosGerada) {
+                listaStFiltrosSel = listaStFiltros;
+                listaStatusFiltrosGerada = true;
+            }
+            
+            return listaStFiltrosSel;
         };
 
         this.getFiltros = function() {
