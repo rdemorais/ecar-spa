@@ -45,6 +45,7 @@
         }*/
 
         // Redirect to /login with the error_reason.
+
         OAuth.revokeToken();
         
         $state.go('app.login');

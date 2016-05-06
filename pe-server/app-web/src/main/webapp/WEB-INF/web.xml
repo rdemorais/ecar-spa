@@ -35,7 +35,7 @@
 	  
 	<filter-mapping>
 	  <filter-name>cors</filter-name>
-	  <url-pattern>/oauth/token</url-pattern>
+	  <url-pattern>/oauth/*</url-pattern>
 	</filter-mapping>
 
 

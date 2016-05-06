@@ -24,7 +24,7 @@
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
                     pemsService.loadOEs(function(oes){});
-
+                    
                     $state.go('app.dashboard');
                 }
             });
