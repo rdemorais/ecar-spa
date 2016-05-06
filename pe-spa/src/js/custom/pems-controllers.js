@@ -19,10 +19,8 @@
         $scope.loginEcar = function() {
             
             OAuth.getAccessToken({
-                //username: $scope.login,
-                //password: $scope.senha
-                username: 'admin',
-                password: 'serenaya'
+                username: $scope.login,
+                password: $scope.senha
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
                     pemsService.loadOEs(function(oes){});
