@@ -148,6 +148,16 @@ public class EcarServiceTest {
 	}
 	
 	@Test
+	public void testFiltroPPAListaItens() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setPpa(true);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+
+		logger.debug("Tamanho da listagem - Filtro PPA: " + listaItens.size());
+	}
+	
+	@Test
 	public void testLoadItem() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);

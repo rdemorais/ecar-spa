@@ -253,6 +253,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				if((filtro.isIniciativa() || filtro.isMeta()) && !(filtro.isIniciativa() == true && filtro.isMeta() == true)) {
 					hql.append("AND iett.estrutura = :apenasMetaIniciativa ");
 				}
+				
+				if(filtro.isPpa()) {
+					hql.append("AND iett.codPpa IS NOT NULL ");
+				}
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
@@ -264,10 +268,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("JOIN mi.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (Atividade) ");
 				hql.append("AND pi.id = :codIett ");
-			}
-			
-			if(filtro.isPpa()) {
-				
 			}
 			
 			if(filtro.getOes().size() > 0) {

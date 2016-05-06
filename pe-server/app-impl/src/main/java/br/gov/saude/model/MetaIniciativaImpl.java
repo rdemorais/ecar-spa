@@ -34,6 +34,9 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	@Column(name="sigla_org")
 	private String siglaOrgMi;
 	
+	@Column(name="ds_ppa_mi")
+	private String codPpa;
+	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
 	private Usuario usuario;
@@ -41,6 +44,14 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=OEImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_oe", referencedColumnName = "cod_iett")
 	private OE oe;
+	
+	public String getCodPpa() {
+		return codPpa;
+	}
+
+	public void setCodPpa(String codPpa) {
+		this.codPpa = codPpa;
+	}
 
 	public String getSiglaMi() {
 		return siglaMi;
