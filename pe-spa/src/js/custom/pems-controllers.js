@@ -81,6 +81,10 @@
             $scope.anexos = anexos;
         });
 
+        $scope.downaloadAnexo = function(anexo) {
+            pemsService.downloadAnexo(anexo.id);
+        }
+
         $scope.itemSelecionadoDash = function(_itemId, _nivel) {
             $state.go("app.dash-item", {itemId: _itemId, nivel: _nivel});
         }

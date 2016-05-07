@@ -172,6 +172,24 @@
             }); 
         };
 
+        this.downloadAnexo = function(codAnexo) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/download-anexo',
+                responseType: 'arraybuffer',
+                data: codAnexo
+            }).then(function successCallBack(response) {
+                
+                var file = new Blob([response.data], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+                
+                var fileURL = URL.createObjectURL(file);
+                //callback(fileURL);
+                window.open(fileURL);
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
     	this.loadAtividades = function(filtro, callback) {
             $http({
                 method: 'POST',

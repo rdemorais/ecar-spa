@@ -35,7 +35,7 @@
 					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 				strong Anexos:
 				scrollable.pt(height=50)
-					a.mr(ng-repeat="anexo in anexos", href="") {{anexo.nomeOriginal}}
+					a.mr(ng-repeat="anexo in anexos", href="", ng-click="downaloadAnexo(anexo)") {{anexo.nomeOriginal}}
 			accordion-group(is-open='false')
 				accordion-heading Indicadores
 				p
