@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import br.gov.saude.model.Estrutura;
+import br.gov.saude.model.Estrutura;import br.gov.saude.web.dto.AnexoDto;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -168,5 +168,17 @@ public class EcarServiceTest {
 		Assert.assertNotNull(item);
 		
 		logger.debug("Item carregado com sucesso: " + item.toString());
+	}
+	
+	@Test
+	public void testLoadAnexos() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodIett(41L);
+		
+		List<AnexoDto> anexos = ecarSiteService.loadAnexos(filtro);
+		
+		for (AnexoDto anexoDto : anexos) {
+			logger.debug(anexoDto.toString());
+		}
 	}
 }

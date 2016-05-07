@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import br.gov.saude.dao.EcarDao;
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.exc.AkulaServiceRuntimeException;
@@ -22,6 +23,7 @@ import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.report.EcarReport;
+import br.gov.saude.web.dto.AnexoDto;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -34,6 +36,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	private EcarSiteDao ecarSiteDao;
 	
 	@Autowired
+	private EcarDao ecarDao;
+	
+	@Autowired
 	private ConvertService convertService;
 	
 	@Autowired
@@ -44,6 +49,10 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	public EcarFileSystem ecarFileSystem;
+	
+	public List<AnexoDto> loadAnexos(FiltroDto filtro) throws AkulaRuntimeException {
+		return ecarDao.loadAnexos(filtro.getCodExe());
+	}
 	
 	private Map<String, Object> gerarParametros() throws IOException {
 		Map<String, Object> parametros = new HashMap<String, Object>();
