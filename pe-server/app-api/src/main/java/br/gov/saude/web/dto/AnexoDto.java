@@ -10,8 +10,11 @@ public class AnexoDto {
 
 	}
 	
+	public AnexoDto(byte[] arquivo) {
+		this.arquivo = arquivo;
+	}
+
 	public AnexoDto(Long id, Long codIett, String nomeOriginal) {
-		super();
 		this.id = id;
 		this.codIett = codIett;
 		this.nomeOriginal = nomeOriginal;

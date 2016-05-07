@@ -121,11 +121,34 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadAnexos(@RequestBody FiltroDto filtro) {
-		List<AnexoDto> anexos = ecarSiteService.loadAnexos(filtro);
+		List<AnexoDto> anexos = ecarSiteService.listaAnexos(filtro);
 		
 		logger.debug("retornando lista de anexos: " + anexos.size());
 		
 		return EcarResponse.ok(anexos);
+	}
+	
+	@RequestMapping(value="/download-anexo", 
+			method=RequestMethod.POST)
+	public void downloadRelatorioExecutivo(HttpServletResponse response, @RequestBody Long codAnexo) {
+		
+	    try {
+	    	AnexoDto anexo = ecarSiteService.loadAnexo(codAnexo);
+	    	
+	    	byte[] data = anexo.arquivo;
+			
+			response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+			response.setHeader("Content-disposition", "attachment; filename=anexo.docx");
+		    response.setContentLength(data.length);
+		    
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (AkulaRuntimeException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@RequestMapping(value="/download-rel-executivo", 
@@ -147,7 +170,6 @@ public class EcarRestApiController {
 		} catch (AkulaRuntimeException e) {
 			e.printStackTrace();
 		}
-        
 	}
 	
 	@RequestMapping(value="/download-rel-gerencial", 

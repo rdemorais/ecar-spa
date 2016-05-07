@@ -50,8 +50,12 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	@Autowired
 	public EcarFileSystem ecarFileSystem;
 	
-	public List<AnexoDto> loadAnexos(FiltroDto filtro) throws AkulaRuntimeException {
-		return ecarDao.loadAnexos(filtro.getCodIett());
+	public AnexoDto loadAnexo(Long codAnexo) throws AkulaRuntimeException {
+		return ecarDao.loadAnexo(codAnexo);
+	}
+	
+	public List<AnexoDto> listaAnexos(FiltroDto filtro) throws AkulaRuntimeException {
+		return ecarDao.listaAnexos(filtro.getCodIett());
 	}
 	
 	private Map<String, Object> gerarParametros() throws IOException {

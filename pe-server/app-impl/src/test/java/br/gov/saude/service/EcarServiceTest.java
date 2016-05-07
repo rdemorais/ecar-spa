@@ -175,7 +175,7 @@ public class EcarServiceTest {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodIett(41L);
 		
-		List<AnexoDto> anexos = ecarSiteService.loadAnexos(filtro);
+		List<AnexoDto> anexos = ecarSiteService.listaAnexos(filtro);
 		
 		logger.debug("Lista de anexos: " + anexos.size());
 		
