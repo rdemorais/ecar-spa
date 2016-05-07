@@ -225,19 +225,19 @@
       }
     }
 
-    function format() {
+    format.$inject = ['NumbroFormater']
+    function format(NumbroFormater) {
       return function(text, format) {
         var ret = ''
-        numbro.culture('pt-BR');
         switch(format) {
           case 'num':
-            ret = numbro(text).format('0,0');
+            ret = NumbroFormater.fmt(text, '0,0');
             break;
           case 'perc':
-            ret = numbro(text).format('0.00%');
+            ret = NumbroFormater.fmt(text, '0.00%');
             break;
           case 'perc-st':
-            ret = numbro(text).format('0');
+            ret = NumbroFormater.fmt(text, '0');
             break;  
         }
 
