@@ -27,17 +27,15 @@
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 
                 var fileURL = URL.createObjectURL(file);
-                //callback(fileURL);
-                window.open(fileURL);
-                
-                /*
-                var anchor = angular.element('<a/>');
-                anchor.attr({
-                    href: 'data:attachment/pdf;charset=utf-8,' + fileURL,
-                    target: '_blank',
-                    download: 'ecar-retatorio-gerencial.pdf'
-                 })[0].click();
-                */
+
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = fileURL;
+                a.download = 'relatorio-executivo.pdf';
+                a.click();
+                window.URL.revokeObjectURL(url);
+
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);
             });
@@ -57,17 +55,15 @@
                 var file = new Blob([response.data], {type: 'application/pdf'});
                 
                 var fileURL = URL.createObjectURL(file);
-                //callback(fileURL);
-                window.open(fileURL);
-                
-                /*
-                var anchor = angular.element('<a/>');
-                anchor.attr({
-                    href: 'data:attachment/pdf;charset=utf-8,' + fileURL,
-                    target: '_blank',
-                    download: 'ecar-retatorio-gerencial.pdf'
-                 })[0].click();
-                */
+
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = fileURL;
+                a.download = 'relatorio-gerencial.pdf';
+                a.click();
+                window.URL.revokeObjectURL(url);
+
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);
             });
@@ -172,19 +168,26 @@
             }); 
         };
 
-        this.downloadAnexo = function(codAnexo) {
+        this.downloadAnexo = function(anexo) {
             $http({
                 method: 'POST',
                 url: $rootScope.app.baseUrl + '/download-anexo',
                 responseType: 'arraybuffer',
-                data: codAnexo
+                data: anexo.id
             }).then(function successCallBack(response) {
                 
-                var file = new Blob([response.data], {type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'});
+                var file = new Blob([response.data], {type: 'application/octet-stream'});
                 
-                var fileURL = URL.createObjectURL(file);
-                //callback(fileURL);
-                window.open(fileURL);
+                var fileURL = window.URL.createObjectURL(file);
+
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = fileURL;
+                a.download = anexo.nomeOriginal;
+                a.click();
+                window.URL.revokeObjectURL(url);
+
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);
             });

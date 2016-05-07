@@ -1,10 +1,10 @@
 package br.gov.saude.web.dto;
 
 public class AnexoDto {
-	public Long id;
-	public Long codIett;
-	public String nomeOriginal;
-	public byte[] arquivo;
+	private Long id;
+	private Long codIett;
+	private String nomeOriginal;
+	private byte[] arquivo;
 	
 	public AnexoDto() {
 

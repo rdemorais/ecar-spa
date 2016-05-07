@@ -135,10 +135,11 @@ public class EcarRestApiController {
 	    try {
 	    	AnexoDto anexo = ecarSiteService.loadAnexo(codAnexo);
 	    	
-	    	byte[] data = anexo.arquivo;
+	    	byte[] data = anexo.getArquivo();
 			
-			response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-			response.setHeader("Content-disposition", "attachment; filename=anexo.docx");
+			//response.setContentType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+	    	response.setContentType("application/octet-stream");
+			response.setHeader("Content-disposition", "attachment; filename=" + anexo.getNomeOriginal());
 		    response.setContentLength(data.length);
 		    
 			response.getOutputStream().write(data);

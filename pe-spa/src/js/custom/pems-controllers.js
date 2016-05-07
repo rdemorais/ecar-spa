@@ -82,7 +82,7 @@
         });
 
         $scope.downaloadAnexo = function(anexo) {
-            pemsService.downloadAnexo(anexo.id);
+            pemsService.downloadAnexo(anexo);
         }
 
         $scope.itemSelecionadoDash = function(_itemId, _nivel) {
