@@ -18,7 +18,8 @@
               'jquery-ui':          ['bower_components/jquery-ui/jquery-ui.min.js',
                                      'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js'],
               'numbro':             ['bower_components/numbro/dist/numbro.min.js', 
-                                     'bower_components/numbro/dist/languages.min.js']
+                                     'bower_components/numbro/dist/languages.min.js'],
+              'swAlert':            ['bower_components/sweetalert/dist/sweetalert.css']
             },
             // Angular modules scripts (name is module name to be injected)
             modules: [
@@ -29,10 +30,7 @@
               {name: 'xeditable',                 files: ['bower_components/angular-xeditable/dist/js/xeditable.js',
                                                           'bower_components/angular-xeditable/dist/css/xeditable.css']},
               {name: 'ui.select',                 files: ['bower_components/ui-select/dist/select.js',
-                                                          'bower_components/ui-select/dist/select.css']},
-              {name: 'oitozero.ngSweetAlert',     files: ['bower_components/sweetalert/dist/sweetalert.css',
-                                                          'bower_components/sweetalert/dist/sweetalert.min.js',
-                                                          'bower_components/angular-sweetalert/SweetAlert.js']}
+                                                          'bower_components/ui-select/dist/select.css']}
             ]
 
         });

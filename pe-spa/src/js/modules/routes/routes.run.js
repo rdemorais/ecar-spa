@@ -9,7 +9,7 @@
         .module('naut')
         .run(appRun);
     /* @ngInject */   
-    function appRun($rootScope, $window, OAuth, $state) {
+    function appRun($rootScope, $window, OAuth, pemsServiceError, $state, SwAlert) {
       
       // Hook not found
       $rootScope.$on('$stateNotFound',
@@ -33,25 +33,26 @@
 
 
       $rootScope.$on('oauth:error', function(event, rejection) {
-        /*
-        // Ignore invalid_grant error - should be catched on LoginController.
-        if ('invalid_grant' === rejection.data.error) {
-          return;
+        if(rejection !== undefined) {
+          // Ignore invalid_grant error - should be catched on LoginController.
+          if ('invalid_grant' === rejection.data.error) {
+            SwAlert.error('', 'Usuário ou senha inválidos');
+            return;
+          }
+          /*
+          // Refresh token when a invalid_token error occurs.
+          if ('invalid_token' === rejection.data.error) {
+            return OAuth.getRefreshToken();
+          }*/
+
         }
-
-        // Refresh token when a invalid_token error occurs.
-        if ('invalid_token' === rejection.data.error) {
-          return OAuth.getRefreshToken();
-        }*/
-
+        
         // Redirect to /login with the error_reason.
-
-        OAuth.revokeToken();
         
         $state.go('app.login');
       });
     }
-    appRun.$inject = ['$rootScope', '$window', 'OAuth', '$state'];
+    appRun.$inject = ['$rootScope', '$window', 'OAuth', 'pemsServiceError', '$state', 'SwAlert'];
 
 })();
 

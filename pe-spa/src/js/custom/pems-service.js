@@ -3,7 +3,8 @@
     angular
         .module('naut')
         .service('pemsService', pemsService)
-        .service('pemsFilterService', pemsFilterService);
+        .service('pemsFilterService', pemsFilterService)
+        .service('pemsServiceError', pemsServiceError);
 
     pemsService.$inject = ['$http', '$q', '$rootScope']
     function pemsService($http, $q, $rootScope) {
@@ -252,6 +253,13 @@
                 callback(fixedArrays.oes);
             }
     	};
+    }
+
+    //pemsServiceError.$inject = ['SwAlert']
+    function pemsServiceError() {
+        this.showInvalidGrantMsg = function() {
+            
+        }
     }
 
     function pemsFilterService() {
