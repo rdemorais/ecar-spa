@@ -76,6 +76,10 @@
     itemDashController.$inject = ['$scope', '$state', '$stateParams', 'pemsService', 'pemsFilterService'];
     function itemDashController($scope, $state, $stateParams, pemsService, pemsFilterService) {
         var vm = this;
+        $scope.anexos = [];
+        pemsService.loadAnexos(pemsFilterService.getFiltros(), function(anexos) {
+            $scope.anexos = anexos;
+        });
 
         $scope.itemSelecionadoDash = function(_itemId, _nivel) {
             $state.go("app.dash-item", {itemId: _itemId, nivel: _nivel});

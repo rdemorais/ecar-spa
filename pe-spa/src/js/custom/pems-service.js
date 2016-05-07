@@ -153,6 +153,25 @@
             });            
     	};
 
+        this.loadAnexos = function(filtro, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/anexos',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: filtro
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var anexos = ecarResponse.obj;
+                    callback(anexos);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            }); 
+        };
+
     	this.loadAtividades = function(filtro, callback) {
             $http({
                 method: 'POST',

@@ -17,8 +17,7 @@ public class EcarDaoImpl extends DaoImpl implements EcarDao{
 			hql.append("SELECT new br.gov.saude.web.dto.AnexoDto( ");
 			hql.append("ane.id, ");
 			hql.append("ane.codIett, ");
-			hql.append("ane.nomeOriginal, ");
-			hql.append("ane.arquivo) ");
+			hql.append("ane.nomeOriginal) ");
 			hql.append("FROM IettAnexo ane ");
 			hql.append("WHERE ane.codIett = :codIett ");
 			

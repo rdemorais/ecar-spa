@@ -177,6 +177,8 @@ public class EcarServiceTest {
 		
 		List<AnexoDto> anexos = ecarSiteService.loadAnexos(filtro);
 		
+		logger.debug("Lista de anexos: " + anexos.size());
+		
 		for (AnexoDto anexoDto : anexos) {
 			logger.debug(anexoDto.toString());
 		}

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.service.EcarSiteService;
+import br.gov.saude.web.dto.AnexoDto;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -114,6 +115,17 @@ public class EcarRestApiController {
 		logger.debug("retornando lista de Etiquetas: " + etiquetas.size());
 		
 		return EcarResponse.ok(etiquetas);
+	}
+	
+	@RequestMapping(value="/anexos", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadAnexos(@RequestBody FiltroDto filtro) {
+		List<AnexoDto> anexos = ecarSiteService.loadAnexos(filtro);
+		
+		logger.debug("retornando lista de anexos: " + anexos.size());
+		
+		return EcarResponse.ok(anexos);
 	}
 	
 	@RequestMapping(value="/download-rel-executivo", 
