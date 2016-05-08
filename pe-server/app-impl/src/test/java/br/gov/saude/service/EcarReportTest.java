@@ -63,4 +63,18 @@ public class EcarReportTest {
 		stream.flush();
         stream.close();
 	}
+	
+	@Test
+	public void testRelatorioExcel() throws IOException {
+		FiltroDto filtro = new FiltroDto();
+		byte[] bytes = ecarSiteService.gerarRelatorioExcel(filtro);
+		
+		File reportFile = new File("/Users/rafaeldemorais/ecarReportExcel.xls");
+		reportFile.createNewFile();
+		
+		FileOutputStream stream = new FileOutputStream(reportFile);
+		stream.write(bytes);
+		stream.flush();
+        stream.close();
+	}
 }

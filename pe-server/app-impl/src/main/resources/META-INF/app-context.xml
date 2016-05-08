@@ -17,6 +17,7 @@
 	<bean id="ecarDao" class="br.gov.saude.dao.EcarDaoImpl"/>
 	<bean id="ecarSentinelaDao" class="br.gov.saude.dao.EcarSentinelaDaoImpl"/>
 	<bean id="convertService" class="br.gov.saude.service.ConvertServiceImpl"/>
+	<bean id="relatorioExcelService" class="br.gov.saude.service.RelatorioExcelServiceImpl"/>
 	<bean id="ecarSiteService" class="br.gov.saude.service.EcarSiteServiceImpl"/>
 	<bean id="statusService" class="br.gov.saude.service.StatusServiceImpl"/>
 	<bean id="sentinelaPasswordHash" class="br.gov.saude.impl.auth.SentinelaPasswordHashImpl"/>

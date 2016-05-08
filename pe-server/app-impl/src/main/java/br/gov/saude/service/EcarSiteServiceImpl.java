@@ -50,6 +50,14 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	@Autowired
 	public EcarFileSystem ecarFileSystem;
 	
+	@Autowired
+	public RelatorioExcelService relatorioExcelService;
+	
+	public byte[] gerarRelatorioExcel(FiltroDto filtro) throws AkulaRuntimeException {
+		
+		return relatorioExcelService.exportarRelatorioExcel(filtro).getBytes();
+	}
+	
 	public AnexoDto loadAnexo(Long codAnexo) throws AkulaRuntimeException {
 		return ecarDao.loadAnexo(codAnexo);
 	}
