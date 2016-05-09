@@ -33,8 +33,9 @@ public class RelatorioExcelServiceImpl implements RelatorioExcelService {
 			InputStream is = ecarFileSystem.findFileInputStream("relatorio-excel-template.xls");
 			
 			SecretariaExcel sec = new SecretariaExcel("SE");
+			SecretariaExcel sec2 = new SecretariaExcel("SAS");
 
-			ItemExcel mi = new ItemExcel("OE 01", "01", "Meta para teste", "03Z4", "Em andamento", "Rafael de Morais",
+			ItemExcel mi = new ItemExcel("OE 01", "M 01", "Meta para teste", "03Z4", "Em andamento", "Rafael de Morais",
 					"rdemorais.freitas@gmail.com", "SE");
 			ItemExcel pi = new ItemExcel("OE 01", "01", "Produto interno para teste", "", "Em andamento",
 					"Rafael de Morais", "rdemorais.freitas@gmail.com", "SE");
@@ -45,8 +46,10 @@ public class RelatorioExcelServiceImpl implements RelatorioExcelService {
 			pi.addItem(atv);
 
 			sec.addItem(mi);
+			sec2.addItem(mi);
 			
 			secretarias.add(sec);
+			secretarias.add(sec2);
 			Map<String, Object> map;
 			for (SecretariaExcel secretariaExcel : secretarias) {
 				sheetNames.add(secretariaExcel.getNome());

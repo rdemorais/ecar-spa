@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-03T18:35:02 -->
+<!-- 2016-05-09T18:32:52 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -44,7 +44,7 @@
 			<staticText>
 				<reportElement x="40" y="0" width="370" height="20" forecolor="#FFFFFF" uuid="86c5b6cf-cc82-4303-8ad8-85ed1b8e5103"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Helvetica" size="9"/>
+					<font fontName="DejaVu Sans" size="9"/>
 				</textElement>
 				<text><![CDATA[PLANEJAMENTO ESTRATÉGICO DO MINISTÉRIO DA SAÚDE]]></text>
 			</staticText>
@@ -61,7 +61,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Helvetica" size="9"/>
+					<font fontName="DejaVu Sans" size="9"/>
 				</textElement>
 				<text><![CDATA[RELATÓRIO DE MONITORAMENTO - GERENCIAL]]></text>
 			</staticText>
@@ -70,7 +70,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Helvetica" size="8"/>
+					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{filtros}]]></textFieldExpression>
 			</textField>
@@ -85,7 +85,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
-					<font fontName="Helvetica" size="8"/>
+					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{exercicio}]]></textFieldExpression>
 			</textField>
@@ -94,7 +94,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Helvetica" size="8"/>
+					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
 				<text><![CDATA[Filtros:]]></text>
 			</staticText>
@@ -103,7 +103,7 @@
 					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 				</reportElement>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Helvetica" size="8"/>
+					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
 				<text><![CDATA[Exercício:]]></text>
 			</staticText>
@@ -137,14 +137,14 @@
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement>
-								<font fontName="Helvetica" size="9" isBold="true"/>
+								<font fontName="DejaVu Sans" size="9" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 						</textField>
 						<textField isStretchWithOverflow="true">
 							<reportElement x="66" y="6" width="484" height="14" uuid="a9ff8525-21ed-4ea2-81e8-bd09807ba2b5"/>
 							<textElement>
-								<font fontName="Helvetica" size="9" isBold="true"/>
+								<font fontName="DejaVu Sans" size="9" isBold="true"/>
 								<paragraph lineSpacing="1_1_2" lineSpacingSize="1.5"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{desc}]]></textFieldExpression>
@@ -162,7 +162,7 @@
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement textAlignment="Center" verticalAlignment="Top">
-								<font fontName="Helvetica" size="9"/>
+								<font fontName="DejaVu Sans" size="9"/>
 							</textElement>
 							<text><![CDATA[-]]></text>
 						</staticText>
@@ -172,14 +172,14 @@
 								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 							</reportElement>
 							<textElement>
-								<font fontName="Helvetica" size="8" isBold="true"/>
+								<font fontName="DejaVu Sans" size="8" isBold="true"/>
 							</textElement>
 							<text><![CDATA[Responsável pelo parecer:]]></text>
 						</staticText>
 						<textField isBlankWhenNull="true">
 							<reportElement x="160" y="39" width="230" height="10" forecolor="#757373" uuid="75ee9bb8-7969-4a58-a314-c7e808b3f32b"/>
 							<textElement>
-								<font fontName="Helvetica" size="8"/>
+								<font fontName="DejaVu Sans" size="8"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{responsavel}]]></textFieldExpression>
 						</textField>
@@ -189,14 +189,14 @@
 								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 							</reportElement>
 							<textElement>
-								<font fontName="Helvetica" size="8" isBold="true"/>
+								<font fontName="DejaVu Sans" size="8" isBold="true"/>
 							</textElement>
 							<text><![CDATA[Órgão responsável:]]></text>
 						</staticText>
 						<textField isBlankWhenNull="true">
 							<reportElement x="160" y="51" width="230" height="10" forecolor="#757373" uuid="e7be2c3c-e32d-45e2-b861-7e89ca705c72"/>
 							<textElement>
-								<font fontName="Helvetica" size="8"/>
+								<font fontName="DejaVu Sans" size="8"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{orgaoResp}]]></textFieldExpression>
 						</textField>
@@ -206,21 +206,21 @@
 								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
 							</reportElement>
 							<textElement>
-								<font fontName="Helvetica" size="8" isBold="true"/>
+								<font fontName="DejaVu Sans" size="8" isBold="true"/>
 							</textElement>
 							<text><![CDATA[Situação:]]></text>
 						</staticText>
 						<textField isBlankWhenNull="true">
 							<reportElement x="450" y="39" width="100" height="10" forecolor="#757373" uuid="5172db8e-84f2-4505-8d21-edb50f74f2cb"/>
 							<textElement>
-								<font fontName="Helvetica" size="8"/>
+								<font fontName="DejaVu Sans" size="8"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{situacao}]]></textFieldExpression>
 						</textField>
 						<textField isBlankWhenNull="true">
 							<reportElement x="6" y="44" width="38" height="14" forecolor="#757373" uuid="40aaaf6a-f3b7-49b2-bbab-b8246d36d13b"/>
 							<textElement textAlignment="Center" verticalAlignment="Middle">
-								<font fontName="Helvetica" size="7"/>
+								<font fontName="DejaVu Sans" size="7"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{ciclo}]]></textFieldExpression>
 						</textField>
@@ -476,7 +476,7 @@
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement textAlignment="Center" verticalAlignment="Middle">
-								<font fontName="Helvetica" size="6" isBold="true"/>
+								<font fontName="DejaVu Sans" size="6" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{oe}]]></textFieldExpression>
 						</textField>
@@ -506,7 +506,7 @@
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement textAlignment="Center" verticalAlignment="Middle">
-								<font fontName="Helvetica" size="6" isBold="true"/>
+								<font fontName="DejaVu Sans" size="6" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
 						</textField>
@@ -526,14 +526,14 @@
 			<textField>
 				<reportElement x="520" y="5" width="20" height="14" forecolor="#C7C7C7" uuid="db9e80c5-991a-49e5-b0c9-80b8a0efd4ad"/>
 				<textElement textAlignment="Right">
-					<font fontName="Arial" size="5"/>
+					<font fontName="DejaVu Sans" size="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Pag. " + $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
 				<reportElement x="540" y="5" width="14" height="14" forecolor="#C7C7C7" uuid="f395b7ed-e676-4586-8c58-b91fa95118d0"/>
 				<textElement textAlignment="Left">
-					<font fontName="Arial" size="5"/>
+					<font fontName="DejaVu Sans" size="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA[" de " +  $V{PAGE_NUMBER}]]></textFieldExpression>
 			</textField>
@@ -547,7 +547,7 @@
 			<textField>
 				<reportElement x="220" y="5" width="116" height="14" forecolor="#C7C7C7" uuid="259c574a-5ddd-4097-a4aa-e19c1829760f"/>
 				<textElement textAlignment="Center">
-					<font fontName="Arial" size="5"/>
+					<font fontName="DejaVu Sans" size="5"/>
 				</textElement>
 				<textFieldExpression><![CDATA["Emitido em " + $P{dataAtual}]]></textFieldExpression>
 			</textField>

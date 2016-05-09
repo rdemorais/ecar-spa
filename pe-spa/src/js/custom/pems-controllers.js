@@ -81,7 +81,7 @@
             $scope.anexos = anexos;
         });
 
-        $scope.downaloadAnexo = function(anexo) {
+        $scope.downloadAnexo = function(anexo) {
             pemsService.downloadAnexo(anexo);
         }
 

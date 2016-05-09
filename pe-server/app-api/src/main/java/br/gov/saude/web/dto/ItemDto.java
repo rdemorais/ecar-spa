@@ -51,7 +51,11 @@ public class ItemDto implements Comparable<ItemDto>{
 			String parecer) {
 		super();
 		this.id = id;
-		this.nomeCor = nomeCor;
+		if(nomeCor == null) {
+			this.nomeCor = "branco";
+		}else {
+			this.nomeCor = nomeCor;
+		}
 		this.codMi = codMi;
 		this.codPi = codPi;
 		this.codAtv = codAtv;
