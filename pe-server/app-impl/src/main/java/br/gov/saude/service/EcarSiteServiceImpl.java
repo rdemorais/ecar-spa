@@ -71,11 +71,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		SimpleDateFormat sdfDataH = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
 		BufferedImage image = ecarFileSystem.getImageFromContext("logo_small.gif");
-		BufferedImage logoEcar = ecarFileSystem.getImageFromContext("ecarLogo.png");
-		BufferedImage logoHeader = ecarFileSystem.getImageFromContext("header_logos.gif");
+		BufferedImage logoHeader = ecarFileSystem.getImageFromContext("gov_brasil_180x61.png");
 		
 		parametros.put("logo", image);
-		parametros.put("logoEcar", logoEcar);
 		parametros.put("logoHeader", logoHeader);
 		parametros.put("dataAtual", sdfDataH.format(new Date()));
 		

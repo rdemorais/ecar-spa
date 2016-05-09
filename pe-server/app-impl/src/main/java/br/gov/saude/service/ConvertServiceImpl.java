@@ -50,7 +50,7 @@ public class ConvertServiceImpl implements ConvertService{
 	public PEGerencial createPEGerencial(List<ItemDto> listaItens) throws IOException {
 		PEGerencial peGerencial = new PEGerencial();
 		peGerencial.setExercicio("2016");
-		peGerencial.setFiltros("OE 01");
+		peGerencial.setFiltros("-");
 		peGerencial.setListaItens(convertItem(listaItens));
 		
 		return peGerencial;

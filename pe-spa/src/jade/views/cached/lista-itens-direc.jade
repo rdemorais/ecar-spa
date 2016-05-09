@@ -34,7 +34,7 @@
                   |&nbsp; {{item.orgaoResp}}
 
                 .mr.label(ng-class="'label-'+item.oeShortName") {{item.oe}}
-                .mr.label.label-meta(ng-if="item.estruturaProduto == 'meta' && item.nivel != 'meta'") M {{item.siglaMi}}
-                .mr.label.label-iniciativa(ng-if="item.estruturaProduto == 'iniciativa' && item.nivel != 'iniciativa'") I {{item.siglaMi}}
+                .mr.label.label-meta(ng-if="item.estruturaProduto == 'meta' && item.nivel != 'meta'") {{item.siglaMi}}
+                .mr.label.label-iniciativa(ng-if="item.estruturaProduto == 'iniciativa' && item.nivel != 'iniciativa'") {{item.siglaMi}}
                 .mr.label.label-produto_intermediario(ng-if="item.estruturaSuperior == 'produto_intermediario'") PI {{item.siglaPi}}
                 .mr.label(ng-class="'label-'+item.nivel", ng-if="item.nivel == 'meta' || item.nivel == 'iniciativa'") {{item.nivel}}
