@@ -173,3 +173,34 @@ WITH (
 );
 ALTER TABLE dbsitedemas.tb_etiqueta
   OWNER TO sa_ecar;
+
+CREATE TABLE dbsitedemas.tb_monitoramento
+(
+  cod_iett bigint NOT NULL,
+  mes character varying(2),
+  ano character varying(4),
+  cod_exe bigint,
+  cod_cor bigint,
+  nome_cor character varying(20),
+  significado_cor character varying(20),
+  data_parecer date,
+  cod_usu bigint,
+  cod_sit bigint,
+  descricao_sit text,
+  parecer text,
+  ultimo_parecer character varying,
+  nao_monitorado character varying,
+  cod_monitoramento bigint NOT NULL,
+  CONSTRAINT cod_monitoramento_pk PRIMARY KEY (cod_monitoramento),
+  CONSTRAINT cod_iett_fk FOREIGN KEY (cod_iett)
+      REFERENCES dbsitedemas.tb_iett (cod_iett) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT cod_usu_fk FOREIGN KEY (cod_usu)
+      REFERENCES dbsitedemas.tb_usuario_usu (co_usuario) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE dbsitedemas.tb_monitoramento
+  OWNER TO sa_ecar;
