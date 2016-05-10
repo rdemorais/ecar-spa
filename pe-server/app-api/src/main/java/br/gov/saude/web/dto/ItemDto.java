@@ -226,7 +226,7 @@ public class ItemDto implements Comparable<ItemDto>{
 				+ estruturaSuperior + ", estruturaProduto=" + estruturaProduto + ", id=" + id + ", nomeCor=" + nomeCor
 				+ ", desc=" + desc + ", situacao=" + situacao + ", nivel=" + nivel + ", orgaoResp=" + orgaoResp
 				+ ", mes=" + mes + ", ano=" + ano + ", oeShortName=" + oeShortName + ", responsavel=" + responsavel
-				+ ", parecer=" + parecer + "]";
+				+ ", parecer=-]";
 	}
 
 	@Override

@@ -1,12 +1,16 @@
 .row(ng-controller="itemDashController as itemDash")
+	.settings-wrapper.visible
+		.settings
+			.settings-inner
+				a.settings-content.mr-xl.pull-right.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioExecutivo()")
 	.col-lg-1
 	.col-lg-10
 		.panel.panel-default
 			.panel-body
 				.col-md-2
 					a.mr.label(ng-click="retornarListaItens()", ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
-					a.mr.label.label-meta(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'META')", ng-if="itemDash.item.estruturaProduto == 'meta' && itemDash.item.nivel != 'meta'") M {{itemDash.item.siglaMi}}
-					a.mr.label.label-iniciativa(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'INICIATIVA')", ng-if="itemDash.item.estruturaProduto == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") I {{itemDash.item.siglaMi}}
+					a.mr.label.label-meta(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'META')", ng-if="itemDash.item.estruturaProduto == 'meta' && itemDash.item.nivel != 'meta'") {{itemDash.item.siglaMi}}
+					a.mr.label.label-iniciativa(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'INICIATIVA')", ng-if="itemDash.item.estruturaProduto == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") {{itemDash.item.siglaMi}}
 					a.mr.label.label-produto_intermediario(ng-click="itemSelecionadoDash(itemDash.item.codPi, 'PRODUTO_INTERMEDIARIO')", ng-if="itemDash.item.estruturaSuperior == 'produto_intermediario'") PI {{itemDash.item.siglaPi}}
 				.col-md-4 
 					strong Responsável:
@@ -18,9 +22,6 @@
 					strong Ciclo:
 					small {{itemDash.item.mes}}/{{itemDash.item.ano}}
 				.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
-		.panel.panel-default
-			.panel-body
-					a.pull-right.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioExecutivo()")
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 
