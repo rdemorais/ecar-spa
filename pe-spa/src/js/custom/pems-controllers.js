@@ -10,7 +10,8 @@
         .controller('dashboardController', dashboardController)
         .controller('listaItensController', listaItensController)
         .controller('itemDashController', itemDashController)
-        .controller('loginController', loginController);
+        .controller('loginController', loginController)
+        .factory('truncate', stripTags);
     
     loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService'];
     function loginController($scope, $state, OAuth, pemsService) {
@@ -73,9 +74,11 @@
         }
     }
 
-    itemDashController.$inject = ['$scope', '$state', '$stateParams', 'pemsService', 'pemsFilterService'];
-    function itemDashController($scope, $state, $stateParams, pemsService, pemsFilterService) {
+    itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate'];
+    function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate) {
         var vm = this;
+        vm.parecer = '';
+
         $scope.anexos = [];
         pemsService.loadAnexos(pemsFilterService.getFiltros(), function(anexos) {
             $scope.anexos = anexos;
@@ -101,7 +104,25 @@
         pemsFilterService.getFiltros().nivel = $stateParams.nivel;
         pemsService.loadItem(pemsFilterService.getFiltros(), function(item) {
             vm.item = item;
+            vm.parecer = truncate(vm.item.parecer, '<a><br><ul><li><strong><b><table><p><i><ol><td><tr><h1><h2><h3>');
         });
+
+    }
+
+    function stripTags() {
+      return function truncate(input, allowed) {
+        //var allowed = '<a><b><strong><table><br>';
+        allowed = (((allowed || '') + '')
+          .toLowerCase()
+          .match(/<[a-z][a-z0-9]*>/g) || [])
+          .join(''); // making sure the allowed arg is a string containing only tags in lowercase (<a><b><c>)
+        var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
+          commentsAndXmlTags = /<!--[\s\S]*?-->|<\?(?:xml)?[\s\S]*?>/gi;
+        return input.replace(commentsAndXmlTags, '')
+          .replace(tags, function($0, $1) {
+            return allowed.indexOf('<' + $1.toLowerCase() + '>') > -1 ? $0 : '';
+          });
+      }
     }
 
 })();
