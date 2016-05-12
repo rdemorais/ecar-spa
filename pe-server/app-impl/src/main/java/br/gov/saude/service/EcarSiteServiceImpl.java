@@ -130,7 +130,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			parametros = gerarParametros();
 			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META);
 			
-			conteudo.add(convertService.createPEGerencial(listaItens));
+			conteudo.add(convertService.createPEGerencial(listaItens, filtro));
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
 			

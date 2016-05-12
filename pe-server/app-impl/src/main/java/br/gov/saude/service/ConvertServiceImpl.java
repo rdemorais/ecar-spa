@@ -14,6 +14,7 @@ import br.gov.saude.report.ItemReport;
 import br.gov.saude.report.PEExecutivo;
 import br.gov.saude.report.PEGerencial;
 import br.gov.saude.web.dto.EtiquetaDto;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 
@@ -47,10 +48,10 @@ public class ConvertServiceImpl implements ConvertService{
 		return peExecutivo;
 	}
 	
-	public PEGerencial createPEGerencial(List<ItemDto> listaItens) throws IOException {
+	public PEGerencial createPEGerencial(List<ItemDto> listaItens, FiltroDto filtro) throws IOException {
 		PEGerencial peGerencial = new PEGerencial();
 		peGerencial.setExercicio("2016");
-		peGerencial.setFiltros("-");
+		peGerencial.setFiltros(convertFiltroToString(filtro));
 		peGerencial.setListaItens(convertItem(listaItens));
 		
 		return peGerencial;
@@ -84,6 +85,24 @@ public class ConvertServiceImpl implements ConvertService{
 		itemReport.setNivel(itemDto.getNivel());
 		
 		return itemReport;
+	}
+	
+	public String convertFiltroToString(FiltroDto filtro) {
+		StringBuffer filtroStr = new StringBuffer();
+		if(filtro.isPpa()) {
+			filtroStr.append("Apenas PPA");
+			filtroStr.append(", ");
+		}
+		if(filtro.isMeta() && filtro.isIniciativa()) {
+			filtroStr.append("Apenas Metas e Iniciativas");
+			filtroStr.append(", ");
+		}
+		if(filtro.isMeta()) {
+			filtroStr.append("Apenas Metas");
+			filtroStr.append(", ");
+		}
+		
+		return "";
 	}
 	
 	public List<OeDto> convertListaOE(List<OE> oesDd) throws AkulaRuntimeException {
