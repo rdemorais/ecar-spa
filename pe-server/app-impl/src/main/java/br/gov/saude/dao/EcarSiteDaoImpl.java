@@ -11,6 +11,7 @@ import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
+import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
@@ -58,6 +59,21 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			return q.getResultList();
 		} catch (Exception e) {
 			throw new AkulaRuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException {
+		try {
+			
+			StringBuffer hql = new StringBuffer();
+			
+			
+			Query q = em.createQuery(hql.toString());
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage());
 		}
 	}
 	
