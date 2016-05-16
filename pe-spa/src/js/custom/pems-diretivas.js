@@ -4,6 +4,7 @@
     angular
         .module('naut')
         .directive('pemsOes', pemsOes)
+        .directive('pemsSecretarias', pemsSecretarias)
         .directive('pemsStatusBar', pemsStatusBar)
         .directive('pemsEtiquetas', pemsEtiquetas)
         .directive('pemsStatusFilter', pemsStatusFilter)
@@ -11,6 +12,36 @@
         .directive('pemsIndicadores', pemsIndicadores)
         .filter('propsFilter', propsFilter)
         .filter('format', format);
+
+    function pemsSecretarias() {
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      return {
+        restrict: 'E',
+        templateUrl: 'app/views/cached/pems-secretarias.html',
+        controller: controller
+      };
+
+      function controller($scope, $element, pemsService, pemsFilterService) {
+        $scope.secretarias = [];
+        $scope.secSelec = pemsFilterService.getSecretarias();
+
+        $scope.toggleSelection = function(sec) {
+          var idx = $scope.secSelec.indexOf(sec.id);
+
+          if (idx > -1) {
+            $scope.secSelec.splice(idx, 1);
+          }else {
+            $scope.secSelec.push(sec.id);
+          }
+
+          pemsFilterService.setSecretarias($scope.secSelec);
+        }
+
+        pemsService.loadSecretarias(function(secs) {
+          $scope.secretarias = secs;
+        });
+      }
+    }
 
     function pemsStatusBar() {
       controller.$inject = ['$scope', '$element', 'pemsService', 'colors'];

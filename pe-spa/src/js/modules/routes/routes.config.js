@@ -46,13 +46,15 @@
           url: '/dashboard',
           templateUrl: Route.base('dashboard.html'),
           resolve: {
-            assets: Route.require('easypiechart', 'ui.select')
+            assets: Route.require('easypiechart', 'ui.select', 'slimscroll')
           }
         })
         .state('app.lista-itens', {
           url: '/lista-itens',
           templateUrl: Route.base('lista-itens.html'),
-          resolve: {}
+          resolve: {
+            assets: Route.require('slimscroll')
+          }
         })
         .state('app.dash-item', {
           params: {

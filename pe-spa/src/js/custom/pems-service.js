@@ -226,6 +226,24 @@
             });
     	};
 
+        this.loadSecretarias = function(callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/lista-secretarias',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var secs = ecarResponse.obj;
+                    callback(secs);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
     	this.loadOEs = function(callback) {
             if(fixedArrays.oes.length == 0) {
                 $http({
@@ -268,6 +286,7 @@
             status: [],
             oes: [],
             etiquetas: [],
+            secretarias: [],
             codExe: 1,
             codIett: -1,
             nivel: null
@@ -276,6 +295,14 @@
         var listaStatusFiltrosGerada = false;
         var listaStFiltrosSel;
 
+        this.getSecretarias = function() {
+            return filtros.secretarias;
+        };
+        
+        this.setSecretarias = function(secs) {
+            filtros.secretarias = secs;
+        };
+
         this.clear = function() {
             filtros = {
                 ppa: false,
@@ -283,7 +310,7 @@
                 iniciativa: false,
                 status: [],
                 oes: [],
-                etiquetas: [{nome: 'Saúde mais perto de você', id: 10}]
+                etiquetas: []
             };
         };
 
