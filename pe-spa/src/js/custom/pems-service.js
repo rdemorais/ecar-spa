@@ -337,6 +337,7 @@
                     {clazz: 'img-status-vermelho', clazzSel: 'img-status-vermelho-sel', codCor: 3, sel: false},
                     {clazz: 'img-status-azul', clazzSel: 'img-status-azul-sel', codCor: 10, sel: false},
                     {clazz: 'img-status-cinza', clazzSel: 'img-status-cinza-sel', codCor: 11, sel: false},
+                    {clazz: 'img-status-branco', clazzSel: 'img-status-branco-sel', codCor: -1, sel: false}
                 ];
             
             if(!listaStatusFiltrosGerada) {
