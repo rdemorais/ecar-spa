@@ -28,6 +28,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
@@ -52,6 +53,10 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	public RelatorioExcelService relatorioExcelService;
+	
+	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException {
+		return ecarSiteDao.loadSecretarias();
+	}
 	
 	public byte[] gerarRelatorioExcel(FiltroDto filtro) throws AkulaRuntimeException {
 		

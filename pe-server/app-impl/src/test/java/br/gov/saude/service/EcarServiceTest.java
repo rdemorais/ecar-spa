@@ -17,6 +17,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
@@ -181,6 +182,28 @@ public class EcarServiceTest {
 		
 		for (AnexoDto anexoDto : anexos) {
 			logger.debug(anexoDto.toString());
+		}
+	}
+	
+	@Test
+	public void testLoadSecretarias() {
+		List<SecretariaDto> secretarias = ecarSiteService.loadSecretarias();
+		
+		for (SecretariaDto secretariaDto : secretarias) {
+			logger.debug(secretariaDto.toString());
+		}
+	}
+	
+	@Test
+	public void testFiltroPorSecretaria() {
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setSecretarias(Arrays.asList(new Long(12))); //SGETS
+		
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
+		
+		for (ItemDto itemDto : listaItens) {
+			logger.debug(itemDto.toString());
 		}
 	}
 }

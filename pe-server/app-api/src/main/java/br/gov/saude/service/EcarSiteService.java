@@ -9,9 +9,11 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public interface EcarSiteService {
+	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException;
 	public byte[] gerarRelatorioExcel(FiltroDto filtro) throws AkulaRuntimeException;
 	public AnexoDto loadAnexo(Long codAnexo) throws AkulaRuntimeException;
 	public List<AnexoDto> listaAnexos(FiltroDto filtro) throws AkulaRuntimeException;

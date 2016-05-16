@@ -23,6 +23,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.SecretariaDto;
 
 @Controller
 @CrossOrigin(value="*", maxAge=3600)
@@ -33,6 +34,17 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
+	
+	@RequestMapping(value="/lista-secretarias", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadSecretarias() {
+		List<SecretariaDto> secretarias = ecarSiteService.loadSecretarias();
+		
+		logger.debug("retornando lista de Secretarias: " + secretarias.size());
+		
+		return EcarResponse.ok(secretarias);
+	}
 	
 	@RequestMapping(value="/lista-oes", 
 			method=RequestMethod.POST)

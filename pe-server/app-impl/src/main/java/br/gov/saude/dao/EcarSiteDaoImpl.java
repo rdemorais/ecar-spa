@@ -68,7 +68,12 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			
 			StringBuffer hql = new StringBuffer();
 			
-			
+			hql.append("SELECT DISTINCT new br.gov.saude.web.dto.SecretariaDto( ");
+			hql.append("mi.codOrg, ");
+			hql.append("mi.siglaOrgMi) ");
+			hql.append("FROM MetaIniciativa mi ");
+			hql.append("WHERE mi.codOrg IS NOT NULL ");
+			hql.append("ORDER BY mi.siglaOrgMi ");
 			Query q = em.createQuery(hql.toString());
 			
 			return q.getResultList();
@@ -273,6 +278,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				if(filtro.isPpa()) {
 					hql.append("AND iett.codPpa IS NOT NULL ");
 				}
+				
+				if(filtro.getSecretarias().size() > 0) {
+					hql.append("AND iett.codOrg IN :secs ");
+				}
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
@@ -322,7 +331,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 					if(filtro.isMeta()) {
 						q.setParameter("apenasMetaIniciativa", Estrutura.META);
 					}
-				}	
+				}
+				
+				if(filtro.getSecretarias().size() > 0) {
+					q.setParameter("secs", filtro.getSecretarias());
+				}
 			}
 			
 			if(filtro.getOes().size() > 0) {

@@ -10,6 +10,7 @@ public class FiltroDto {
 	private List<Long> oes = new ArrayList<Long>();
 	private List<Long> status = new ArrayList<Long>();
 	private List<Long> etiquetas = new ArrayList<Long>();
+	private List<Long> secretarias = new ArrayList<Long>();
 	private Long codExe;
 	private Long codIett;
 	private String mes;
@@ -83,11 +84,16 @@ public class FiltroDto {
 	public void setNivel(String nivel) {
 		this.nivel = nivel;
 	}
+	public List<Long> getSecretarias() {
+		return secretarias;
+	}
+	public void setSecretarias(List<Long> secretarias) {
+		this.secretarias = secretarias;
+	}
 	@Override
 	public String toString() {
 		return "FiltroDto [ppa=" + ppa + ", meta=" + meta + ", iniciativa=" + iniciativa + ", oes=" + oes + ", status="
 				+ status + ", etiquetas=" + etiquetas + ", codExe=" + codExe + ", codIett=" + codIett + ", mes=" + mes
 				+ ", ano=" + ano + ", nivel=" + nivel + "]";
 	}
-	
 }
