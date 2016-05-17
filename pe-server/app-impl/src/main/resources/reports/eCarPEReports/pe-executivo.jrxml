@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-17T11:51:44 -->
+<!-- 2016-05-17T15:31:17 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -481,23 +481,23 @@
 				<text><![CDATA[Atividade]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
-				<reportElement x="6" y="80" width="19" height="10" uuid="0c441e0b-ee50-43f5-84e1-f3bda2ccc2e3">
+				<reportElement x="6" y="80" width="24" height="10" uuid="0c441e0b-ee50-43f5-84e1-f3bda2ccc2e3">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 				</reportElement>
 				<textElement>
-					<font fontName="DejaVu Sans" size="8"/>
+					<font fontName="DejaVu Sans" size="7"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="25" y="80" width="3" height="10" uuid="11051106-885d-4143-a7ec-66eb52480de4"/>
+				<reportElement x="30" y="80" width="3" height="10" uuid="11051106-885d-4143-a7ec-66eb52480de4"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 				</textElement>
 				<text><![CDATA[-]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement x="29" y="80" width="526" height="10" uuid="8c99f0a9-b82b-4fb4-b3f3-11e1f59ad59f"/>
+				<reportElement x="34" y="80" width="518" height="10" uuid="8c99f0a9-b82b-4fb4-b3f3-11e1f59ad59f"/>
 				<textElement>
 					<font fontName="DejaVu Sans" size="8"/>
 					<paragraph lineSpacing="1_1_2"/>
@@ -587,7 +587,7 @@
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement>
-								<font fontName="DejaVu Sans" size="9" isBold="true"/>
+								<font fontName="DejaVu Sans" size="8" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 						</textField>
