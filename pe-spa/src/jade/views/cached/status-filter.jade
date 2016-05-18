@@ -1,4 +1,4 @@
 .row
 	.col-lg-2(ng-repeat="st in listaStatus")
-		.clickable(ng-click="selStatus(st)", ng-class="st.clazz", ng-if="!st.sel")
-		.clickable(ng-click="selStatus(st)", ng-class="st.clazzSel", ng-if="st.sel")
+		.clickable(ng-click="selStatus(st)", ng-class="st.clazz", ng-if="!st.sel", tooltip="{{st.desc}}")
+		.clickable(ng-click="selStatus(st)", ng-class="st.clazzSel", ng-if="st.sel", tooltip="{{st.desc}}")
