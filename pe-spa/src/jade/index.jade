@@ -18,9 +18,8 @@ html(lang="en", ng-app="naut")
     // build:css app/css/application.css
     link(rel='stylesheet', href="app/css/bootstrap.css")
     link(rel='stylesheet', href="app/css/styles.css")
-
-    link(rel="icon" type="image/ico" href="app/img/favicon.ico")
     // endbuild
+    link(rel="icon" type="image/ico" href="app/img/favicon.ico")
 
   body(ng-cloak='', ng-class="{ 'layout-fixed' : app.layout.isFixed, 'layout-boxed' : app.layout.isBoxed, 'layout-dock' : app.layout.isDocked, 'layout-material': app.layout.isMaterial, 'aside-offscreen' : app.sidebar.isOffscreen, 'aside-mini' : app.sidebar.isMini, 'aside-right' : app.sidebar.isRight, 'footer-hidden': app.footer.hidden, 'in-app': !$state.includes('page')}")
 
