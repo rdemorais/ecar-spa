@@ -32,8 +32,7 @@
 					span(ng-if="itemDash.item.nivel == 'meta' || itemDash.item.nivel == 'iniciativa'") {{itemDash.item.siglaMi}} - {{itemDash.item.desc}}
 					span(ng-if="itemDash.item.nivel == 'produto_intermediario'") {{itemDash.item.siglaPi}} - {{itemDash.item.desc}}
 					span(ng-if="itemDash.item.nivel == 'atividade'") {{itemDash.item.siglaAtv}} - {{itemDash.item.desc}}
-				.smoothy
-					scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
+				scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
 				strong Anexos:
 				scrollable.pt(height=50)
 					a.mr(ng-repeat="anexo in anexos", href="", ng-click="downloadAnexo(anexo)") {{anexo.nomeOriginal}}
