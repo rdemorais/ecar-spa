@@ -23,9 +23,12 @@
                       |- {{item.desc}}
                     .span(ng-if="item.siglaAtv !== undefined && item.nivel == 'atividade'") {{item.siglaAtv}} 
                       |- {{item.desc}}
-                .pull-right.text-muted 
+                p.pull-right.text-muted
                   strong Situação:
                   |&nbsp; {{item.situacao}}
+                p.text-muted
+                  strong PPA:
+                  |&nbsp; {{item.ppa}}
                 p.text-muted 
                   strong Responsável pelo parecer: 
                   |&nbsp;{{item.responsavel}}
