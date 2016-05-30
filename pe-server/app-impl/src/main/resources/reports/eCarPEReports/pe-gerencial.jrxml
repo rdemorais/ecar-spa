@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-25T09:46:13 -->
+<!-- 2016-05-30T11:22:10 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -16,6 +16,7 @@
 		<field name="ciclo" class="java.lang.String"/>
 		<field name="oe" class="java.lang.String"/>
 		<field name="nivel" class="java.lang.String"/>
+		<field name="ppa" class="java.lang.String"/>
 	</subDataset>
 	<parameter name="logo" class="java.lang.Object"/>
 	<parameter name="logoHeader" class="java.lang.Object"/>
@@ -132,16 +133,16 @@
 					</datasetRun>
 					<jr:listContents height="80" width="555">
 						<textField isBlankWhenNull="true">
-							<reportElement x="50" y="6" width="26" height="14" uuid="de0b2e25-56a6-436f-b55d-0323a60c4b9f">
+							<reportElement x="50" y="6" width="23" height="14" uuid="de0b2e25-56a6-436f-b55d-0323a60c4b9f">
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
-							<textElement verticalAlignment="Middle">
-								<font fontName="DejaVu Sans" size="8" isBold="true"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="DejaVu Sans" size="9" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{sigla}]]></textFieldExpression>
 						</textField>
 						<textField isStretchWithOverflow="true">
-							<reportElement x="81" y="6" width="469" height="14" uuid="a9ff8525-21ed-4ea2-81e8-bd09807ba2b5">
+							<reportElement x="78" y="6" width="472" height="14" uuid="a9ff8525-21ed-4ea2-81e8-bd09807ba2b5">
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement>
@@ -159,7 +160,7 @@
 							<imageExpression><![CDATA[$F{imgStatus}]]></imageExpression>
 						</image>
 						<staticText>
-							<reportElement x="76" y="6" width="5" height="14" uuid="2ee86247-67d0-43ec-9ce1-2c050853e515">
+							<reportElement x="73" y="6" width="5" height="14" uuid="2ee86247-67d0-43ec-9ce1-2c050853e515">
 								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							</reportElement>
 							<textElement textAlignment="Center" verticalAlignment="Top">
@@ -212,7 +213,9 @@
 							<text><![CDATA[Situação:]]></text>
 						</staticText>
 						<textField isBlankWhenNull="true">
-							<reportElement x="450" y="39" width="100" height="10" forecolor="#757373" uuid="5172db8e-84f2-4505-8d21-edb50f74f2cb"/>
+							<reportElement x="450" y="39" width="99" height="10" forecolor="#757373" uuid="5172db8e-84f2-4505-8d21-edb50f74f2cb">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
 							<textElement>
 								<font fontName="DejaVu Sans" size="8"/>
 							</textElement>
@@ -510,6 +513,23 @@
 								<font fontName="DejaVu Sans" size="6" isBold="true"/>
 							</textElement>
 							<textFieldExpression><![CDATA[$F{nivel}]]></textFieldExpression>
+						</textField>
+						<staticText>
+							<reportElement x="410" y="51" width="40" height="10" forecolor="#757373" uuid="ddf684cf-8b86-4ea4-b3bf-66a6d96fb663">
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							</reportElement>
+							<textElement>
+								<font fontName="DejaVu Sans" size="8" isBold="true"/>
+							</textElement>
+							<text><![CDATA[PPA:]]></text>
+						</staticText>
+						<textField isBlankWhenNull="true">
+							<reportElement x="450" y="51" width="100" height="10" forecolor="#757373" uuid="31102236-0853-43d0-8a67-042142da140d"/>
+							<textElement>
+								<font fontName="DejaVu Sans" size="8"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{ppa}]]></textFieldExpression>
 						</textField>
 					</jr:listContents>
 				</jr:list>

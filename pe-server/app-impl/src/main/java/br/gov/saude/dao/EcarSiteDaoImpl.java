@@ -131,6 +131,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
+				hql.append("iett.codPpa, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -143,6 +144,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("iett.siglaPi, ");
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
+				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -155,6 +157,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("pi.siglaPi, ");
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
+				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}
 			
@@ -234,6 +237,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
+				hql.append("iett.codPpa, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -246,6 +250,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("iett.siglaPi, ");
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
+				hql.append("'', ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -258,6 +263,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("pi.siglaPi, ");
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
+				hql.append("'', ");
 				hql.append("'') ");
 			}
 			
@@ -356,5 +362,4 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 			throw new AkulaRuntimeException(e.getMessage(), e);
 		}
 	}
-	
 }

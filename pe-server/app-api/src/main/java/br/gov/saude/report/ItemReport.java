@@ -12,7 +12,14 @@ public class ItemReport {
 	private String oe;
 	private String ciclo;
 	private String nivel;
+	private String ppa;
 	
+	public String getPpa() {
+		return ppa;
+	}
+	public void setPpa(String ppa) {
+		this.ppa = ppa;
+	}
 	public String getSigla() {
 		return sigla;
 	}

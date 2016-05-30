@@ -23,7 +23,6 @@ public class EcarReportTest {
 	@Autowired
 	public EcarSiteService ecarSiteService;
 	
-	
 	@Test
 	public void gerarReportGerencialTest() throws IOException {
 		logger.debug("Gerando relatorio...");

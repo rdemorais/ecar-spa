@@ -19,6 +19,7 @@ public class PEExecutivo {
 	private String parecer;
 	private String estruturaProduto;
 	private String estruturaSuperior;
+	private String ppa;
 	
 	private String siglaMi;
 	private String siglaPi;
@@ -26,6 +27,14 @@ public class PEExecutivo {
 	
 	private List<ItemReport> listaItens = new ArrayList<ItemReport>();
 	
+	public String getPpa() {
+		return ppa;
+	}
+
+	public void setPpa(String ppa) {
+		this.ppa = ppa;
+	}
+
 	public String getEstruturaSuperior() {
 		return estruturaSuperior;
 	}

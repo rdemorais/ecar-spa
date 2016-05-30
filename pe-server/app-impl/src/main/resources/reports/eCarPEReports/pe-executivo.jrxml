@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.1.0.final using JasperReports Library version 6.1.0  -->
-<!-- 2016-05-17T15:31:17 -->
+<!-- 2016-05-30T11:43:23 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="pe-gerencial" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6166dd9b-37f6-4815-b04a-d2521ba9dee9">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="dsItens" uuid="22c09344-d8b9-4c12-ae86-daa13faf733d">
@@ -38,6 +38,7 @@
 	<field name="estruturaSuperior" class="java.lang.String"/>
 	<field name="estruturaProduto" class="java.lang.String"/>
 	<field name="siglaPi" class="java.lang.String"/>
+	<field name="ppa" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -560,6 +561,22 @@
 					<font fontName="DejaVu Sans" size="6" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA["PI " + $F{siglaPi}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="461" y="67" width="26" height="10" uuid="734ba00d-4a0e-4ad8-a3e8-46264a206cec">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PPA:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="488" y="67" width="37" height="10" uuid="2d62a793-f1ae-4be6-9f8d-72c5364055e6"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="DejaVu Sans" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ppa}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
