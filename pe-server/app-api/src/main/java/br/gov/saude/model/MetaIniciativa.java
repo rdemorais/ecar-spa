@@ -19,4 +19,6 @@ public interface MetaIniciativa {
 	public void setUsuario(Usuario usuario);
 	public OE getOe();
 	public void setOe(OE oe);
+	public String getOePnsMi();
+	public void setOePnsMi(String oePnsMi);
 }

@@ -51,6 +51,10 @@ WITH (
 ALTER TABLE dbsitedemas.tb_oe
   OWNER TO sa_ecar;
 
+-- Table: dbsitedemas.tb_meta_iniciativa
+
+-- DROP TABLE dbsitedemas.tb_meta_iniciativa;
+
 CREATE TABLE dbsitedemas.tb_meta_iniciativa
 (
   cod_iett bigint NOT NULL,
@@ -64,6 +68,7 @@ CREATE TABLE dbsitedemas.tb_meta_iniciativa
   sigla_org character varying(10),
   cod_usu bigint,
   ds_ppa_mi character varying(20),
+  ds_oe_pns_mi character varying(15),
   CONSTRAINT cod_iett_mi_pk PRIMARY KEY (cod_iett),
   CONSTRAINT co_usuario_fk FOREIGN KEY (cod_usu)
       REFERENCES dbsitedemas.tb_usuario_usu (co_usuario) MATCH SIMPLE
@@ -80,6 +85,7 @@ WITH (
 );
 ALTER TABLE dbsitedemas.tb_meta_iniciativa
   OWNER TO sa_ecar;
+
 
 CREATE TABLE dbsitedemas.tb_prod_inter
 (
