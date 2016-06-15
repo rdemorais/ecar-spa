@@ -46,6 +46,18 @@ public class EcarRestApiController {
 		return EcarResponse.ok(secretarias);
 	}
 	
+	@RequestMapping(value="/lista-oes-pns", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse loadOesPns() {
+		
+		List<OeDto> oes = ecarSiteService.listaOesPns();
+		
+		logger.debug("retornando lista de OEs do PNS: " + oes.size());
+		
+		return EcarResponse.ok(oes);
+	}
+	
 	@RequestMapping(value="/lista-oes", 
 			method=RequestMethod.POST)
 	@ResponseBody

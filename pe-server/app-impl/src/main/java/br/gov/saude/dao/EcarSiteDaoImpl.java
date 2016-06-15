@@ -5,16 +5,39 @@ import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.gov.saude.exc.AkulaDaoRuntimeException;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
+import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.StatusDto;
 
-public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
+public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<OeDto> listOEPns() throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("SELECT new br.gov.saude.web.dto.OeDto( ");
+			hql.append("oePns.id, ");
+			hql.append("oePns.nome, ");
+			hql.append("oePns.descricao) ");
+			hql.append("FROM OEPns oePns ");
+			hql.append("WHERE oePns.codSga = 48 ");
+			hql.append("ORDER BY oePns.descricao ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<OE> loadOes() throws AkulaRuntimeException {
@@ -132,6 +155,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
 				hql.append("iett.codPpa, ");
+				hql.append("iett.oePnsMi, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -145,6 +169,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
 				hql.append("'', ");
+				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -157,6 +182,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("pi.siglaPi, ");
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
+				hql.append("'', ");
 				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}
@@ -238,6 +264,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
 				hql.append("iett.codPpa, ");
+				hql.append("iett.oePnsMi, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -251,6 +278,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
 				hql.append("'', ");
+				hql.append("'', ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -263,6 +291,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao{
 				hql.append("pi.siglaPi, ");
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
+				hql.append("'', ");
 				hql.append("'', ");
 				hql.append("'') ");
 			}

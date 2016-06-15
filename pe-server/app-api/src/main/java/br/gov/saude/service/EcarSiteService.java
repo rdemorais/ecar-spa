@@ -19,6 +19,7 @@ public interface EcarSiteService {
 	public List<AnexoDto> listaAnexos(FiltroDto filtro) throws AkulaRuntimeException;
 	public byte[] gerarRelatorioExecutivo(FiltroDto filtro) throws AkulaRuntimeException;
 	public byte[] gerarRelatorioGerencial(FiltroDto filtro) throws AkulaRuntimeException;
+	public List<OeDto> listaOesPns() throws AkulaRuntimeException;
 	public List<OeDto> listaOes() throws AkulaRuntimeException;
 	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException;
 	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException;

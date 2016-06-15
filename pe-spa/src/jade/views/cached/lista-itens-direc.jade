@@ -23,18 +23,28 @@
                       |- {{item.desc}}
                     .span(ng-if="item.siglaAtv !== undefined && item.nivel == 'atividade'") {{item.siglaAtv}} 
                       |- {{item.desc}}
-                p.pull-right.text-muted
-                  strong Situação:
-                  |&nbsp; {{item.situacao}}
-                p.text-muted
-                  strong PPA:
-                  |&nbsp; {{item.ppa}}
-                p.text-muted 
-                  strong Responsável pelo parecer: 
-                  |&nbsp;{{item.responsavel}}
-                p.text-muted
-                  strong Órgão Responsável:
-                  |&nbsp; {{item.orgaoResp}}
+                .row
+                  .col-md-3.pull-right
+                    .text-muted
+                      strong Situação:
+                      |&nbsp; {{item.situacao}}
+                  .col-md-3
+                    .text-muted
+                      strong PPA:
+                      |&nbsp; {{item.ppa}}
+                  .col-md-3
+                    .text-muted
+                      strong PNS:
+                      |&nbsp; {{item.oePns}}
+                .row.mt.mb
+                  .col-md-4.pull-right
+                    .text-muted
+                      strong Órgão Responsável:
+                      |&nbsp; {{item.orgaoResp}}
+                  .col-md-8
+                    .text-muted 
+                      strong Responsável pelo parecer: 
+                      |&nbsp;{{item.responsavel}}
 
                 .mr.label(ng-class="'label-'+item.oeShortName") {{item.oe}}
                 .mr.label.label-meta(ng-if="item.estruturaProduto == 'meta' && item.nivel != 'meta'") {{item.siglaMi}}

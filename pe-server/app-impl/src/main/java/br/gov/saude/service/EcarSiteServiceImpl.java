@@ -146,6 +146,11 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	@Transactional
+	public List<OeDto> listaOesPns() throws AkulaRuntimeException {
+		return ecarSiteDao.listOEPns();
+	}
+	
+	@Transactional
 	public List<OeDto> listaOes() throws AkulaRuntimeException {
 		List<OE> oesDb = ecarSiteDao.loadOes();
 		
