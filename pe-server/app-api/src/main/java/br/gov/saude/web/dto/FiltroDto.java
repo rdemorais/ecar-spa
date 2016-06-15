@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FiltroDto {
+	private boolean pns = false;
 	private boolean ppa = false;
 	private boolean meta = false;
 	private boolean iniciativa = false;
@@ -17,6 +18,12 @@ public class FiltroDto {
 	private String ano;
 	private String nivel;
 	
+	public boolean isPns() {
+		return pns;
+	}
+	public void setPns(boolean pns) {
+		this.pns = pns;
+	}
 	public boolean isPpa() {
 		return ppa;
 	}

@@ -45,7 +45,9 @@ public class EcarServiceTest {
 	
 	@Test
 	public void testLoadStatusBar() {
-		StatusBarDto statusBar = ecarSiteService.loadStatusBar(1L);
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		StatusBarDto statusBar = ecarSiteService.loadStatusBar(filtro);
 		logger.debug("Carregando StatusBar: " + statusBar.toString());
 	}
 	

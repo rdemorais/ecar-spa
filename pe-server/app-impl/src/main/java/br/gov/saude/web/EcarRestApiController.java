@@ -123,11 +123,11 @@ public class EcarRestApiController {
 	@RequestMapping(value="/status", 
 			method=RequestMethod.POST)
 	@ResponseBody
-	public EcarResponse loadStatus() {
+	public EcarResponse loadStatus(@RequestBody FiltroDto filtro) {
 		
 		logger.debug("retornando statusBar");
 		
-		return EcarResponse.ok(ecarSiteService.loadStatusBar(1L));
+		return EcarResponse.ok(ecarSiteService.loadStatusBar(filtro));
 	}
 	
 	@RequestMapping(value="/etiquetas", 

@@ -37,8 +37,11 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	@Column(name="ds_ppa_mi")
 	private String codPpa;
 	
-	@Column(name="ds_oe_pns_mi")
-	private String oePnsMi;
+	@Column(name="co_oe_pns")
+	private Long coOePns;
+	
+	@Column(name="ds_oe_pns")
+	private String oePns;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -48,12 +51,20 @@ public class MetaIniciativaImpl extends IettImpl implements MetaIniciativa{
 	@JoinColumn(name = "cod_oe", referencedColumnName = "cod_iett")
 	private OE oe;
 	
-	public String getOePnsMi() {
-		return oePnsMi;
+	public Long getCoOePns() {
+		return coOePns;
 	}
 
-	public void setOePnsMi(String oePnsMi) {
-		this.oePnsMi = oePnsMi;
+	public void setCoOePns(Long coOePns) {
+		this.coOePns = coOePns;
+	}
+
+	public String getOePns() {
+		return oePns;
+	}
+
+	public void setOePns(String oePns) {
+		this.oePns = oePns;
 	}
 
 	public String getCodPpa() {

@@ -19,6 +19,10 @@ public interface MetaIniciativa {
 	public void setUsuario(Usuario usuario);
 	public OE getOe();
 	public void setOe(OE oe);
-	public String getOePnsMi();
-	public void setOePnsMi(String oePnsMi);
+	public Long getCoOePns();
+	public void setCoOePns(Long coOePns);
+	public String getOePns();
+	public void setOePns(String oePns);
+	public String getCodPpa();
+	public void setCodPpa(String codPpa);
 }

@@ -62,7 +62,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<StatusDto> loadStatusCount(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
+	public List<StatusDto> loadStatusCount(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
@@ -73,10 +73,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("WHERE mon.exercicio = :codExe ");
 			hql.append("AND iett.estrutura = :est ");
 			hql.append("AND mon.ultimoParecer = 'Y' ");
+			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
+				hql.append("AND iett.coOePns IS NOT NULL ");
+			}
 			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
 			
 			Query q = em.createQuery(hql.toString());
-			q.setParameter("codExe", codExe);
+			q.setParameter("codExe", filtro.getCodExe());
 			q.setParameter("est", estrutura);
 			
 			return q.getResultList();
@@ -105,7 +108,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 		}
 	}
 	
-	public StatusDto loadStatusCountNaoMonitorado(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
+	public StatusDto loadStatusCountNaoMonitorado(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			
 			StringBuffer hql = new StringBuffer();
@@ -116,10 +119,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("WHERE mon.exercicio = :codExe ");
 			hql.append("AND mon.naoMonitorado = 'Y' ");
 			hql.append("AND iett.estrutura = :est ");
+			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
+				hql.append("AND iett.coOePns IS NOT NULL ");
+			}
 			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
 			
 			Query q = em.createQuery(hql.toString());
-			q.setParameter("codExe", codExe);
+			q.setParameter("codExe", filtro.getCodExe());
 			q.setParameter("est", estrutura);
 			
 			return (StatusDto) q.getSingleResult();
@@ -155,7 +161,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
 				hql.append("iett.codPpa, ");
-				hql.append("iett.oePnsMi, ");
+				hql.append("iett.coOePns, ");
+				hql.append("iett.oePns, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -169,6 +176,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
 				hql.append("'', ");
+				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
@@ -183,6 +191,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
 				hql.append("'', ");
+				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}
@@ -264,7 +273,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("iett.estrutura, ");
 				hql.append("iett.codPpa, ");
-				hql.append("iett.oePnsMi, ");
+				hql.append("iett.coOePns, ");
+				hql.append("iett.oePns, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -278,6 +288,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("mi.estrutura, ");
 				hql.append("'', ");
+				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
@@ -292,6 +303,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.siglaAtv, ");
 				hql.append("pi.estrutura, ");
 				hql.append("'', ");
+				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("'') ");
 			}
@@ -330,8 +342,16 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("AND pi.id = :codIett ");
 			}
 			
+			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
+				hql.append("AND iett.coOePns IS NOT NULL ");
+			}
+			
 			if(filtro.getOes().size() > 0) {
-				hql.append("AND oe.id IN :oes ");
+				if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
+					hql.append("AND iett.coOePns IN :oes ");
+				}else {
+					hql.append("AND oe.id IN :oes ");
+				}
 			}
 			
 			if(filtro.getStatus().size() > 0) {

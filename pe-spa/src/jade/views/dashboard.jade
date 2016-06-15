@@ -1,24 +1,28 @@
 .row.p
   .col-lg-12
-    .col-md-1
-      h4 Perspectiva
-    .col-md-2
-      button.btn.btn-primary.btn-fw PPA
-    .col-md-2
-      button.btn.btn-primary.btn-fw PNS
+    .radio-inline.c-radio
+      label
+        input(type='radio', name="rdPerspectiva", value='ppa', ng-model="persp")
+        span.fa.fa-circle
+        | PPA
+    .radio-inline.c-radio
+      label
+        input(type='radio', name="rdPerspectiva", value='pns', ng-model="persp")
+        span.fa.fa-circle
+        | PNS
 .row.p
   .col-lg-8.fw-boxed
     .row
       .col-md-12
         .panel.panel-default
-          pems-status-bar
+          pems-status-bar(perspectiva="persp")
     .row
       .col-md-12
           .panel.panel-default
             .panel-body
               .col-md-1
               .col-md-10
-                pems-oes(mod="main")
+                pems-oes(mod="main", perspectiva="persp")
 
   .col-md-4.fw-boxed.pull-right
     .row

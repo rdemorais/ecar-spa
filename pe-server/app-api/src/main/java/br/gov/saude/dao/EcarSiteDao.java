@@ -16,9 +16,9 @@ public interface EcarSiteDao extends Dao{
 	public List<OeDto> listOEPns() throws AkulaRuntimeException;
 	public List<OE> loadOes() throws AkulaRuntimeException;
 	public List<Etiqueta> loadEtiquetas() throws AkulaRuntimeException;
-	public List<StatusDto> loadStatusCount(Long codExe, Estrutura estrutura) throws AkulaRuntimeException;
+	public List<StatusDto> loadStatusCount(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException;
-	public StatusDto loadStatusCountNaoMonitorado(Long codExe, Estrutura estrutura) throws AkulaRuntimeException;
+	public StatusDto loadStatusCountNaoMonitorado(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado) throws AkulaRuntimeException;
 }

@@ -53,6 +53,7 @@
         .state('app.lista-itens', {
           url: '/lista-itens',
           templateUrl: Route.base('lista-itens.html'),
+          controller: 'listaItensController',
           resolve: {
             assets: Route.require('slimscroll')
           }

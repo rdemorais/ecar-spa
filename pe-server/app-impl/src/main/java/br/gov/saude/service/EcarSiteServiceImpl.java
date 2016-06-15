@@ -165,9 +165,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	@Transactional
-	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException {
+	public StatusBarDto loadStatusBar(FiltroDto filtro) throws AkulaRuntimeException {
 		
-		return statusService.loadStatusBar(codExe);
+		return statusService.loadStatusBar(filtro);
 	}
 	
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {

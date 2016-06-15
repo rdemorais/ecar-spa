@@ -6,11 +6,12 @@
         .service('pemsFilterService', pemsFilterService)
         .service('pemsServiceError', pemsServiceError);
 
-    pemsService.$inject = ['$http', '$q', '$rootScope']
-    function pemsService($http, $q, $rootScope) {
+    pemsService.$inject = ['$http', '$q', '$rootScope', 'pemsFilterService']
+    function pemsService($http, $q, $rootScope, pemsFilterService) {
 
         var fixedArrays = {
-            oes: []
+            oes: [],
+            oesPns: []
         };
 
         this.gerarRelatorioExecutivo = function(filtro) {
@@ -208,10 +209,11 @@
             });
     	};
 
-    	this.loadStatus = function(callback) {
+    	this.loadStatus = function(filtro, callback) {
             $http({
                 method: 'POST',
                 url: $rootScope.app.baseUrl + '/status',
+                data: filtro,
                 headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
             }).then(function successCallBack(response) {
                 var ecarResponse = response.data;
@@ -245,29 +247,31 @@
         };
 
     	this.loadOEs = function(callback) {
-            if(fixedArrays.oes.length == 0) {
-                $http({
-                    method: 'POST',
-                    url: $rootScope.app.baseUrl + '/lista-oes',
-                    headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
-                }).then(function successCallBack(response) {
-                    var ecarResponse = response.data;
-                    if(ecarResponse.status == 'success') {
-                        fixedArrays.oes = ecarResponse.obj;
-                        for (var i = 0; i < fixedArrays.oes.length; i++) {
-                            fixedArrays.oes[i].sel = false;
-                            fixedArrays.oes[i].ord = i+1;
-                        };
-                        callback(fixedArrays.oes);
-                    }else {
-                        //tratar erro
-                    }
-                }, function errorCallBack(response) {
-                    $rootScope.$emit('oauth:error', response);
-                });
-            }else {
-                callback(fixedArrays.oes);
+            var url = '';
+            if(pemsFilterService.getFiltros().pns == true) {
+                url = '/lista-oes-pns';
+            }else if(pemsFilterService.getFiltros().pns == false) {
+                url = '/lista-oes';
             }
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + url,
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    fixedArrays.oes = ecarResponse.obj;
+                    for (var i = 0; i < fixedArrays.oes.length; i++) {
+                        fixedArrays.oes[i].sel = false;
+                        fixedArrays.oes[i].ord = i+1;
+                    };
+                    callback(fixedArrays.oes);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
     	};
     }
 
@@ -280,6 +284,7 @@
 
     function pemsFilterService() {
         var filtros = {
+            pns: false,
             ppa: false,
             meta: false,
             iniciativa: false,
@@ -295,6 +300,16 @@
         var listaStatusFiltrosGerada = false;
         var listaStFiltrosSel;
 
+        this.mudarPerspectiva = function(p) {
+            this.clear();
+
+            if(p == 'ppa') {
+                filtros.pns = false;
+            }else if(p == 'pns') {
+                filtros.pns = true;
+            }
+        };
+
         this.getSecretarias = function() {
             return filtros.secretarias;
         };
@@ -305,12 +320,16 @@
 
         this.clear = function() {
             filtros = {
-                ppa: false,
+                pns: false,
                 meta: false,
                 iniciativa: false,
                 status: [],
                 oes: [],
-                etiquetas: []
+                etiquetas: [],
+                secretarias: [],
+                codExe: 1,
+                codIett: -1,
+                nivel: null
             };
         };
 

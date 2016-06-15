@@ -17,6 +17,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String estruturaSuperior;
 	private String estruturaProduto;
 	private String ppa;
+	private Long coOePnsMi;
 	private String oePns;
 	
 	private Long codMi;
@@ -51,6 +52,7 @@ public class ItemDto implements Comparable<ItemDto>{
 			String siglaAtv, 
 			Estrutura estruturaSuperior,
 			String ppa,
+			Long coOePnsMi,
 			String oePns,
 			String parecer) {
 		super();
@@ -78,10 +80,19 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.responsavel = responsavel;
 		this.estruturaSuperior = estruturaSuperior.name().toLowerCase();
 		this.ppa = ppa;
+		this.coOePnsMi = coOePnsMi;
 		this.oePns = oePns;
 		this.parecer = parecer;
 	}
 	
+	public Long getCoOePnsMi() {
+		return coOePnsMi;
+	}
+
+	public void setCoOePnsMi(Long coOePnsMi) {
+		this.coOePnsMi = coOePnsMi;
+	}
+
 	public String getOePns() {
 		return oePns;
 	}

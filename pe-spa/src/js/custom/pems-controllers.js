@@ -33,13 +33,15 @@
         }
     }
 
-    dashboardController.$inject = ['$scope', '$state', 'pemsFilterService'];
-    function dashboardController($scope, $state, pemsFilterService) {
+    dashboardController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService'];
+    function dashboardController($scope, $state, pemsFilterService, pemsService) {
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
             iniciativa: pemsFilterService.getFiltros().iniciativa
         };
+
+        $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
 
         $scope.pesquisar = function() {
             pemsFilterService.setPpa($scope.filtro.ppa);
@@ -61,6 +63,12 @@
             meta: pemsFilterService.getFiltros().meta,
             iniciativa: pemsFilterService.getFiltros().iniciativa
         };
+
+        $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
+
+        $scope.$watch($scope.persp, function(newValue, oldValue) {
+            console.log(newValue);
+        });
 
         $scope.gerarRelatorioGerencial = function() {
           pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());

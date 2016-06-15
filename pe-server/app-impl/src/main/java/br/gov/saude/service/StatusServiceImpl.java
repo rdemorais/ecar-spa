@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
+import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.StatusBarDto;
 import br.gov.saude.web.dto.StatusDto;
 import br.gov.saude.web.dto.StatusEstruturaDto;
@@ -16,20 +17,20 @@ public class StatusServiceImpl implements StatusService{
 	@Autowired
 	public EcarSiteDao ecarSiteDao;
 	
-	public StatusBarDto loadStatusBar(Long codExe) throws AkulaRuntimeException {
+	public StatusBarDto loadStatusBar(FiltroDto filtro) throws AkulaRuntimeException {
 		StatusBarDto statusBar = new StatusBarDto();
 		
-		statusBar.setMeta(produzStatusEstrutura(codExe, Estrutura.META));
-		statusBar.setIniciativa(produzStatusEstrutura(codExe, Estrutura.INICIATIVA));
-		statusBar.setProduto(produzStatusEstrutura(codExe, Estrutura.PRODUTO_INTERMEDIARIO));
-		statusBar.setAtividade(produzStatusEstrutura(codExe, Estrutura.ATIVIDADE));
+		statusBar.setMeta(produzStatusEstrutura(filtro, Estrutura.META));
+		statusBar.setIniciativa(produzStatusEstrutura(filtro, Estrutura.INICIATIVA));
+		statusBar.setProduto(produzStatusEstrutura(filtro, Estrutura.PRODUTO_INTERMEDIARIO));
+		statusBar.setAtividade(produzStatusEstrutura(filtro, Estrutura.ATIVIDADE));
 		
 		return statusBar;
 	}
 	
-	private StatusEstruturaDto produzStatusEstrutura(Long codExe, Estrutura estrutura) throws AkulaRuntimeException {
-		List<StatusDto> statusListDto = ecarSiteDao.loadStatusCount(codExe, estrutura);
-		StatusDto statusNMDto = ecarSiteDao.loadStatusCountNaoMonitorado(codExe, estrutura);
+	private StatusEstruturaDto produzStatusEstrutura(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+		List<StatusDto> statusListDto = ecarSiteDao.loadStatusCount(filtro, estrutura);
+		StatusDto statusNMDto = ecarSiteDao.loadStatusCountNaoMonitorado(filtro, estrutura);
 		List<StatusDto> statusPadrao = listaStatusPadrao();
 		
 		Long count = 0L;

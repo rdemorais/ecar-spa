@@ -44,13 +44,16 @@
     }
 
     function pemsStatusBar() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'colors'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'colors', 'pemsFilterService'];
       return {
         restrict: 'E',
+        scope: {
+          perspectiva: '&'
+        },
         templateUrl: 'app/views/cached/pems-status-bar.html',
         controller: controller
       };
-      function controller($scope, $element, pemsService, colors) {
+      function controller($scope, $element, pemsService, colors, pemsFilterService) {
         $scope.statusBar = {};
         
         var pieOptionsCor = function(nomeCor) {
@@ -74,7 +77,15 @@
           item.sel = !item.sel;
         }
 
-        pemsService.loadStatus(function(statusBar) {
+        $scope.$watch($scope.perspectiva, function(newValue, oldValue) {
+          loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);          
+        });
+
+        loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);
+      }
+
+      function loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope) {
+        pemsService.loadStatus(pemsFilterService.getFiltros(), function(statusBar) {
           $scope.statusBar = statusBar;
         
 
@@ -117,17 +128,16 @@
             st.percentual = (st.count/atividade.total) * 100;
           });
         });
-
       }
     };
 
-    //pemsOes.$inject = ['pemsService'];
     function pemsOes() {
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
       return {
         restrict: 'E',
         scope: {
-          mod: '@'
+          mod: '@',
+          perspectiva: '&'
         },
         templateUrl: 'app/views/cached/oes.html',
         controller: controller
@@ -142,6 +152,14 @@
           pemsFilterService.addRemoveOe(oe.id);
           oe.sel = !oe.sel;
         }
+
+        $scope.$watch($scope.perspectiva, function(newValue, oldValue) {
+          console.log(newValue);
+          pemsFilterService.mudarPerspectiva(newValue);
+          pemsService.loadOEs(function(oes) {
+            $scope.oes = oes;
+          });
+        });
       }
     }
 
