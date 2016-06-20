@@ -67,7 +67,7 @@
         $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
 
         $scope.$watch($scope.persp, function(newValue, oldValue) {
-            console.log(newValue);
+
         });
 
         $scope.gerarRelatorioGerencial = function() {

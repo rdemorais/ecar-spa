@@ -282,7 +282,8 @@
         }
     }
 
-    function pemsFilterService() {
+    pemsFilterService.$inject = ['$rootScope']
+    function pemsFilterService($rootScope) {
         var filtros = {
             pns: false,
             ppa: false,
@@ -308,6 +309,8 @@
             }else if(p == 'pns') {
                 filtros.pns = true;
             }
+
+            $rootScope.$emit('pems:perspectivaAlterada');
         };
 
         this.getSecretarias = function() {

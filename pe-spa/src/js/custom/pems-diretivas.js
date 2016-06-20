@@ -44,16 +44,13 @@
     }
 
     function pemsStatusBar() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'colors', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'colors', 'pemsFilterService', '$rootScope'];
       return {
         restrict: 'E',
-        scope: {
-          perspectiva: '&'
-        },
         templateUrl: 'app/views/cached/pems-status-bar.html',
         controller: controller
       };
-      function controller($scope, $element, pemsService, colors, pemsFilterService) {
+      function controller($scope, $element, pemsService, colors, pemsFilterService, $rootScope) {
         $scope.statusBar = {};
         
         var pieOptionsCor = function(nomeCor) {
@@ -77,8 +74,8 @@
           item.sel = !item.sel;
         }
 
-        $scope.$watch($scope.perspectiva, function(newValue, oldValue) {
-          loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);          
+        $rootScope.$on('pems:perspectivaAlterada', function(event) {
+          loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);
         });
 
         loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);
@@ -154,7 +151,6 @@
         }
 
         $scope.$watch($scope.perspectiva, function(newValue, oldValue) {
-          console.log(newValue);
           pemsFilterService.mudarPerspectiva(newValue);
           pemsService.loadOEs(function(oes) {
             $scope.oes = oes;
