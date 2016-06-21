@@ -38,8 +38,8 @@
           description:   'Planejamento Estratégico do Ministério da Saúde',
           departamento:  'Departamento de Monitoramento e Avaliação do SUS - DEMAS/SE/MS',
           year:          new Date().getFullYear(),
-          //baseUrl:       '${pems-url}/ecar/api',
-          baseUrl:       'http://localhost:8080/pems/ecar/api',
+          baseUrl:       '${pems-url}/ecar/api',
+          //baseUrl:       'http://localhost:8080/pems/ecar/api',
           views: {
             animation: 'ng-fadeInLeft2'
           },
