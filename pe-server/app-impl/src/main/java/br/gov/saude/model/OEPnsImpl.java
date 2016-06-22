@@ -37,7 +37,7 @@ public class OEPnsImpl implements OEPns {
 	public void setCodSga(Long codSga) {
 		this.codSga = codSga;
 	}
-
+	
 	public String getNome() {
 		return nome;
 	}

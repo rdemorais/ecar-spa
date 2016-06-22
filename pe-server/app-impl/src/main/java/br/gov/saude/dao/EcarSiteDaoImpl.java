@@ -29,7 +29,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("oePns.descricao) ");
 			hql.append("FROM OEPns oePns ");
 			hql.append("WHERE oePns.codSga = 48 ");
-			hql.append("ORDER BY oePns.descricao ");
+			hql.append("ORDER BY oePns.id ");
 			
 			Query q = em.createQuery(hql.toString());
 			
