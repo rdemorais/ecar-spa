@@ -7,21 +7,30 @@
 	.col-lg-10
 		.panel.panel-default
 			.panel-body
-				.col-md-2
-					a.mr.label(ng-click="retornarListaItens()", ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
-					a.mr.label.label-meta(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'META')", ng-if="itemDash.item.estruturaProduto == 'meta' && itemDash.item.nivel != 'meta'") {{itemDash.item.siglaMi}}
-					a.mr.label.label-iniciativa(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'INICIATIVA')", ng-if="itemDash.item.estruturaProduto == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") {{itemDash.item.siglaMi}}
-					a.mr.label.label-produto_intermediario(ng-click="itemSelecionadoDash(itemDash.item.codPi, 'PRODUTO_INTERMEDIARIO')", ng-if="itemDash.item.estruturaSuperior == 'produto_intermediario'") PI {{itemDash.item.siglaPi}}
-				.col-md-4 
-					strong Responsável:
-					|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
-				.col-md-3
-					strong Situação:
-					|&nbsp; {{itemDash.item.situacao}}
-				.col-md-2
-					strong Ciclo:
-					small {{itemDash.item.mes}}/{{itemDash.item.ano}}
-				.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
+				.row
+					.col-md-2
+						a.mr.label(ng-click="retornarListaItens()", ng-class="'label-'+itemDash.item.oeShortName") {{itemDash.item.oe}}
+						a.mr.label.label-meta(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'META')", ng-if="itemDash.item.estruturaProduto == 'meta' && itemDash.item.nivel != 'meta'") {{itemDash.item.siglaMi}}
+						a.mr.label.label-iniciativa(ng-click="itemSelecionadoDash(itemDash.item.codMi, 'INICIATIVA')", ng-if="itemDash.item.estruturaProduto == 'iniciativa' && itemDash.item.nivel != 'iniciativa'") {{itemDash.item.siglaMi}}
+						a.mr.label.label-produto_intermediario(ng-click="itemSelecionadoDash(itemDash.item.codPi, 'PRODUTO_INTERMEDIARIO')", ng-if="itemDash.item.estruturaSuperior == 'produto_intermediario'") PI {{itemDash.item.siglaPi}}
+					.col-md-4 
+						strong Responsável:
+						|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
+					.col-md-3
+						strong Situação:
+						|&nbsp; {{itemDash.item.situacao}}
+					.col-md-2
+						strong Ciclo:
+						small {{itemDash.item.mes}}/{{itemDash.item.ano}}
+					.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
+				.row
+					.col-md-2
+					.col-md-2
+						strong PPA: 
+						small {{itemDash.item.ppa}}
+					.col-md-2
+						strong PNS: 
+						small {{itemDash.item.oePns}}
 		accordion(close-others='false')
 			accordion-group(is-open='true')
 				accordion-heading 
