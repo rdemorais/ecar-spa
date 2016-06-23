@@ -10,6 +10,7 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.model.UsuarioPermissaoMonitoramento;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
@@ -18,6 +19,27 @@ import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	
+	public UsuarioPermissaoMonitoramento loadUsuarioPermissaoMonitoramento(Long codUsu, Long codIett) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM UsuarioPermissaoMonitoramento upm ");
+			hql.append("WHERE ");
+			hql.append("upm.tpPerm = 'F' ");
+			hql.append("upm.codIett = :codIett ");
+			hql.append("upm.codUsu = :codUsu ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("codIett", codIett);
+			q.setParameter("codUsu", codUsu);
+			
+			return (UsuarioPermissaoMonitoramento) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<OeDto> listOEPns() throws AkulaRuntimeException {

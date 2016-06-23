@@ -13,6 +13,7 @@ public class ItemReport {
 	private String ciclo;
 	private String nivel;
 	private String ppa;
+	private String pns;
 	
 	public String getPpa() {
 		return ppa;
@@ -73,5 +74,11 @@ public class ItemReport {
 	}
 	public void setNivel(String nivel) {
 		this.nivel = nivel;
+	}
+	public String getPns() {
+		return pns;
+	}
+	public void setPns(String pns) {
+		this.pns = pns;
 	}
 }

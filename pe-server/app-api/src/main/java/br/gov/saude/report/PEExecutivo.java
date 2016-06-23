@@ -20,6 +20,7 @@ public class PEExecutivo {
 	private String estruturaProduto;
 	private String estruturaSuperior;
 	private String ppa;
+	private String pns;
 	
 	private String siglaMi;
 	private String siglaPi;
@@ -170,5 +171,12 @@ public class PEExecutivo {
 	public void setSiglaAtv(String siglaAtv) {
 		this.siglaAtv = siglaAtv;
 	}
-	
+
+	public String getPns() {
+		return pns;
+	}
+
+	public void setPns(String pns) {
+		this.pns = pns;
+	}
 }
