@@ -78,6 +78,9 @@
             pemsFilterService.setPpa($scope.filtro.ppa);
             pemsFilterService.setMeta($scope.filtro.meta);
             pemsFilterService.setIniciativa($scope.filtro.iniciativa);
+
+            console.log(pemsFilterService.getFiltros().status);
+
             $scope.$broadcast('pems:pesquisar-lista');
         }
     }

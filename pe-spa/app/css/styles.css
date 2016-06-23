@@ -340,13 +340,13 @@
   height: 46px !important;
 }
 .img-status-verde:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-verde-sel {
   background-image: url("../img/status1.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-amarelo {
   background-image: url("../img/status2.gif");
@@ -354,13 +354,13 @@
   height: 46px !important;
 }
 .img-status-amarelo:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-amarelo-sel {
   background-image: url("../img/status2.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-vermelho {
   background-image: url("../img/status3.gif");
@@ -368,13 +368,13 @@
   height: 46px !important;
 }
 .img-status-vermelho:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-vermelho-sel {
   background-image: url("../img/status3.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-azul {
   background-image: url("../img/status4.gif");
@@ -382,13 +382,13 @@
   height: 46px !important;
 }
 .img-status-azul:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-azul-sel {
   background-image: url("../img/status4.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-cinza {
   background-image: url("../img/status5.gif");
@@ -396,13 +396,13 @@
   height: 46px !important;
 }
 .img-status-cinza:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-cinza-sel {
   background-image: url("../img/status5.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-branco {
   background-image: url("../img/status0.gif");
@@ -410,13 +410,13 @@
   height: 46px !important;
 }
 .img-status-branco:hover {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-branco-sel {
   background-image: url("../img/status0.gif");
   width: 46px !important;
   height: 46px !important;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 5px 5px 2px #000000;
 }
 .img-status-verde-dash {
   background-image: url("../img/status1.gif");

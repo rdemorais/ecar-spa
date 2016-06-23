@@ -302,7 +302,7 @@
         var listaStFiltrosSel;
 
         this.mudarPerspectiva = function(p) {
-            this.clear();
+            //this.clear();
 
             if(p == 'ppa') {
                 filtros.pns = false;
