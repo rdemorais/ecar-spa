@@ -1,5 +1,8 @@
 package br.gov.saude.impl.auth;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,9 +33,14 @@ public class SentinelaAuthenticationProvider implements AuthenticationProvider {
 		
 		if(eCarSentinelaDao.consultar(login, crypPass) != null) {
 			Autenticacao autenticacao = new Autenticacao();
+			Map<UserDetails, Object> userDet = new HashMap<UserDetails, Object>();
 			autenticacao.setName(login);
 			autenticacao.setAuthenticated(true);
 			autenticacao.addPermissao(new PermissaoConcedida("ROLE_AUTENTICADO"));
+			
+			userDet.put(UserDetails.ID_USER, login);
+			
+			autenticacao.setDetails(userDet);
 			
 			return autenticacao;
 		}else {
