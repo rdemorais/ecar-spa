@@ -10,8 +10,63 @@
         .directive('pemsStatusFilter', pemsStatusFilter)
         .directive('pemsListaItens', pemsListaItens)
         .directive('pemsIndicadores', pemsIndicadores)
+        .directive('pemsParecer', pemsParecer)
         .filter('propsFilter', propsFilter)
         .filter('format', format);
+
+    function pemsParecer() {
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      return {
+        restrict: 'E',
+        templateUrl: 'app/views/cached/parecer-view.html',
+        controller: controller
+      };
+
+      function controller($scope, $element, pemsService, pemsFilterService) {
+        $scope.data = {
+          situacoes: [],
+          cores: [],
+          corSelecionada: 'branco',
+          corAlcancado: {id: 10, nome: 'azul', significado: 'Satisfatório'},
+          sitAlcancado: {id: 2, descricao: 'Alcançado'}
+        };
+
+        $scope.parecer = {
+          situacao: null,
+          cor: null
+        }
+
+        pemsService.listSituacoes(function(sits) {
+          $scope.data.situacoes = sits;
+        });
+
+        pemsService.listCores(function(cores) {
+          $scope.data.cores = cores;
+        });
+
+        $scope.changeCor = function() {
+          $scope.data.corSelecionada = $scope.parecer.cor.nome;
+
+          if($scope.parecer.cor.id == 10) {
+            $scope.parecer.situacao = $scope.data.sitAlcancado;
+          }else if($scope.parecer.situacao.id == 2){
+            $scope.parecer.situacao = null;
+          }
+        };
+
+        $scope.changeSituacao = function() {
+          if($scope.parecer.situacao.id == 2) {
+            $scope.parecer.cor = $scope.data.corAlcancado;
+            $scope.data.corSelecionada = $scope.parecer.cor.nome;
+          }else if($scope.parecer.cor.id == 10) {
+            $scope.parecer.cor = null;
+            $scope.data.corSelecionada = 'branco';
+          }
+        };
+
+        
+      }
+    }
 
     function pemsSecretarias() {
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];

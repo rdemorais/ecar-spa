@@ -19,11 +19,13 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.service.EcarSiteService;
 import br.gov.saude.web.dto.AnexoDto;
+import br.gov.saude.web.dto.CorDto;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.SecretariaDto;
+import br.gov.saude.web.dto.SituacaoDto;
 
 @Controller
 @CrossOrigin(value="*", maxAge=3600)
@@ -34,6 +36,28 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
+	
+	@RequestMapping(value="/lista-cores", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse listCores() {
+		List<CorDto> cores = ecarSiteService.listCor();
+		
+		logger.debug("retornando lista de Cores: " + cores.size());
+		
+		return EcarResponse.ok(cores);
+	}
+	
+	@RequestMapping(value="/lista-situacoes", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse listSituacoes() {
+		List<SituacaoDto> situacoes = ecarSiteService.listSituacao();
+		
+		logger.debug("retornando lista de Situacoes: " + situacoes.size());
+		
+		return EcarResponse.ok(situacoes);
+	}
 	
 	@RequestMapping(value="/lista-secretarias", 
 			method=RequestMethod.POST)
@@ -79,6 +103,7 @@ public class EcarRestApiController {
 	public EcarResponse loadItem(@RequestBody FiltroDto filtro) {
 		logger.debug(filtro.toString());
 		Estrutura estrutura = Estrutura.INICIATIVA;
+		
 		if(filtro.getNivel() != null) {
 			estrutura = Estrutura.valueOf(filtro.getNivel());
 		}

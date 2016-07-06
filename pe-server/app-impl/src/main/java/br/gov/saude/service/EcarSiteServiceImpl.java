@@ -22,13 +22,15 @@ import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.model.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.AnexoDto;
+import br.gov.saude.web.dto.CorDto;
 import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.SecretariaDto;
+import br.gov.saude.web.dto.SecretariaDto;import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
@@ -49,7 +51,10 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	private EcarReport ecarReport;
 	
 	@Autowired
-	public EcarFileSystem ecarFileSystem;
+	private EcarFileSystem ecarFileSystem;
+	
+	@Autowired
+	private ControleAcessoService controleAcessoService;
 	
 	@Autowired
 	public RelatorioExcelService relatorioExcelService;
@@ -171,7 +176,17 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
-		return ecarSiteDao.loadItem(filtro, estrutura);
+		ItemDto dto = ecarSiteDao.loadItem(filtro, estrutura);
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
+		
+		if(upm != null) {
+			dto.setParecerAutorizado(true);
+		}else {
+			dto.setParecerAutorizado(false);
+		}
+		
+		return dto;
 	}
 	
 	@Transactional
@@ -186,5 +201,15 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		Collections.sort(itens);
 		
 		return itens;
+	}
+	
+	@Transactional
+	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException {
+		return ecarSiteDao.listSituacao();
+	}
+	
+	@Transactional
+	public List<CorDto> listCor() throws AkulaRuntimeException {
+		return ecarSiteDao.listCor();
 	}
 }

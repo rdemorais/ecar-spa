@@ -28,6 +28,8 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String siglaAtv;
 	private String parecer;
 	
+	private boolean parecerAutorizado = false;
+	
 	public ItemDto() {
 		
 	}
@@ -250,7 +252,13 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.estruturaSuperior = estruturaSuperior;
 	}
 
-	
+	public boolean isParecerAutorizado() {
+		return parecerAutorizado;
+	}
+
+	public void setParecerAutorizado(boolean parecerAutorizado) {
+		this.parecerAutorizado = parecerAutorizado;
+	}
 
 	@Override
 	public String toString() {

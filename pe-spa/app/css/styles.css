@@ -334,6 +334,36 @@
 .text-atividade {
   color: #7C82CC;
 }
+.img-status-parecer-verde {
+  background-image: url("../img/status1.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
+.img-status-parecer-amarelo {
+  background-image: url("../img/status2.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
+.img-status-parecer-vermelho {
+  background-image: url("../img/status3.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
+.img-status-parecer-azul {
+  background-image: url("../img/status4.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
+.img-status-parecer-cinza {
+  background-image: url("../img/status5.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
+.img-status-parecer-branco {
+  background-image: url("../img/status0.gif");
+  width: 46px !important;
+  height: 46px !important;
+}
 .img-status-verde {
   background-image: url("../img/status1.gif");
   width: 46px !important;

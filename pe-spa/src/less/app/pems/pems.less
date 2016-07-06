@@ -54,6 +54,12 @@
 }
 
 //Carinhas
+.img-status-parecer(@img) {
+	background-image: url(@img);
+	width: 46px !important;
+	height: 46px !important;
+}
+
 .img-status(@img) {
 	background-image: url(@img);
 	width: 46px !important;
@@ -71,6 +77,13 @@
 	//box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	box-shadow: 5px 5px 2px #000000;
 }
+
+.img-status-parecer-verde {.img-status-parecer(@img-verde);}
+.img-status-parecer-amarelo {.img-status-parecer(@img-amarelo);}
+.img-status-parecer-vermelho {.img-status-parecer(@img-vermelho);}
+.img-status-parecer-azul {.img-status-parecer(@img-azul);}
+.img-status-parecer-cinza {.img-status-parecer(@img-cinza);}
+.img-status-parecer-branco {.img-status-parecer(@img-branco);}
 
 .img-status-verde {.img-status(@img-verde);}
 .img-status-verde-sel {.img-status-sel(@img-verde);}

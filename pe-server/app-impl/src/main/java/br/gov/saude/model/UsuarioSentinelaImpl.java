@@ -8,6 +8,7 @@ import javax.persistence.Table;
 @Entity(name="UsuarioSentinela")
 @Table(name="usuario", schema="dbsentdemas")
 public class UsuarioSentinelaImpl implements UsuarioSentinela {
+	
 	@Id
 	@Column(name="codusuario")
 	private Long id;
@@ -17,6 +18,9 @@ public class UsuarioSentinelaImpl implements UsuarioSentinela {
 	
 	@Column(name="senhausuario")
 	private String senhausuario;
+	
+	@Column(name="emailusuario")
+	private String emailUsuario;
 
 	public Long getId() {
 		return id;
@@ -40,5 +44,13 @@ public class UsuarioSentinelaImpl implements UsuarioSentinela {
 
 	public void setSenhausuario(String senhausuario) {
 		this.senhausuario = senhausuario;
+	}
+
+	public String getEmailUsuario() {
+		return emailUsuario;
+	}
+
+	public void setEmailUsuario(String emailUsuario) {
+		this.emailUsuario = emailUsuario;
 	}
 }

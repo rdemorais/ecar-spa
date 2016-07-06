@@ -14,6 +14,9 @@ import org.springframework.security.core.AuthenticationException;
 
 import br.gov.saude.auth.SentinelaPasswordHash;
 import br.gov.saude.dao.EcarSentinelaDao;
+import br.gov.saude.dao.EcarSiteDao;
+import br.gov.saude.model.Usuario;
+import br.gov.saude.model.UsuarioSentinela;
 
 public class SentinelaAuthenticationProvider implements AuthenticationProvider {
 	private static final Logger logger = LoggerFactory.getLogger(SentinelaAuthenticationProvider.class);
@@ -24,21 +27,27 @@ public class SentinelaAuthenticationProvider implements AuthenticationProvider {
 	@Autowired
 	private EcarSentinelaDao eCarSentinelaDao;
 	
+	@Autowired
+	private EcarSiteDao eCarSiteDao;
+	
 	public Authentication authenticate(Authentication auth) throws AuthenticationException {
 		logger.debug("Iniciando autenticacao para usuario " + auth.getName());
 		String login = String.valueOf(auth.getPrincipal());
 		String senha = String.valueOf(auth.getCredentials());
 		
 		String crypPass = sentinelaPasswordHash.criptografar(login+senha);
+		UsuarioSentinela userSentinela = eCarSentinelaDao.consultar(login, crypPass);
 		
-		if(eCarSentinelaDao.consultar(login, crypPass) != null) {
+		if(userSentinela != null) {
 			Autenticacao autenticacao = new Autenticacao();
 			Map<UserDetails, Object> userDet = new HashMap<UserDetails, Object>();
 			autenticacao.setName(login);
 			autenticacao.setAuthenticated(true);
 			autenticacao.addPermissao(new PermissaoConcedida("ROLE_AUTENTICADO"));
 			
-			userDet.put(UserDetails.ID_USER, login);
+			Usuario user = eCarSiteDao.loadUsuario(userSentinela.getEmailUsuario());
+			
+			userDet.put(UserDetails.ID_USER, user.getId());
 			
 			autenticacao.setDetails(userDet);
 			

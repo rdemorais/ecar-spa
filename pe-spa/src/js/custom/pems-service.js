@@ -246,6 +246,42 @@
             });
         };
 
+        this.listSituacoes = function(callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/lista-situacoes',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var sits = ecarResponse.obj;
+                    callback(sits);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
+        this.listCores = function(callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/lista-cores',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var cores = ecarResponse.obj;
+                    callback(cores);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
     	this.loadOEs = function(callback) {
             var url = '';
             if(pemsFilterService.getFiltros().pns == true) {

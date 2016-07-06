@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>ETL_Usuarios</name>
+    <name>ETL_Situacao</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -66,9 +66,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;04&#x2f;21 21&#x3a;53&#x3a;08.179</created_date>
+  <created_date>2016&#x2f;06&#x2f;30 12&#x3a;21&#x3a;03.371</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;04 16&#x3a;24&#x3a;27.762</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;30 12&#x3a;23&#x3a;57.179</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -97,11 +97,65 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Carregar usuarios</from><to>Convert id_sentinela</to><enabled>Y</enabled> </hop>
-  <hop> <from>Convert id_sentinela</from><to>Atualiza tb_usuario_usu</to><enabled>Y</enabled> </hop>
+  <hop> <from>Carregar situacoes</from><to>Campos</to><enabled>Y</enabled> </hop>
+  <hop> <from>Campos</from><to>Atualiza situacao PEMS</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Atualiza tb_usuario_usu</name>
+    <name>Carregar situacoes</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>eCar 2016</connection>
+    <sql>SELECT cod_sit, descricao_sit from dbecardemas.tb_situacao_sit where cod_sit &#x3c;&#x3e; 19</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>86</xloc>
+      <yloc>68</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Campos</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>cod_sit</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>descricao_sit</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>241</xloc>
+      <yloc>68</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Atualiza situacao PEMS</name>
     <type>InsertUpdate</type>
     <description/>
     <distribute>Y</distribute>
@@ -116,115 +170,28 @@
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dbsitedemas</schema>
-      <table>tb_usuario_usu</table>
+      <table>tb_situacao</table>
       <key>
-        <name>cod_usu</name>
-        <field>co_usuario</field>
+        <name>cod_sit</name>
+        <field>co_situacao</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
-        <name>co_usuario</name>
-        <rename>cod_usu</rename>
+        <name>co_situacao</name>
+        <rename>cod_sit</rename>
         <update>N</update>
       </value>
       <value>
-        <name>ds_nome</name>
-        <rename>nome_usu</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>ds_email</name>
-        <rename>email1_usu</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>co_usuario_sentinela</name>
-        <rename>id_dominio_usu</rename>
+        <name>ds_situacao</name>
+        <rename>descricao_sit</rename>
         <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>377</xloc>
-      <yloc>68</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Carregar usuarios</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>eCar 2016</connection>
-    <sql>select cod_usu, nome_usu, email1_usu, id_dominio_usu from dbecardemas.tb_usuario_usu</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>100</xloc>
-      <yloc>68</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Convert id_sentinela</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>cod_usu</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>nome_usu</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>email1_usu</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>id_dominio_usu</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>id_dominio_usu</name>
-        <rename>id_dominio_usu</rename>
-        <type>Integer</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>227</xloc>
-      <yloc>68</yloc>
+      <xloc>381</xloc>
+      <yloc>67</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

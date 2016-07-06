@@ -10,14 +10,45 @@ import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
+import br.gov.saude.model.Usuario;
 import br.gov.saude.model.UsuarioPermissaoMonitoramento;
+import br.gov.saude.web.dto.CorDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.SecretariaDto;
+import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
+	
+	@SuppressWarnings("unchecked")
+	public List<CorDto> listCor() throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Cor c WHERE c.id <> -1 ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Situacao");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			return q.getResultList();
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	public UsuarioPermissaoMonitoramento loadUsuarioPermissaoMonitoramento(Long codUsu, Long codIett) throws AkulaRuntimeException {
 		try {
@@ -25,8 +56,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("FROM UsuarioPermissaoMonitoramento upm ");
 			hql.append("WHERE ");
 			hql.append("upm.tpPerm = 'F' ");
-			hql.append("upm.codIett = :codIett ");
-			hql.append("upm.codUsu = :codUsu ");
+			hql.append("AND upm.codIett = :codIett ");
+			hql.append("AND upm.codUsu = :codUsu ");
 			
 			Query q = em.createQuery(hql.toString());
 			
@@ -34,6 +65,24 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			q.setParameter("codUsu", codUsu);
 			
 			return (UsuarioPermissaoMonitoramento) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	public Usuario loadUsuario(String email) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Usuario u ");
+			hql.append("WHERE u.email = :email ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("email", email);
+			
+			return (Usuario) q.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		} catch (Exception e) {

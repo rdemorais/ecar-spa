@@ -1,5 +1,18 @@
 CREATE SCHEMA dbsitedemas
   AUTHORIZATION sa_ecar;
+
+CREATE TABLE dbsitedemas.tb_situacao
+(
+  co_situacao bigint NOT NULL,
+  ds_situacao character varying,
+  CONSTRAINT co_situacao_pk PRIMARY KEY (co_situacao)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE dbsitedemas.tb_situacao
+  OWNER TO sa_ecar;
+  
 CREATE SEQUENCE dbsitedemas.cod_monitoramento_seq
   INCREMENT 1
   MINVALUE 1

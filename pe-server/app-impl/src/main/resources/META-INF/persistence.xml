@@ -17,6 +17,8 @@
         <class>br.gov.saude.model.UsuarioImpl</class>
         <class>br.gov.saude.model.UsuarioSentinelaImpl</class>
         <class>br.gov.saude.model.IettAnexoImpl</class>
+        <class>br.gov.saude.model.SituacaoImpl</class>
+        <class>br.gov.saude.model.CorImpl</class>
         <class>br.gov.saude.model.OEPnsImpl</class>
         <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramentoImpl</class>
         

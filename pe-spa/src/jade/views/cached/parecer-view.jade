@@ -1,0 +1,24 @@
+div
+	.row.mb
+		.col-md-4.mt
+			small.text-red Data limite para emissão do parecer: 21/01/2016
+		.col-md-5
+			.col-md-2
+				div(class="img-status-parecer-{{data.corSelecionada}}")
+			.col-md-8
+				select.form-control(ng-model="parecer.cor", 
+						ng-options="cor as cor.significado for cor in data.cores track by cor.id",
+						ng-change="changeCor()")
+					option(value="", disabled) Selecione a cor
+		.col-md-3.pull-right
+			select.form-control(ng-model="parecer.situacao",
+					ng-options="sit as sit.descricao for sit in data.situacoes track by sit.id",
+					ng-change="changeSituacao()")
+				option(value="", disabled) Selecione a situação
+	.row
+		.col-md-12
+			textArea(froala-ng, ng-model="data.os.sugestaoSolucao", language="pt_br",
+				 toolbar-buttons="['bold', 'italic', 'underline', 'align', 'insertLink', 'insertTable', 'quote']")
+	.row
+		.col-md-3
+			button.mr.btn.btn-success.btn-fw.mt-xl Gravar

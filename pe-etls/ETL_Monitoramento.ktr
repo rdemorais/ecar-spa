@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;28 13&#x3a;54&#x3a;14.680</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;16 13&#x3a;00&#x3a;32.177</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;04 17&#x3a;12&#x3a;52.882</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -97,8 +97,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Monitoramento</from><to>Campos monitoramento</to><enabled>Y</enabled> </hop>
-  <hop> <from>Campos monitoramento</from><to>Ult. parecer - N monitorado</to><enabled>Y</enabled> </hop>
+  <hop> <from>Campos monitoramento</from><to>Ult. parecer - N monitorado</to><enabled>N</enabled> </hop>
   <hop> <from>Atualiza monitoramento</from><to>Select Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Select Iett</from><to>Ordena Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Carrega Ietts</from><to>Monitoramento</to><enabled>Y</enabled> </hop>
@@ -112,6 +111,8 @@
   <hop> <from>Nao monitorados</from><to>Responsavel Cadastro</to><enabled>Y</enabled> </hop>
   <hop> <from>Responsavel Cadastro</from><to>Cor NM</to><enabled>Y</enabled> </hop>
   <hop> <from>Cor NM</from><to>Atualiza nao monitorado</to><enabled>Y</enabled> </hop>
+  <hop> <from>Monitoramento</from><to>Limpar Parecer</to><enabled>Y</enabled> </hop>
+  <hop> <from>Limpar Parecer</from><to>Campos monitoramento</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Atualiza monitoramento</name>
@@ -506,8 +507,53 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>55</xloc>
-      <yloc>104</yloc>
+      <xloc>30</xloc>
+      <yloc>103</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Cor NM</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>cod_cor</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>-1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>nome_cor</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Branco</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>177</xloc>
+      <yloc>207</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -589,7 +635,7 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>183</xloc>
+      <xloc>133</xloc>
       <yloc>103</yloc>
       <draw>Y</draw>
       </GUI>
@@ -830,8 +876,8 @@
     </step>
 
   <step>
-    <name>Cor NM</name>
-    <type>Constant</type>
+    <name>Limpar Parecer</name>
+    <type>RegexEval</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -840,36 +886,36 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
+    <script><![CDATA[<font[^>]*>(.+)<\/font[^>]*>]]></script>    <matcher>parecer</matcher>
+    <resultfieldname>font_matched</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>N</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>Y</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
     <fields>
       <field>
-        <name>cod_cor</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>-1</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>nome_cor</name>
+        <name>parecer_clean</name>
         <type>String</type>
         <format/>
-        <currency/>
-        <decimal/>
         <group/>
-        <nullif>Branco</nullif>
+        <decimal/>
         <length>-1</length>
         <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>177</xloc>
-      <yloc>207</yloc>
+      <xloc>222</xloc>
+      <yloc>103</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

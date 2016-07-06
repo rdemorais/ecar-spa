@@ -17,7 +17,10 @@
               'slimscroll':         ['bower_components/slimScroll/jquery.slimscroll.min.js'],
               'jquery-ui':          ['bower_components/jquery-ui/jquery-ui.min.js',
                                      'bower_components/jqueryui-touch-punch/jquery.ui.touch-punch.min.js'],
-              'swAlert':            ['bower_components/sweetalert/dist/sweetalert.css']
+              'swAlert':            ['bower_components/sweetalert/dist/sweetalert.css'],
+              'froala':             ['bower_components/froala/css/froala_editor.min.css',
+                                     'bower_components/froala/css/froala_editor.pkgd.min.css',
+                                     'bower_components/froala/css/froala_style.min.css']
             },
             // Angular modules scripts (name is module name to be injected)
             modules: [
