@@ -184,8 +184,6 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		DateTime dataLimite = new DateTime(dto.getDataLimite());
 		dataLimite = dataLimite.plusDays(1);
 		
-		System.out.println(dataLimite.isAfter(hoje));
-		
 		if(upm != null && dataLimite.isAfter(hoje)) {
 			dto.setParecerAutorizado(true);
 		}else {

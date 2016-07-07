@@ -309,6 +309,24 @@
                 $rootScope.$emit('oauth:error', response);
             });
     	};
+
+        this.gravarParecer = function(parecer, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/gravar-parecer',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: parecer
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(true);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
     }
 
     //pemsServiceError.$inject = ['SwAlert']

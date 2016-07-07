@@ -50,7 +50,10 @@
         });
 
         $scope.gravarParecer = function() {
-          console.log($scope.parecer);
+          console.log('Gravando paracer...');
+          pemsService.gravarParecer($scope.parecer, function(ret) {
+            console.log(ret);
+          });
         };  
 
         $scope.changeCor = function() {

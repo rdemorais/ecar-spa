@@ -35,4 +35,6 @@ public interface Monitoramento {
 	public void setUsuario(Usuario usuario);
 	public Date getDataLimite();
 	public void setDataLimite(Date dataLimite);
+	public Long getCodArel();
+	public void setCodArel(Long codArel);
 }

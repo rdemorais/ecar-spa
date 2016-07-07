@@ -22,6 +22,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	private Long coOePnsMi;
 	private String oePns;
 	
+	private Long codArel;
 	private Long codMi;
 	private Long codPi;
 	private Long codAtv;
@@ -61,6 +62,7 @@ public class ItemDto implements Comparable<ItemDto>{
 			Long coOePnsMi,
 			String oePns,
 			Date dataLimite,
+			Long codArel,
 			String parecer) {
 		super();
 		this.id = id;
@@ -90,9 +92,18 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.coOePnsMi = coOePnsMi;
 		this.oePns = oePns;
 		this.parecer = parecer;
+		this.codArel = codArel;
 		this.dataLimite = dataLimite;
 	}
 	
+	public Long getCodArel() {
+		return codArel;
+	}
+
+	public void setCodArel(Long codArel) {
+		this.codArel = codArel;
+	}
+
 	public Date getDataLimite() {
 		return dataLimite;
 	}
