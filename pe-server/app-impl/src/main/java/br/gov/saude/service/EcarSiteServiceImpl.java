@@ -12,6 +12,7 @@ import java.util.Map;
 
 import javax.transaction.Transactional;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.dao.EcarDao;
@@ -179,8 +180,13 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		ItemDto dto = ecarSiteDao.loadItem(filtro, estrutura);
 		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
 		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
+		DateTime hoje = new DateTime();
+		DateTime dataLimite = new DateTime(dto.getDataLimite());
+		dataLimite = dataLimite.plusDays(1);
 		
-		if(upm != null) {
+		System.out.println(dataLimite.isAfter(hoje));
+		
+		if(upm != null && dataLimite.isAfter(hoje)) {
 			dto.setParecerAutorizado(true);
 		}else {
 			dto.setParecerAutorizado(false);
