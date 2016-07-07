@@ -18,6 +18,9 @@
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
       return {
         restrict: 'E',
+        scope: {
+          conteudo: '='
+        },
         templateUrl: 'app/views/cached/parecer-view.html',
         controller: controller
       };
@@ -33,8 +36,10 @@
 
         $scope.parecer = {
           situacao: null,
-          cor: null
-        }
+          cor: null,
+          texto: $scope.conteudo,
+          codIett: pemsFilterService.getFiltros().codIett
+        };
 
         pemsService.listSituacoes(function(sits) {
           $scope.data.situacoes = sits;
@@ -43,6 +48,10 @@
         pemsService.listCores(function(cores) {
           $scope.data.cores = cores;
         });
+
+        $scope.gravarParecer = function() {
+          console.log($scope.parecer);
+        };  
 
         $scope.changeCor = function() {
           $scope.data.corSelecionada = $scope.parecer.cor.nome;
@@ -63,8 +72,6 @@
             $scope.data.corSelecionada = 'branco';
           }
         };
-
-        
       }
     }
 

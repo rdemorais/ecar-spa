@@ -54,6 +54,9 @@ public class MonitoramentoImpl implements Monitoramento {
 	@Column(name="nao_monitorado")
 	private String naoMonitorado;
 	
+	@Column(name="data_limite_parecer")
+	private Date dataLimite;
+	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=IettImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_iett", referencedColumnName = "cod_iett")
 	private Iett iett;
@@ -180,6 +183,14 @@ public class MonitoramentoImpl implements Monitoramento {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public Date getDataLimite() {
+		return dataLimite;
+	}
+
+	public void setDataLimite(Date dataLimite) {
+		this.dataLimite = dataLimite;
 	}
 	
 }

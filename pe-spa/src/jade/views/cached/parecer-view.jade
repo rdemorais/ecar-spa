@@ -17,8 +17,8 @@ div
 				option(value="", disabled) Selecione a situação
 	.row
 		.col-md-12
-			textArea(froala-ng, ng-model="data.os.sugestaoSolucao", language="pt_br",
+			textArea(froala-ng, ng-model="parecer.texto", language="pt_br",
 				 toolbar-buttons="['bold', 'italic', 'underline', 'align', 'insertLink', 'insertTable', 'quote']")
 	.row
 		.col-md-3
-			button.mr.btn.btn-success.btn-fw.mt-xl Gravar
+			button.mr.btn.btn-success.btn-fw.mt-xl(ng-click="gravarParecer()") Gravar

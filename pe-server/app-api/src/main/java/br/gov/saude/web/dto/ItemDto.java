@@ -1,5 +1,7 @@
 package br.gov.saude.web.dto;
 
+import java.util.Date;
+
 import br.gov.saude.model.Estrutura;
 
 public class ItemDto implements Comparable<ItemDto>{
@@ -27,6 +29,8 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String siglaPi;
 	private String siglaAtv;
 	private String parecer;
+	
+	private Date dataLimite;
 	
 	private boolean parecerAutorizado = false;
 	
@@ -56,6 +60,7 @@ public class ItemDto implements Comparable<ItemDto>{
 			String ppa,
 			Long coOePnsMi,
 			String oePns,
+			Date dataLimite,
 			String parecer) {
 		super();
 		this.id = id;
@@ -85,8 +90,17 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.coOePnsMi = coOePnsMi;
 		this.oePns = oePns;
 		this.parecer = parecer;
+		this.dataLimite = dataLimite;
 	}
 	
+	public Date getDataLimite() {
+		return dataLimite;
+	}
+
+	public void setDataLimite(Date dataLimite) {
+		this.dataLimite = dataLimite;
+	}
+
 	public Long getCoOePnsMi() {
 		return coOePnsMi;
 	}

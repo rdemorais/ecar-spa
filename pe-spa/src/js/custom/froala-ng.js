@@ -10,7 +10,8 @@
 	        require: '?ngModel',
 	        scope: {
 	        	language: '@',
-	        	toolbarButtons: '@'
+	        	toolbarButtons: '@',
+	        	ngModel: '='
 	        },
 	        controller: controller,
 	        link: link
@@ -33,6 +34,10 @@
 						var value = $element.froalaEditor('html.get', true);
 						ngModel.$setViewValue(value);
 					});
+
+					if(!ngModel.$isEmpty(ngModel.$viewValue)) {
+						$element.froalaEditor('html.set', ngModel.$viewValue);
+					}
 	      }
     	}
 })();

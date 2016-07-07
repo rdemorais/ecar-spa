@@ -24,6 +24,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.ParecerDto;
 import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.SituacaoDto;
 
@@ -36,6 +37,15 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
+	
+	@RequestMapping(value="/gravar-parecer", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse gravarParecer(@RequestBody ParecerDto parecer) {
+		logger.debug("Gravando parecer: " + parecer.toString());
+		
+		return EcarResponse.ok();
+	}
 	
 	@RequestMapping(value="/lista-cores", 
 			method=RequestMethod.POST)

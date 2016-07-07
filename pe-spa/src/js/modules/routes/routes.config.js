@@ -34,7 +34,7 @@
           abstract: true,
           templateUrl: Route.base('app.html'),
           resolve: {
-            _assets: Route.require('icons', 'toaster', 'animate', 'swAlert')
+            _assets: Route.require('icons', 'toaster', 'animate', 'swAlert', 'froala')
           }
         })
         .state('app.login', {

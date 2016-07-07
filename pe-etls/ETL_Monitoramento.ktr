@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;28 13&#x3a;54&#x3a;14.680</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;04 17&#x3a;12&#x3a;52.882</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;07 14&#x3a;29&#x3a;10.472</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -97,7 +97,7 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Campos monitoramento</from><to>Ult. parecer - N monitorado</to><enabled>N</enabled> </hop>
+  <hop> <from>Campos monitoramento</from><to>Ult. parecer - N monitorado</to><enabled>Y</enabled> </hop>
   <hop> <from>Atualiza monitoramento</from><to>Select Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Select Iett</from><to>Ordena Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Carrega Ietts</from><to>Monitoramento</to><enabled>Y</enabled> </hop>
@@ -111,8 +111,7 @@
   <hop> <from>Nao monitorados</from><to>Responsavel Cadastro</to><enabled>Y</enabled> </hop>
   <hop> <from>Responsavel Cadastro</from><to>Cor NM</to><enabled>Y</enabled> </hop>
   <hop> <from>Cor NM</from><to>Atualiza nao monitorado</to><enabled>Y</enabled> </hop>
-  <hop> <from>Monitoramento</from><to>Limpar Parecer</to><enabled>Y</enabled> </hop>
-  <hop> <from>Limpar Parecer</from><to>Campos monitoramento</to><enabled>Y</enabled> </hop>
+  <hop> <from>Monitoramento</from><to>Campos monitoramento</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Atualiza monitoramento</name>
@@ -229,6 +228,11 @@
         <name>cod_monitoramento</name>
         <rename>cod_monitoramento</rename>
         <update>N</update>
+      </value>
+      <value>
+        <name>data_limite_parecer</name>
+        <rename>data_limite_arli</rename>
+        <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
@@ -459,6 +463,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>data_limite_arli</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>parecer</name>
         <rename/>
         <length>-2</length>
@@ -481,8 +489,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>319</xloc>
-      <yloc>103</yloc>
+      <xloc>304</xloc>
+      <yloc>104</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -507,8 +515,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>30</xloc>
-      <yloc>103</yloc>
+      <xloc>74</xloc>
+      <yloc>104</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -624,7 +632,7 @@
            </partitioning>
     <connection>eCar 2016</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;aref.mes_aref as mes,&#xa;aref.ano_aref as ano,&#xa;aref.cod_exe,&#xa;arel.cod_cor,&#xa;cor.nome_cor,&#xa;cor.significado_cor,&#xa;arel.data_ult_manut_arel data_parecer,&#xa;arel.cod_usuultmanut_arel cod_usu,&#xa;arel.cod_sit,&#xa;sit.descricao_sit,&#xa;descricao_arel as parecer&#xa;from dbecardemas.tb_item_estrutura_iett item&#xa;inner join dbecardemas.tb_acomp_referencia_item_ari ari on item.cod_iett &#x3d; ari.cod_iett&#xa;inner join dbecardemas.tb_acomp_relatorio_arel arel on ari.cod_ari &#x3d; arel.cod_ari&#xa;inner join dbecardemas.tb_acomp_referencia_aref aref on aref.cod_aref &#x3d; ari.cod_aref&#xa;left join dbecardemas.tb_cor cor on cor.cod_cor &#x3d; arel.cod_cor&#xa;left join dbecardemas.tb_situacao_sit sit on sit.cod_sit &#x3d; arel.cod_sit&#xa;where ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and item.cod_iett &#x3d; &#x3f;&#xa;order by ano_aref, mes_aref</sql>
+    <sql>select &#xa;aref.mes_aref as mes,&#xa;aref.ano_aref as ano,&#xa;aref.cod_exe,&#xa;arel.cod_cor,&#xa;cor.nome_cor,&#xa;cor.significado_cor,&#xa;arel.data_ult_manut_arel data_parecer,&#xa;arel.cod_usuultmanut_arel cod_usu,&#xa;arel.cod_sit,&#xa;sit.descricao_sit,&#xa;arli.data_limite_arli,&#xa;descricao_arel as parecer&#xa;from dbecardemas.tb_item_estrutura_iett item&#xa;inner join dbecardemas.tb_acomp_referencia_item_ari ari on item.cod_iett &#x3d; ari.cod_iett&#xa;inner join dbecardemas.tb_acomp_relatorio_arel arel on ari.cod_ari &#x3d; arel.cod_ari&#xa;inner join dbecardemas.tb_acomp_referencia_aref aref on aref.cod_aref &#x3d; ari.cod_aref&#xa;inner join dbecardemas.tb_acomp_ref_item_limites_arli arli on ari.cod_ari &#x3d; arli.cod_ari&#xa;left join dbecardemas.tb_cor cor on cor.cod_cor &#x3d; arel.cod_cor&#xa;left join dbecardemas.tb_situacao_sit sit on sit.cod_sit &#x3d; arel.cod_sit&#xa;where ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and item.cod_iett &#x3d; &#x3f;&#xa;order by ano_aref, mes_aref</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -635,8 +643,8 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>133</xloc>
-      <yloc>103</yloc>
+      <xloc>177</xloc>
+      <yloc>104</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -871,51 +879,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>454</xloc>
       <yloc>104</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Limpar Parecer</name>
-    <type>RegexEval</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <script><![CDATA[<font[^>]*>(.+)<\/font[^>]*>]]></script>    <matcher>parecer</matcher>
-    <resultfieldname>font_matched</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>N</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>Y</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>parecer_clean</name>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>222</xloc>
-      <yloc>103</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

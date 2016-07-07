@@ -33,4 +33,6 @@ public interface Monitoramento {
 	public void setIett(Iett iett);
 	public Usuario getUsuario();
 	public void setUsuario(Usuario usuario);
+	public Date getDataLimite();
+	public void setDataLimite(Date dataLimite);
 }
