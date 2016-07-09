@@ -44,9 +44,13 @@ public class EcarRestApiController {
 	public EcarResponse gravarParecer(@RequestBody ParecerDto parecer) {
 		logger.debug("Gravando parecer: " + parecer.toString());
 		
-		ecarSiteService.gravarParecer(parecer);
-		
-		return EcarResponse.ok();
+		try {
+			ecarSiteService.gravarParecer(parecer);
+			
+			return EcarResponse.ok();
+		} catch (Exception e) {
+			return EcarResponse.error(e.getMessage());
+		}
 	}
 	
 	@RequestMapping(value="/lista-cores", 

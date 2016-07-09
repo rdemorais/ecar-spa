@@ -36,12 +36,12 @@ public class StatusServiceImpl implements StatusService{
 		Long count = 0L;
 		for (StatusDto statusP : statusPadrao) {
 			for (StatusDto statusDto : statusListDto) {
-				if(statusP.getNomeCor().equals(statusDto.getNomeCor())) {
+				if(statusP.getNomeCor().equalsIgnoreCase(statusDto.getNomeCor())) {
 					statusP.setCount(statusDto.getCount());
 					count += statusDto.getCount();
 				}
 				
-				if(statusP.getNomeCor().equals(statusNMDto.getNomeCor())) {
+				if(statusP.getNomeCor().equalsIgnoreCase(statusNMDto.getNomeCor())) {
 					statusP.setCount(statusNMDto.getCount());
 					count += statusNMDto.getCount();
 					break;

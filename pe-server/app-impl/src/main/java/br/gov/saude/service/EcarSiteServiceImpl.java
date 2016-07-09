@@ -74,6 +74,15 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		mon.setCor(cor);
 		mon.setSituacao(situacao);
 		
+		Long idUserLogado = (Long) controleAcessoService.usuarioLogadoId();
+		Long idUserItem = mon.getUsuario().getId();
+		
+		if(!idUserLogado.equals(idUserItem)) {
+			throw new AkulaServiceRuntimeException("Usuario logado eh direfente daquele que possui permissao no parecer!");
+		}
+		
+		ecarSiteDao.merge(mon);
+		
 	}
 	
 	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException {

@@ -209,13 +209,14 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("SELECT new br.gov.saude.web.dto.StatusDto('Branco', count(mon.iett)) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
+			hql.append("JOIN mon.cor cor ");
 			hql.append("WHERE mon.exercicio = :codExe ");
 			hql.append("AND mon.naoMonitorado = 'Y' ");
 			hql.append("AND iett.estrutura = :est ");
 			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
 				hql.append("AND iett.coOePns IS NOT NULL ");
 			}
-			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
+			hql.append("GROUP BY iett.estrutura, cor.significado, cor.nome, cor.id ");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", filtro.getCodExe());

@@ -321,7 +321,7 @@
                 if(ecarResponse.status == 'success') {
                     callback(true);
                 }else {
-                    //tratar erro
+                    console.log(ecarResponse.msg);
                 }
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);

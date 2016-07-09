@@ -52,6 +52,7 @@
 
         $scope.gravarParecer = function() {
           console.log('Gravando paracer...');
+          console.log($scope.parecer.codArel);
           pemsService.gravarParecer($scope.parecer, function(ret) {
             console.log(ret);
           });
