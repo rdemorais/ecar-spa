@@ -11,18 +11,8 @@ public interface Monitoramento {
 	public void setAno(String ano);
 	public Long getExercicio();
 	public void setExercicio(Long exercicio);
-	public Long getCodCor();
-	public void setCodCor(Long codCor);
-	public String getNomeCor();
-	public void setNomeCor(String nomeCor);
-	public String getSignificadoCor();
-	public void setSignificadoCor(String significadoCor);
 	public Date getDataParecer();
 	public void setDataParecer(Date dataParecer);
-	public Long getCodSit();
-	public void setCodSit(Long codSit);
-	public String getDescricaoSit();
-	public void setDescricaoSit(String descricaoSit);
 	public String getParecer();
 	public void setParecer(String parecer);
 	public String getUltimoParecer();
@@ -37,4 +27,8 @@ public interface Monitoramento {
 	public void setDataLimite(Date dataLimite);
 	public Long getCodArel();
 	public void setCodArel(Long codArel);
+	public Cor getCor();
+	public void setCor(Cor cor);
+	public Situacao getSituacao();
+	public void setSituacao(Situacao situacao);
 }

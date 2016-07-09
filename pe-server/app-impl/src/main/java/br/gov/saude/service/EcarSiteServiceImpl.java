@@ -20,9 +20,12 @@ import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.exc.AkulaServiceRuntimeException;
 import br.gov.saude.file.EcarFileSystem;
+import br.gov.saude.model.Cor;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
+import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
+import br.gov.saude.model.Situacao;
 import br.gov.saude.model.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.AnexoDto;
@@ -31,6 +34,7 @@ import br.gov.saude.web.dto.EtiquetaDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.web.dto.ParecerDto;
 import br.gov.saude.web.dto.SecretariaDto;import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
@@ -59,6 +63,18 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	public RelatorioExcelService relatorioExcelService;
+	
+	@Transactional
+	public void gravarParecer(ParecerDto dto) throws AkulaRuntimeException {
+		Monitoramento mon = ecarSiteDao.loadMonitoramento(dto.getCodArel());
+		Cor cor = ecarSiteDao.find(Cor.class, dto.getCor().getId());
+		Situacao situacao = ecarSiteDao.find(Situacao.class, dto.getSituacao().getId());
+		
+		mon.setParecer(dto.getTexto());
+		mon.setCor(cor);
+		mon.setSituacao(situacao);
+		
+	}
 	
 	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException {
 		return ecarSiteDao.loadSecretarias();

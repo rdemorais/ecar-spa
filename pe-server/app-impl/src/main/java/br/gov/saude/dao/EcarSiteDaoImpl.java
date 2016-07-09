@@ -3,12 +3,14 @@ package br.gov.saude.dao;
 import java.util.List;
 
 import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
 import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaDaoRuntimeException;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
+import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.UsuarioPermissaoMonitoramento;
@@ -21,6 +23,25 @@ import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
+	
+	public Monitoramento loadMonitoramento(Long codArel) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Monitoramento mon WHERE mon.codArel = :codArel ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("codArel", codArel);
+			
+			return (Monitoramento) q.getSingleResult();
+		} catch (NoResultException e) {
+			throw new AkulaDaoRuntimeException("Monitormento eh obrigatorio e nao foi encontrado com o codArel [" + codArel + "]", e);
+		} catch (NonUniqueResultException e) {
+			throw new AkulaDaoRuntimeException("Mais de um Monitoramento encontrado para codArel [" + codArel + "]", e);
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<CorDto> listCor() throws AkulaRuntimeException {
@@ -138,8 +159,9 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(mon.nomeCor, count(mon.codCor)) ");
+			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(cor.nome, count(cor.id)) ");
 			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.cor cor ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("WHERE mon.exercicio = :codExe ");
 			hql.append("AND iett.estrutura = :est ");
@@ -147,7 +169,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
 				hql.append("AND iett.coOePns IS NOT NULL ");
 			}
-			hql.append("GROUP BY iett.estrutura, mon.significadoCor, mon.nomeCor, mon.codCor ");
+			hql.append("GROUP BY iett.estrutura, cor.significado, cor.nome, cor.id ");
 			
 			Query q = em.createQuery(hql.toString());
 			q.setParameter("codExe", filtro.getCodExe());
@@ -212,8 +234,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			StringBuffer hql = new StringBuffer();
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
 			hql.append("iett.id, "); 
-			hql.append("LOWER(mon.nomeCor), ");
-			hql.append("mon.descricaoSit, ");
+			hql.append("LOWER(cor.nome), ");
+			hql.append("sit.descricao, ");
 			hql.append("iett.estrutura, ");
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
@@ -274,6 +296,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			}
 			
 			hql.append("FROM Monitoramento mon ");
+			hql.append("JOIN mon.cor cor ");
+			hql.append("JOIN mon.situacao sit ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("LEFT JOIN mon.usuario usu ");
 			
@@ -326,12 +350,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
 			hql.append("iett.id, "); 
-			if(nMonitorado) {
-				hql.append("'branco', ");
-			}else {
-				hql.append("LOWER(mon.nomeCor), ");
-			}
-			hql.append("mon.descricaoSit, ");
+			hql.append("LOWER(cor.nome), ");
+			hql.append("sit.descricao, ");
 			hql.append("iett.estrutura, ");
 			hql.append("mon.mes, ");
 			hql.append("mon.ano, ");
@@ -352,8 +372,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.codPpa, ");
 				hql.append("iett.coOePns, ");
 				hql.append("iett.oePns, ");
-				hql.append("-1L, ");
 				hql.append("current_date(), ");
+				hql.append("-1L, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -369,8 +389,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("-1L, ");
 				hql.append("'', ");
-				hql.append("-1L, ");
 				hql.append("current_date(), ");
+				hql.append("-1L, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -386,13 +406,15 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("'', ");
 				hql.append("-1L, ");
 				hql.append("'', ");
-				hql.append("-1L, ");
 				hql.append("current_date(), ");
+				hql.append("-1L, ");
 				hql.append("'') ");
 			}
 			
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
+			hql.append("JOIN mon.cor cor ");
+			hql.append("JOIN mon.situacao sit ");
 			hql.append("LEFT JOIN mon.usuario usu ");
 			if(filtro.getEtiquetas().size() > 0) {
 				hql.append("JOIN iett.etiquetas etq ");

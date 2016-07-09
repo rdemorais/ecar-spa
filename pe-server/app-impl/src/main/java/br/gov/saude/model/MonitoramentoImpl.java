@@ -27,24 +27,9 @@ public class MonitoramentoImpl implements Monitoramento {
 	@Column(name="cod_exe")
 	private Long exercicio;
 	
-	@Column(name="cod_cor")
-	private Long codCor;
-	
-	@Column(name="nome_cor")
-	private String nomeCor;
-	
-	@Column(name="significado_cor")
-	private String significadoCor;
-	
 	@Column(name="data_parecer")
 	private Date dataParecer;
 	
-	@Column(name="cod_sit")
-	private Long codSit;
-	
-	@Column(name="descricao_sit")
-	private String descricaoSit;
-
 	@Column(name="parecer")
 	private String parecer;
 	
@@ -67,6 +52,14 @@ public class MonitoramentoImpl implements Monitoramento {
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=UsuarioImpl.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
 	private Usuario usuario;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity=CorImpl.class, cascade=CascadeType.REFRESH)
+	@JoinColumn(name = "co_cor", referencedColumnName = "co_cor")
+	private Cor cor;
+	
+	@ManyToOne(fetch = FetchType.LAZY, targetEntity=SituacaoImpl.class, cascade=CascadeType.REFRESH)
+	@JoinColumn(name = "co_situacao", referencedColumnName = "co_situacao")
+	private Situacao situacao;
 
 	public Long getId() {
 		return id;
@@ -100,52 +93,12 @@ public class MonitoramentoImpl implements Monitoramento {
 		this.exercicio = exercicio;
 	}
 
-	public Long getCodCor() {
-		return codCor;
-	}
-
-	public void setCodCor(Long codCor) {
-		this.codCor = codCor;
-	}
-
-	public String getNomeCor() {
-		return nomeCor;
-	}
-
-	public void setNomeCor(String nomeCor) {
-		this.nomeCor = nomeCor;
-	}
-
-	public String getSignificadoCor() {
-		return significadoCor;
-	}
-
-	public void setSignificadoCor(String significadoCor) {
-		this.significadoCor = significadoCor;
-	}
-
 	public Date getDataParecer() {
 		return dataParecer;
 	}
 
 	public void setDataParecer(Date dataParecer) {
 		this.dataParecer = dataParecer;
-	}
-
-	public Long getCodSit() {
-		return codSit;
-	}
-
-	public void setCodSit(Long codSit) {
-		this.codSit = codSit;
-	}
-
-	public String getDescricaoSit() {
-		return descricaoSit;
-	}
-
-	public void setDescricaoSit(String descricaoSit) {
-		this.descricaoSit = descricaoSit;
 	}
 
 	public String getParecer() {
@@ -203,4 +156,21 @@ public class MonitoramentoImpl implements Monitoramento {
 	public void setCodArel(Long codArel) {
 		this.codArel = codArel;
 	}
+
+	public Cor getCor() {
+		return cor;
+	}
+
+	public void setCor(Cor cor) {
+		this.cor = cor;
+	}
+
+	public Situacao getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(Situacao situacao) {
+		this.situacao = situacao;
+	}
+	
 }

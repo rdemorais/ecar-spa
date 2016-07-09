@@ -19,7 +19,8 @@
       return {
         restrict: 'E',
         scope: {
-          conteudo: '='
+          conteudo: '=',
+          codArel: '='
         },
         templateUrl: 'app/views/cached/parecer-view.html',
         controller: controller
@@ -38,7 +39,7 @@
           situacao: null,
           cor: null,
           texto: $scope.conteudo,
-          codIett: pemsFilterService.getFiltros().codIett
+          codArel: $scope.codArel
         };
 
         pemsService.listSituacoes(function(sits) {

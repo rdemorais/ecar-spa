@@ -44,6 +44,8 @@ public class EcarRestApiController {
 	public EcarResponse gravarParecer(@RequestBody ParecerDto parecer) {
 		logger.debug("Gravando parecer: " + parecer.toString());
 		
+		ecarSiteService.gravarParecer(parecer);
+		
 		return EcarResponse.ok();
 	}
 	

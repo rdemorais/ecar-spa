@@ -4,7 +4,7 @@ public class ParecerDto {
 	private String texto;
 	private CorDto cor;
 	private SituacaoDto situacao;
-	private Long codIett;
+	private Long codArel;
 	
 	public String getTexto() {
 		return texto;
@@ -24,15 +24,14 @@ public class ParecerDto {
 	public void setSituacao(SituacaoDto situacao) {
 		this.situacao = situacao;
 	}
-	public Long getCodIett() {
-		return codIett;
+	public Long getCodArel() {
+		return codArel;
 	}
-	public void setCodIett(Long codIett) {
-		this.codIett = codIett;
+	public void setCodArel(Long codArel) {
+		this.codArel = codArel;
 	}
 	@Override
 	public String toString() {
-		return "ParecerDto [cor=" + cor + ", situacao=" + situacao + ", codIett=" + codIett + "]";
+		return "ParecerDto [texto=" + texto + ", cor=" + cor + ", situacao=" + situacao + ", codArel=" + codArel + "]";
 	}
-	
 }

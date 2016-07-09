@@ -5,6 +5,7 @@ import java.util.List;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
+import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.UsuarioPermissaoMonitoramento;
@@ -17,6 +18,7 @@ import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public interface EcarSiteDao extends Dao{
+	public Monitoramento loadMonitoramento(Long codArel) throws AkulaRuntimeException;
 	public List<CorDto> listCor() throws AkulaRuntimeException;
 	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException;
 	public UsuarioPermissaoMonitoramento loadUsuarioPermissaoMonitoramento(Long codUsu, Long codIett) throws AkulaRuntimeException;

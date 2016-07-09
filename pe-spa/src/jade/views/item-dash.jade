@@ -44,7 +44,7 @@
 				div(ng-if="!itemDash.item.parecerAutorizado")
 					scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
 				div(ng-if="itemDash.item.parecerAutorizado")
-					pems-parecer(ng-if="itemDash.item.parecerAutorizado", conteudo="itemDash.parecer")
+					pems-parecer(ng-if="itemDash.item.parecerAutorizado", conteudo="itemDash.parecer", cod-arel="itemDash.item.codArel")
 				hr
 				strong Anexos:
 				scrollable.pt(height=50)
