@@ -1,4 +1,4 @@
-package br.gov.saude.model;
+package br.gov.saude.model.ecar;
 
 public interface UsuarioPermissaoMonitoramento {
 	public Long getId();

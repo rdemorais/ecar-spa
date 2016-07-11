@@ -8,7 +8,7 @@ import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
-import br.gov.saude.model.UsuarioPermissaoMonitoramento;
+import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.web.dto.CorDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
