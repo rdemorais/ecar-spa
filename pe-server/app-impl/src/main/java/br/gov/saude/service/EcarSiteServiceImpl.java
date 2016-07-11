@@ -74,6 +74,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		mon.setParecer(dto.getTexto());
 		mon.setCor(cor);
 		mon.setSituacao(situacao);
+		mon.setUltimoParecer("Y");
+		mon.setNaoMonitorado("N");
 		
 		Long idUserLogado = (Long) controleAcessoService.usuarioLogadoId();
 		Long idUserItem = mon.getUsuario().getId();
@@ -81,6 +83,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		if(!idUserLogado.equals(idUserItem)) {
 			throw new AkulaServiceRuntimeException("Usuario logado eh direfente daquele que possui permissao no parecer!");
 		}
+		
+		ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
 		
 		ecarSiteDao.merge(mon);
 		
