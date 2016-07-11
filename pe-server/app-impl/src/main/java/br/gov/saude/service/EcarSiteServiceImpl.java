@@ -26,6 +26,7 @@ import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Situacao;
+import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
@@ -67,24 +68,21 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Transactional
 	public void gravarParecer(ParecerDto dto) throws AkulaRuntimeException {
+		Long codUser = (Long) controleAcessoService.usuarioLogadoId();
 		Monitoramento mon = ecarSiteDao.loadMonitoramento(dto.getCodArel());
 		Cor cor = ecarSiteDao.find(Cor.class, dto.getCor().getId());
 		Situacao situacao = ecarSiteDao.find(Situacao.class, dto.getSituacao().getId());
+		Usuario user = ecarSiteDao.find(Usuario.class, codUser);
 		
 		mon.setParecer(dto.getTexto());
 		mon.setCor(cor);
 		mon.setSituacao(situacao);
+		mon.setDataParecer(new Date());
+		mon.setUsuario(user);
 		mon.setUltimoParecer("Y");
 		mon.setNaoMonitorado("N");
 		
-		Long idUserLogado = (Long) controleAcessoService.usuarioLogadoId();
-		Long idUserItem = mon.getUsuario().getId();
-		
-		if(!idUserLogado.equals(idUserItem)) {
-			throw new AkulaServiceRuntimeException("Usuario logado eh direfente daquele que possui permissao no parecer!");
-		}
-		
-		ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
+		//ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
 		
 		ecarSiteDao.merge(mon);
 		

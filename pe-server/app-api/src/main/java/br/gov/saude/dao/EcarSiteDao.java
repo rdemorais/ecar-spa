@@ -24,6 +24,7 @@ public interface EcarSiteDao extends Dao{
 	public List<CorDto> listCor() throws AkulaRuntimeException;
 	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException;
 	public UsuarioPermissaoMonitoramento loadUsuarioPermissaoMonitoramento(Long codUsu, Long codIett) throws AkulaRuntimeException;
+	public Usuario loadUsuario(Long id) throws AkulaRuntimeException;
 	public Usuario loadUsuario(String email) throws AkulaRuntimeException;
 	public List<OeDto> listOEPns() throws AkulaRuntimeException;
 	public List<OE> loadOes() throws AkulaRuntimeException;

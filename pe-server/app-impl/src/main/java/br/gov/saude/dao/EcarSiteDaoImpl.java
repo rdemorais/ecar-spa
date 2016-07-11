@@ -27,7 +27,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	public void updateUltimoParecerENaoMonitorado(Long codIett) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
-			hql.append("UPDATE Monitoramento mon SET mon.naoMonitorado = 'N' AND mon.ultimoParecer = 'N' ");
+			hql.append("UPDATE Monitoramento mon SET mon.naoMonitorado = 'N', mon.ultimoParecer = 'N' ");
 			hql.append("WHERE mon.iett.id = :codIett ");
 			
 			Query q = em.createQuery(hql.toString());
@@ -127,6 +127,24 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			q.setParameter("codUsu", codUsu);
 			
 			return (UsuarioPermissaoMonitoramento) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	public Usuario loadUsuario(Long id) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Usuario u ");
+			hql.append("WHERE u.id = :id ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("id", id);
+			
+			return (Usuario) q.getSingleResult();
 		} catch (NoResultException e) {
 			return null;
 		} catch (Exception e) {
@@ -336,7 +354,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.cor cor ");
-			hql.append("JOIN mon.situacao sit ");
+			hql.append("LEFT JOIN mon.situacao sit ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("LEFT JOIN mon.usuario usu ");
 			
@@ -450,7 +468,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("JOIN mon.cor cor ");
-			hql.append("JOIN mon.situacao sit ");
+			hql.append("LEFT JOIN mon.situacao sit ");
 			hql.append("LEFT JOIN mon.usuario usu ");
 			if(filtro.getEtiquetas().size() > 0) {
 				hql.append("JOIN iett.etiquetas etq ");
@@ -496,7 +514,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			}
 			
 			if(filtro.getStatus().size() > 0) {
-				hql.append("AND mon.codCor IN :status ");
+				hql.append("AND cor.id IN :status ");
 			}
 			
 			if(filtro.getEtiquetas().size() > 0) {
