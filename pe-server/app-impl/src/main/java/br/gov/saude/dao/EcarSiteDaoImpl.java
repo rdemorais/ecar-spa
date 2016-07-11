@@ -13,7 +13,7 @@ import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
-import br.gov.saude.model.UsuarioPermissaoMonitoramento;
+import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.web.dto.CorDto;
 import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
@@ -23,6 +23,31 @@ import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
+	
+	public Monitoramento loadMonitoramento(Long codIett, String mes, String ano) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("SELECT mon FROM Monitoramento mon  ");
+			hql.append("JOIN mon.iett iett ");
+			hql.append("WHERE mon.mes = :mes ");
+			hql.append("AND mon.ano = :ano ");
+			hql.append("AND iett.id = :codIett ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("mes", mes);
+			q.setParameter("ano", ano);
+			q.setParameter("codIett", codIett);
+			
+			return (Monitoramento) q.getSingleResult();
+		} catch (NoResultException e) {
+			throw new AkulaDaoRuntimeException("Nenhum resultado encontrado para IETT [" + codIett + "] - Mes/Ano ["+mes+"/" + ano + "]", e);
+		} catch (NonUniqueResultException e) {
+			throw new AkulaDaoRuntimeException("Mais de um Monitoramento encontrado para para IETT [" + codIett + "] - Mes/Ano ["+mes+"/" + ano + "]", e);
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	public Monitoramento loadMonitoramento(Long codArel) throws AkulaRuntimeException {
 		try {
@@ -258,7 +283,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.coOePns, ");
 				hql.append("iett.oePns, ");
 				hql.append("mon.dataLimite, ");
-				hql.append("mon.codArel, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -275,7 +299,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.dataLimite, ");
-				hql.append("mon.codArel, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -292,7 +315,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.dataLimite, ");
-				hql.append("mon.codArel, ");
 				hql.append("mon.parecer) ");
 			}
 			
@@ -374,7 +396,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.coOePns, ");
 				hql.append("iett.oePns, ");
 				hql.append("current_date(), ");
-				hql.append("-1L, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -391,7 +412,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("current_date(), ");
-				hql.append("-1L, ");
 				hql.append("'') ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -408,7 +428,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("current_date(), ");
-				hql.append("-1L, ");
 				hql.append("'') ");
 			}
 			

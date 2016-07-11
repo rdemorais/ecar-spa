@@ -22,7 +22,6 @@ public class ItemDto implements Comparable<ItemDto>{
 	private Long coOePnsMi;
 	private String oePns;
 	
-	private Long codArel;
 	private Long codMi;
 	private Long codPi;
 	private Long codAtv;
@@ -31,7 +30,12 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String siglaAtv;
 	private String parecer;
 	
+	
+	//Informacoes do cilo vigente
 	private Date dataLimite;
+	private Long codArel;
+	private String mesCicloParecer;
+	private String anoCicloParecer;
 	
 	private boolean parecerAutorizado = false;
 	
@@ -62,7 +66,6 @@ public class ItemDto implements Comparable<ItemDto>{
 			Long coOePnsMi,
 			String oePns,
 			Date dataLimite,
-			Long codArel,
 			String parecer) {
 		super();
 		this.id = id;
@@ -92,7 +95,6 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.coOePnsMi = coOePnsMi;
 		this.oePns = oePns;
 		this.parecer = parecer;
-		this.codArel = codArel;
 		this.dataLimite = dataLimite;
 	}
 	
@@ -283,6 +285,22 @@ public class ItemDto implements Comparable<ItemDto>{
 
 	public void setParecerAutorizado(boolean parecerAutorizado) {
 		this.parecerAutorizado = parecerAutorizado;
+	}
+	
+	public String getMesCicloParecer() {
+		return mesCicloParecer;
+	}
+
+	public void setMesCicloParecer(String mesCicloParecer) {
+		this.mesCicloParecer = mesCicloParecer;
+	}
+
+	public String getAnoCicloParecer() {
+		return anoCicloParecer;
+	}
+
+	public void setAnoCicloParecer(String anoCicloParecer) {
+		this.anoCicloParecer = anoCicloParecer;
 	}
 
 	@Override

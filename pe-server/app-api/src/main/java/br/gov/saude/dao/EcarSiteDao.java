@@ -18,6 +18,7 @@ import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusDto;
 
 public interface EcarSiteDao extends Dao{
+	public Monitoramento loadMonitoramento(Long codIett, String mes, String ano) throws AkulaRuntimeException;
 	public Monitoramento loadMonitoramento(Long codArel) throws AkulaRuntimeException;
 	public List<CorDto> listCor() throws AkulaRuntimeException;
 	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException;

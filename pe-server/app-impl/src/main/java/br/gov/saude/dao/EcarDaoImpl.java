@@ -6,9 +6,28 @@ import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaRuntimeException;
+import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.web.dto.AnexoDto;
 
 public class EcarDaoImpl extends DaoImpl implements EcarDao{
+	
+	public AcompanhamentoAref loadUltimoCiclo() throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM AcompanhamentoAref aref ");
+			hql.append("ORDER BY aref.dataInicioAref DESC ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setMaxResults(1);
+			
+			return (AcompanhamentoAref) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage());
+		}
+	}
 	
 	@SuppressWarnings("unchecked")
 	public List<AnexoDto> listaAnexos(Long codExe) throws AkulaRuntimeException {

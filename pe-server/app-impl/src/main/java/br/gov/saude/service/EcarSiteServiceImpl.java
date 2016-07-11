@@ -26,7 +26,8 @@ import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Situacao;
-import br.gov.saude.model.UsuarioPermissaoMonitoramento;
+import br.gov.saude.model.ecar.AcompanhamentoAref;
+import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.AnexoDto;
 import br.gov.saude.web.dto.CorDto;
@@ -211,6 +212,12 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		
 		if(upm != null && dataLimite.isAfter(hoje)) {
 			dto.setParecerAutorizado(true);
+			AcompanhamentoAref aref = ecarDao.loadUltimoCiclo();
+			Monitoramento mon = ecarSiteDao.loadMonitoramento(dto.getId(), aref.getMes(), aref.getAno());
+			
+			dto.setCodArel(mon.getCodArel());
+			dto.setMesCicloParecer(aref.getMes());
+			dto.setAnoCicloParecer(aref.getAno());
 		}else {
 			dto.setParecerAutorizado(false);
 		}

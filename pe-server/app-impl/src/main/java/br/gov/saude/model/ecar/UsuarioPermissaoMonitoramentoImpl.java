@@ -5,8 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import br.gov.saude.model.UsuarioPermissaoMonitoramento;
-
 @Entity(name="UsuarioPermissaoMonitoramento")
 @Table(name="tb_item_estrut_usuario_iettus", schema="dbecardemas")
 public class UsuarioPermissaoMonitoramentoImpl implements UsuarioPermissaoMonitoramento{

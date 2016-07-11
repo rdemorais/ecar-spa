@@ -44,7 +44,11 @@
 				div(ng-if="!itemDash.item.parecerAutorizado")
 					scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
 				div(ng-if="itemDash.item.parecerAutorizado")
-					pems-parecer(ng-if="itemDash.item.parecerAutorizado", conteudo="itemDash.parecer", cod-arel="itemDash.item.codArel")
+					tabset
+						tab(heading='Último parecer')
+							scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
+						tab(heading="Emissão de parecer para o ciclo {{itemDash.item.mesCicloParecer}}/{{itemDash.item.anoCicloParecer}}")
+							pems-parecer(conteudo="itemDash.parecer", cod-arel="itemDash.item.codArel", data-limite="itemDash.item.dataLimite")
 				hr
 				strong Anexos:
 				scrollable.pt(height=50)

@@ -20,7 +20,8 @@
         restrict: 'E',
         scope: {
           conteudo: '=',
-          codArel: '='
+          codArel: '=',
+          dataLimite: '='
         },
         templateUrl: 'app/views/cached/parecer-view.html',
         controller: controller
