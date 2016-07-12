@@ -294,7 +294,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			StringBuffer hql = new StringBuffer();
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
 			hql.append("iett.id, "); 
-			hql.append("LOWER(cor.nome), ");
+			hql.append("cor.id, ");
+			hql.append("cor.nome, ");
+			hql.append("cor.significado, ");
+			hql.append("sit.id, ");
 			hql.append("sit.descricao, ");
 			hql.append("iett.estrutura, ");
 			hql.append("mon.mes, ");
@@ -406,8 +409,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			StringBuffer hql = new StringBuffer();
 			
 			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
-			hql.append("iett.id, "); 
-			hql.append("LOWER(cor.nome), ");
+			hql.append("iett.id, ");
+			hql.append("cor.id, ");
+			hql.append("cor.nome, ");
+			hql.append("cor.significado, ");
+			hql.append("sit.id, ");
 			hql.append("sit.descricao, ");
 			hql.append("iett.estrutura, ");
 			hql.append("mon.mes, ");

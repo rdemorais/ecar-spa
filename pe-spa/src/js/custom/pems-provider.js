@@ -15,6 +15,12 @@
 							swal( title, text, 'error' );
 						});
 					}
+
+					this.success = function(title, text) {
+						$rootScope.$evalAsync(function(){
+							swal( title, text, 'success' );
+						});
+					}
 				}
 				return new SwAlert();
 			}

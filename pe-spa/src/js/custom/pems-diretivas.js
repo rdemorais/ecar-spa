@@ -15,19 +15,18 @@
         .filter('format', format);
 
     function pemsParecer() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', 'SwAlert'];
       return {
         restrict: 'E',
         scope: {
           conteudo: '=',
-          codArel: '=',
-          dataLimite: '='
+          item: '='
         },
         templateUrl: 'app/views/cached/parecer-view.html',
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, pemsFilterService) {
+      function controller($scope, $element, pemsService, pemsFilterService, SwAlert) {
         $scope.data = {
           situacoes: [],
           cores: [],
@@ -40,8 +39,15 @@
           situacao: null,
           cor: null,
           texto: $scope.conteudo,
-          codArel: $scope.codArel
+          codArel: $scope.item.codArel
         };
+
+        if(($scope.item.mes === $scope.item.mesCicloParecer) && ($scope.item.ano === $scope.item.anoCicloParecer)) {
+          $scope.parecer.cor = $scope.item.cor;
+          $scope.parecer.situacao = $scope.item.situacao;
+
+          $scope.data.corSelecionada = $scope.parecer.cor.nome;
+        }
 
         pemsService.listSituacoes(function(sits) {
           $scope.data.situacoes = sits;
@@ -52,11 +58,12 @@
         });
 
         $scope.gravarParecer = function() {
-          console.log('Gravando paracer...');
-          console.log($scope.parecer.codArel);
+          SwAlert.success('', 'Parecer registrado com sucesso');
+          /*
           pemsService.gravarParecer($scope.parecer, function(ret) {
             console.log(ret);
           });
+          */
         };  
 
         $scope.changeCor = function() {

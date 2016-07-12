@@ -33,7 +33,7 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setCiclo(itemDto.getMes() + "/" + itemDto.getAno());
 		peExecutivo.setResponsavel(itemDto.getResponsavel());
 		peExecutivo.setOrgaoResp(itemDto.getOrgaoResp());
-		peExecutivo.setSituacao(itemDto.getSituacao());
+		peExecutivo.setSituacao(itemDto.getSituacao().getDescricao());
 		peExecutivo.setNivel(itemDto.getNivel());
 		peExecutivo.setParecer(itemDto.getParecer());
 		peExecutivo.setSiglaMi(itemDto.getSiglaMi());
@@ -41,7 +41,7 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setSiglaAtv(itemDto.getSiglaAtv());
 		peExecutivo.setEstruturaProduto(itemDto.getEstruturaProduto());
 		peExecutivo.setEstruturaSuperior(itemDto.getEstruturaSuperior());
-		peExecutivo.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getNomeCor() + ".gif"));
+		peExecutivo.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getCor().getNome() + ".gif"));
 		peExecutivo.setPpa(itemDto.getPpa());
 		peExecutivo.setPns(itemDto.getOePns());
 		
@@ -70,7 +70,7 @@ public class ConvertServiceImpl implements ConvertService{
 	
 	public ItemReport convertItem(ItemDto itemDto) throws IOException {
 		ItemReport itemReport = new ItemReport();
-		itemReport.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getNomeCor() + ".gif"));
+		itemReport.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getCor().getNome() + ".gif"));
 		itemReport.setOe(itemDto.getOe());
 		if(itemDto.getNivel().equals("meta") || itemDto.getNivel().equals("iniciativa")) {
 			itemReport.setSigla(itemDto.getSiglaMi());
@@ -83,7 +83,7 @@ public class ConvertServiceImpl implements ConvertService{
 		itemReport.setCiclo(itemDto.getMes() + "/" + itemDto.getAno());
 		itemReport.setResponsavel(itemDto.getResponsavel());
 		itemReport.setOrgaoResp(itemDto.getOrgaoResp());
-		itemReport.setSituacao(itemDto.getSituacao());
+		itemReport.setSituacao(itemDto.getSituacao().getDescricao());
 		itemReport.setNivel(itemDto.getNivel());
 		itemReport.setPpa(itemDto.getPpa());
 		itemReport.setPns(itemDto.getOePns());

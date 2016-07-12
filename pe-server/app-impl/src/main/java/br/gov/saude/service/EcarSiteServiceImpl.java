@@ -82,6 +82,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		mon.setUltimoParecer("Y");
 		mon.setNaoMonitorado("N");
 		
+		//Gravar parecer no eCar
+		
 		//ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
 		
 		ecarSiteDao.merge(mon);

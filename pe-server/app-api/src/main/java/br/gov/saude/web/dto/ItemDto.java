@@ -6,9 +6,9 @@ import br.gov.saude.model.Estrutura;
 
 public class ItemDto implements Comparable<ItemDto>{
 	private Long id;
-	private String nomeCor;
 	private String desc;
-	private String situacao;
+	private CorDto cor;
+	private SituacaoDto situacao;
 	private String nivel;
 	private String orgaoResp;
 	private String mes;
@@ -44,9 +44,12 @@ public class ItemDto implements Comparable<ItemDto>{
 	}
 	
 	public ItemDto(
-			Long id, 
-			String nomeCor, 
-			String situacao, 
+			Long id,
+			Long idCor,
+			String nomeCor,
+			String significadoCor,
+			Long idSit,
+			String descSit,
 			Estrutura estrutura, 
 			String mes, 
 			String ano,
@@ -69,11 +72,7 @@ public class ItemDto implements Comparable<ItemDto>{
 			String parecer) {
 		super();
 		this.id = id;
-		if(nomeCor == null) {
-			this.nomeCor = "branco";
-		}else {
-			this.nomeCor = nomeCor;
-		}
+		this.cor = new CorDto(idCor, nomeCor, significadoCor);
 		this.codMi = codMi;
 		this.codPi = codPi;
 		this.codAtv = codAtv;
@@ -81,7 +80,7 @@ public class ItemDto implements Comparable<ItemDto>{
 		this.siglaPi = siglaPi;
 		this.siglaAtv = siglaAtv;
 		this.desc = desc;
-		this.situacao = situacao;
+		this.situacao = new SituacaoDto(idSit, descSit);
 		this.estruturaProduto = estruturaProduto.name().toLowerCase();
 		this.nivel = estrutura.name().toLowerCase();
 		this.orgaoResp = orgaoResp;
@@ -176,24 +175,29 @@ public class ItemDto implements Comparable<ItemDto>{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getNomeCor() {
-		return nomeCor;
-	}
-	public void setNomeCor(String nomeCor) {
-		this.nomeCor = nomeCor;
-	}
+	
 	public String getDesc() {
 		return desc;
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
-	public String getSituacao() {
+	public CorDto getCor() {
+		return cor;
+	}
+
+	public void setCor(CorDto cor) {
+		this.cor = cor;
+	}
+
+	public SituacaoDto getSituacao() {
 		return situacao;
 	}
-	public void setSituacao(String situacao) {
+
+	public void setSituacao(SituacaoDto situacao) {
 		this.situacao = situacao;
 	}
+
 	public String getNivel() {
 		return nivel;
 	}
@@ -307,7 +311,7 @@ public class ItemDto implements Comparable<ItemDto>{
 	public String toString() {
 		return "ItemDto [oe=" + oe + ", siglaMi=" + siglaMi + ", siglaPi=" + siglaPi + ", siglaAtv=" + siglaAtv
 				+ ", codMi=" + codMi + ", codPi=" + codPi + ", codAtv=" + codAtv + ", estruturaSuperior="
-				+ estruturaSuperior + ", estruturaProduto=" + estruturaProduto + ", id=" + id + ", nomeCor=" + nomeCor
+				+ estruturaSuperior + ", estruturaProduto=" + estruturaProduto + ", id=" + id + ", cor=" + cor
 				+ ", desc=" + desc + ", situacao=" + situacao + ", nivel=" + nivel + ", orgaoResp=" + orgaoResp
 				+ ", mes=" + mes + ", ano=" + ano + ", oeShortName=" + oeShortName + ", responsavel=" + responsavel
 				+ ", parecer=-]";

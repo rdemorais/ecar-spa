@@ -18,11 +18,11 @@
 						|&nbsp;{{itemDash.item.responsavel}} - {{itemDash.item.orgaoResp}}
 					.col-md-3
 						strong Situação:
-						|&nbsp; {{itemDash.item.situacao}}
+						|&nbsp; {{itemDash.item.situacao.descricao}}
 					.col-md-2
 						strong Ciclo:
 						small {{itemDash.item.mes}}/{{itemDash.item.ano}}
-					.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.nomeCor+'-dash'")
+					.col-md-1.pull-right(ng-class="'img-status-'+itemDash.item.cor.nome+'-dash'")
 				.row
 					.col-md-2
 					.col-md-2
@@ -48,7 +48,7 @@
 						tab(heading='Último parecer')
 							scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
 						tab(heading="Emissão de parecer para o ciclo {{itemDash.item.mesCicloParecer}}/{{itemDash.item.anoCicloParecer}}")
-							pems-parecer(conteudo="itemDash.parecer", cod-arel="itemDash.item.codArel", data-limite="itemDash.item.dataLimite")
+							pems-parecer(conteudo="itemDash.parecer", item="itemDash.item")
 				hr
 				strong Anexos:
 				scrollable.pt(height=50)

@@ -12,7 +12,7 @@
           td
             .media
               a.pull-left(href='', ng-click="itemSelecionado(item.id)")
-                .media-object.img-responsive(ng-class="'img-status-parecer-'+item.nomeCor")
+                .media-object.img-responsive(ng-class="'img-status-parecer-'+item.cor.nome")
                 .small.text-muted {{item.mes}}/{{item.ano}}
               .media-body
                 h5.media-heading 
@@ -27,7 +27,7 @@
                   .col-md-3.pull-right
                     .text-muted
                       strong Situação:
-                      |&nbsp; {{item.situacao}}
+                      |&nbsp; {{item.situacao.descricao}}
                   .col-md-3
                     .text-muted
                       strong PPA:

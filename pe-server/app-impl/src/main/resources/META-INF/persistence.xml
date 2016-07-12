@@ -22,6 +22,7 @@
         <class>br.gov.saude.model.OEPnsImpl</class>
         <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramentoImpl</class>
         <class>br.gov.saude.model.ecar.AcompanhamentoArefImpl</class>
+        <class>br.gov.saude.model.ecar.AcompanhamentoArelImpl</class>
         
         
         <exclude-unlisted-classes/>
