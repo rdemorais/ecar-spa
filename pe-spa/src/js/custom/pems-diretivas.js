@@ -58,12 +58,14 @@
         });
 
         $scope.gravarParecer = function() {
-          SwAlert.success('', 'Parecer registrado com sucesso');
-          /*
+          
+          
           pemsService.gravarParecer($scope.parecer, function(ret) {
-            console.log(ret);
+            if(ret) {
+              SwAlert.success('', 'Parecer registrado com sucesso');
+            }
           });
-          */
+          
         };  
 
         $scope.changeCor = function() {

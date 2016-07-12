@@ -17,4 +17,8 @@ public interface AcompanhamentoArel {
 	public void setCodSit(Long codSit);
 	public Long getCodUsuarioUltimaManut();
 	public void setCodUsuarioUltimaManut(Long codUsuarioUltimaManut);
+	public Long getCodTpfa();
+	public void setCodTpfa(Long codTpfa);
+	public Long getCodTpfaUsuario();
+	public void setCodTpfaUsuario(Long codTpfaUsuario);
 }

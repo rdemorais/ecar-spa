@@ -28,6 +28,7 @@ import br.gov.saude.model.OE;
 import br.gov.saude.model.Situacao;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
+import br.gov.saude.model.ecar.AcompanhamentoArel;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.AnexoDto;
@@ -83,11 +84,19 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		mon.setNaoMonitorado("N");
 		
 		//Gravar parecer no eCar
+		AcompanhamentoArel arel = ecarDao.find(AcompanhamentoArel.class, dto.getCodArel());
+		arel.setCodCor(dto.getCor().getId());
+		arel.setCodSit(dto.getSituacao().getId());
+		arel.setCodUsuarioUltimaManut(codUser);
+		arel.setDataUltimaManutencao(new Date());
+		arel.setDescricaoArel(dto.getTexto());
+		arel.setIndLiberado("S");
+		arel.setCodTpfaUsuario(arel.getCodTpfa());
 		
 		//ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
 		
+		ecarDao.merge(arel);
 		ecarSiteDao.merge(mon);
-		
 	}
 	
 	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException {

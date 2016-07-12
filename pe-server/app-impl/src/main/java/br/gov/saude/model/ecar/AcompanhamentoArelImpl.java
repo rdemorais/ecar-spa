@@ -32,6 +32,12 @@ public class AcompanhamentoArelImpl implements AcompanhamentoArel{
 	
 	@Column(name="cod_usuultmanut_arel")
 	private Long codUsuarioUltimaManut;
+	
+	@Column(name="cod_tpfa")
+	private Long codTpfa;
+	
+	@Column(name="cod_tpfa_usuario")
+	private Long codTpfaUsuario;
 
 	public Long getId() {
 		return id;
@@ -87,5 +93,21 @@ public class AcompanhamentoArelImpl implements AcompanhamentoArel{
 
 	public void setCodUsuarioUltimaManut(Long codUsuarioUltimaManut) {
 		this.codUsuarioUltimaManut = codUsuarioUltimaManut;
+	}
+
+	public Long getCodTpfa() {
+		return codTpfa;
+	}
+
+	public void setCodTpfa(Long codTpfa) {
+		this.codTpfa = codTpfa;
+	}
+
+	public Long getCodTpfaUsuario() {
+		return codTpfaUsuario;
+	}
+
+	public void setCodTpfaUsuario(Long codTpfaUsuario) {
+		this.codTpfaUsuario = codTpfaUsuario;
 	}
 }
