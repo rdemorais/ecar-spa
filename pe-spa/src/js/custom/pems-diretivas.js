@@ -14,8 +14,8 @@
         .filter('propsFilter', propsFilter)
         .filter('format', format);
 
-    pemsParecer.$inject = ['$state'];
-    function pemsParecer($state) {
+    pemsParecer.$inject = ['$state', '$timeout'];
+    function pemsParecer($state, $timeout) {
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', 'SwAlert'];
       return {
         restrict: 'E',
@@ -33,7 +33,8 @@
           cores: [],
           corSelecionada: 'branco',
           corAlcancado: {id: 10, nome: 'azul', significado: 'Satisfatório'},
-          sitAlcancado: {id: 2, descricao: 'Alcançado'}
+          sitAlcancado: {id: 2, descricao: 'Alcançado'},
+          disabled: false
         };
 
         $scope.parecer = {
@@ -60,6 +61,8 @@
         });
 
         $scope.gravarParecer = function() {
+          $scope.data.disabled=true;
+
           $scope.item.situacao = $scope.parecer.situacao;
           $scope.item.cor = $scope.parecer.cor;
           $scope.item.parecer = $scope.parecer.texto;
@@ -68,7 +71,7 @@
           
           pemsService.gravarParecer($scope.parecer, function(ret) {
             if(ret) {
-
+              $scope.data.disabled=false;
               SwAlert.success('', 'Parecer registrado com sucesso');
             }
           });
