@@ -34,6 +34,8 @@
           corSelecionada: 'branco',
           corAlcancado: {id: 10, nome: 'azul', significado: 'Satisfatório'},
           sitAlcancado: {id: 2, descricao: 'Alcançado'},
+          corCancelado: {id: 11, nome: 'cinza', significado: 'Cancelado'},
+          sitCancelado: {id: 17, descricao: 'Cancelado'},
           disabled: false
         };
 
@@ -61,21 +63,28 @@
         });
 
         $scope.gravarParecer = function() {
-          $scope.data.disabled=true;
+          var emptyCor = angular.equals({}, $scope.parecer.cor);
+          var emptySituacao = angular.equals({}, $scope.parecer.situacao);
+          var emptyParecer = angular.equals('', $scope.parecer.texto);
 
-          $scope.item.situacao = $scope.parecer.situacao;
-          $scope.item.cor = $scope.parecer.cor;
-          $scope.item.parecer = $scope.parecer.texto;
-          $scope.item.mes = $scope.item.mesCicloParecer;
-          $scope.item.ano = $scope.item.anoCicloParecer;
-          
-          pemsService.gravarParecer($scope.parecer, function(ret) {
-            if(ret) {
-              $scope.data.disabled=false;
-              SwAlert.success('', 'Parecer registrado com sucesso');
-            }
-          });
-          
+          if(emptyCor || emptySituacao || emptyParecer) {
+            SwAlert.error('', 'Informe a Cor, a Situação e o Parecer, por favor.');
+          } else {
+            $scope.data.disabled=true;
+
+            $scope.item.situacao = $scope.parecer.situacao;
+            $scope.item.cor = $scope.parecer.cor;
+            $scope.item.parecer = $scope.parecer.texto;
+            $scope.item.mes = $scope.item.mesCicloParecer;
+            $scope.item.ano = $scope.item.anoCicloParecer;
+            
+            pemsService.gravarParecer($scope.parecer, function(ret) {
+              if(ret) {
+                $scope.data.disabled=false;
+                SwAlert.success('', 'Parecer registrado com sucesso');
+              }
+            });
+          }
         };  
 
         $scope.changeCor = function() {
@@ -84,7 +93,13 @@
           if($scope.parecer.cor.id == 10) {
             $scope.parecer.situacao = $scope.data.sitAlcancado;
           }else if($scope.parecer.situacao.id == 2){
-            $scope.parecer.situacao = null;
+            $scope.parecer.situacao = {};
+          }
+
+          if($scope.parecer.cor.id == 11) {
+            $scope.parecer.situacao = $scope.data.sitCancelado;
+          }else if($scope.parecer.situacao.id == 17){
+            $scope.parecer.situacao = {};
           }
         };
 
@@ -93,9 +108,18 @@
             $scope.parecer.cor = $scope.data.corAlcancado;
             $scope.data.corSelecionada = $scope.parecer.cor.nome;
           }else if($scope.parecer.cor.id == 10) {
-            $scope.parecer.cor = null;
+            $scope.parecer.cor = {};
             $scope.data.corSelecionada = 'branco';
           }
+
+          if($scope.parecer.situacao.id == 17) {
+            $scope.parecer.cor = $scope.data.corCancelado;
+            $scope.data.corSelecionada = $scope.parecer.cor.nome;
+          }else if($scope.parecer.cor.id == 11) {
+            $scope.parecer.cor = {};
+            $scope.data.corSelecionada = 'branco';
+          }
+
         };
       }
     }

@@ -364,6 +364,8 @@
                 filtros.pns = true;
             }
 
+            filtros.oes = [];
+
             $rootScope.$emit('pems:perspectivaAlterada');
         };
 
