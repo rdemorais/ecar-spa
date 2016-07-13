@@ -49,6 +49,7 @@ public class EcarRestApiController {
 			
 			return EcarResponse.ok();
 		} catch (Exception e) {
+			logger.error(e.getMessage(), e);
 			return EcarResponse.error(e.getMessage());
 		}
 	}
@@ -211,9 +212,9 @@ public class EcarRestApiController {
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (AkulaRuntimeException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 	
@@ -232,9 +233,9 @@ public class EcarRestApiController {
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (AkulaRuntimeException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
 	}
 	
@@ -253,12 +254,10 @@ public class EcarRestApiController {
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		} catch (AkulaRuntimeException e) {
-			e.printStackTrace();
+			logger.error(e.getMessage(), e);
 		}
         
 	}
-	
-	
 }

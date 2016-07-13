@@ -24,15 +24,17 @@ import br.gov.saude.web.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	
-	public void updateUltimoParecerENaoMonitorado(Long codIett) throws AkulaRuntimeException {
+	public void updateUltimoParecerENaoMonitorado(Long codIett, Long codArel) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			hql.append("UPDATE Monitoramento mon SET mon.naoMonitorado = 'N', mon.ultimoParecer = 'N' ");
 			hql.append("WHERE mon.iett.id = :codIett ");
+			hql.append("AND mon.codArel <> :codArel ");
 			
 			Query q = em.createQuery(hql.toString());
 			
 			q.setParameter("codIett", codIett);
+			q.setParameter("codArel", codArel);
 			
 			q.executeUpdate();
 		} catch (Exception e) {

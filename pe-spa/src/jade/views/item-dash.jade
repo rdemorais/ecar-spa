@@ -42,11 +42,11 @@
 					span(ng-if="itemDash.item.nivel == 'produto_intermediario'") {{itemDash.item.siglaPi}} - {{itemDash.item.desc}}
 					span(ng-if="itemDash.item.nivel == 'atividade'") {{itemDash.item.siglaAtv}} - {{itemDash.item.desc}}
 				div(ng-if="!itemDash.item.parecerAutorizado")
-					scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
+					scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 				div(ng-if="itemDash.item.parecerAutorizado")
 					tabset
 						tab(heading='Último parecer')
-							scrollable.pt(height=350, ng-bind-html="itemDash.parecer")
+							scrollable.pt(height=350, ng-bind-html="itemDash.item.parecer")
 						tab(heading="Emissão de parecer para o ciclo {{itemDash.item.mesCicloParecer}}/{{itemDash.item.anoCicloParecer}}")
 							pems-parecer(conteudo="itemDash.parecer", item="itemDash.item")
 				hr

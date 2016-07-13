@@ -14,7 +14,8 @@
         .filter('propsFilter', propsFilter)
         .filter('format', format);
 
-    function pemsParecer() {
+    pemsParecer.$inject = ['$state'];
+    function pemsParecer($state) {
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', 'SwAlert'];
       return {
         restrict: 'E',
@@ -36,15 +37,16 @@
         };
 
         $scope.parecer = {
-          situacao: null,
-          cor: null,
-          texto: $scope.conteudo,
+          situacao: {},
+          cor: {},
+          texto: '',
           codArel: $scope.item.codArel
         };
 
         if(($scope.item.mes === $scope.item.mesCicloParecer) && ($scope.item.ano === $scope.item.anoCicloParecer)) {
           $scope.parecer.cor = $scope.item.cor;
           $scope.parecer.situacao = $scope.item.situacao;
+          $scope.parecer.texto = $scope.conteudo;
 
           $scope.data.corSelecionada = $scope.parecer.cor.nome;
         }
@@ -58,10 +60,15 @@
         });
 
         $scope.gravarParecer = function() {
-          
+          $scope.item.situacao = $scope.parecer.situacao;
+          $scope.item.cor = $scope.parecer.cor;
+          $scope.item.parecer = $scope.parecer.texto;
+          $scope.item.mes = $scope.item.mesCicloParecer;
+          $scope.item.ano = $scope.item.anoCicloParecer;
           
           pemsService.gravarParecer($scope.parecer, function(ret) {
             if(ret) {
+
               SwAlert.success('', 'Parecer registrado com sucesso');
             }
           });

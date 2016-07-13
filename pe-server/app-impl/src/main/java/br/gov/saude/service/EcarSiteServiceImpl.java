@@ -93,7 +93,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		arel.setIndLiberado("S");
 		arel.setCodTpfaUsuario(arel.getCodTpfa());
 		
-		//ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId());
+		ecarSiteDao.updateUltimoParecerENaoMonitorado(mon.getIett().getId(), mon.getCodArel());
 		
 		ecarDao.merge(arel);
 		ecarSiteDao.merge(mon);
