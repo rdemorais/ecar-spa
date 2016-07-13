@@ -12,7 +12,20 @@ WITH (
 );
 ALTER TABLE dbsitedemas.tb_situacao
   OWNER TO sa_ecar;
-  
+
+CREATE TABLE dbsitedemas.tb_cor
+(
+  co_cor bigint NOT NULL,
+  no_cor character varying,
+  ds_significado_cor character varying,
+  CONSTRAINT co_cor_pk PRIMARY KEY (co_cor)
+)
+WITH (
+  OIDS=FALSE
+);
+ALTER TABLE dbsitedemas.tb_cor
+  OWNER TO sa_ecar;
+
 CREATE SEQUENCE dbsitedemas.cod_monitoramento_seq
   INCREMENT 1
   MINVALUE 1
@@ -195,28 +208,31 @@ ALTER TABLE dbsitedemas.tb_etiqueta
 
 CREATE TABLE dbsitedemas.tb_monitoramento
 (
-  cod_iett bigint NOT NULL,
+  cod_iett bigint,
   mes character varying(2),
   ano character varying(4),
   cod_exe bigint,
-  cod_cor bigint,
-  nome_cor character varying(20),
-  significado_cor character varying(20),
-  data_parecer date,
+  co_cor bigint,
+  data_parecer timestamp without time zone,
   cod_usu bigint,
-  cod_sit bigint,
-  descricao_sit text,
+  co_situacao bigint,
   parecer text,
-  ultimo_parecer character varying,
-  nao_monitorado character varying,
-  cod_monitoramento bigint NOT NULL,
-  CONSTRAINT cod_monitoramento_pk PRIMARY KEY (cod_monitoramento),
-  CONSTRAINT cod_iett_fk FOREIGN KEY (cod_iett)
+  ultimo_parecer text,
+  nao_monitorado text,
+  cod_monitoramento double precision NOT NULL,
+  data_limite_parecer timestamp without time zone,
+  cod_arel bigint,
+  CONSTRAINT co_monitoramento_pk PRIMARY KEY (cod_monitoramento),
+  CONSTRAINT co_cor_fk FOREIGN KEY (co_cor)
+      REFERENCES dbsitedemas.tb_cor (co_cor) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT co_iett_fk FOREIGN KEY (cod_iett)
       REFERENCES dbsitedemas.tb_iett (cod_iett) MATCH SIMPLE
       ON UPDATE NO ACTION ON DELETE NO ACTION,
-  CONSTRAINT cod_usu_fk FOREIGN KEY (cod_usu)
-      REFERENCES dbsitedemas.tb_usuario_usu (co_usuario) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+  CONSTRAINT co_situacao_fk FOREIGN KEY (co_situacao)
+      REFERENCES dbsitedemas.tb_situacao (co_situacao) MATCH SIMPLE
+      ON UPDATE NO ACTION ON DELETE NO ACTION,
+  CONSTRAINT cod_arel_uk UNIQUE (cod_arel)
 )
 WITH (
   OIDS=FALSE
