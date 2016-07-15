@@ -38,6 +38,7 @@
 					});
 
 	      	$timeout(function() {
+	      		//TODO Inserir texto padrao: Sit, Pontos, Reco
 	      		var cleredHtml = $element.froalaEditor('clean.html', ngModel.$viewValue, ['font', 'fontFamily', 'font-family']);
 	      		$element.froalaEditor('html.set', ngModel.$viewValue);
 	      	});

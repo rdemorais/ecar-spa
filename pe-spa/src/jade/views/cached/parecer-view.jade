@@ -9,7 +9,7 @@ div
 				select.form-control(ng-model="parecer.cor", 
 						ng-options="cor as cor.significado for cor in data.cores track by cor.id",
 						ng-change="changeCor()")
-					option(value="", disabled) Selecione a cor
+					option(value="", disabled) Selecione o status
 		.col-md-3.pull-right
 			select.form-control(ng-model="parecer.situacao",
 					ng-options="sit as sit.descricao for sit in data.situacoes track by sit.id",
@@ -19,6 +19,26 @@ div
 		.col-md-12
 			textArea(froala-ng, ng-model="parecer.texto", language="pt_br",
 				 toolbar-buttons="['bold', 'italic', 'underline', 'align', 'insertLink', 'insertTable', 'quote']")
+	.row
+		.col-md-12.mt
+			.row
+				.col-md-5
+					h4 Incluir anexos
+			.row.mt
+				.col-md-12
+					div.clickable.drop-box(ngf-select="", ngf-drop="", ng-model="data.file", 
+						ngf-drag-over-class="'dragover'", ngf-multiple="true", ngf-allow-dir="false", 
+						accept="image/*,application/pdf", ngf-pattern="'image/*,application/pdf'", ngf-max-files="10")
+						|Clique ou arraste seus anexos para este espaço
+			.row.mt
+				.col-md-12
+					.row
+						.col-md-5
+							h4 Lista de novos anexos
+					.row
+						.col-md-12
+							ul
+								li(ng-repeat="f in data.files") {{f.name}}
 	.row
 		.col-md-3
 			button.mr.btn.btn-success.btn-fw.mt-xl(ng-click="gravarParecer()", ng-disabled="data.disabled") Gravar

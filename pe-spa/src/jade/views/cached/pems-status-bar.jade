@@ -1,13 +1,13 @@
 .row(ng-init="hpanel = [true, false, false, false]")
   .col-md-4
     .row.row-flush.text-center.text-muted.m0
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [true, false, false, false]", ng-class="{'bg-meta': hpanel[0]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", tooltip="Metas", ng-click="hpanel = [true, false, false, false]", ng-class="{'bg-meta': hpanel[0]}")
         em.fa.fa-bullseye.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, true, false, false]", ng-class="{'bg-iniciativa': hpanel[1]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", tooltip="Iniciativas", ng-click="hpanel = [false, true, false, false]", ng-class="{'bg-iniciativa': hpanel[1]}")
         em.fa.fa-cogs.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, true, false]", ng-class="{'bg-produto': hpanel[2]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", tooltip="Produtos Intermediários", ng-click="hpanel = [false, false, true, false]", ng-class="{'bg-produto': hpanel[2]}")
         em.fa.fa-tasks.fa-2x.mv
-      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", ng-click="hpanel = [false, false, false, true]", ng-class="{'bg-atividade': hpanel[3]}")
+      .col-xs-3.col-md-6.bb.br.pv-xxl.clickable(ripple="", tooltip="Atividades", ng-click="hpanel = [false, false, false, true]", ng-class="{'bg-atividade': hpanel[3]}")
         em.fa.fa-pencil-square-o.fa-2x.mv    
   .col-md-8(ng-if="hpanel[0]")
     .row.row-table

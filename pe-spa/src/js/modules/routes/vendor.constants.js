@@ -31,7 +31,8 @@
               {name: 'xeditable',                 files: ['bower_components/angular-xeditable/dist/js/xeditable.js',
                                                           'bower_components/angular-xeditable/dist/css/xeditable.css']},
               {name: 'ui.select',                 files: ['bower_components/ui-select/dist/select.js',
-                                                          'bower_components/ui-select/dist/select.css']}
+                                                          'bower_components/ui-select/dist/select.css']},
+              {name: 'ngFileUpload',      files: ['bower_components/ng-file-upload-bower-12.0.4/ng-file-upload.min.js']}
             ]
 
         });

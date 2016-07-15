@@ -2,6 +2,8 @@ package br.gov.saude.service;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.web.dto.AnexoDto;
@@ -16,6 +18,7 @@ import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public interface EcarSiteService {
+	public void gravarUpload(MultipartFile file, String nomeFile, Long codIett, Long codArel) throws AkulaRuntimeException;
 	public void gravarParecer(ParecerDto dto) throws AkulaRuntimeException;
 	public List<SecretariaDto> loadSecretarias() throws AkulaRuntimeException;
 	public byte[] gerarRelatorioExcel(FiltroDto filtro) throws AkulaRuntimeException;

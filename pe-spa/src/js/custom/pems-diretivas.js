@@ -14,8 +14,8 @@
         .filter('propsFilter', propsFilter)
         .filter('format', format);
 
-    pemsParecer.$inject = ['$state', '$timeout'];
-    function pemsParecer($state, $timeout) {
+    pemsParecer.$inject = ['$state', '$timeout', 'Upload', '$rootScope'];
+    function pemsParecer($state, $timeout, Upload, $rootScope) {
       controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', 'SwAlert'];
       return {
         restrict: 'E',
@@ -36,8 +36,17 @@
           sitAlcancado: {id: 2, descricao: 'Alcançado'},
           corCancelado: {id: 11, nome: 'cinza', significado: 'Cancelado'},
           sitCancelado: {id: 17, descricao: 'Cancelado'},
-          disabled: false
+          disabled: false,
+          files: new Array(),
+          file: new Object()
         };
+
+        $scope.$watch('data.file', function(newValue, oldValue) {
+          var file = $scope.data.file[0];
+          if(file !== undefined) {
+            $scope.data.files.push(file);
+          }
+        });
 
         $scope.parecer = {
           situacao: {},
@@ -68,7 +77,7 @@
           var emptyParecer = angular.equals('', $scope.parecer.texto);
 
           if(emptyCor || emptySituacao || emptyParecer) {
-            SwAlert.error('', 'Informe a Cor, a Situação e o Parecer, por favor.');
+            SwAlert.error('', 'Informe o Status, a Situação e o Parecer.');
           } else {
             $scope.data.disabled=true;
 
@@ -80,7 +89,29 @@
             
             pemsService.gravarParecer($scope.parecer, function(ret) {
               if(ret) {
+                var files = $scope.data.files;
+
+                if(files && files.length) {
+
+                }
                 $scope.data.disabled=false;
+
+                for (var i = 0; i < files.length; i++) {
+                  var f = files[i];
+                  Upload.upload({
+                    url: $rootScope.app.baseUrl + '/upload',
+                    data: {
+                      file: f, 
+                      nomeFile: f.name,
+                      codIett: $scope.item.id,
+                      codArel: $scope.parecer.codArel
+                    }
+                  }).then(function(response) {
+                    console.log(response);
+                  });
+                  
+                };
+
                 SwAlert.success('', 'Parecer registrado com sucesso');
               }
             });

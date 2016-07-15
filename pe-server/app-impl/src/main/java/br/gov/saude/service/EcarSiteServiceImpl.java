@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.multipart.MultipartFile;
 
 import br.gov.saude.dao.EcarDao;
 import br.gov.saude.dao.EcarSiteDao;
@@ -29,6 +30,8 @@ import br.gov.saude.model.Situacao;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.AcompanhamentoArel;
+import br.gov.saude.model.ecar.IettAnexo;
+import br.gov.saude.model.ecar.IettAnexoImpl;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.report.EcarReport;
 import br.gov.saude.web.dto.AnexoDto;
@@ -38,7 +41,8 @@ import br.gov.saude.web.dto.FiltroDto;
 import br.gov.saude.web.dto.ItemDto;
 import br.gov.saude.web.dto.OeDto;
 import br.gov.saude.web.dto.ParecerDto;
-import br.gov.saude.web.dto.SecretariaDto;import br.gov.saude.web.dto.SituacaoDto;
+import br.gov.saude.web.dto.SecretariaDto;
+import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusBarDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
@@ -66,6 +70,28 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	public RelatorioExcelService relatorioExcelService;
+	
+	@Transactional
+	public void gravarUpload(MultipartFile file, String nomeFile, Long codIett, Long codArel) throws AkulaRuntimeException {
+		try {
+			Long userId = (Long) controleAcessoService.usuarioLogadoId();
+			IettAnexo anexo = new IettAnexoImpl();
+			
+			anexo.setArquivo(file.getBytes());
+			anexo.setCodIett(codIett);
+			anexo.setCodArel(codArel);
+			anexo.setCodUta(5L);
+			anexo.setDataInclusao(new Date());
+			anexo.setIndAtivo("S");
+			anexo.setNomeOriginal(nomeFile);
+			anexo.setTamanho(file.getSize());
+			anexo.setCodUsu(userId);
+			
+			ecarDao.create(anexo);
+		} catch (IOException e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	@Transactional
 	public void gravarParecer(ParecerDto dto) throws AkulaRuntimeException {

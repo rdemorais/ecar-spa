@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 
 import br.gov.saude.exc.AkulaDaoRuntimeException;
 import br.gov.saude.exc.AkulaRuntimeException;
@@ -15,17 +16,36 @@ public class DaoImpl implements Dao{
 
 	@Override
 	public void create(Object o) throws AkulaRuntimeException {
-		
+		try {
+			em.persist(o);
+			em.flush();
+		} catch (PersistenceException e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e, o);
+		}
 	}
 
 	@Override
 	public Object merge(Object o) throws AkulaRuntimeException {
-		return null;
+		try {
+			Object merged = em.merge(o);
+			em.flush();
+			return merged;
+		} catch (RuntimeException e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e, o);
+		}
 	}
 
 	@Override
 	public void remove(Object o) throws AkulaRuntimeException {
-		
+		try {
+			Object attEnt = em.merge(o);
+			em.remove(attEnt);
+			em.flush();
+		} catch (PersistenceException e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e, o);
+		} catch (IllegalArgumentException il) {
+			throw new AkulaDaoRuntimeException(il.getMessage(), il, o);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

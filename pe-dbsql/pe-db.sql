@@ -1,3 +1,14 @@
+CREATE SEQUENCE dbecardemas.item_anexo_seq
+  INCREMENT 1
+  MINVALUE 1
+  MAXVALUE 9223372036854775807
+  START 1000
+  CACHE 1;
+ALTER TABLE dbecardemas.item_anexo_seq
+  OWNER TO sa_ecar;
+COMMENT ON SEQUENCE dbecardemas.item_anexo_seq
+  IS 'Sequencia a ser usada pelo PEMS para gravar anexos na tabela tb_item_estrut_upload_iettup.';
+
 CREATE SCHEMA dbsitedemas
   AUTHORIZATION sa_ecar;
 

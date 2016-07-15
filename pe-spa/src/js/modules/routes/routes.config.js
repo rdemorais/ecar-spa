@@ -66,7 +66,7 @@
           url: '/item-dash',
           templateUrl: Route.base('item-dash.html'),
           resolve: {
-            assets: Route.require('slimscroll')
+            assets: Route.require('slimscroll', 'ngFileUpload')
           }
         })
     }
