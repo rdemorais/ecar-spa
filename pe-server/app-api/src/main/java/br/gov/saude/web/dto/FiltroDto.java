@@ -7,7 +7,9 @@ public class FiltroDto {
 	private boolean pns = false;
 	private boolean ppa = false;
 	private boolean meta = false;
+	private boolean minhaVisao = false;
 	private boolean iniciativa = false;
+	private Long codUsu;
 	private List<Long> oes = new ArrayList<Long>();
 	private List<Long> status = new ArrayList<Long>();
 	private List<Long> etiquetas = new ArrayList<Long>();
@@ -18,6 +20,18 @@ public class FiltroDto {
 	private String ano;
 	private String nivel;
 	
+	public Long getCodUsu() {
+		return codUsu;
+	}
+	public void setCodUsu(Long codUsu) {
+		this.codUsu = codUsu;
+	}
+	public boolean isMinhaVisao() {
+		return minhaVisao;
+	}
+	public void setMinhaVisao(boolean minhaVisao) {
+		this.minhaVisao = minhaVisao;
+	}
 	public boolean isPns() {
 		return pns;
 	}

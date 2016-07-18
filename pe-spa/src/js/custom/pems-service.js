@@ -342,6 +342,7 @@
             pns: false,
             ppa: false,
             meta: false,
+            minhaVisao: false,
             iniciativa: false,
             status: [],
             oes: [],
@@ -402,6 +403,10 @@
 
         this.setIniciativa = function(iniciativa) {
             filtros.iniciativa = iniciativa;
+        };
+
+        this.setMinhaVisao = function(mv) {
+            filtros.minhaVisao = mv;
         };
 
         this.setStatusFilter = function(status) {

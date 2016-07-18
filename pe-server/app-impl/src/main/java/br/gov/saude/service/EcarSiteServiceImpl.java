@@ -266,6 +266,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Transactional
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		filtro.setCodUsu(idUser);
+		
 		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false);
 		List<ItemDto> nMonitorados = ecarSiteDao.loadListaItens(filtro, estrutura, true);
 		

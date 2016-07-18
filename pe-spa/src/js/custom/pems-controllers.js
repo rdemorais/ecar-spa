@@ -38,7 +38,8 @@
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
-            iniciativa: pemsFilterService.getFiltros().iniciativa
+            iniciativa: pemsFilterService.getFiltros().iniciativa,
+            minhaVisao: pemsFilterService.getFiltros().minhaVisao
         };
 
         $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
@@ -47,6 +48,7 @@
             pemsFilterService.setPpa($scope.filtro.ppa);
             pemsFilterService.setMeta($scope.filtro.meta);
             pemsFilterService.setIniciativa($scope.filtro.iniciativa);
+            pemsFilterService.setMinhaVisao($scope.filtro.minhaVisao);
 
             $state.go('app.lista-itens');
         };
@@ -61,14 +63,11 @@
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
-            iniciativa: pemsFilterService.getFiltros().iniciativa
+            iniciativa: pemsFilterService.getFiltros().iniciativa,
+            minhaVisao: pemsFilterService.getFiltros().minhaVisao
         };
 
         $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
-
-        $scope.$watch($scope.persp, function(newValue, oldValue) {
-
-        });
 
         $scope.gerarRelatorioGerencial = function() {
           pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());
@@ -78,6 +77,7 @@
             pemsFilterService.setPpa($scope.filtro.ppa);
             pemsFilterService.setMeta($scope.filtro.meta);
             pemsFilterService.setIniciativa($scope.filtro.iniciativa);
+            pemsFilterService.setMinhaVisao($scope.filtro.minhaVisao);
 
             $scope.$broadcast('pems:pesquisar-lista');
         }
