@@ -38,9 +38,11 @@
 					});
 
 	      	$timeout(function() {
-	      		//TODO Inserir texto padrao: Sit, Pontos, Reco
 	      		var cleredHtml = $element.froalaEditor('clean.html', ngModel.$viewValue, ['font', 'fontFamily', 'font-family']);
-	      		$element.froalaEditor('html.set', ngModel.$viewValue);
+	      		if(cleredHtml == '') {
+	      			cleredHtml = '<strong>Situa&ccedil;&atilde;o Atual</strong><br><i>[escreva aqui]</i><br><br><strong>Pontos Cr&iacute;ticos</strong><br><i>[escreva aqui]</i><br><br><strong>Recomenda&ccedil;&otilde;es</strong><br><i>[escreva aqui]</i>';
+	      		}
+	      		$element.froalaEditor('html.set', cleredHtml);
 	      	});
 	      }
     	}
