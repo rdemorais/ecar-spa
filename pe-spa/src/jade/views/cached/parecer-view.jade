@@ -38,7 +38,11 @@ div
 					.row
 						.col-md-12
 							ul
-								li(ng-repeat="f in data.files") {{f.name}}
+								li(ng-repeat="f in data.files") 
+									|{{f.name}}
+									|&nbsp;
+									a(href="", ng-click="excluirAnexo(f)")
+										i.fa.fa-trash.text-danger
 	.row
 		.col-md-3
 			button.mr.btn.btn-success.btn-fw.mt-xl(ng-click="gravarParecer()", ng-disabled="data.disabled") Gravar

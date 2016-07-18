@@ -71,6 +71,13 @@
           $scope.data.cores = cores;
         });
 
+        $scope.excluirAnexo = function(f) {
+          var indexOf = $scope.data.files.indexOf(f);
+          if(indexOf != -1) {
+            $scope.data.files.splice(indexOf, 1);
+          }
+        };
+
         $scope.gravarParecer = function() {
           var emptyCor = angular.equals({}, $scope.parecer.cor);
           var emptySituacao = angular.equals({}, $scope.parecer.situacao);
