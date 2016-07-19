@@ -22,7 +22,11 @@ container.container-sm
         .panel-body(ng-if="data.verificado")
           |Olá
           strong {{data.nomeUsuario}},
-          |&nbsp;agora informe sua nova senha nos campos abaixo para concluir o procedimento.
+          |&nbsp;agora informe sua nova senha (mínimo de 6 caracteres) nos campos abaixo para concluir o procedimento.
+          br
+          br
+          |Logo que o sistema concluir a alteração da senha, você será redirecionado automaticamente para a
+          |página inicial do PEMS.
           form.form-validate(role='form', name="frmTrocaSenha").mb-lg.p
             .row
               .form-group.has-feedback.mb
@@ -30,7 +34,8 @@ container.container-sm
                   placeholder='Sua nova senha', 
                   autocomplete="off", 
                   ng-model="data.senha1", 
-                  required='')
+                  required=''
+                  ng-minlength="6")
                 span.fa.fa-key.form-control-feedback.text-muted
               br
               .form-group.has-feedback.mb
@@ -39,7 +44,8 @@ container.container-sm
                   autocomplete="off", 
                   ng-model="data.senha2", 
                   required='',
-                  ui-validate="'$value==data.senha1'")
+                  ui-validate="'$value==data.senha1'"
+                  ng-minlength="6")
                 span.fa.fa-key.form-control-feedback.text-muted
               .form-group
                 button.btn.btn-block.btn-info.mb(type='button', ng-click="trocar()", ng-disabled="frmTrocaSenha.$invalid") Alterar e entrar
