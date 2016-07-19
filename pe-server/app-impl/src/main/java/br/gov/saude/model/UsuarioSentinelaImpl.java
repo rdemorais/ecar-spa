@@ -21,6 +21,12 @@ public class UsuarioSentinelaImpl implements UsuarioSentinela {
 	
 	@Column(name="emailusuario")
 	private String emailUsuario;
+	
+	@Column(name="nomeusuario")
+	private String nomeUsuario;
+	
+	@Column(name="cpfusuario")
+	private String cpf;
 
 	public Long getId() {
 		return id;
@@ -52,5 +58,21 @@ public class UsuarioSentinelaImpl implements UsuarioSentinela {
 
 	public void setEmailUsuario(String emailUsuario) {
 		this.emailUsuario = emailUsuario;
+	}
+
+	public String getNomeUsuario() {
+		return nomeUsuario;
+	}
+
+	public void setNomeUsuario(String nomeUsuario) {
+		this.nomeUsuario = nomeUsuario;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 }

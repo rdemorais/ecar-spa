@@ -16,7 +16,9 @@ import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
+import br.gov.saude.auth.SentinelaPasswordHash;
 import br.gov.saude.dao.EcarDao;
+import br.gov.saude.dao.EcarSentinelaDao;
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.exc.AkulaServiceRuntimeException;
@@ -28,6 +30,7 @@ import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Situacao;
 import br.gov.saude.model.Usuario;
+import br.gov.saude.model.UsuarioSentinela;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.AcompanhamentoArel;
 import br.gov.saude.model.ecar.IettAnexo;
@@ -44,11 +47,15 @@ import br.gov.saude.web.dto.ParecerDto;
 import br.gov.saude.web.dto.SecretariaDto;
 import br.gov.saude.web.dto.SituacaoDto;
 import br.gov.saude.web.dto.StatusBarDto;
+import br.gov.saude.web.dto.TrocaSenhaDto;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	private EcarSiteDao ecarSiteDao;
+	
+	@Autowired
+	private EcarSentinelaDao ecarSentinelaDao;
 	
 	@Autowired
 	private EcarDao ecarDao;
@@ -70,6 +77,30 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	public RelatorioExcelService relatorioExcelService;
+	
+	@Autowired
+	private SentinelaPasswordHash sentinelaPasswordHash;
+	
+	@Transactional
+	public void trocarSenha(TrocaSenhaDto dto) throws AkulaRuntimeException {
+		UsuarioSentinela us = ecarSentinelaDao.verificarUsuario(dto.getEmail(), dto.getCpf());
+		String cryptPass = sentinelaPasswordHash.criptografar(us.getLoginusuario() + dto.getNovaSenha());
+		
+		us.setSenhausuario(cryptPass);
+		
+		ecarDao.merge(us);
+	}
+	
+	@Transactional
+	public TrocaSenhaDto verificarUsuario(TrocaSenhaDto dto) throws AkulaRuntimeException {
+		UsuarioSentinela us = ecarSentinelaDao.verificarUsuario(dto.getEmail(), dto.getCpf());
+		TrocaSenhaDto ret = null;
+		if(us != null) {
+			ret = new TrocaSenhaDto();
+			ret.setNomeUsuario(us.getNomeUsuario());
+		}
+		return ret;
+	}
 	
 	@Transactional
 	public void gravarUpload(MultipartFile file, String nomeFile, Long codIett, Long codArel) throws AkulaRuntimeException {

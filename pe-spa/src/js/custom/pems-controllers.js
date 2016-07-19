@@ -11,7 +11,37 @@
         .controller('listaItensController', listaItensController)
         .controller('itemDashController', itemDashController)
         .controller('loginController', loginController)
+        .controller('trocaSenhaController', trocaSenhaController)
         .factory('truncate', stripTags);
+
+    trocaSenhaController.$inject = ['$scope', '$state', 'pemsService'];
+    function trocaSenhaController($scope, $state, pemsService) {
+        $scope.data = {
+            verificado: false,
+            email: '',
+            cpf: '',
+            senha1: '',
+            senha2: '',
+            nomeUsuario: ''
+        }
+
+        $scope.verificar = function() {
+            pemsService.verificarUsuario({email: $scope.data.email, cpf: $scope.data.cpf}, function(user) {
+                if(user != null) {
+                    $scope.data.verificado = true;
+                    $scope.data.nomeUsuario = user.nomeUsuario;
+                }else {
+                    console.log('null - apresentar erro');
+                }
+            });
+        }
+
+        $scope.trocar = function() {
+            pemsService.trocaSenha({email: $scope.data.email, cpf: $scope.data.cpf, novaSenha: $scope.data.senha2}, function(user) {
+                
+            });
+        }
+    }
     
     loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService'];
     function loginController($scope, $state, OAuth, pemsService) {

@@ -9,4 +9,8 @@ public interface UsuarioSentinela {
 	public void setSenhausuario(String senhausuario);
 	public String getEmailUsuario();
 	public void setEmailUsuario(String emailUsuario);
+	public String getNomeUsuario();
+	public void setNomeUsuario(String nomeUsuario);
+	public String getCpf();
+	public void setCpf(String cpf);
 }

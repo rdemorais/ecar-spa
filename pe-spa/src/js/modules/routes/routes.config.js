@@ -42,6 +42,12 @@
           templateUrl: Route.base('login.html'),
           resolve: {}
         })
+        .state('app.troca', {
+          url: '/troca',
+          templateUrl: Route.base('troca-senha.html'),
+          controller: 'trocaSenhaController',
+          resolve: {}
+        })
         .state('app.dashboard', {
           url: '/dashboard',
           templateUrl: Route.base('dashboard.html'),

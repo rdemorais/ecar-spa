@@ -17,5 +17,8 @@ container.container-sm(ng-controller="loginController")
                 span.fa.fa-lock.form-control-feedback.text-muted
               .form-group
                 button.btn.btn-block.btn-info.mb(type='submit', ng-click="loginEcar()") Entrar
-
-              
+              br
+              .text-center.text-muted
+                |Esqueceu ou quer trocar a senha? 
+                a(href="", ui-sref='app.troca', ng-click="trocarSenha()")
+                  |Clique aqui.

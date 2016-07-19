@@ -327,6 +327,42 @@
                 $rootScope.$emit('oauth:error', response);
             });
         };
+
+        this.verificarUsuario = function(user, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrlTrocaSenha + '/verificar-usuario',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: user
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(ecarResponse.obj);
+                }else {
+                    console.log(ecarResponse.msg);
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
+        this.trocaSenha = function(user, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrlTrocaSenha + '/troca-senha',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: user
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(ecarResponse.obj);
+                }else {
+                    console.log(ecarResponse.msg);
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
     }
 
     //pemsServiceError.$inject = ['SwAlert']
