@@ -18,7 +18,12 @@ container.container-sm
                 input.form-control(type='text', ng-model="data.cpf", ui-mask='999.999.999-99', required='')
                 span.fa.fa-credit-card.form-control-feedback.text-muted
               .form-group
-                button.btn.btn-block.btn-info.mb(type='button', ng-click="verificar()", ng-disabled="frmVerificacao.$invalid") Verificar
+                .col-md-6
+                  button.btn.btn-block.btn-info(type='button', 
+                    ng-click="verificar()", 
+                    ng-disabled="frmVerificacao.$invalid") Verificar
+                .col-md-6
+                  a.btn.btn-block.btn-default(type='button', ui-sref='app.login', href="") Cancelar
         .panel-body(ng-if="data.verificado")
           |Olá
           strong {{data.nomeUsuario}},
@@ -48,4 +53,9 @@ container.container-sm
                   ng-minlength="6")
                 span.fa.fa-key.form-control-feedback.text-muted
               .form-group
-                button.btn.btn-block.btn-info.mb(type='button', ng-click="trocar()", ng-disabled="frmTrocaSenha.$invalid") Alterar e entrar
+                .col-md-6
+                  button.btn.btn-block.btn-info.mb(type='button', 
+                    ng-click="trocar()", 
+                    ng-disabled="frmTrocaSenha.$invalid") Alterar e entrar
+                .col-md-6
+                  a.btn.btn-block.btn-default(type='button', ui-sref='app.login', href="") Cancelar
