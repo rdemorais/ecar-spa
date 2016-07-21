@@ -1,5 +1,12 @@
 // top navbar
 header(ng-include="'app/views/cached/top-navbar.html'", ng-class="app.theme.topbar")
+.row(ng-controller="appController")
+  .col-lg-12(ng-if="isAuth")
+    .col-sm-3.pull-right.box-welcome
+      div.mt.text-center
+        |Olá, {{nomeUsuario}}
+        a.pull-right(href="", ng-click="logout()")
+          em.fa.fa-power-off.text-orange
 
 // Sidebar
 //aside(ng-include="'app/views/cached/sidebar.html'", ng-class="app.theme.sidebar")

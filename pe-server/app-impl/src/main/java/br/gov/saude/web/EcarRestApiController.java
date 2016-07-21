@@ -3,11 +3,14 @@ package br.gov.saude.web;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
+import br.gov.saude.service.ControleAcessoService;
 import br.gov.saude.service.EcarSiteService;
 import br.gov.saude.web.dto.AnexoDto;
 import br.gov.saude.web.dto.CorDto;
@@ -37,6 +41,35 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private EcarSiteService ecarSiteService;
+	
+	@Autowired
+    private TokenStore tokenStore;
+	
+	@Autowired
+	private ControleAcessoService controleAcessoService;
+	
+	@RequestMapping(value="/nome-usuario", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse getNomeUsuario() {
+		String nomeUsuario = controleAcessoService.getNomeUsuario();
+		return EcarResponse.ok(nomeUsuario);
+	}
+	
+	
+	@RequestMapping(value="/logout", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse logout(HttpServletRequest request) {
+		String authHeader = request.getHeader("Authorization");
+		if (authHeader != null) {
+            String tokenValue = authHeader.replace("Bearer", "").trim();
+            OAuth2AccessToken accessToken = tokenStore.readAccessToken(tokenValue);
+            tokenStore.removeAccessToken(accessToken);
+            logger.debug("Logout do usuario realizado com sucesso");
+        }
+		return EcarResponse.ok();
+	}
 	
 	@RequestMapping(value="/gravar-parecer", 
 			method=RequestMethod.POST)

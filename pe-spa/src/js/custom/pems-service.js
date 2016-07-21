@@ -363,6 +363,40 @@
                 $rootScope.$emit('oauth:error', response);
             });
         };
+
+        this.logout = function(callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/logout',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(true);
+                }else {
+                    callback(false);
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        }
+
+        this.loadNomeUsuario = function(callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/nome-usuario',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(ecarResponse.obj);
+                }else {
+                    console.log(ecarResponse.msg);
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
     }
 
     //pemsServiceError.$inject = ['SwAlert']

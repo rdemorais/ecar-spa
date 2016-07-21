@@ -9,6 +9,31 @@
 @img-cinza: "../img/status5.gif";
 @img-branco: "../img/status0.gif";
 
+.box-welcome {
+	background-color: #3F51B5;
+	color: #FFFFFF;
+	height: 30px;
+	vertical-align: middle;
+	position: relative;
+	&::before {
+		content: '';
+		position: absolute;
+		height: 100%;
+		width: 45px;
+		z-index: -1;
+		background-color: #3F51B5;
+		transform: skewX(45deg);
+		left: -18px;
+	}
+}
+
+.box-welcome-tri {
+	width: 0;
+	height: 0;
+	border-top: 30px solid #3F51B5;
+	border-left: 30px solid transparent;
+}
+
 .drop-box {
     background: #F8F8F8;
     border: 5px dashed #DDD;

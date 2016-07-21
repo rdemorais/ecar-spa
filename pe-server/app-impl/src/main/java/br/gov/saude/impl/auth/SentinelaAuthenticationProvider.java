@@ -48,6 +48,7 @@ public class SentinelaAuthenticationProvider implements AuthenticationProvider {
 			Usuario user = eCarSiteDao.loadUsuario(userSentinela.getEmailUsuario());
 			
 			userDet.put(UserDetails.ID_USER, user.getId());
+			userDet.put(UserDetails.NOME_USER, userSentinela.getNomeUsuario());
 			
 			autenticacao.setDetails(userDet);
 			

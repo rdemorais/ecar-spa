@@ -12,6 +12,7 @@
         .controller('itemDashController', itemDashController)
         .controller('loginController', loginController)
         .controller('trocaSenhaController', trocaSenhaController)
+        .controller('appController', appController)
         .factory('truncate', stripTags);
 
     trocaSenhaController.$inject = ['$scope', '$state', 'pemsService', 'OAuth'];
@@ -52,21 +53,44 @@
             });
         }
     }
-    
-    loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService'];
-    function loginController($scope, $state, OAuth, pemsService) {
+
+    appController.$inject = ['$scope', 'OAuth', '$state', 'pemsService', '$rootScope'];
+    function appController($scope, OAuth, $state, pemsService, $rootScope) {
+        $scope.isAuth = false;
+        $scope.nomeUsuario = '';
+
+        $scope.logout = function() {
+            pemsService.logout(function(ret) {
+                if(ret) {
+                    OAuth.removeToken();
+                    $state.go('app.login');
+                    $scope.isAuth = false;
+                    $scope.nomeUsuario = '';
+                }
+            });
+        };
+
+        $rootScope.$on('oauth:login', function() {
+            pemsService.loadNomeUsuario(function(nome) {
+                $scope.nomeUsuario = nome;
+                $scope.isAuth = true;
+            });
+        });
+    }
+
+    loginController.$inject = ['$scope', '$state', 'OAuth', 'pemsService', '$rootScope'];
+    function loginController($scope, $state, OAuth, pemsService, $rootScope) {
         $scope.login = '';
         $scope.senha = '';
 
         $scope.loginEcar = function() {
-
             OAuth.getAccessToken({
                 username: $scope.login,
                 password: $scope.senha
             }).then(function() {
                 if(OAuth.isAuthenticated()) {
                     pemsService.loadOEs(function(oes){});
-
+                    $rootScope.$emit('oauth:login');         
                     $state.go('app.dashboard');
                 }
             });
@@ -75,6 +99,7 @@
 
     dashboardController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService'];
     function dashboardController($scope, $state, pemsFilterService, pemsService) {
+        
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
@@ -153,7 +178,7 @@
         pemsFilterService.getFiltros().nivel = $stateParams.nivel;
         pemsService.loadItem(pemsFilterService.getFiltros(), function(item) {
             vm.item = item;
-            vm.parecer = truncate(vm.item.parecer, '<a><br><ul><li><strong><b><table><p><i><ol><td><tr><h1><h2><h3>');
+            vm.item.parecer = truncate(vm.item.parecer, '<a><br><ul><li><strong><b><table><p><i><ol><td><tr><h1><h2><h3>');
         });
 
     }

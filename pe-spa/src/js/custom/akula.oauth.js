@@ -211,6 +211,10 @@
 		          return response;
 		        });
 		      }
+
+					this.removeToken = function() {
+		        return OAuthToken.removeToken();
+		      }
 		    }
 
 		    return new OAuth();
