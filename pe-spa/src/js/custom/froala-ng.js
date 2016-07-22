@@ -33,10 +33,10 @@
 	      	});
 
 	      	$element.on('froalaEditor.contentChanged', function (e, editor) {
-						var value = $element.froalaEditor('html.get', true);
-						var cleredHtml = $element.froalaEditor('clean.html', value, ['font', 'fontFamily', 'font-family', 'style']);
-						ngModel.$setViewValue(cleredHtml);
-					});
+				var value = $element.froalaEditor('html.get', true);
+				var cleredHtml = $element.froalaEditor('clean.html', value, ['font', 'fontFamily', 'font-family', 'style']);
+				ngModel.$setViewValue(cleredHtml);
+			});
 
 	      	$timeout(function() {
 	      		var cleredHtml = $element.froalaEditor('clean.html', ngModel.$viewValue, ['font', 'fontFamily', 'font-family']);

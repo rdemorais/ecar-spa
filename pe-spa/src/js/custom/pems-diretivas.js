@@ -20,7 +20,6 @@
       return {
         restrict: 'E',
         scope: {
-          conteudo: '=',
           item: '='
         },
         templateUrl: 'app/views/cached/parecer-view.html',
@@ -51,14 +50,14 @@
         $scope.parecer = {
           situacao: {},
           cor: {},
-          texto: '',
+          texto: $scope.item.parecer,
           codArel: $scope.item.codArel
         };
 
         if(($scope.item.mes === $scope.item.mesCicloParecer) && ($scope.item.ano === $scope.item.anoCicloParecer)) {
           $scope.parecer.cor = $scope.item.cor;
           $scope.parecer.situacao = $scope.item.situacao;
-          $scope.parecer.texto = $scope.conteudo;
+          $scope.parecer.texto = $scope.item.parecer;
 
           $scope.data.corSelecionada = $scope.parecer.cor.nome;
         }

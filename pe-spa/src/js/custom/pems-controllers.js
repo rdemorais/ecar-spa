@@ -66,6 +66,7 @@
                     $state.go('app.login');
                     $scope.isAuth = false;
                     $scope.nomeUsuario = '';
+                    $state.go('app.login');
                 }
             });
         };
