@@ -277,17 +277,20 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
 		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
 		DateTime hoje = new DateTime();
-		DateTime dataLimite = new DateTime(dto.getDataLimite());
-		dataLimite = dataLimite.plusDays(1);
 		
-		if(upm != null && dataLimite.isAfter(hoje)) {
-			dto.setParecerAutorizado(true);
+		if(upm != null) {
+			
 			AcompanhamentoAref aref = ecarDao.loadUltimoCiclo();
 			Monitoramento mon = ecarSiteDao.loadMonitoramento(dto.getId(), aref.getMes(), aref.getAno());
+			DateTime dataLimite = new DateTime(mon.getDataLimite());
+			dataLimite = dataLimite.plusDays(1);
 			
-			dto.setCodArel(mon.getCodArel());
-			dto.setMesCicloParecer(aref.getMes());
-			dto.setAnoCicloParecer(aref.getAno());
+			if(dataLimite.isAfter(hoje)) {
+				dto.setParecerAutorizado(true);
+				dto.setCodArel(mon.getCodArel());
+				dto.setMesCicloParecer(aref.getMes());
+				dto.setAnoCicloParecer(aref.getAno());
+			}
 		}else {
 			dto.setParecerAutorizado(false);
 		}

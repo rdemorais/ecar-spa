@@ -24,7 +24,7 @@
         function(event, toState, toParams, fromState, fromParams) {
           // success here
           // display new view from top
-          if(!OAuth.isAuthenticated()) {
+          if(!OAuth.isAuthenticated() && toState.name != 'app.troca') {
             console.log('nao autenticado... redirecionando para login');
             $state.go('app.login');
           }

@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;28 13&#x3a;54&#x3a;14.680</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;09 19&#x3a;56&#x3a;10.766</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;22 13&#x3a;04&#x3a;07.766</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -101,9 +101,6 @@
   <hop> <from>Atualiza monitoramento</from><to>Select Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Select Iett</from><to>Ordena Iett</to><enabled>Y</enabled> </hop>
   <hop> <from>Carrega Ietts</from><to>Monitoramento</to><enabled>Y</enabled> </hop>
-  <hop> <from>Exercicios</from><to>Nao monitorados</to><enabled>Y</enabled> </hop>
-  <hop> <from>Exercicios</from><to>Select ultimo parecer</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select ultimo parecer</from><to>Atualiza ultimo parecer</to><enabled>Y</enabled> </hop>
   <hop> <from>Ordena Iett</from><to>Iett unico</to><enabled>Y</enabled> </hop>
   <hop> <from>Iett unico</from><to>Exercicios</to><enabled>Y</enabled> </hop>
   <hop> <from>Ult. parecer - N monitorado</from><to>Seq Mon</to><enabled>Y</enabled> </hop>
@@ -112,6 +109,9 @@
   <hop> <from>Responsavel Cadastro</from><to>Cor NM</to><enabled>Y</enabled> </hop>
   <hop> <from>Cor NM</from><to>Atualiza nao monitorado</to><enabled>Y</enabled> </hop>
   <hop> <from>Monitoramento</from><to>Campos monitoramento</to><enabled>Y</enabled> </hop>
+  <hop> <from>Exercicios</from><to>Select ultimo parecer</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select ultimo parecer</from><to>Atualiza ultimo parecer</to><enabled>Y</enabled> </hop>
+  <hop> <from>Atualiza ultimo parecer</from><to>Nao monitorados</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Atualiza monitoramento</name>
@@ -312,8 +312,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>64</xloc>
-      <yloc>207</yloc>
+      <xloc>186</xloc>
+      <yloc>299</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -330,7 +330,7 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <commit>100</commit>
+    <commit>1</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
       <schema>dbsitedemas</schema>
@@ -387,8 +387,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>437</xloc>
-      <yloc>303</yloc>
+      <xloc>321</xloc>
+      <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -540,8 +540,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>177</xloc>
-      <yloc>207</yloc>
+      <xloc>67</xloc>
+      <yloc>299</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -570,7 +570,7 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>562</xloc>
+      <xloc>561</xloc>
       <yloc>207</yloc>
       <draw>Y</draw>
       </GUI>
@@ -642,7 +642,7 @@
            </partitioning>
     <connection>eCar 2016</connection>
     <rowlimit>0</rowlimit>
-    <sql>select &#xa;data_parecer, &#xa;mes,&#xa;ano,&#xa;&#x27;Y&#x27; as &#x22;nao_monitorado&#x22;&#xa;from dbsitedemas.tb_monitoramento &#xa;where cod_iett &#x3d; &#x3f; and data_parecer is null and cod_exe &#x3d; &#x3f;&#xa;and cod_iett not in &#x28;&#xa;	select distinct cod_iett &#xa;	from dbsitedemas.tb_monitoramento &#xa;	where data_parecer is not null and cod_exe &#x3d; &#x3f;&#x29;&#xa;order by ano, mes desc&#xa;limit 1</sql>
+    <sql>select &#xa;data_parecer, &#xa;mes,&#xa;ano,&#xa;CASE WHEN cod_iett in &#x28;select distinct cod_iett from dbsitedemas.tb_monitoramento where cod_exe &#x3d; &#x3f; and ultimo_parecer &#x3d; &#x27;Y&#x27;&#x29;&#xa;     THEN &#x27;N&#x27;&#xa;     ELSE &#x27;Y&#x27;&#xa;END as &#x22;nao_monitorado&#x22;&#xa;from dbsitedemas.tb_monitoramento &#xa;where &#xa;cod_iett &#x3d; &#x3f; &#xa;and data_parecer is null &#xa;and cod_exe &#x3d; &#x3f;&#xa;&#x2f;&#x2a;&#xa;and cod_iett not in &#x28;&#xa;	select distinct cod_iett &#xa;	from dbsitedemas.tb_monitoramento &#xa;	where data_parecer is not null &#xa;	and cod_exe &#x3d; &#x3f;&#x29;&#xa;&#x2a;&#x2f;&#xa;order by ano, mes desc&#xa;--limit 1</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -661,8 +661,8 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>430</xloc>
-      <yloc>207</yloc>
+      <xloc>186</xloc>
+      <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -725,8 +725,8 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>297</xloc>
-      <yloc>207</yloc>
+      <xloc>67</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -783,8 +783,8 @@
     </parameter>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>561</xloc>
-      <yloc>303</yloc>
+      <xloc>441</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

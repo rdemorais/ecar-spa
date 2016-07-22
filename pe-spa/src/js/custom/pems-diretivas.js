@@ -50,7 +50,7 @@
         $scope.parecer = {
           situacao: {},
           cor: {},
-          texto: $scope.item.parecer,
+          texto: '',
           codArel: $scope.item.codArel
         };
 
