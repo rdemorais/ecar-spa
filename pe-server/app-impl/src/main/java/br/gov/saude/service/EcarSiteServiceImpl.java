@@ -287,6 +287,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			
 			if(dataLimite.isAfter(hoje)) {
 				dto.setParecerAutorizado(true);
+				dto.setDataLimite(mon.getDataLimite());
 				dto.setCodArel(mon.getCodArel());
 				dto.setMesCicloParecer(aref.getMes());
 				dto.setAnoCicloParecer(aref.getAno());

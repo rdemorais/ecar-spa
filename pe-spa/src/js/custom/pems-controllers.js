@@ -15,8 +15,8 @@
         .controller('appController', appController)
         .factory('truncate', stripTags);
 
-    trocaSenhaController.$inject = ['$scope', '$state', 'pemsService', 'OAuth'];
-    function trocaSenhaController($scope, $state, pemsService, OAuth) {
+    trocaSenhaController.$inject = ['$scope', '$state', 'pemsService', 'OAuth', '$rootScope'];
+    function trocaSenhaController($scope, $state, pemsService, OAuth, $rootScope) {
         $scope.data = {
             verificado: false,
             email: '',
@@ -40,13 +40,15 @@
         $scope.trocar = function() {
             pemsService.trocaSenha({email: $scope.data.email, cpf: $scope.data.cpf, novaSenha: $scope.data.senha2}, function(ret) {
                 var indexOfArroba = $scope.data.email.indexOf('@');
+                var login = $scope.data.email.substring(0, indexOfArroba);
+                
                 OAuth.getAccessToken({
-                    username: $scope.data.email.substring(0, indexOfArroba),
+                    username: login,
                     password: $scope.data.senha2
                 }).then(function() {
                     if(OAuth.isAuthenticated()) {
                         pemsService.loadOEs(function(oes){});
-
+                        $rootScope.$emit('oauth:login');
                         $state.go('app.dashboard');
                     }
                 });
