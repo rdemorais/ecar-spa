@@ -35,7 +35,6 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setOrgaoResp(itemDto.getOrgaoResp());
 		peExecutivo.setSituacao(itemDto.getSituacao().getDescricao());
 		peExecutivo.setNivel(itemDto.getNivel());
-		peExecutivo.setParecer(itemDto.getParecer());
 		peExecutivo.setSiglaMi(itemDto.getSiglaMi());
 		peExecutivo.setSiglaPi(itemDto.getSiglaPi());
 		peExecutivo.setSiglaAtv(itemDto.getSiglaAtv());
@@ -44,6 +43,8 @@ public class ConvertServiceImpl implements ConvertService{
 		peExecutivo.setImgStatus(ecarFileSystem.getImageFromContext(itemDto.getCor().getNome() + ".gif"));
 		peExecutivo.setPpa(itemDto.getPpa());
 		peExecutivo.setPns(itemDto.getOePns());
+		
+		peExecutivo.setParecer(itemDto.getParecer());
 		
 		peExecutivo.setListaItens(convertItem(listaItens));
 		
