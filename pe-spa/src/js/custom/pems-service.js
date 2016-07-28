@@ -14,6 +14,16 @@
             oesPns: []
         };
 
+        $rootScope.$on('pems:limparFiltros', function() {
+            for (var i = 0; i < fixedArrays.oes.length; i++) {
+                fixedArrays.oes[i].sel = false;
+            };
+
+            for (var i = 0; i < fixedArrays.oesPns.length; i++) {
+                fixedArrays.oesPns[i].sel = false;
+            };
+        });
+
         this.gerarRelatorioExecutivo = function(filtro) {
             $http({
                 method: 'POST',
@@ -426,6 +436,21 @@
         var listaStatusFiltrosGerada = false;
         var listaStFiltrosSel;
 
+        $rootScope.$on('pems:limparFiltros', function() {
+            filtros = {
+                pns: false,
+                meta: false,
+                iniciativa: false,
+                status: [],
+                oes: [],
+                etiquetas: [],
+                secretarias: [],
+                codExe: 1,
+                codIett: -1,
+                nivel: null
+            };
+        });
+
         this.mudarPerspectiva = function(p) {
             //this.clear();
 
@@ -446,21 +471,6 @@
         
         this.setSecretarias = function(secs) {
             filtros.secretarias = secs;
-        };
-
-        this.clear = function() {
-            filtros = {
-                pns: false,
-                meta: false,
-                iniciativa: false,
-                status: [],
-                oes: [],
-                etiquetas: [],
-                secretarias: [],
-                codExe: 1,
-                codIett: -1,
-                nivel: null
-            };
         };
 
         this.setPpa = function(ppa) {

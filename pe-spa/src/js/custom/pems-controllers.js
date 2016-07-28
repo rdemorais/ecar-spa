@@ -100,8 +100,8 @@
         }
     }
 
-    dashboardController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService'];
-    function dashboardController($scope, $state, pemsFilterService, pemsService) {
+    dashboardController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService', '$rootScope'];
+    function dashboardController($scope, $state, pemsFilterService, pemsService, $rootScope) {
         
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
@@ -122,12 +122,18 @@
         };
 
         $scope.limparFiltros = function() {
-            //pemsFilterService.clear();
+            $scope.filtro = {
+                ppa: false,
+                meta: false,
+                iniciativa: false,
+                minhaVisao: false
+            };
+            $rootScope.$emit('pems:limparFiltros');
         };
     }
 
-    listaItensController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService'];
-    function listaItensController($scope, $state, pemsFilterService, pemsService) {
+    listaItensController.$inject = ['$scope', '$state', 'pemsFilterService', 'pemsService', '$rootScope'];
+    function listaItensController($scope, $state, pemsFilterService, pemsService, $rootScope) {
         $scope.filtro = {
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
@@ -149,6 +155,16 @@
 
             $scope.$broadcast('pems:pesquisar-lista');
         }
+
+        $scope.limparFiltros = function() {
+            $scope.filtro = {
+                ppa: false,
+                meta: false,
+                iniciativa: false,
+                minhaVisao: false
+            };
+            $rootScope.$emit('pems:limparFiltros');
+        };
     }
 
     itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate'];

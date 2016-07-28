@@ -162,14 +162,14 @@
     }
 
     function pemsSecretarias() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', '$rootScope'];
       return {
         restrict: 'E',
         templateUrl: 'app/views/cached/pems-secretarias.html',
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, pemsFilterService) {
+      function controller($scope, $element, pemsService, pemsFilterService, $rootScope) {
         $scope.secretarias = [];
         $scope.secSelec = pemsFilterService.getSecretarias();
 
@@ -187,6 +187,10 @@
 
         pemsService.loadSecretarias(function(secs) {
           $scope.secretarias = secs;
+        });
+
+        $rootScope.$on('pems:limparFiltros', function() {
+          $scope.secSelec = [];
         });
       }
     }
@@ -308,14 +312,14 @@
     }
 
     function pemsEtiquetas() {
-      controller.$inject = ['$scope', '$element', '$timeout', 'pemsService', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', '$timeout', 'pemsService', 'pemsFilterService', '$rootScope'];
       return {
         restrict: 'E',
         templateUrl: 'app/views/cached/etiquetas.html',
         controller: controller
       };
 
-      function controller($scope, $element, $timeout, pemsService, pemsFilterService) {
+      function controller($scope, $element, $timeout, pemsService, pemsFilterService, $rootScope) {
         $scope.uiselectEt = {
           etiquetas: [],
           etSelectionadas: []
@@ -333,24 +337,34 @@
         $scope.onRemoveEt = function(et) {
           pemsFilterService.addRemoveEtiqueta(et.id);
         };
+
+        $rootScope.$on('pems:limparFiltros', function() {
+          $scope.uiselectEt.etSelectionadas = [];
+        });
       }
     }
 
     function pemsStatusFilter() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', '$rootScope'];
       return {
         restrict: 'E',
         templateUrl: 'app/views/cached/status-filter.html',
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, pemsFilterService) {
+      function controller($scope, $element, pemsService, pemsFilterService, $rootScope) {
         $scope.listaStatus = pemsFilterService.listaStatusFiltros();
 
         $scope.selStatus = function(status) {
           pemsFilterService.addRemoveStatus(status.codCor);
           status.sel = !status.sel;
         }
+
+        $rootScope.$on('pems:limparFiltros', function() {
+          for (var i = 0; i < $scope.listaStatus.length; i++) {
+            $scope.listaStatus[i].sel = false;
+          }  
+        });
       }
     }
 
