@@ -4,6 +4,7 @@ public class AnexoDto {
 	private Long id;
 	private Long codIett;
 	private String nomeOriginal;
+	private boolean permissaoExclusao;
 	private byte[] arquivo;
 	
 	public AnexoDto() {
@@ -36,6 +37,12 @@ public class AnexoDto {
 	}
 	public void setNomeOriginal(String nomeOriginal) {
 		this.nomeOriginal = nomeOriginal;
+	}
+	public boolean isPermissaoExclusao() {
+		return permissaoExclusao;
+	}
+	public void setPermissaoExclusao(boolean permissaoExclusao) {
+		this.permissaoExclusao = permissaoExclusao;
 	}
 	public byte[] getArquivo() {
 		return arquivo;

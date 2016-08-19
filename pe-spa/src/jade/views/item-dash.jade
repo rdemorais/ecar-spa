@@ -56,7 +56,12 @@
 				hr
 				strong Anexos:
 				scrollable.pt(height=50)
-					a.mr(ng-repeat="anexo in anexos", href="", ng-click="downloadAnexo(anexo)") {{anexo.nomeOriginal}}
+					div(ng-repeat="anexo in anexos")
+						a.mr(href="", ng-click="downloadAnexo(anexo)") {{anexo.nomeOriginal}}
+							|&nbsp;
+						a(href="")
+							i.fa.fa-trash.text-danger(ng-if="anexo.permissaoExclusao", ng-click="excluirAnexoServer(anexo)")
+						
 			accordion-group(is-open='false')
 				accordion-heading Indicadores
 				p

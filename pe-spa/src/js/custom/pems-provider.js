@@ -21,6 +21,24 @@
 							swal( title, text, 'success' );
 						});
 					}
+
+					this.confirm = function(title, text, callback) {
+						$rootScope.$evalAsync(function() {
+							swal({
+								title: title,
+								text: text, 
+								type: 'warning',
+								showCancelButton: true,
+							  closeOnConfirm: false,
+							  showLoaderOnConfirm: true,
+							  confirmButtonText: 'Ok',
+							  cancelButtonText: 'Cancelar'
+							},
+							function() {
+								callback();
+							});
+						});
+					}
 				}
 				return new SwAlert();
 			}

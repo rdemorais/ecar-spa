@@ -167,8 +167,8 @@
         };
     }
 
-    itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate'];
-    function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate) {
+    itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate', 'SwAlert'];
+    function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate, SwAlert) {
         var vm = this;
         vm.parecer = '';
 
@@ -179,6 +179,23 @@
 
         $scope.downloadAnexo = function(anexo) {
             pemsService.downloadAnexo(anexo);
+        }
+
+        $scope.excluirAnexoServer = function(anexo) {
+            SwAlert.confirm(
+                'Exclusão de Anexo', 
+                'Esta ação excluirá permanentemente o anexo da base de dados!',
+                function() {
+                    pemsService.excluirAnexoServer(anexo, function(resp) {
+                        if(resp) {
+                            pemsService.loadAnexos(pemsFilterService.getFiltros(), function(anexos) {
+                                $scope.anexos = anexos;
+                            });
+                            SwAlert.success('Sucesso', 'Anexo excluído da base de dados');
+                        }
+                    });
+                }
+            );
         }
 
         $scope.itemSelecionadoDash = function(_itemId, _nivel) {

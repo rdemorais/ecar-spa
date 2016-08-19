@@ -170,7 +170,24 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	public List<AnexoDto> listaAnexos(FiltroDto filtro) throws AkulaRuntimeException {
-		return ecarDao.listaAnexos(filtro.getCodIett());
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
+		List<AnexoDto> anexos = ecarDao.listaAnexos(filtro.getCodIett());
+		
+		if(upm != null) {
+			for (AnexoDto anexoDto : anexos) {
+				anexoDto.setPermissaoExclusao(true);
+			}
+		}
+		
+		return anexos;
+	}
+	
+	@Transactional
+	public void excluirAnexo(AnexoDto anexo) throws AkulaRuntimeException {
+		IettAnexo iettAnexo = ecarSiteDao.find(IettAnexo.class, anexo.getId());
+		
+		ecarSiteDao.remove(iettAnexo);
 	}
 	
 	private Map<String, Object> gerarParametros() throws IOException {

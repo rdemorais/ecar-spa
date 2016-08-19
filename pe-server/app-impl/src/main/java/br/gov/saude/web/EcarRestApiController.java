@@ -227,6 +227,23 @@ public class EcarRestApiController {
 		return EcarResponse.ok(anexos);
 	}
 	
+	@RequestMapping(value="/excluir-anexo", 
+			method=RequestMethod.POST)
+	@ResponseBody
+	public EcarResponse excluirAnexo(@RequestBody AnexoDto anexo) {
+		try {
+			logger.debug("Excluindo anexo: " + anexo.toString());
+			
+			ecarSiteService.excluirAnexo(anexo);
+			
+			return EcarResponse.ok();
+		} catch (AkulaRuntimeException e) {
+			logger.error(e.getMessage(), e);
+			
+			return EcarResponse.error(e.getMessage());
+		}
+	}
+	
 	@RequestMapping(value="/download-anexo", 
 			method=RequestMethod.POST)
 	public void downloadRelatorioExecutivo(HttpServletResponse response, @RequestBody Long codAnexo) {

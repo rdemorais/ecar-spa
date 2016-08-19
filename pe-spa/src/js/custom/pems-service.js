@@ -162,6 +162,24 @@
             });
         };
 
+        this.excluirAnexoServer = function(anexo, callback) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/excluir-anexo',
+                data: anexo,
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'}
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    callback(true);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        };
+
     	this.loadAtividades = function(filtro, callback) {
             $http({
                 method: 'POST',

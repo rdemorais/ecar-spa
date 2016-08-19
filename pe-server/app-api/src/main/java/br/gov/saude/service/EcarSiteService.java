@@ -19,6 +19,7 @@ import br.gov.saude.web.dto.StatusBarDto;
 import br.gov.saude.web.dto.TrocaSenhaDto;
 
 public interface EcarSiteService {
+	public void excluirAnexo(AnexoDto anexo) throws AkulaRuntimeException;
 	public void trocarSenha(TrocaSenhaDto dto) throws AkulaRuntimeException;
 	public TrocaSenhaDto verificarUsuario(TrocaSenhaDto dto) throws AkulaRuntimeException;
 	public void gravarUpload(MultipartFile file, String nomeFile, Long codIett, Long codArel) throws AkulaRuntimeException;
