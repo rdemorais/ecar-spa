@@ -1,4 +1,4 @@
-package br.gov.saude.service;
+package br.gov.saude.spi.service;
 
 import java.io.Serializable;
 

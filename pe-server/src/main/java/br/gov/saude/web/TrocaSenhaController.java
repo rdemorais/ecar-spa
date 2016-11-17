@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import br.gov.saude.service.EcarSiteService;
-import br.gov.saude.web.dto.TrocaSenhaDto;
+import br.gov.saude.service.dto.TrocaSenhaDto;
+import br.gov.saude.spi.service.EcarSiteService;
 
 @Controller
 @CrossOrigin(value="*", maxAge=3600)

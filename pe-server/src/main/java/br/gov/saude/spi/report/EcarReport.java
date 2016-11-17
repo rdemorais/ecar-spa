@@ -1,4 +1,4 @@
-package br.gov.saude.report;
+package br.gov.saude.spi.report;
 
 import java.util.List;
 import java.util.Map;

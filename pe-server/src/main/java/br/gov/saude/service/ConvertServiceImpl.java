@@ -7,16 +7,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.exc.AkulaRuntimeException;
-import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.model.Etiqueta;
 import br.gov.saude.model.OE;
 import br.gov.saude.report.ItemReport;
 import br.gov.saude.report.PEExecutivo;
 import br.gov.saude.report.PEGerencial;
-import br.gov.saude.web.dto.EtiquetaDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.service.dto.EtiquetaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.spi.file.EcarFileSystem;
+import br.gov.saude.spi.service.ConvertService;
 
 public class ConvertServiceImpl implements ConvertService{
 	

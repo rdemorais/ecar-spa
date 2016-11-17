@@ -20,17 +20,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
-import br.gov.saude.service.ControleAcessoService;
-import br.gov.saude.service.EcarSiteService;
-import br.gov.saude.web.dto.AnexoDto;
-import br.gov.saude.web.dto.CorDto;
-import br.gov.saude.web.dto.EtiquetaDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.ParecerDto;
-import br.gov.saude.web.dto.SecretariaDto;
-import br.gov.saude.web.dto.SituacaoDto;
+import br.gov.saude.service.dto.AnexoDto;
+import br.gov.saude.service.dto.CorDto;
+import br.gov.saude.service.dto.EtiquetaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.service.dto.ParecerDto;
+import br.gov.saude.service.dto.SecretariaDto;
+import br.gov.saude.service.dto.SituacaoDto;
+import br.gov.saude.spi.service.ControleAcessoService;
+import br.gov.saude.spi.service.EcarSiteService;
 
 @Controller
 @CrossOrigin(value="*", maxAge=3600)

@@ -12,13 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import br.gov.saude.model.Estrutura;import br.gov.saude.web.dto.AnexoDto;
-import br.gov.saude.web.dto.EtiquetaDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.SecretariaDto;
-import br.gov.saude.web.dto.StatusBarDto;
+import br.gov.saude.model.Estrutura;
+import br.gov.saude.service.dto.AnexoDto;
+import br.gov.saude.service.dto.EtiquetaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.service.dto.SecretariaDto;
+import br.gov.saude.service.dto.StatusBarDto;
+import br.gov.saude.spi.service.EcarSiteService;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -1,4 +1,4 @@
-package br.gov.saude.web.dto;
+package br.gov.saude.service.dto;
 
 import java.util.ArrayList;
 import java.util.List;

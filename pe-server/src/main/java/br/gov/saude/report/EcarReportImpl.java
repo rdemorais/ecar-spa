@@ -13,7 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.exc.AkulaServiceRuntimeException;
-import br.gov.saude.file.EcarFileSystem;
+import br.gov.saude.spi.file.EcarFileSystem;
+import br.gov.saude.spi.report.EcarReport;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;

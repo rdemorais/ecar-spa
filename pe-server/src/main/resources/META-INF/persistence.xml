@@ -7,22 +7,22 @@
     <persistence-unit name="JpaPersistenceUnit" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 		
-		<class>br.gov.saude.model.IettImpl</class> 
-        <class>br.gov.saude.model.OEImpl</class>
-        <class>br.gov.saude.model.EtiquetaImpl</class>
-        <class>br.gov.saude.model.MonitoramentoImpl</class>
-        <class>br.gov.saude.model.MetaIniciativaImpl</class>
-        <class>br.gov.saude.model.ProdutoIntermediarioImpl</class>
-        <class>br.gov.saude.model.AtividadeImpl</class>
-        <class>br.gov.saude.model.UsuarioImpl</class>
-        <class>br.gov.saude.model.UsuarioSentinelaImpl</class>
-        <class>br.gov.saude.model.SituacaoImpl</class>
-        <class>br.gov.saude.model.CorImpl</class>
-        <class>br.gov.saude.model.OEPnsImpl</class>
-        <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramentoImpl</class>
-        <class>br.gov.saude.model.ecar.AcompanhamentoArefImpl</class>
-        <class>br.gov.saude.model.ecar.AcompanhamentoArelImpl</class>
-		<class>br.gov.saude.model.ecar.IettAnexoImpl</class>        
+		<class>br.gov.saude.model.Iett</class> 
+        <class>br.gov.saude.model.OE</class>
+        <class>br.gov.saude.model.Etiqueta</class>
+        <class>br.gov.saude.model.Monitoramento</class>
+        <class>br.gov.saude.model.MetaIniciativa</class>
+        <class>br.gov.saude.model.ProdutoIntermediario</class>
+        <class>br.gov.saude.model.Atividade</class>
+        <class>br.gov.saude.model.Usuario</class>
+        <class>br.gov.saude.model.UsuarioSentinela</class>
+        <class>br.gov.saude.model.Situacao</class>
+        <class>br.gov.saude.model.Cor</class>
+        <class>br.gov.saude.model.OEPns</class>
+        <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento</class>
+        <class>br.gov.saude.model.ecar.AcompanhamentoAref</class>
+        <class>br.gov.saude.model.ecar.AcompanhamentoArel</class>
+		<class>br.gov.saude.model.ecar.IettAnexo</class>        
         
         <exclude-unlisted-classes/>
          

@@ -14,13 +14,13 @@ import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
-import br.gov.saude.web.dto.CorDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.SecretariaDto;
-import br.gov.saude.web.dto.SituacaoDto;
-import br.gov.saude.web.dto.StatusDto;
+import br.gov.saude.service.dto.CorDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.service.dto.SecretariaDto;
+import br.gov.saude.service.dto.SituacaoDto;
+import br.gov.saude.service.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	
@@ -176,7 +176,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	public List<OeDto> listOEPns() throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
-			hql.append("SELECT new br.gov.saude.web.dto.OeDto( ");
+			hql.append("SELECT new br.gov.saude.service.dto.OeDto( ");
 			hql.append("oePns.id, ");
 			hql.append("oePns.nome, ");
 			hql.append("oePns.descricao) ");
@@ -220,7 +220,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto(cor.nome, count(cor.id)) ");
+			hql.append("SELECT new br.gov.saude.service.dto.StatusDto(cor.nome, count(cor.id)) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.cor cor ");
 			hql.append("JOIN mon.iett iett ");
@@ -248,7 +248,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT DISTINCT new br.gov.saude.web.dto.SecretariaDto( ");
+			hql.append("SELECT DISTINCT new br.gov.saude.service.dto.SecretariaDto( ");
 			hql.append("mi.codOrg, ");
 			hql.append("mi.siglaOrgMi) ");
 			hql.append("FROM MetaIniciativa mi ");
@@ -267,7 +267,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.StatusDto('Branco', count(mon.iett)) ");
+			hql.append("SELECT new br.gov.saude.service.dto.StatusDto('Branco', count(mon.iett)) ");
 			hql.append("FROM Monitoramento mon ");
 			hql.append("JOIN mon.iett iett ");
 			hql.append("JOIN mon.cor cor ");
@@ -294,7 +294,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
-			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
+			hql.append("SELECT new br.gov.saude.service.dto.ItemDto( ");
 			hql.append("iett.id, "); 
 			hql.append("cor.id, ");
 			hql.append("cor.nome, ");
@@ -410,7 +410,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
-			hql.append("SELECT new br.gov.saude.web.dto.ItemDto( ");
+			hql.append("SELECT new br.gov.saude.service.dto.ItemDto( ");
 			hql.append("iett.id, ");
 			hql.append("cor.id, ");
 			hql.append("cor.nome, ");

@@ -1,4 +1,4 @@
-package br.gov.saude.web.dto;
+package br.gov.saude.service.dto;
 
 public class StatusBarDto {
 	private StatusEstruturaDto iniciativa;

@@ -12,10 +12,11 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import br.gov.saude.exc.AkulaRuntimeException;
-import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.report.ItemExcel;
 import br.gov.saude.report.SecretariaExcel;
-import br.gov.saude.web.dto.FiltroDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.spi.file.EcarFileSystem;
+import br.gov.saude.spi.service.RelatorioExcelService;
 import net.sf.jxls.exception.ParsePropertyException;
 import net.sf.jxls.transformer.XLSTransformer;
 

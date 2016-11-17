@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.ResourceLoader;
 
+import br.gov.saude.spi.file.EcarFileSystem;
+
 public class EcarFileSystemImpl implements EcarFileSystem, ResourceLoaderAware {
 	
 	private ResourceLoader resourceLoader;

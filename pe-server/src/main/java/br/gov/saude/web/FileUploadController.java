@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import br.gov.saude.service.EcarSiteService;
+import br.gov.saude.spi.service.EcarSiteService;
 
 @Controller
 @CrossOrigin(value="*", maxAge=3600)

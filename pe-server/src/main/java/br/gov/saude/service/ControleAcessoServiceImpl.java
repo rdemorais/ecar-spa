@@ -9,6 +9,7 @@ import org.springframework.security.oauth2.provider.OAuth2Authentication;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.impl.auth.UserDetails;
+import br.gov.saude.spi.service.ControleAcessoService;
 
 public class ControleAcessoServiceImpl implements ControleAcessoService{
 	

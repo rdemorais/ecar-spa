@@ -2,23 +2,112 @@ package br.gov.saude.model.ecar;
 
 import java.util.Date;
 
-public interface AcompanhamentoArel {
-	public Long getId();
-	public void setId(Long id);
-	public Date getDataUltimaManutencao();
-	public void setDataUltimaManutencao(Date dataUltimaManutencao);
-	public String getIndLiberado();
-	public void setIndLiberado(String indLiberado);
-	public String getDescricaoArel();
-	public void setDescricaoArel(String descricaoArel);
-	public Long getCodCor();
-	public void setCodCor(Long codCor);
-	public Long getCodSit();
-	public void setCodSit(Long codSit);
-	public Long getCodUsuarioUltimaManut();
-	public void setCodUsuarioUltimaManut(Long codUsuarioUltimaManut);
-	public Long getCodTpfa();
-	public void setCodTpfa(Long codTpfa);
-	public Long getCodTpfaUsuario();
-	public void setCodTpfaUsuario(Long codTpfaUsuario);
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity(name="AcompanhamentoArel")
+@Table(name="tb_acomp_relatorio_arel", schema="dbecardemas")
+public class AcompanhamentoArel {
+	
+	@Id
+	@Column(name="cod_arel")
+	private Long id;
+	
+	@Column(name="data_ult_manut_arel")
+	private Date dataUltimaManutencao;
+	
+	@Column(name="ind_liberado_arel")
+	private String indLiberado;
+	
+	@Column(name="descricao_arel")
+	private String descricaoArel;
+	
+	@Column(name="cod_cor")
+	private Long codCor;
+	
+	@Column(name="cod_sit")
+	private Long codSit;
+	
+	@Column(name="cod_usuultmanut_arel")
+	private Long codUsuarioUltimaManut;
+	
+	@Column(name="cod_tpfa")
+	private Long codTpfa;
+	
+	@Column(name="cod_tpfa_usuario")
+	private Long codTpfaUsuario;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getDataUltimaManutencao() {
+		return dataUltimaManutencao;
+	}
+
+	public void setDataUltimaManutencao(Date dataUltimaManutencao) {
+		this.dataUltimaManutencao = dataUltimaManutencao;
+	}
+
+	public String getIndLiberado() {
+		return indLiberado;
+	}
+
+	public void setIndLiberado(String indLiberado) {
+		this.indLiberado = indLiberado;
+	}
+
+	public String getDescricaoArel() {
+		return descricaoArel;
+	}
+
+	public void setDescricaoArel(String descricaoArel) {
+		this.descricaoArel = descricaoArel;
+	}
+
+	public Long getCodCor() {
+		return codCor;
+	}
+
+	public void setCodCor(Long codCor) {
+		this.codCor = codCor;
+	}
+
+	public Long getCodSit() {
+		return codSit;
+	}
+
+	public void setCodSit(Long codSit) {
+		this.codSit = codSit;
+	}
+
+	public Long getCodUsuarioUltimaManut() {
+		return codUsuarioUltimaManut;
+	}
+
+	public void setCodUsuarioUltimaManut(Long codUsuarioUltimaManut) {
+		this.codUsuarioUltimaManut = codUsuarioUltimaManut;
+	}
+
+	public Long getCodTpfa() {
+		return codTpfa;
+	}
+
+	public void setCodTpfa(Long codTpfa) {
+		this.codTpfa = codTpfa;
+	}
+
+	public Long getCodTpfaUsuario() {
+		return codTpfaUsuario;
+	}
+
+	public void setCodTpfaUsuario(Long codTpfaUsuario) {
+		this.codTpfaUsuario = codTpfaUsuario;
+	}
 }

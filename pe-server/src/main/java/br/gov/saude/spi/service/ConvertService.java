@@ -1,4 +1,4 @@
-package br.gov.saude.service;
+package br.gov.saude.spi.service;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,10 +9,10 @@ import br.gov.saude.model.OE;
 import br.gov.saude.report.ItemReport;
 import br.gov.saude.report.PEExecutivo;
 import br.gov.saude.report.PEGerencial;
-import br.gov.saude.web.dto.EtiquetaDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
+import br.gov.saude.service.dto.EtiquetaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
 
 public interface ConvertService {
 	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens) throws IOException;

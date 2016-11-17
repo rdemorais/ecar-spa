@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.StatusBarDto;
-import br.gov.saude.web.dto.StatusDto;
-import br.gov.saude.web.dto.StatusEstruturaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.StatusBarDto;
+import br.gov.saude.service.dto.StatusDto;
+import br.gov.saude.service.dto.StatusEstruturaDto;
+import br.gov.saude.spi.service.StatusService;
 
 public class StatusServiceImpl implements StatusService{
 	@Autowired

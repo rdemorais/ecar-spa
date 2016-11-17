@@ -7,7 +7,7 @@ import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
-import br.gov.saude.web.dto.AnexoDto;
+import br.gov.saude.service.dto.AnexoDto;
 
 public class EcarDaoImpl extends DaoImpl implements EcarDao{
 	
@@ -33,7 +33,7 @@ public class EcarDaoImpl extends DaoImpl implements EcarDao{
 	public List<AnexoDto> listaAnexos(Long codExe) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
-			hql.append("SELECT new br.gov.saude.web.dto.AnexoDto( ");
+			hql.append("SELECT new br.gov.saude.service.dto.AnexoDto( ");
 			hql.append("ane.id, ");
 			hql.append("ane.codIett, ");
 			hql.append("ane.nomeOriginal) ");
@@ -55,7 +55,7 @@ public class EcarDaoImpl extends DaoImpl implements EcarDao{
 	public AnexoDto loadAnexo(Long codAnexo) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
-			hql.append("SELECT new br.gov.saude.web.dto.AnexoDto( ");
+			hql.append("SELECT new br.gov.saude.service.dto.AnexoDto( ");
 			hql.append("ane.arquivo) ");
 			hql.append("FROM IettAnexo ane ");
 			hql.append("WHERE ane.id = :codAnexo ");

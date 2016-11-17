@@ -9,13 +9,13 @@ import br.gov.saude.model.Monitoramento;
 import br.gov.saude.model.OE;
 import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
-import br.gov.saude.web.dto.CorDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.SecretariaDto;
-import br.gov.saude.web.dto.SituacaoDto;
-import br.gov.saude.web.dto.StatusDto;
+import br.gov.saude.service.dto.CorDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.service.dto.SecretariaDto;
+import br.gov.saude.service.dto.SituacaoDto;
+import br.gov.saude.service.dto.StatusDto;
 
 public interface EcarSiteDao extends Dao{
 	public void updateUltimoParecerENaoMonitorado(Long codIett, Long codArel) throws AkulaRuntimeException;

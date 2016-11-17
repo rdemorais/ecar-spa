@@ -12,7 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import br.gov.saude.web.dto.FiltroDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.spi.service.EcarSiteService;
 
 @ContextConfiguration("/META-INF/ecarTest-context.xml")
 @RunWith(SpringJUnit4ClassRunner.class)

@@ -22,7 +22,6 @@ import br.gov.saude.dao.EcarSentinelaDao;
 import br.gov.saude.dao.EcarSiteDao;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.exc.AkulaServiceRuntimeException;
-import br.gov.saude.file.EcarFileSystem;
 import br.gov.saude.model.Cor;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
@@ -34,20 +33,26 @@ import br.gov.saude.model.UsuarioSentinela;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.AcompanhamentoArel;
 import br.gov.saude.model.ecar.IettAnexo;
-import br.gov.saude.model.ecar.IettAnexoImpl;
+import br.gov.saude.model.ecar.IettAnexo;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
-import br.gov.saude.report.EcarReport;
-import br.gov.saude.web.dto.AnexoDto;
-import br.gov.saude.web.dto.CorDto;
-import br.gov.saude.web.dto.EtiquetaDto;
-import br.gov.saude.web.dto.FiltroDto;
-import br.gov.saude.web.dto.ItemDto;
-import br.gov.saude.web.dto.OeDto;
-import br.gov.saude.web.dto.ParecerDto;
-import br.gov.saude.web.dto.SecretariaDto;
-import br.gov.saude.web.dto.SituacaoDto;
-import br.gov.saude.web.dto.StatusBarDto;
-import br.gov.saude.web.dto.TrocaSenhaDto;
+import br.gov.saude.service.dto.AnexoDto;
+import br.gov.saude.service.dto.CorDto;
+import br.gov.saude.service.dto.EtiquetaDto;
+import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.ItemDto;
+import br.gov.saude.service.dto.OeDto;
+import br.gov.saude.service.dto.ParecerDto;
+import br.gov.saude.service.dto.SecretariaDto;
+import br.gov.saude.service.dto.SituacaoDto;
+import br.gov.saude.service.dto.StatusBarDto;
+import br.gov.saude.service.dto.TrocaSenhaDto;
+import br.gov.saude.spi.file.EcarFileSystem;
+import br.gov.saude.spi.report.EcarReport;
+import br.gov.saude.spi.service.ControleAcessoService;
+import br.gov.saude.spi.service.ConvertService;
+import br.gov.saude.spi.service.EcarSiteService;
+import br.gov.saude.spi.service.RelatorioExcelService;
+import br.gov.saude.spi.service.StatusService;
 
 public class EcarSiteServiceImpl implements EcarSiteService{
 	
@@ -106,7 +111,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	public void gravarUpload(MultipartFile file, String nomeFile, Long codIett, Long codArel) throws AkulaRuntimeException {
 		try {
 			Long userId = (Long) controleAcessoService.usuarioLogadoId();
-			IettAnexo anexo = new IettAnexoImpl();
+			IettAnexo anexo = new IettAnexo();
 			
 			anexo.setArquivo(file.getBytes());
 			anexo.setCodIett(codIett);
