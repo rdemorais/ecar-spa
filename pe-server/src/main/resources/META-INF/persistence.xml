@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                                 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+             version="2.0">
+    <persistence-unit name="JpaPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>br.gov.saude.model.Iett</class> 
+        <class>br.gov.saude.model.OE</class>
+        <class>br.gov.saude.model.Etiqueta</class>
+        <class>br.gov.saude.model.Monitoramento</class>
+        <class>br.gov.saude.model.MetaIniciativa</class>
+        <class>br.gov.saude.model.ProdutoIntermediario</class>
+        <class>br.gov.saude.model.Atividade</class>
+        <class>br.gov.saude.model.Usuario</class>
+        <class>br.gov.saude.model.UsuarioSentinela</class>
+        <class>br.gov.saude.model.Situacao</class>
+        <class>br.gov.saude.model.Cor</class>
+        <class>br.gov.saude.model.OEPns</class>
+        <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento</class>
+        <class>br.gov.saude.model.ecar.AcompanhamentoAref</class>
+        <class>br.gov.saude.model.ecar.AcompanhamentoArel</class>
+		<class>br.gov.saude.model.ecar.IettAnexo</class>        
+        
+        <exclude-unlisted-classes/>
+         
+        <properties>
+			<property name="hibernate.connection.driver_class" value="org.postgresql.Driver" />  
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+            <property name="hibernate.show_sql" value="false" />
+            <property name="hibernate.hbm2ddl.auto" value="none" />
+            <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.HashtableCacheProvider" />
+           
+        </properties>
+    </persistence-unit>
+    
+</persistence>
