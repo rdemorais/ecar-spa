@@ -24,7 +24,7 @@ public class EcarReportTest {
 	@Autowired
 	public EcarSiteService ecarSiteService;
 	
-	@Test
+	//@Test
 	public void gerarReportGerencialTest() throws IOException {
 		logger.debug("Gerando relatorio...");
 		
@@ -64,7 +64,7 @@ public class EcarReportTest {
         stream.close();
 	}
 	
-	@Test
+	//@Test
 	public void testRelatorioExcel() throws IOException {
 		FiltroDto filtro = new FiltroDto();
 		byte[] bytes = ecarSiteService.gerarRelatorioExcel(filtro);

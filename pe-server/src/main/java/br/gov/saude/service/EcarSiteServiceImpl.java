@@ -33,7 +33,6 @@ import br.gov.saude.model.UsuarioSentinela;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.AcompanhamentoArel;
 import br.gov.saude.model.ecar.IettAnexo;
-import br.gov.saude.model.ecar.IettAnexo;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.service.dto.AnexoDto;
 import br.gov.saude.service.dto.CorDto;
@@ -296,7 +295,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		ItemDto dto = ecarSiteDao.loadItem(filtro, estrutura);
-		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		Long idUser = 1L;
 		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
 		DateTime hoje = new DateTime();
 		
@@ -323,7 +323,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Transactional
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
-		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		Long idUser = 1L;
 		filtro.setCodUsu(idUser);
 		
 		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false);
