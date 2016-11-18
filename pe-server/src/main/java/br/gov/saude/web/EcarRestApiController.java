@@ -169,7 +169,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItens(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA, false);
 		logger.debug("retornando lista de itens - MI: " + itens.size());
 		
 		return EcarResponse.ok(itens);
@@ -179,7 +179,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItensPi(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false);
 		logger.debug("retornando lista de itens - PI: " + itens.size());
 		
 		return EcarResponse.ok(itens);
@@ -189,7 +189,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItensAtv(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE, false);
 		logger.debug("retornando lista de itens - ATV: " + itens.size());
 		
 		return EcarResponse.ok(itens);

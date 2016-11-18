@@ -3,6 +3,7 @@ package br.gov.saude.service;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +43,26 @@ public class EcarReportTest {
 	}
 	
 	@Test
+	public void gerarReportExecutivoPareceresTest() throws IOException {
+		logger.debug("Gerando relatorio executivo pareceres...");
+		
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setOes(Arrays.asList(20L));//OE04
+		filtro.setNivel("meta");
+		
+		byte[] bytes = ecarSiteService.gerarRelatorioExecutivoPareceres(filtro);
+		
+		File reportFile = new File("/Users/rafaeldemorais/ecarReportExecutivoPareceres.pdf");
+		reportFile.createNewFile();
+		
+		FileOutputStream stream = new FileOutputStream(reportFile);
+		stream.write(bytes);
+		stream.flush();
+        stream.close();
+	}
+	
+	//@Test
 	public void gerarReportExecutivoTest() throws IOException {
 		logger.debug("Gerando relatorio executivo...");
 		

@@ -57,7 +57,7 @@ public class EcarServiceTest {
 	public void testFiltroEstruturaMetaIniListaItens() {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 		/*
 		for (ItemDto itemDto : listaItens) {
 			logger.debug(itemDto.toString());
@@ -71,7 +71,7 @@ public class EcarServiceTest {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
 		filtro.setCodIett(44L);
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false);
 		
 		logger.debug("Tamanho da listagem de produtos: " + listaItens.size());
 	}
@@ -81,7 +81,7 @@ public class EcarServiceTest {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
 		filtro.setCodIett(321L);
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE, false);
 		
 		logger.debug("Tamanho da listagem de atividades: " + listaItens.size());
 	}
@@ -92,7 +92,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setMeta(true);
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 		
 		logger.debug("Tamanho da listagem - Apenas Metas: " + listaItens.size());
 	}
@@ -103,7 +103,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setIniciativa(true);
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 		
 		logger.debug("Tamanho da listagem - Apenas Iniciativas: " + listaItens.size());
 	}
@@ -115,7 +115,7 @@ public class EcarServiceTest {
 		filtro.setIniciativa(true);
 		filtro.setMeta(true);
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 		
 		logger.debug("Tamanho da listagem - Apenas Metas/Iniciativas: " + listaItens.size());
 	}
@@ -126,7 +126,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setOes(Arrays.asList(new Long(17))); //OE 01 
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 		logger.debug("Tamanho da listagem - Filtro OE 01: " + listaItens.size());
 	}
 	
@@ -136,7 +136,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setStatus(Arrays.asList(new Long(1))); //Verde 
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 
 		logger.debug("Tamanho da listagem - Filtro Status: " + listaItens.size());
 	}
@@ -147,7 +147,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setEtiquetas(Arrays.asList(new Long(1144))); 
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 
 		logger.debug("Tamanho da listagem - Filtro Etiquetas: " + listaItens.size());
 	}
@@ -157,7 +157,7 @@ public class EcarServiceTest {
 		FiltroDto filtro = new FiltroDto();
 		filtro.setCodExe(1L);
 		filtro.setPpa(true);
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.META, false);
 
 		logger.debug("Tamanho da listagem - Filtro PPA: " + listaItens.size());
 	}
@@ -204,7 +204,7 @@ public class EcarServiceTest {
 		filtro.setCodExe(1L);
 		filtro.setSecretarias(Arrays.asList(new Long(12))); //SGETS
 		
-		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
+		List<ItemDto> listaItens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA, false);
 		
 		for (ItemDto itemDto : listaItens) {
 			logger.debug(itemDto.toString());
