@@ -169,7 +169,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItens(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.INICIATIVA, false, false);
 		logger.debug("retornando lista de itens - MI: " + itens.size());
 		
 		return EcarResponse.ok(itens);
@@ -179,7 +179,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItensPi(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
 		logger.debug("retornando lista de itens - PI: " + itens.size());
 		
 		return EcarResponse.ok(itens);
@@ -189,7 +189,7 @@ public class EcarRestApiController {
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse loadListaItensAtv(@RequestBody FiltroDto filtro) {
-		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE);
+		List<ItemDto> itens = ecarSiteService.loadListaItens(filtro, Estrutura.ATIVIDADE, false, false);
 		logger.debug("retornando lista de itens - ATV: " + itens.size());
 		
 		return EcarResponse.ok(itens);
@@ -298,6 +298,50 @@ public class EcarRestApiController {
 			
 			response.setContentType("application/pdf");
 			response.setHeader("Content-disposition", "attachment; filename=relatorioGerencial.pdf");
+		    response.setContentLength(data.length);
+		    
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
+		} catch (AkulaRuntimeException e) {
+			logger.error(e.getMessage(), e);
+		}
+        
+	}
+	
+	@RequestMapping(value="/download-rel-executivo-pareceres", 
+			method=RequestMethod.POST)
+	public void downloadRelatorioExecutivoPareceres(HttpServletResponse response, @RequestBody FiltroDto filtro) {
+		
+	    try {
+	    	byte[] data = ecarSiteService.gerarRelatorioExecutivoPareceres(filtro);
+			
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition", "attachment; filename=relatorio-executivo-pareceres.pdf");
+		    response.setContentLength(data.length);
+		    
+			response.getOutputStream().write(data);
+			response.getOutputStream().flush();
+			response.getOutputStream().close();
+		} catch (IOException e) {
+			logger.error(e.getMessage(), e);
+		} catch (AkulaRuntimeException e) {
+			logger.error(e.getMessage(), e);
+		}
+        
+	}
+	
+	@RequestMapping(value="/download-rel-executivo-pareceres-anteriores", 
+			method=RequestMethod.POST)
+	public void downloadRelatorioExecutivoPareceresAnteriores(HttpServletResponse response, @RequestBody FiltroDto filtro) {
+		
+	    try {
+	    	byte[] data = ecarSiteService.gerarRelatorioExecutivoPareceresAnteriores(filtro);
+			
+			response.setContentType("application/pdf");
+			response.setHeader("Content-disposition", "attachment; filename=relatorio-executivo-pareceres-anteriores.pdf");
 		    response.setContentLength(data.length);
 		    
 			response.getOutputStream().write(data);

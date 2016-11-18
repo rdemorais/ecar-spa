@@ -208,6 +208,90 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		return parametros;
 	}
 	
+	public byte[] gerarRelatorioExecutivoPareceresAnteriores(FiltroDto filtro) throws AkulaRuntimeException {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		List<Object> conteudo = new ArrayList<Object>();
+		
+		try {
+			parametros = gerarParametros();
+			//Estrutura nivelPai = Estrutura.valueOf(filtro.getNivel().toUpperCase());
+			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META, true, true);
+			List<ItemDto> listaItensSubNivel = null;
+			
+			for (ItemDto itemDto : listaItens) {
+				/*
+				switch (nivelPai) {
+				case META:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
+					break;
+				case INICIATIVA:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
+					break;
+				case PRODUTO_INTERMEDIARIO:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.ATIVIDADE, false, false);
+					break;
+				case ATIVIDADE:
+					listaItensSubNivel = new ArrayList<ItemDto>();
+					break;
+				default:
+					break;
+				}*/
+				
+				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel));
+			}
+			
+			byte[] bytes = ecarReport.generateReportPDF("pe-executivo-pareceres-anteriores.jasper",  parametros, conteudo);
+			
+			return bytes;
+		} catch (IOException e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		}
+	}
+	
+	public byte[] gerarRelatorioExecutivoPareceres(FiltroDto filtro) throws AkulaRuntimeException {
+		Map<String, Object> parametros = new HashMap<String, Object>();
+		List<Object> conteudo = new ArrayList<Object>();
+		
+		try {
+			parametros = gerarParametros();
+			Estrutura nivelPai;
+			if(filtro.getNivel() == null) {
+				nivelPai = Estrutura.META;
+			}else {
+				nivelPai = Estrutura.valueOf(filtro.getNivel().toUpperCase());
+			}
+			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META, true, false);
+			List<ItemDto> listaItensSubNivel = null;
+			
+			for (ItemDto itemDto : listaItens) {
+				switch (nivelPai) {
+				case META:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
+					break;
+				case INICIATIVA:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
+					break;
+				case PRODUTO_INTERMEDIARIO:
+					listaItensSubNivel = loadListaItens(filtro, Estrutura.ATIVIDADE, false, false);
+					break;
+				case ATIVIDADE:
+					listaItensSubNivel = new ArrayList<ItemDto>();
+					break;
+				default:
+					break;
+				}
+				
+				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel));
+			}
+			
+			byte[] bytes = ecarReport.generateReportPDF("pe-executivo-pareceres.jasper",  parametros, conteudo);
+			
+			return bytes;
+		} catch (IOException e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		}
+	}
+	
 	public byte[] gerarRelatorioExecutivo(FiltroDto filtro) throws AkulaRuntimeException {
 		Map<String, Object> parametros = new HashMap<String, Object>();
 		List<Object> conteudo = new ArrayList<Object>();
@@ -221,15 +305,15 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			switch (nivelPai) {
 			case META:
 				item = loadItem(filtro, Estrutura.META);
-				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
 				break;
 			case INICIATIVA:
 				item = loadItem(filtro, Estrutura.INICIATIVA);
-				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
+				listaItens = loadListaItens(filtro, Estrutura.PRODUTO_INTERMEDIARIO, false, false);
 				break;
 			case PRODUTO_INTERMEDIARIO:
 				item = loadItem(filtro, Estrutura.PRODUTO_INTERMEDIARIO);
-				listaItens = loadListaItens(filtro, Estrutura.ATIVIDADE);
+				listaItens = loadListaItens(filtro, Estrutura.ATIVIDADE, false, false);
 				break;
 			case ATIVIDADE:
 				item = loadItem(filtro, Estrutura.ATIVIDADE);
@@ -256,7 +340,7 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		
 		try {
 			parametros = gerarParametros();
-			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META);
+			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META, false, false);
 			
 			conteudo.add(convertService.createPEGerencial(listaItens, filtro));
 			
@@ -295,8 +379,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		ItemDto dto = ecarSiteDao.loadItem(filtro, estrutura);
-		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
-		Long idUser = 1L;
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = 1L;
 		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
 		DateTime hoje = new DateTime();
 		
@@ -322,13 +406,13 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	}
 	
 	@Transactional
-	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
-		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
-		Long idUser = 1L;
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean comParecer, boolean anteriores) throws AkulaRuntimeException {
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = 1L;
 		filtro.setCodUsu(idUser);
 		
-		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false);
-		List<ItemDto> nMonitorados = ecarSiteDao.loadListaItens(filtro, estrutura, true);
+		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false, comParecer, anteriores);
+		List<ItemDto> nMonitorados = ecarSiteDao.loadListaItens(filtro, estrutura, true, false, false);
 		
 		List<ItemDto> itens = new ArrayList<ItemDto>(monitorados);
 		

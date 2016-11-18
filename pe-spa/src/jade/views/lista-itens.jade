@@ -59,6 +59,6 @@
 					.col-sm-4.mt-xl
 						a(href="", ng-click="limparFiltros()") Limpar filtros
 					.col-sm-2
-						a.pull-right.mt-xl.em.fa.fa-print.fa-2x(href="", ng-click="gerarRelatorioGerencial()")
+						a.pull-right.mt-xl.em.fa.fa-print.fa-2x(popover-placement='right' popover-title="Escolhar um dos modelos disponíveis" popover-template="'app/views/cached/popover-lista-itens-print.html'")
 	.col-lg-8.fw-boxed
 		pems-lista-itens(nivel='META')

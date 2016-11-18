@@ -45,7 +45,63 @@
                 a.href = fileURL;
                 a.download = 'relatorio-executivo.pdf';
                 a.click();
-                window.URL.revokeObjectURL(url);
+                //window.URL.revokeObjectURL(url);
+
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        }
+
+        this.gerarRelatorioExecutivoPareceresAnteriores = function(filtro) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/download-rel-executivo-pareceres-anteriores',
+                headers: {
+                    accept: 'application/pdf'
+                },
+                responseType: 'arraybuffer',
+                data: filtro
+            }).then(function successCallBack(response) {
+                
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                
+                var fileURL = URL.createObjectURL(file);
+
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = fileURL;
+                a.download = 'relatorio-executivo-pareceres-anteriores.pdf';
+                a.click();
+                //window.URL.revokeObjectURL(url);
+
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });
+        }
+
+        this.gerarRelatorioExecutivoPareceres = function(filtro) {
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/download-rel-executivo-pareceres',
+                headers: {
+                    accept: 'application/pdf'
+                },
+                responseType: 'arraybuffer',
+                data: filtro
+            }).then(function successCallBack(response) {
+                
+                var file = new Blob([response.data], {type: 'application/pdf'});
+                
+                var fileURL = URL.createObjectURL(file);
+
+                var a = document.createElement("a");
+                document.body.appendChild(a);
+                a.style = "display: none";
+                a.href = fileURL;
+                a.download = 'relatorio-executivo-pareceres.pdf';
+                a.click();
+                //window.URL.revokeObjectURL(url);
 
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);
@@ -73,7 +129,7 @@
                 a.href = fileURL;
                 a.download = 'relatorio-gerencial.pdf';
                 a.click();
-                window.URL.revokeObjectURL(url);
+                //window.URL.revokeObjectURL(url);
 
             }, function errorCallBack(response) {
                 $rootScope.$emit('oauth:error', response);

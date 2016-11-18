@@ -406,7 +406,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado) throws AkulaRuntimeException {
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado, boolean comParecer, boolean anteriores) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
@@ -438,7 +438,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.coOePns, ");
 				hql.append("iett.oePns, ");
 				hql.append("current_date(), ");
-				hql.append("'') ");
+				if(comParecer) {
+					hql.append("mon.parecer) ");
+				}else {
+					hql.append("'') ");					
+				}
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
 				hql.append("iett.nomePi, ");
@@ -454,7 +458,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("current_date(), ");
-				hql.append("'') ");
+				if(comParecer) {
+					hql.append("mon.parecer) ");
+				}else {
+					hql.append("'') ");					
+				}
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
 				hql.append("iett.nomeAtv, ");
@@ -470,7 +478,11 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("current_date(), ");
-				hql.append("'') ");
+				if(comParecer) {
+					hql.append("mon.parecer) ");
+				}else {
+					hql.append("'') ");					
+				}
 			}
 			
 			hql.append("FROM Monitoramento mon ");
@@ -537,14 +549,18 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			if(nMonitorado) {
 				hql.append("AND mon.naoMonitorado = 'Y' ");
 			}else {
-				hql.append("AND mon.ultimoParecer = 'Y' ");
+				if(!anteriores) {
+					hql.append("AND mon.ultimoParecer = 'Y' ");
+				}else {
+					hql.append("AND iett.id = :codIett ");
+				}
 			}
 			
 			hql.append("AND mon.exercicio = :codExe ");
 			
 			Query q = em.createQuery(hql.toString());
 			
-			if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO) || estrutura.equals(Estrutura.ATIVIDADE)) {
+			if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO) || estrutura.equals(Estrutura.ATIVIDADE) || anteriores) {
 				q.setParameter("codIett", filtro.getCodIett());
 			}
 			

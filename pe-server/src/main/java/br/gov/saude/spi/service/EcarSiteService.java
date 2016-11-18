@@ -19,6 +19,8 @@ import br.gov.saude.service.dto.StatusBarDto;
 import br.gov.saude.service.dto.TrocaSenhaDto;
 
 public interface EcarSiteService {
+	public byte[] gerarRelatorioExecutivoPareceresAnteriores(FiltroDto filtro) throws AkulaRuntimeException;
+	public byte[] gerarRelatorioExecutivoPareceres(FiltroDto filtro) throws AkulaRuntimeException;
 	public void excluirAnexo(AnexoDto anexo) throws AkulaRuntimeException;
 	public void trocarSenha(TrocaSenhaDto dto) throws AkulaRuntimeException;
 	public TrocaSenhaDto verificarUsuario(TrocaSenhaDto dto) throws AkulaRuntimeException;
@@ -35,7 +37,7 @@ public interface EcarSiteService {
 	public List<EtiquetaDto> listaEtiquetas() throws AkulaRuntimeException;
 	public StatusBarDto loadStatusBar(FiltroDto filtro) throws AkulaRuntimeException;
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
-	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException;
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean comParecer, boolean anteriores) throws AkulaRuntimeException;
 	public List<SituacaoDto> listSituacao() throws AkulaRuntimeException;
 	public List<CorDto> listCor() throws AkulaRuntimeException;
 }
