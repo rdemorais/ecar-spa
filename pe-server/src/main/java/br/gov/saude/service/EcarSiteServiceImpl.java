@@ -254,7 +254,12 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		
 		try {
 			parametros = gerarParametros();
-			Estrutura nivelPai = Estrutura.valueOf(filtro.getNivel().toUpperCase());
+			Estrutura nivelPai;
+			if(filtro.getNivel() == null) {
+				nivelPai = Estrutura.META;
+			}else {
+				nivelPai = Estrutura.valueOf(filtro.getNivel().toUpperCase());
+			}
 			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META, true, false);
 			List<ItemDto> listaItensSubNivel = null;
 			
@@ -374,8 +379,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	public ItemDto loadItem(FiltroDto filtro, Estrutura estrutura) throws AkulaRuntimeException {
 		ItemDto dto = ecarSiteDao.loadItem(filtro, estrutura);
-		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
-		Long idUser = 1L;
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = 1L;
 		UsuarioPermissaoMonitoramento upm = ecarSiteDao.loadUsuarioPermissaoMonitoramento(idUser, filtro.getCodIett());
 		DateTime hoje = new DateTime();
 		
@@ -402,8 +407,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Transactional
 	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean comParecer, boolean anteriores) throws AkulaRuntimeException {
-		//Long idUser = (Long) controleAcessoService.usuarioLogadoId();
-		Long idUser = 1L;
+		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
+		//Long idUser = 1L;
 		filtro.setCodUsu(idUser);
 		
 		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false, comParecer, anteriores);

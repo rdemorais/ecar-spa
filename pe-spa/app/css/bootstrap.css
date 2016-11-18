@@ -6768,6 +6768,7 @@ button.close {
 }
 .popover-content {
   padding: 9px 14px;
+  width: 300px;
 }
 .popover > .arrow,
 .popover > .arrow:after {

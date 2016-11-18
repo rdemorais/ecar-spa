@@ -551,6 +551,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			}else {
 				if(!anteriores) {
 					hql.append("AND mon.ultimoParecer = 'Y' ");
+				}else {
+					hql.append("AND iett.id = :codIett ");
 				}
 			}
 			
@@ -558,7 +560,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			Query q = em.createQuery(hql.toString());
 			
-			if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO) || estrutura.equals(Estrutura.ATIVIDADE)) {
+			if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO) || estrutura.equals(Estrutura.ATIVIDADE) || anteriores) {
 				q.setParameter("codIett", filtro.getCodIett());
 			}
 			

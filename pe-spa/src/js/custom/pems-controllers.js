@@ -147,6 +147,10 @@
           pemsService.gerarRelatorioGerencial(pemsFilterService.getFiltros());
         }
 
+        $scope.gerarRelatorioExecutivoPareceres = function() {
+            pemsService.gerarRelatorioExecutivoPareceres(pemsFilterService.getFiltros());
+        }
+
         $scope.pesquisar = function() {
             pemsFilterService.setPpa($scope.filtro.ppa);
             pemsFilterService.setMeta($scope.filtro.meta);
@@ -208,6 +212,10 @@
 
         $scope.gerarRelatorioExecutivo = function() {
             pemsService.gerarRelatorioExecutivo(pemsFilterService.getFiltros());
+        }
+
+        $scope.gerarRelatorioExecutivoPareceresAnteriores = function() {
+            pemsService.gerarRelatorioExecutivoPareceresAnteriores(pemsFilterService.getFiltros());
         }
 
         pemsFilterService.getFiltros().codIett = $stateParams.itemId;
