@@ -63,8 +63,10 @@ public class ConvertServiceImpl implements ConvertService{
 	
 	public List<ItemReport> convertItem(List<ItemDto> listaItens) throws IOException {
 		List<ItemReport> itensRep = new ArrayList<ItemReport>();
-		for (ItemDto itemDto : listaItens) {
-			itensRep.add(convertItem(itemDto));
+		if(listaItens != null) {
+			for (ItemDto itemDto : listaItens) {
+				itensRep.add(convertItem(itemDto));
+			}			
 		}
 		
 		return itensRep;

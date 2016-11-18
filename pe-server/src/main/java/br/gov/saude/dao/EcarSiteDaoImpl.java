@@ -406,7 +406,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado, boolean comParecer) throws AkulaRuntimeException {
+	public List<ItemDto> loadListaItens(FiltroDto filtro, Estrutura estrutura, boolean nMonitorado, boolean comParecer, boolean anteriores) throws AkulaRuntimeException {
 		try {
 			StringBuffer hql = new StringBuffer();
 			
@@ -549,7 +549,9 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			if(nMonitorado) {
 				hql.append("AND mon.naoMonitorado = 'Y' ");
 			}else {
-				hql.append("AND mon.ultimoParecer = 'Y' ");
+				if(!anteriores) {
+					hql.append("AND mon.ultimoParecer = 'Y' ");
+				}
 			}
 			
 			hql.append("AND mon.exercicio = :codExe ");

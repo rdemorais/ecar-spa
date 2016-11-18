@@ -43,6 +43,26 @@ public class EcarReportTest {
 	}
 	
 	@Test
+	public void gerarReportExecutivoPareceresAnterioresTest() throws IOException {
+		logger.debug("Gerando relatorio executivo pareceres...");
+		
+		FiltroDto filtro = new FiltroDto();
+		filtro.setCodExe(1L);
+		filtro.setOes(Arrays.asList(20L));//OE04
+		filtro.setNivel("meta");
+		
+		byte[] bytes = ecarSiteService.gerarRelatorioExecutivoPareceresAnteriores(filtro);
+		
+		File reportFile = new File("/Users/rafaeldemorais/ecarReportExecutivoPareceresAnteriores.pdf");
+		reportFile.createNewFile();
+		
+		FileOutputStream stream = new FileOutputStream(reportFile);
+		stream.write(bytes);
+		stream.flush();
+        stream.close();
+	}
+	
+	//@Test
 	public void gerarReportExecutivoPareceresTest() throws IOException {
 		logger.debug("Gerando relatorio executivo pareceres...");
 		
