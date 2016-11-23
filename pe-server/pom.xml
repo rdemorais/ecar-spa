@@ -373,7 +373,7 @@
 								<targetPath>/app/js</targetPath>
 								<directory>src/main/webapp/app/js</directory>
 								<includes>
-									<include>application.js</include>
+									<include>application.js</include> 
 								</includes>
 							</resource>
 						</webResources>
