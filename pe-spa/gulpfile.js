@@ -156,7 +156,7 @@ gulp.task('pe-server-dist-app', function(done) {
     log('Copiando pe-spa/app/* para pe-server...');
     return gulp
       .src(['app/**/*'])
-      .pipe(gulp.dest('../pe-server/app-web/src/main/webapp/app'));
+      .pipe(gulp.dest('../pe-server/src/main/webapp/app'));
 });
 
 gulp.task('pe-server-dist-index', function(done) {
@@ -170,7 +170,7 @@ gulp.task('pe-server-dist-bower', function(done) {
     log('Copiando pe-spa/bower_components para pe-server...');
     return gulp
       .src(['bower_components/**/*'])
-      .pipe(gulp.dest('../pe-server/src/main/resources/bower_components'));
+      .pipe(gulp.dest('../pe-server/src/main/webapp/bower_components'));
 });
 
 //---------------
