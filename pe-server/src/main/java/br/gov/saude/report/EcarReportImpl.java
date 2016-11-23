@@ -59,6 +59,8 @@ public class EcarReportImpl implements EcarReport{
 			throw new AkulaServiceRuntimeException(e.getMessage(), e);
 		} catch (IOException e) {
 			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		} catch (Exception e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
 		}
 	}
 }

@@ -289,6 +289,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			return bytes;
 		} catch (IOException e) {
 			throw new AkulaServiceRuntimeException(e.getMessage(), e);
+		} catch (Exception e) {
+			throw new AkulaServiceRuntimeException(e.getMessage(), e);
 		}
 	}
 	
