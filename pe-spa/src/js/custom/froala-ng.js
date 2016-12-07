@@ -25,12 +25,14 @@
 
 	      link.$inject = ['$scope', '$element', '$attrs', 'ngModel'];
 	      function link($scope, $element, $attrs, ngModel) {
+
 					$element.froalaEditor({
-	      		toolbarButtons: $scope.toolbarButtons,
-	      		language: $scope.language,
-	      		quickInsertButtons: ['table', 'ul', 'ol', 'hr'],
-	      		heightMin: 350
-	      	});
+						toolbarButtons: $scope.toolbarButtons,
+						language: $scope.language,
+						quickInsertButtons: ['table', 'ul', 'ol', 'hr'],
+						heightMin: 350,
+						key: 'Etf1ktA3zkB-21hhD6hD-8gF1qf=='
+					});
 
 	      	$element.on('froalaEditor.contentChanged', function (e, editor) {
 				var value = $element.froalaEditor('html.get', true);
