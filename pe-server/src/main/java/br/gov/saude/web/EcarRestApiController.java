@@ -325,6 +325,7 @@ public class EcarRestApiController {
 			response.getOutputStream().write(data);
 			response.getOutputStream().flush();
 			response.getOutputStream().close();
+			
 		} catch (IOException e) {
 			logger.error(e.getMessage(), e);
 		} catch (AkulaRuntimeException e) {

@@ -52,7 +52,7 @@ public class DaoImpl implements Dao{
 	public <T> T find(Class<T> c, Serializable pk) throws AkulaRuntimeException {
 		try {
 			String nomeClass = c.getCanonicalName();
-			nomeClass += "Impl";
+			//nomeClass += "Impl";
 			return (T) em.find(Class.forName(nomeClass), pk);
 		} catch (ClassNotFoundException e) {
 			//TODO Informar que o prefixo da classe concreta deve ser "Impl" e o pacote deve ser o mesmo que a interface
