@@ -40,8 +40,8 @@
           year:          new Date().getFullYear(),
           baseUrl:       '${pems-url}/ecar/api',
           baseUrlTrocaSenha: '${pems-url}/troca-senha/ecar/api',
-          //baseUrl:       'http://localhost:8080/pems/ecar/api',
-          //baseUrlTrocaSenha: 'http://localhost:8080/pems/troca-senha/ecar/api',
+          // baseUrl:       'http://localhost:8080/pems/ecar/api',
+          // baseUrlTrocaSenha: 'http://localhost:8080/pems/troca-senha/ecar/api',
           views: {
             animation: 'ng-fadeInLeft2'
           },

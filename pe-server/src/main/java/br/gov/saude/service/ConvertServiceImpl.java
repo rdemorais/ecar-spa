@@ -24,10 +24,10 @@ public class ConvertServiceImpl implements ConvertService{
 	@Autowired
 	private EcarFileSystem ecarFileSystem;
 	
-	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens) throws IOException {
+	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens, String descExe) throws IOException {
 		PEExecutivo peExecutivo = new PEExecutivo();
 		
-		peExecutivo.setExercicio("2016");
+		peExecutivo.setExercicio(descExe);
 		peExecutivo.setOe(itemDto.getOe());
 		peExecutivo.setSigla(itemDto.getSiglaMi());
 		peExecutivo.setDesc(itemDto.getDesc());
@@ -52,9 +52,9 @@ public class ConvertServiceImpl implements ConvertService{
 		return peExecutivo;
 	}
 	
-	public PEGerencial createPEGerencial(List<ItemDto> listaItens, FiltroDto filtro) throws IOException {
+	public PEGerencial createPEGerencial(List<ItemDto> listaItens, FiltroDto filtro, String descExe) throws IOException {
 		PEGerencial peGerencial = new PEGerencial();
-		peGerencial.setExercicio("2016");
+		peGerencial.setExercicio(descExe);
 		peGerencial.setFiltros(convertFiltroToString(filtro));
 		peGerencial.setListaItens(convertItem(listaItens));
 		
