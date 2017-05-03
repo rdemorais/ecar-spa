@@ -107,8 +107,13 @@
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
             iniciativa: pemsFilterService.getFiltros().iniciativa,
-            minhaVisao: pemsFilterService.getFiltros().minhaVisao
+            minhaVisao: pemsFilterService.getFiltros().minhaVisao,
+            codExe: pemsFilterService.getFiltros().codExe
         };
+
+        $scope.mudarExercicio = function() {
+            pemsFilterService.mudarExercicio($scope.filtro.codExe);
+        }
 
         $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
 
@@ -138,8 +143,13 @@
             ppa: pemsFilterService.getFiltros().ppa,
             meta: pemsFilterService.getFiltros().meta,
             iniciativa: pemsFilterService.getFiltros().iniciativa,
-            minhaVisao: pemsFilterService.getFiltros().minhaVisao
+            minhaVisao: pemsFilterService.getFiltros().minhaVisao,
+            codExe: pemsFilterService.getFiltros().codExe
         };
+
+        $scope.mudarExercicio = function() {
+            pemsFilterService.mudarExercicio($scope.filtro.codExe);
+        }
 
         $scope.persp = pemsFilterService.getFiltros().pns ? 'pns' : 'ppa';
 
