@@ -14,7 +14,7 @@
 
       OAuthProvider.configure({
         baseUrl: '${pems-url}/',
-        //baseUrl: 'http://localhost:8080/pems',
+        // baseUrl: 'http://localhost:8080/pems',
         clientId: 'restapp',
         clientSecret: 'secret',
         grantPath: '/oauth/token',

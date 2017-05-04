@@ -7,9 +7,29 @@ import javax.persistence.Query;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
+import br.gov.saude.model.ecar.Exercicio;
 import br.gov.saude.service.dto.AnexoDto;
 
 public class EcarDaoImpl extends DaoImpl implements EcarDao{
+	
+	@Override
+	public Exercicio loadExercicio(Long codExe) throws AkulaRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("FROM Exercicio exe ");
+			hql.append("WHERE exe.id = :codExe ");
+			
+			Query q = em.createQuery(hql.toString());
+			
+			q.setParameter("codExe", codExe);
+			
+			return (Exercicio) q.getSingleResult();
+		} catch (NoResultException e) {
+			return null;
+		} catch (Exception e) {
+			throw new AkulaRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	public AcompanhamentoAref loadUltimoCiclo() throws AkulaRuntimeException {
 		try {

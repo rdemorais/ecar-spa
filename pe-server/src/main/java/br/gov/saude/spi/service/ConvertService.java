@@ -15,8 +15,8 @@ import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 
 public interface ConvertService {
-	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens) throws IOException;
-	public PEGerencial createPEGerencial(List<ItemDto> listaItens, FiltroDto filtro) throws IOException;
+	public PEExecutivo createPEExecutivo(ItemDto itemDto, List<ItemDto> listaItens, String descExe) throws IOException;
+	public PEGerencial createPEGerencial(List<ItemDto> listaItens, FiltroDto filtro, String descExe) throws IOException;
 	public List<ItemReport> convertItem(List<ItemDto> listaItens) throws IOException;
 	public ItemReport convertItem(ItemDto itemDto) throws IOException;
 	public List<OeDto> convertListaOE(List<OE> oesDd) throws AkulaRuntimeException;

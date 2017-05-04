@@ -22,7 +22,8 @@
         <class>br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento</class>
         <class>br.gov.saude.model.ecar.AcompanhamentoAref</class>
         <class>br.gov.saude.model.ecar.AcompanhamentoArel</class>
-		<class>br.gov.saude.model.ecar.IettAnexo</class>        
+		<class>br.gov.saude.model.ecar.IettAnexo</class>
+		<class>br.gov.saude.model.ecar.Exercicio</class>
         
         <exclude-unlisted-classes/>
          

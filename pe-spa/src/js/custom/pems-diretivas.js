@@ -204,7 +204,7 @@
       };
       function controller($scope, $element, pemsService, colors, pemsFilterService, $rootScope) {
         $scope.statusBar = {};
-        
+
         var pieOptionsCor = function(nomeCor) {
           var pieOptions = {
             animate:{
@@ -225,6 +225,10 @@
         $scope.statusClick = function(item) {
           item.sel = !item.sel;
         }
+
+        $rootScope.$on('pems:exercicioAlterado', function(event) {
+          loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);
+        });
 
         $rootScope.$on('pems:perspectivaAlterada', function(event) {
           loadStatus(pemsService, pemsFilterService, pieOptionsCor, $scope);
@@ -369,7 +373,7 @@
     }
 
     function pemsListaItens() {
-      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', '$state'];
+      controller.$inject = ['$scope', '$element', 'pemsService', 'pemsFilterService', '$state', '$rootScope'];
       return {
         restrict: 'E',
         scope: {
@@ -379,7 +383,12 @@
         controller: controller
       };
 
-      function controller($scope, $element, pemsService, pemsFilterService, $state) {
+      function controller($scope, $element, pemsService, pemsFilterService, $state, $rootScope) {
+        $rootScope.$on('pems:exercicioAlterado', function(event) {
+          pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
+            $scope.listaItens = listaItens;
+          });
+        });
         if($scope.nivel == 'META') {
           pemsService.loadListaItens(pemsFilterService.getFiltros(), function(listaItens) {
             $scope.listaItens = listaItens;

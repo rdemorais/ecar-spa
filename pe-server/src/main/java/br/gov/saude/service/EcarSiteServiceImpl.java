@@ -32,6 +32,7 @@ import br.gov.saude.model.Usuario;
 import br.gov.saude.model.UsuarioSentinela;
 import br.gov.saude.model.ecar.AcompanhamentoAref;
 import br.gov.saude.model.ecar.AcompanhamentoArel;
+import br.gov.saude.model.ecar.Exercicio;
 import br.gov.saude.model.ecar.IettAnexo;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.service.dto.AnexoDto;
@@ -236,8 +237,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 				default:
 					break;
 				}*/
-				
-				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel));
+				Exercicio exe = ecarDao.loadExercicio(filtro.getCodExe());
+				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel, exe.getDescricao()));
 			}
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-executivo-pareceres-anteriores.jasper",  parametros, conteudo);
@@ -280,8 +281,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 				default:
 					break;
 				}
-				
-				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel));
+				Exercicio exe = ecarDao.loadExercicio(filtro.getCodExe());
+				conteudo.add(convertService.createPEExecutivo(itemDto, listaItensSubNivel, exe.getDescricao()));
 			}
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-executivo-pareceres.jasper",  parametros, conteudo);
@@ -324,9 +325,9 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 			default:
 				break;
 			}
+			Exercicio exe = ecarDao.loadExercicio(filtro.getCodExe());
 			
-			
-			conteudo.add(convertService.createPEExecutivo(item, listaItens));
+			conteudo.add(convertService.createPEExecutivo(item, listaItens, exe.getDescricao()));
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-executivo.jasper",  parametros, conteudo);
 			
@@ -343,8 +344,8 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		try {
 			parametros = gerarParametros();
 			List<ItemDto> listaItens = loadListaItens(filtro, Estrutura.META, false, false);
-			
-			conteudo.add(convertService.createPEGerencial(listaItens, filtro));
+			Exercicio exe = ecarDao.loadExercicio(filtro.getCodExe());
+			conteudo.add(convertService.createPEGerencial(listaItens, filtro, exe.getDescricao()));
 			
 			byte[] bytes = ecarReport.generateReportPDF("pe-gerencial.jasper",  parametros, conteudo);
 			
@@ -412,7 +413,6 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 		Long idUser = (Long) controleAcessoService.usuarioLogadoId();
 		//Long idUser = 1L;
 		filtro.setCodUsu(idUser);
-		
 		List<ItemDto> monitorados = ecarSiteDao.loadListaItens(filtro, estrutura, false, comParecer, anteriores);
 		List<ItemDto> nMonitorados = ecarSiteDao.loadListaItens(filtro, estrutura, true, false, false);
 		

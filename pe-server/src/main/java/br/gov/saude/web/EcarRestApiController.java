@@ -9,14 +9,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
@@ -47,6 +51,13 @@ public class EcarRestApiController {
 	
 	@Autowired
 	private ControleAcessoService controleAcessoService;
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<EcarResponse> errorHandler(Exception ex, WebRequest request) {
+		logger.error(ex.getMessage(), ex);
+		EcarResponse error = EcarResponse.error(ex.getMessage());
+		return new ResponseEntity<EcarResponse>(error, HttpStatus.BAD_REQUEST);
+	}
 	
 	@RequestMapping(value="/nome-usuario", 
 			method=RequestMethod.POST)

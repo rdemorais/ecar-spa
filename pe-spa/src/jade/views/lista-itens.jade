@@ -3,6 +3,12 @@
 		.panel.panel-default
 			.panel-body
 				.row
+					h4.ml Exercício
+					.col-md-12
+						select(ng-model="filtro.codExe", ng-change="mudarExercicio()")
+							option(value="1") 2016
+							option(value="2") 2017
+				.row
 					h4.ml Perspectiva
 					.col-md-12
 						.radio-inline.c-radio

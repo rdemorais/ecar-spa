@@ -525,6 +525,11 @@
             };
         });
 
+        this.mudarExercicio = function(exe) {
+            filtros.codExe = exe;
+            $rootScope.$emit('pems:exercicioAlterado');
+        }
+
         this.mudarPerspectiva = function(p) {
             //this.clear();
 
