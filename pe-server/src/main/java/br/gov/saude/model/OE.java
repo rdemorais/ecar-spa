@@ -15,6 +15,9 @@ public class OE extends Iett {
 	
 	@Column(name="nome_oe")
 	private String descricao;
+	
+	@Column(name="ind_ativo")
+	private String ativoOe;
 
 	public String getSigla() {
 		return sigla;
@@ -31,4 +34,14 @@ public class OE extends Iett {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public String getAtivoOe() {
+		return ativoOe;
+	}
+
+	public void setAtivoOe(String ativoOe) {
+		this.ativoOe = ativoOe;
+	}
+	
+	
 }

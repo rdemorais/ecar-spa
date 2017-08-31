@@ -195,7 +195,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 	@SuppressWarnings("unchecked")
 	public List<OE> loadOes() throws AkulaRuntimeException {
 		try {
-			Query q = em.createQuery("FROM OE oe ORDER BY oe.sigla ASC");
+			Query q = em.createQuery("FROM OE oe WHERE oe.ativoOe = 'S' ORDER BY oe.sigla ASC");
 			
 			return q.getResultList();
 		} catch (Exception e) {
@@ -366,20 +366,22 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			if(estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA)) {
 				hql.append("JOIN iett.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (MetaIniciativa) ");
+				hql.append("AND iett.ativoMi = 'S' ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (ProdutoIntermediario) ");
+				hql.append("AND iett.ativoPi = 'S' ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("JOIN iett.produtoIntermediario pi ");
 				hql.append("JOIN pi.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (Atividade) ");	
+				hql.append("AND iett.ativoAtv = 'S' ");
 			}
 			
 			hql.append("AND mon.exercicio = :codExe ");
 			hql.append("AND iett.id = :codIett ");
-			hql.append("AND iett.ativo = 'S' ");
 			
 			if(filtro.getMes() != null && filtro.getAno() != null) {
 				hql.append("AND mon.mes = :mes ");
@@ -510,17 +512,20 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				if(filtro.getSecretarias().size() > 0) {
 					hql.append("AND iett.codOrg IN :secs ");
 				}
+				hql.append("AND iett.ativoMi = 'S' ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (ProdutoIntermediario) ");
 				hql.append("AND mi.id = :codIett ");
+				hql.append("AND iett.ativoPi = 'S' ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("JOIN iett.produtoIntermediario pi ");
 				hql.append("JOIN pi.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
 				hql.append("WHERE TYPE(iett) IN (Atividade) ");
 				hql.append("AND pi.id = :codIett ");
+				hql.append("AND iett.ativoAtv = 'S' ");
 			}
 			
 			if(filtro.isMinhaVisao()) {
@@ -558,7 +563,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			}
 			
 			hql.append("AND mon.exercicio = :codExe ");
-			hql.append("AND iett.ativo = 'S' ");
 			
 			Query q = em.createQuery(hql.toString());
 			

@@ -34,6 +34,9 @@ public class ProdutoIntermediario extends Iett {
 	@Column(name="sigla_org")
 	private String siglaOrgPi;
 	
+	@Column(name="ind_ativo")
+	private String ativoPi;
+	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=Usuario.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
 	private Usuario usuario;
@@ -105,4 +108,13 @@ public class ProdutoIntermediario extends Iett {
 	public void setMetaIniciativa(MetaIniciativa metaIniciativa) {
 		this.metaIniciativa = metaIniciativa;
 	}
+
+	public String getAtivoPi() {
+		return ativoPi;
+	}
+
+	public void setAtivoPi(String ativoPi) {
+		this.ativoPi = ativoPi;
+	}
+
 }

@@ -53,4 +53,5 @@ public class Iett {
 	public void setEtiquetas(Collection<Etiqueta> etiquetas) {
 		this.etiquetas = etiquetas;
 	}
+	
 }
