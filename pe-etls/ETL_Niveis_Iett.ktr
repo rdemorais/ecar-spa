@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;21 23&#x3a;14&#x3a;02.741</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;04 16&#x3a;24&#x3a;23.986</modified_date>
+  <modified_date>2017&#x2f;08&#x2f;31 14&#x3a;35&#x3a;29.284</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -77,7 +77,7 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
-    <database>ecar2016</database>
+    <database>ecar2017</database>
     <port>5432</port>
     <username>sa_ecar</username>
     <password>Encrypted 2be98afc86aa7f28efc0ffd619380aedc</password>
@@ -445,6 +445,11 @@
         <rename>ds_oe_pns</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>ind_ativo</name>
+        <rename>ind_ativo_iett</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -783,6 +788,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>ind_ativo_iett</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>data_inicio</name>
         <rename>data_inicio</rename>
@@ -929,7 +938,7 @@
            </partitioning>
     <connection>eCar 2016</connection>
     <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_mi,&#xa;sigla_iett as sigla_mi,&#xa;nome_iett as nome_mi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;iett.descricao_r3 as ppa_mi,&#xa;att_satb.cod_satb as co_oe_pns,&#xa;att_satb.descricao_satb as ds_oe_pns,&#xa;CASE WHEN ett.cod_ett &#x3d; 2 THEN &#x27;INICIATIVA&#x27;&#xa;	 WHEN ett.cod_ett &#x3d; 5 THEN &#x27;META&#x27;&#xa;END as ds_estrutura_mi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;left join dbecardemas.tb_itemestrutura_sisatributo_iettsatb oePnsTb on iett.cod_iett &#x3d; oePnsTb.cod_iett&#xa;left join dbecardemas.tb_sis_atributo_satb att_satb on oePnsTb.cod_satb &#x3d; att_satb.cod_satb and att_satb.cod_sga &#x3d; 48&#xa;where nivel_iett &#x3d; 2&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <sql>select iett.cod_iett as cod_mi,&#xa;sigla_iett as sigla_mi,&#xa;nome_iett as nome_mi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;iett.ind_ativo_iett,&#xa;iett.descricao_r3 as ppa_mi,&#xa;att_satb.cod_satb as co_oe_pns,&#xa;att_satb.descricao_satb as ds_oe_pns,&#xa;CASE WHEN ett.cod_ett &#x3d; 2 THEN &#x27;INICIATIVA&#x27;&#xa;	 WHEN ett.cod_ett &#x3d; 5 THEN &#x27;META&#x27;&#xa;END as ds_estrutura_mi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;left join dbecardemas.tb_itemestrutura_sisatributo_iettsatb oePnsTb on iett.cod_iett &#x3d; oePnsTb.cod_iett&#xa;left join dbecardemas.tb_sis_atributo_satb att_satb on oePnsTb.cod_satb &#x3d; att_satb.cod_satb and att_satb.cod_sga &#x3d; 48&#xa;where nivel_iett &#x3d; 2&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>

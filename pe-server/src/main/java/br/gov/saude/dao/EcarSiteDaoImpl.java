@@ -379,6 +379,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			
 			hql.append("AND mon.exercicio = :codExe ");
 			hql.append("AND iett.id = :codIett ");
+			hql.append("AND iett.ativo = 'S' ");
 			
 			if(filtro.getMes() != null && filtro.getAno() != null) {
 				hql.append("AND mon.mes = :mes ");
@@ -557,6 +558,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			}
 			
 			hql.append("AND mon.exercicio = :codExe ");
+			hql.append("AND iett.ativo = 'S' ");
 			
 			Query q = em.createQuery(hql.toString());
 			

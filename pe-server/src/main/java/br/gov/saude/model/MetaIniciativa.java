@@ -43,6 +43,9 @@ public class MetaIniciativa extends Iett {
 	@Column(name="ds_oe_pns")
 	private String oePns;
 	
+	@Column(name="ind_ativo")
+	private String ativo;
+	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=Usuario.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
 	private Usuario usuario;
@@ -138,4 +141,13 @@ public class MetaIniciativa extends Iett {
 	public void setOe(OE oe) {
 		this.oe = oe;
 	}
+
+	public String getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(String ativo) {
+		this.ativo = ativo;
+	}
+	
 }
