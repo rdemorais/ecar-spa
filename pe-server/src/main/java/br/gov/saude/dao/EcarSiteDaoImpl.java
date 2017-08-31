@@ -588,11 +588,12 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				if(filtro.getSecretarias().size() > 0) {
 					q.setParameter("secs", filtro.getSecretarias());
 				}
+				
+				if(filtro.isMinhaVisao()) {
+					q.setParameter("codUsu", filtro.getCodUsu());
+				}
 			}
 			
-			if(filtro.isMinhaVisao()) {
-				q.setParameter("codUsu", filtro.getCodUsu());
-			}
 			
 			if(filtro.getOes().size() > 0) {
 				q.setParameter("oes", filtro.getOes());
