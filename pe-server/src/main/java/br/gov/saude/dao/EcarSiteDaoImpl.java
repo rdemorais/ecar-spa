@@ -512,7 +512,13 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				if(filtro.getSecretarias().size() > 0) {
 					hql.append("AND iett.codOrg IN :secs ");
 				}
+				
+				if(filtro.isMinhaVisao()) {
+					hql.append("AND iett.id IN (SELECT upm.codIett FROM UsuarioPermissaoMonitoramento upm WHERE upm.codUsu = :codUsu ) ");
+				}
+				
 				hql.append("AND iett.ativoMi = 'S' ");
+				
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("JOIN iett.metaIniciativa mi ");
 				hql.append("JOIN mi.oe oe ");
@@ -528,9 +534,6 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("AND iett.ativoAtv = 'S' ");
 			}
 			
-			if(filtro.isMinhaVisao()) {
-				hql.append("AND usu.id IN (SELECT upm.codUsu FROM UsuarioPermissaoMonitoramento upm WHERE upm.codUsu = :codUsu ) ");
-			}
 			
 			if(filtro.isPns() && (estrutura.equals(Estrutura.META) || estrutura.equals(Estrutura.INICIATIVA))) {
 				hql.append("AND iett.coOePns IS NOT NULL ");
