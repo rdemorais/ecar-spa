@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;21 23&#x3a;14&#x3a;02.741</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;08&#x2f;31 14&#x3a;35&#x3a;29.284</modified_date>
+  <modified_date>2017&#x2f;08&#x2f;31 15&#x3a;02&#x3a;37.264</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -125,7 +125,7 @@
            </partitioning>
     <connection>eCar 2016</connection>
     <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_atv,&#xa;sigla_iett as sigla_atv,&#xa;nome_iett as nome_atv,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;&#x27;ATIVIDADE&#x27; as ds_estrutura_atv,&#xa;iett.descricao_r3 as ppa_atv&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 4&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <sql>select iett.cod_iett as cod_atv,&#xa;sigla_iett as sigla_atv,&#xa;nome_iett as nome_atv,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;iett.ind_ativo_iett as ind_ativo_atv,&#xa;&#x27;ATIVIDADE&#x27; as ds_estrutura_atv,&#xa;iett.descricao_r3 as ppa_atv&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 4&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
@@ -348,6 +348,11 @@
         <rename>nome_oe</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>ind_ativo</name>
+        <rename>ind_ativo_oe</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -530,7 +535,12 @@
       <value>
         <name>ds_ppa_atv</name>
         <rename>ppa_atv</rename>
-        <update>N</update>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ind_ativo</name>
+        <rename>ind_ativo_atv</rename>
+        <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
@@ -612,7 +622,12 @@
       <value>
         <name>ds_ppa_pi</name>
         <rename>ppa_pi</rename>
-        <update>N</update>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ind_ativo</name>
+        <rename>ind_ativo_pi</rename>
+        <update>Y</update>
       </value>
     </lookup>
      <cluster_schema/>
@@ -679,6 +694,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>ppa_atv</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ind_ativo_atv</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -886,6 +905,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>ind_ativo_pi</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>data_inicio</name>
         <rename>data_inicio</rename>
@@ -967,7 +990,7 @@
            <schema_name/>
            </partitioning>
     <connection>eCar 2016</connection>
-    <sql>select cod_iett as cod_oe,&#xa;sigla_iett as sigla_oe,&#xa;nome_iett as nome_oe,&#xa;&#x27;OE&#x27; as ds_estrutura&#xa;from dbecardemas.tb_item_estrutura_iett &#xa;where nivel_iett &#x3d; 1&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;order by sigla_iett</sql>
+    <sql>select cod_iett as cod_oe,&#xa;sigla_iett as sigla_oe,&#xa;nome_iett as nome_oe,&#xa;ind_ativo_iett as ind_ativo_oe,&#xa;&#x27;OE&#x27; as ds_estrutura&#xa;from dbecardemas.tb_item_estrutura_iett &#xa;where nivel_iett &#x3d; 1&#xa;order by sigla_iett</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -994,7 +1017,7 @@
            </partitioning>
     <connection>eCar 2016</connection>
     <rowlimit>0</rowlimit>
-    <sql>select iett.cod_iett as cod_pi,&#xa;sigla_iett as sigla_pi,&#xa;nome_iett as nome_pi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;iett.descricao_r3 as ppa_pi,&#xa;&#x27;PRODUTO_INTERMEDIARIO&#x27; as ds_estrutura_pi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 3&#xa;and ind_ativo_iett &#x3d; &#x27;S&#x27;&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
+    <sql>select iett.cod_iett as cod_pi,&#xa;sigla_iett as sigla_pi,&#xa;nome_iett as nome_pi,&#xa;sigla_ett,&#xa;data_inicio_iett as data_inicio,&#xa;data_termino_iett as data_termino,&#xa;iett.cod_orgao_responsavel1_iett as cod_org,&#xa;org.sigla_org,&#xa;resp.cod_usu,&#xa;iett.ind_ativo_iett as ind_ativo_pi,&#xa;iett.descricao_r3 as ppa_pi,&#xa;&#x27;PRODUTO_INTERMEDIARIO&#x27; as ds_estrutura_pi&#xa;from dbecardemas.tb_item_estrutura_iett iett&#xa;inner join dbecardemas.tb_estrutura_ett ett on iett.cod_ett &#x3d; ett.cod_ett&#xa;left join dbecardemas.TB_ITEM_EST_USUTPFUAC_IETTUTFA resp on resp.cod_iett &#x3d; iett.cod_iett&#xa;left join dbecardemas.tb_usuario_usu usu on usu.cod_usu &#x3d; resp.cod_usu&#xa;left join dbecardemas.tb_orgao_org org on iett.cod_orgao_responsavel1_iett &#x3d; org.cod_org&#xa;where nivel_iett &#x3d; 3&#xa;and cod_iett_pai &#x3d; &#x3f;&#xa;&#xa;</sql>
     <outer_join>N</outer_join>
     <replace_vars>N</replace_vars>
     <parameter>
