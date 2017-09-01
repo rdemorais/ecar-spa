@@ -249,10 +249,10 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 			StringBuffer hql = new StringBuffer();
 			
 			hql.append("SELECT DISTINCT new br.gov.saude.service.dto.SecretariaDto( ");
-			hql.append("mi.codOrg, ");
+			hql.append("mi.codOrgMi, ");
 			hql.append("mi.siglaOrgMi) ");
 			hql.append("FROM MetaIniciativa mi ");
-			hql.append("WHERE mi.codOrg IS NOT NULL ");
+			hql.append("WHERE mi.codOrgMi IS NOT NULL ");
 			hql.append("ORDER BY mi.siglaOrgMi ");
 			Query q = em.createQuery(hql.toString());
 			
@@ -510,7 +510,7 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				}
 				
 				if(filtro.getSecretarias().size() > 0) {
-					hql.append("AND iett.codOrg IN :secs ");
+					hql.append("AND iett.codOrgMi IN :secs ");
 				}
 				
 				if(filtro.isMinhaVisao()) {
