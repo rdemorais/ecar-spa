@@ -502,7 +502,7 @@
             oes: [],
             etiquetas: [],
             secretarias: [],
-            codExe: 1,
+            codExe: 2,
             codIett: -1,
             nivel: null
         };
@@ -519,7 +519,6 @@
                 oes: [],
                 etiquetas: [],
                 secretarias: [],
-                codExe: 1,
                 codIett: -1,
                 nivel: null
             };

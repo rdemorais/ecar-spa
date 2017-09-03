@@ -5,9 +5,9 @@
 				.row
 					h4.ml Exercício
 					.col-md-12
-						select(ng-model="filtro.codExe", ng-change="mudarExercicio()")
+						select.form-control(ng-model="filtro.codExe", ng-change="mudarExercicio()")
 							option(value="1") 2016
-							option(value="2") 2017
+							option(value="2", ng-selected="true") 2017
 				.row
 					h4.ml Perspectiva
 					.col-md-12
