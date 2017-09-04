@@ -3,4 +3,5 @@
 /vendor/
 /vendor_/
 /dist/
+/.vscode/
 index.html

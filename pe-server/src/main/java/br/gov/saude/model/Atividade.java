@@ -34,6 +34,9 @@ public class Atividade extends Iett{
 	@Column(name="sigla_org")
 	private String siglaOrgAtv;
 	
+	@Column(name="ind_ativo")
+	private String ativoAtv;
+	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=Usuario.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
 	private Usuario usuario;
@@ -105,4 +108,13 @@ public class Atividade extends Iett{
 	public void setProdutoIntermediario(ProdutoIntermediario produtoIntermediario) {
 		this.produtoIntermediario = produtoIntermediario;
 	}
+
+	public String getAtivoAtv() {
+		return ativoAtv;
+	}
+
+	public void setAtivoAtv(String ativoAtv) {
+		this.ativoAtv = ativoAtv;
+	}
+
 }

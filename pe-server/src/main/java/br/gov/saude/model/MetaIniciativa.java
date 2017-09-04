@@ -29,7 +29,7 @@ public class MetaIniciativa extends Iett {
 	private Date dataTermino;
 	
 	@Column(name="cod_org")
-	private Long codOrg;
+	private Long codOrgMi;
 	
 	@Column(name="sigla_org")
 	private String siglaOrgMi;
@@ -42,6 +42,9 @@ public class MetaIniciativa extends Iett {
 	
 	@Column(name="ds_oe_pns")
 	private String oePns;
+	
+	@Column(name="ind_ativo")
+	private String ativoMi;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=Usuario.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -107,12 +110,12 @@ public class MetaIniciativa extends Iett {
 		this.dataTermino = dataTermino;
 	}
 
-	public Long getCodOrg() {
-		return codOrg;
+	public Long getCodOrgMi() {
+		return codOrgMi;
 	}
 
-	public void setCodOrg(Long codOrg) {
-		this.codOrg = codOrg;
+	public void setCodOrgMi(Long codOrgMi) {
+		this.codOrgMi = codOrgMi;
 	}
 
 	public String getSiglaOrgMi() {
@@ -138,4 +141,14 @@ public class MetaIniciativa extends Iett {
 	public void setOe(OE oe) {
 		this.oe = oe;
 	}
+
+	public String getAtivoMi() {
+		return ativoMi;
+	}
+
+	public void setAtivoMi(String ativoMi) {
+		this.ativoMi = ativoMi;
+	}
+
+	
 }

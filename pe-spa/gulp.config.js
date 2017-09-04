@@ -57,7 +57,7 @@ module.exports = function($, usehtml) {
     webserver: {
       webroot:          '.',
       host:             'localhost',
-      port:             '3000',
+      port:             '5000',
       livereload:       true,
       directoryListing: false
     },
