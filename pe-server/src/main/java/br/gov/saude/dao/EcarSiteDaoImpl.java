@@ -514,7 +514,8 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				}
 				
 				if(filtro.isMinhaVisao()) {
-					hql.append("AND iett.id IN (SELECT upm.codIett FROM UsuarioPermissaoMonitoramento upm WHERE upm.codUsu = :codUsu ) ");
+					hql.append("AND iett.id IN (SELECT upm.codIett FROM UsuarioPermissaoMonitoramento upm "
+							+ "WHERE upm.codUsu = :codUsu AND upm.tpPerm = 'F') ");
 				}
 				
 				hql.append("AND iett.ativoMi = 'S' ");
