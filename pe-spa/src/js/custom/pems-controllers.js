@@ -127,12 +127,11 @@
         };
 
         $scope.limparFiltros = function() {
-            $scope.filtro = {
-                ppa: false,
-                meta: false,
-                iniciativa: false,
-                minhaVisao: false
-            };
+            $scope.filtro.ppa = false;
+            $scope.filtro.meta = false;
+            $scope.filtro.iniciativa = false;
+            $scope.filtro.minhaVisao = false;
+            
             $rootScope.$emit('pems:limparFiltros');
         };
     }
@@ -171,12 +170,11 @@
         }
 
         $scope.limparFiltros = function() {
-            $scope.filtro = {
-                ppa: false,
-                meta: false,
-                iniciativa: false,
-                minhaVisao: false
-            };
+            $scope.filtro.ppa = false;
+            $scope.filtro.meta = false;
+            $scope.filtro.iniciativa = false;
+            $scope.filtro.minhaVisao = false;
+            
             $rootScope.$emit('pems:limparFiltros');
         };
     }
