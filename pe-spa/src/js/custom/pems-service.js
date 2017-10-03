@@ -511,21 +511,22 @@
         var listaStFiltrosSel;
 
         $rootScope.$on('pems:limparFiltros', function() {
-            filtros = {
-                pns: false,
-                meta: false,
-                iniciativa: false,
-                status: [],
-                oes: [],
-                etiquetas: [],
-                secretarias: [],
-                codIett: -1,
-                nivel: null
-            };
+
+            filtros.pns = false;
+            filtros.meta = false;
+            filtros.iniciativa = false;
+            filtros.status = [];
+            filtros.oes = [];
+            filtros.etiquetas = [];
+            filtros.secretarias = [];
+            filtros.codIett = -1;
+            filtros.nivel = null;
+            // filtros.codExe = 2;
         });
 
         this.mudarExercicio = function(exe) {
             filtros.codExe = exe;
+            console.log(filtros.codExe);
             $rootScope.$emit('pems:exercicioAlterado');
         }
 
