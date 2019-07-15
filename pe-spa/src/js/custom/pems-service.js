@@ -526,7 +526,6 @@
 
         this.mudarExercicio = function(exe) {
             filtros.codExe = exe;
-            console.log(filtros.codExe);
             $rootScope.$emit('pems:exercicioAlterado');
         }
 
