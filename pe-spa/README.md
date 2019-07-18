@@ -1,4 +1,10 @@
-settings.xml
+Java 8
+
+Postgres
+
+Maven
+
+.m2/settings.xml
 
 <profiles>
   <profile>
@@ -12,10 +18,22 @@ settings.xml
   </profile>
 </profiles>
 
+user: monica.silva
+pass: serenaya
+
 Levantar servidor:
+
+pe-server/
 
 mvn tomcat6:run -Pdev -DskipTests=true
 
 Levantar app:
 
-gulp server
+pe-spa/
+
+gulp webserver
+
+GULP:
+
+[14:23:03] CLI version 3.9.1
+[14:23:03] Local version 3.9.1
