@@ -3,6 +3,8 @@ package br.gov.saude.service.dto;
 import java.util.Date;
 
 import br.gov.saude.model.Estrutura;
+import br.gov.saude.model.Periodicidade;
+import br.gov.saude.model.Polaridade;
 
 public class ItemDto implements Comparable<ItemDto>{
 	private Long id;
@@ -37,10 +39,96 @@ public class ItemDto implements Comparable<ItemDto>{
 	private String mesCicloParecer;
 	private String anoCicloParecer;
 	
+	// Novos campos, demanda SPO
+	private String descProduto;
+	private String descEspecificacaoProduto;
+	
+	//Unidade de medida
+	
+	private Double linhaBase;
+	private Integer anoLinhaBase;
+	private Date dataApuracao;
+	private String metodoApuracao;
+	private Polaridade polaridadeIndicador;
+	private Periodicidade periodicidade;
+	
 	private boolean parecerAutorizado = false;
 	
 	public ItemDto() {
 		
+	}
+	
+	public ItemDto(
+			Long id,
+			Long idCor,
+			String nomeCor,
+			String significadoCor,
+			Long idSit,
+			String descSit,
+			Estrutura estrutura, 
+			String mes, 
+			String ano,
+			String oe, 
+			String responsavel,
+			Estrutura estruturaProduto,
+			String desc, 
+			String orgaoResp,
+			Long codMi, 
+			Long codPi, 
+			Long codAtv,
+			String siglaMi, 
+			String siglaPi, 
+			String siglaAtv, 
+			Estrutura estruturaSuperior,
+			String ppa,
+			Long coOePnsMi,
+			String oePns,
+			Date dataLimite,
+			
+			String descProduto,
+			String descEspecificacaoProduto,
+			Double linhaBase,
+			Integer anoLinhaBase,
+			Date dataApuracao,
+			String metodoApuracao,
+			Polaridade polaridadeIndicador,
+			Periodicidade periodicidade,
+			
+			String parecer) {
+		super();
+		this.id = id;
+		this.cor = new CorDto(idCor, nomeCor, significadoCor);
+		this.codMi = codMi;
+		this.codPi = codPi;
+		this.codAtv = codAtv;
+		this.siglaMi = siglaMi;
+		this.siglaPi = siglaPi;
+		this.siglaAtv = siglaAtv;
+		this.desc = desc;
+		this.situacao = new SituacaoDto(idSit, descSit);
+		this.estruturaProduto = estruturaProduto.name().toLowerCase();
+		this.nivel = estrutura.name().toLowerCase();
+		this.orgaoResp = orgaoResp;
+		this.mes = mes;
+		this.ano = ano;
+		this.oe = oe;
+		this.oeShortName = oe.replaceAll("\\s+","").toLowerCase();
+		this.responsavel = responsavel;
+		this.estruturaSuperior = estruturaSuperior.name().toLowerCase();
+		this.ppa = ppa;
+		this.coOePnsMi = coOePnsMi;
+		this.oePns = oePns;
+		this.parecer = parecer;
+		this.dataLimite = dataLimite;
+		
+		this.descProduto = descProduto;
+		this.descEspecificacaoProduto = descEspecificacaoProduto;
+		this.linhaBase = linhaBase;
+		this.anoLinhaBase = anoLinhaBase;
+		this.dataApuracao = dataApuracao;
+		this.metodoApuracao = metodoApuracao;
+		this.polaridadeIndicador = polaridadeIndicador;
+		this.periodicidade = periodicidade;
 	}
 	
 	public ItemDto(
@@ -305,6 +393,70 @@ public class ItemDto implements Comparable<ItemDto>{
 
 	public void setAnoCicloParecer(String anoCicloParecer) {
 		this.anoCicloParecer = anoCicloParecer;
+	}
+	
+	public String getDescProduto() {
+		return descProduto;
+	}
+
+	public void setDescProduto(String descProduto) {
+		this.descProduto = descProduto;
+	}
+
+	public String getDescEspecificacaoProduto() {
+		return descEspecificacaoProduto;
+	}
+
+	public void setDescEspecificacaoProduto(String descEspecificacaoProduto) {
+		this.descEspecificacaoProduto = descEspecificacaoProduto;
+	}
+
+	public Double getLinhaBase() {
+		return linhaBase;
+	}
+
+	public void setLinhaBase(Double linhaBase) {
+		this.linhaBase = linhaBase;
+	}
+
+	public Integer getAnoLinhaBase() {
+		return anoLinhaBase;
+	}
+
+	public void setAnoLinhaBase(Integer anoLinhaBase) {
+		this.anoLinhaBase = anoLinhaBase;
+	}
+
+	public Date getDataApuracao() {
+		return dataApuracao;
+	}
+
+	public void setDataApuracao(Date dataApuracao) {
+		this.dataApuracao = dataApuracao;
+	}
+
+	public String getMetodoApuracao() {
+		return metodoApuracao;
+	}
+
+	public void setMetodoApuracao(String metodoApuracao) {
+		this.metodoApuracao = metodoApuracao;
+	}
+
+	public Polaridade getPolaridadeIndicador() {
+		return polaridadeIndicador;
+	}
+
+	public void setPolaridadeIndicador(Polaridade polaridadeIndicador) {
+		this.polaridadeIndicador = polaridadeIndicador;
+	}
+
+	public Periodicidade getPeriodicidade() {
+		return periodicidade;
+	}
+
+	public void setPeriodicidade(Periodicidade periodicidade) {
+		this.periodicidade = periodicidade;
 	}
 
 	@Override

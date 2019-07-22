@@ -322,6 +322,14 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("iett.coOePns, ");
 				hql.append("iett.oePns, ");
 				hql.append("mon.dataLimite, ");
+				hql.append("iett.descProduto, ");
+				hql.append("iett.descEspecificacaoProduto, ");
+				hql.append("iett.linhaBase, ");
+				hql.append("iett.anoLinhaBase, ");
+				hql.append("iett.dataApuracao, ");
+				hql.append("iett.metodoApuracao, ");
+				hql.append("iett.polaridadeIndicador, ");
+				hql.append("iett.periodicidade, ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.PRODUTO_INTERMEDIARIO)) {
 				hql.append("mi.estrutura, ");
@@ -338,6 +346,14 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.dataLimite, ");
+				hql.append("'', ");
+				hql.append("'', ");
+				hql.append("0.0, ");
+				hql.append("0, ");
+				hql.append("null, ");
+				hql.append("'', ");
+				hql.append("'', ");
+				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}else if(estrutura.equals(Estrutura.ATIVIDADE)) {
 				hql.append("mi.estrutura, ");
@@ -354,6 +370,14 @@ public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
 				hql.append("-1L, ");
 				hql.append("'', ");
 				hql.append("mon.dataLimite, ");
+				hql.append("'', ");
+				hql.append("'', ");
+				hql.append("0.0, ");
+				hql.append("0, ");
+				hql.append("null, ");
+				hql.append("'', ");
+				hql.append("'', ");
+				hql.append("'', ");
 				hql.append("mon.parecer) ");
 			}
 			

@@ -5,6 +5,8 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -45,6 +47,34 @@ public class MetaIniciativa extends Iett {
 	
 	@Column(name="ind_ativo")
 	private String ativoMi;
+	
+	//Novos campos - Demanda SPO
+	@Column(name="ds_produto")
+	private String descProduto;
+	
+	@Column(name="ds_especificacao_produto")
+	private String descEspecificacaoProduto;
+	
+	//Unidade de medida
+	
+	@Column(name="nu_linha_base")
+	private Double linhaBase;
+	
+	@Column(name="nu_ano_linha_base")
+	private Integer anoLinhaBase;
+	
+	@Column(name="dt_data_apuracao")
+	private Date dataApuracao;
+	
+	@Column(name="ds_metodo_apuracao")
+	private String metodoApuracao;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name="ds_polaridade_indicador")
+	private Polaridade polaridadeIndicador;
+	
+	@Column(name="ds_periodicidade")
+	private Periodicidade periodicidade;
 	
 	@ManyToOne(fetch = FetchType.LAZY, targetEntity=Usuario.class, cascade=CascadeType.REFRESH)
 	@JoinColumn(name = "cod_usu", referencedColumnName = "co_usuario")
@@ -148,6 +178,70 @@ public class MetaIniciativa extends Iett {
 
 	public void setAtivoMi(String ativoMi) {
 		this.ativoMi = ativoMi;
+	}
+
+	public String getDescProduto() {
+		return descProduto;
+	}
+
+	public void setDescProduto(String descProduto) {
+		this.descProduto = descProduto;
+	}
+
+	public String getDescEspecificacaoProduto() {
+		return descEspecificacaoProduto;
+	}
+
+	public void setDescEspecificacaoProduto(String descEspecificacaoProduto) {
+		this.descEspecificacaoProduto = descEspecificacaoProduto;
+	}
+
+	public Double getLinhaBase() {
+		return linhaBase;
+	}
+
+	public void setLinhaBase(Double linhaBase) {
+		this.linhaBase = linhaBase;
+	}
+
+	public Integer getAnoLinhaBase() {
+		return anoLinhaBase;
+	}
+
+	public void setAnoLinhaBase(Integer anoLinhaBase) {
+		this.anoLinhaBase = anoLinhaBase;
+	}
+
+	public Date getDataApuracao() {
+		return dataApuracao;
+	}
+
+	public void setDataApuracao(Date dataApuracao) {
+		this.dataApuracao = dataApuracao;
+	}
+
+	public String getMetodoApuracao() {
+		return metodoApuracao;
+	}
+
+	public void setMetodoApuracao(String metodoApuracao) {
+		this.metodoApuracao = metodoApuracao;
+	}
+
+	public Polaridade getPolaridadeIndicador() {
+		return polaridadeIndicador;
+	}
+
+	public void setPolaridadeIndicador(Polaridade polaridadeIndicador) {
+		this.polaridadeIndicador = polaridadeIndicador;
+	}
+
+	public Periodicidade getPeriodicidade() {
+		return periodicidade;
+	}
+
+	public void setPeriodicidade(Periodicidade periodicidade) {
+		this.periodicidade = periodicidade;
 	}
 
 	
