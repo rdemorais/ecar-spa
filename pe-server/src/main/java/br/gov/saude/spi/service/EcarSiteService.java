@@ -10,6 +10,7 @@ import br.gov.saude.service.dto.AnexoDto;
 import br.gov.saude.service.dto.CorDto;
 import br.gov.saude.service.dto.EtiquetaDto;
 import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.IettCamposIndicadorDto;
 import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 import br.gov.saude.service.dto.ParecerDto;
@@ -19,6 +20,7 @@ import br.gov.saude.service.dto.StatusBarDto;
 import br.gov.saude.service.dto.TrocaSenhaDto;
 
 public interface EcarSiteService {
+	public void updateIettCamposIndicador(Long codIett, IettCamposIndicadorDto camposDto);
 	public byte[] gerarRelatorioExecutivoPareceresAnteriores(FiltroDto filtro) throws AkulaRuntimeException;
 	public byte[] gerarRelatorioExecutivoPareceres(FiltroDto filtro) throws AkulaRuntimeException;
 	public void excluirAnexo(AnexoDto anexo) throws AkulaRuntimeException;

@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +29,7 @@ import br.gov.saude.service.dto.AnexoDto;
 import br.gov.saude.service.dto.CorDto;
 import br.gov.saude.service.dto.EtiquetaDto;
 import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.IettCamposIndicadorDto;
 import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 import br.gov.saude.service.dto.ParecerDto;
@@ -59,12 +61,32 @@ public class EcarRestApiController {
 		return new ResponseEntity<EcarResponse>(error, HttpStatus.BAD_REQUEST);
 	}
 	
+	@RequestMapping(value="/campos-indicador/{codiett}", 
+			method=RequestMethod.PUT)
+	@ResponseBody
+	public EcarResponse updateIettCamposIndicador(@PathVariable(name="codiett") Long codIett, @RequestBody IettCamposIndicadorDto camposDto) {
+		try {
+			ecarSiteService.updateIettCamposIndicador(codIett, camposDto);
+			return EcarResponse.ok();
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.debug(e.getMessage());
+			return EcarResponse.error(e.getMessage());
+		}
+	}
+	
 	@RequestMapping(value="/nome-usuario", 
 			method=RequestMethod.POST)
 	@ResponseBody
 	public EcarResponse getNomeUsuario() {
-		String nomeUsuario = controleAcessoService.getNomeUsuario();
-		return EcarResponse.ok(nomeUsuario);
+		try {
+			String nomeUsuario = controleAcessoService.getNomeUsuario();
+			return EcarResponse.ok(nomeUsuario);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e.getMessage());
+			return EcarResponse.error(e.getMessage());
+		}
 	}
 	
 	

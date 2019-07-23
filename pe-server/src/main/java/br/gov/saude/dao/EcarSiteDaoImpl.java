@@ -16,6 +16,7 @@ import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.service.dto.CorDto;
 import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.IettCamposIndicadorDto;
 import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 import br.gov.saude.service.dto.SecretariaDto;
@@ -23,6 +24,37 @@ import br.gov.saude.service.dto.SituacaoDto;
 import br.gov.saude.service.dto.StatusDto;
 
 public class EcarSiteDaoImpl extends DaoImpl implements EcarSiteDao {
+	
+	public void updateIettCamposIndicador(Long codIett, IettCamposIndicadorDto camposDto) throws AkulaDaoRuntimeException {
+		try {
+			StringBuffer hql = new StringBuffer();
+			hql.append("UPDATE MetaIniciativa mi SET ");
+			hql.append("mi.descProduto = :descProduto, ");
+			hql.append("mi.descEspecificacaoProduto = :descEspecificacaoProduto, ");
+			hql.append("mi.linhaBase = :linhaBase, ");
+			hql.append("mi.anoLinhaBase = :anoLinhaBase, ");
+			hql.append("mi.dataApuracao = :dataApuracao, ");
+			hql.append("mi.metodoApuracao = :metodoApuracao, ");
+			hql.append("mi.polaridadeIndicador = :polaridadeIndicador, ");
+			hql.append("mi.periodicidade = :periodicidade ");
+			hql.append("WHERE mi.id = :codIett");
+			
+			Query q = em.createQuery(hql.toString());
+			q.setParameter("codIett", codIett);
+			q.setParameter("descProduto", camposDto.getDescProduto());
+			q.setParameter("descEspecificacaoProduto", camposDto.getDescEspecificacaoProduto());
+			q.setParameter("linhaBase", camposDto.getLinhaBase());
+			q.setParameter("anoLinhaBase", camposDto.getAnoLinhaBase());
+			q.setParameter("dataApuracao", camposDto.getDataApuracao());
+			q.setParameter("metodoApuracao", camposDto.getMetodoApuracao());
+			q.setParameter("polaridadeIndicador", camposDto.getPolaridadeIndicador());
+			q.setParameter("periodicidade", camposDto.getPeriodicidade());
+			
+			q.executeUpdate();
+		} catch (Exception e) {
+			throw new AkulaDaoRuntimeException(e.getMessage(), e);
+		}
+	}
 	
 	public void updateUltimoParecerENaoMonitorado(Long codIett, Long codArel) throws AkulaRuntimeException {
 		try {

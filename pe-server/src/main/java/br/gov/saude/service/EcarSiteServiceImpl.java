@@ -39,6 +39,7 @@ import br.gov.saude.service.dto.AnexoDto;
 import br.gov.saude.service.dto.CorDto;
 import br.gov.saude.service.dto.EtiquetaDto;
 import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.IettCamposIndicadorDto;
 import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 import br.gov.saude.service.dto.ParecerDto;
@@ -85,6 +86,11 @@ public class EcarSiteServiceImpl implements EcarSiteService{
 	
 	@Autowired
 	private SentinelaPasswordHash sentinelaPasswordHash;
+	
+	@Transactional
+	public void updateIettCamposIndicador(Long codIett, IettCamposIndicadorDto camposDto) {
+		ecarSiteDao.updateIettCamposIndicador(codIett, camposDto);
+	}
 	
 	@Transactional
 	public void trocarSenha(TrocaSenhaDto dto) throws AkulaRuntimeException {

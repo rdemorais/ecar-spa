@@ -2,6 +2,7 @@ package br.gov.saude.dao;
 
 import java.util.List;
 
+import br.gov.saude.exc.AkulaDaoRuntimeException;
 import br.gov.saude.exc.AkulaRuntimeException;
 import br.gov.saude.model.Estrutura;
 import br.gov.saude.model.Etiqueta;
@@ -11,6 +12,7 @@ import br.gov.saude.model.Usuario;
 import br.gov.saude.model.ecar.UsuarioPermissaoMonitoramento;
 import br.gov.saude.service.dto.CorDto;
 import br.gov.saude.service.dto.FiltroDto;
+import br.gov.saude.service.dto.IettCamposIndicadorDto;
 import br.gov.saude.service.dto.ItemDto;
 import br.gov.saude.service.dto.OeDto;
 import br.gov.saude.service.dto.SecretariaDto;
@@ -18,6 +20,7 @@ import br.gov.saude.service.dto.SituacaoDto;
 import br.gov.saude.service.dto.StatusDto;
 
 public interface EcarSiteDao extends Dao{
+	public void updateIettCamposIndicador(Long codIett, IettCamposIndicadorDto camposDto) throws AkulaDaoRuntimeException;
 	public void updateUltimoParecerENaoMonitorado(Long codIett, Long codArel) throws AkulaRuntimeException;
 	public Monitoramento loadMonitoramento(Long codIett, String mes, String ano) throws AkulaRuntimeException;
 	public Monitoramento loadMonitoramento(Long codArel) throws AkulaRuntimeException;
