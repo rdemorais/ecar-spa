@@ -183,8 +183,20 @@
   function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate, SwAlert) {
     var vm = this;
     vm.parecer = '';
-
+    $scope.obj ={
+      descProduto: '',
+      descEspecificacaoProduto: '',
+      linhaBase: '',
+      anoLinhaBase: '',
+      dataApuracao: '',
+      metodoApuracao: '',
+      polaridadeIndicador: '',
+      periodicidade: '',
+    }
     $scope.anexos = [];
+
+    $scope.edita = false;
+
     pemsService.loadAnexos(pemsFilterService.getFiltros(), function (anexos) {
       $scope.anexos = anexos;
     });
@@ -224,6 +236,13 @@
 
     $scope.gerarRelatorioExecutivoPareceresAnteriores = function () {
       pemsService.gerarRelatorioExecutivoPareceresAnteriores(pemsFilterService.getFiltros());
+    }
+    $scope.botaoEditar = function (){
+      $scope.edita = !$scope.edita;
+    }
+    $scope.botaoSalvar = function(){
+      $scope.edita = !$scope.edita;
+      pemsService.loadCamposIndicador($scope.obj, $stateParams.itemId);    
     }
 
     pemsFilterService.getFiltros().codIett = $stateParams.itemId;

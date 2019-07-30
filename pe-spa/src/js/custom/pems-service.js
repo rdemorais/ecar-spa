@@ -217,6 +217,7 @@
                 $rootScope.$emit('oauth:error', response);
             });
         };
+        
 
         this.excluirAnexoServer = function(anexo, callback) {
             $http({
@@ -481,6 +482,64 @@
                 $rootScope.$emit('oauth:error', response);
             });
         };
+        this.loadCampos = function(filtro, callback) {
+
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/campos-indicador',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: filtro
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var item = ecarResponse.obj;
+                    callback(item);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });            
+        };
+            	this.loadItem = function(filtro, callback) {
+
+            $http({
+                method: 'POST',
+                url: $rootScope.app.baseUrl + '/load-item',
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: filtro
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var item = ecarResponse.obj;
+                    callback(item);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });            
+        }
+
+        this.loadCamposIndicador = function(filtro, id, callback) {
+            // console.log(filtro)
+            $http({
+                method: 'PUT',
+                url: $rootScope.app.baseUrl + `/campos-indicador/${id}`,
+                headers: {'Accept': 'application/json', 'Content-Type': 'application/json'},
+                data: filtro
+            }).then(function successCallBack(response) {
+                var ecarResponse = response.data;
+                if(ecarResponse.status == 'success') {
+                    var item = ecarResponse.obj;
+                    callback(item);
+                }else {
+                    //tratar erro
+                }
+            }, function errorCallBack(response) {
+                $rootScope.$emit('oauth:error', response);
+            });            
+    	} 
     }
 
     //pemsServiceError.$inject = ['SwAlert']
@@ -523,6 +582,7 @@
             filtros.nivel = null;
             // filtros.codExe = 2;
         });
+        
 
         this.mudarExercicio = function(exe) {
             filtros.codExe = exe;
