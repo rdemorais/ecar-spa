@@ -179,8 +179,8 @@
     };
   }
 
-  itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate', 'SwAlert'];
-  function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate, SwAlert) {
+  itemDashController.$inject = ['$scope', '$state', '$stateParams', '$sce', 'pemsService', 'pemsFilterService', 'truncate', 'SwAlert', '$rootScope'];
+  function itemDashController($scope, $state, $stateParams, $sce, pemsService, pemsFilterService, truncate, SwAlert, $rootScope) {
     var vm = this;
     vm.parecer = '';
     $scope.obj ={
@@ -188,7 +188,7 @@
       descEspecificacaoProduto: '',
       linhaBase: '',
       anoLinhaBase: '',
-      dataApuracao: '',
+      dataApuracao: new Date(),
       metodoApuracao: '',
       polaridadeIndicador: '',
       periodicidade: '',
@@ -240,10 +240,26 @@
     $scope.botaoEditar = function (){
       $scope.edita = !$scope.edita;
     }
-    $scope.botaoSalvar = function(){
+    $scope.botaoSalvar = async function(){
       $scope.edita = !$scope.edita;
-      pemsService.loadCamposIndicador($scope.obj, $stateParams.itemId);    
-    }
+      await pemsService.loadCamposIndicador($scope.obj, $stateParams.itemId);
+      $scope.$apply();
+      await pemsService.loadItem(pemsFilterService.getFiltros(), function (item) {
+        vm.item = item;
+        vm.item.parecer = truncate(vm.item.parecer, '<a><br><ul><li><strong><b><table><p><i><ol><td><tr><h1><h2><h3>');
+      });
+
+      // if($scope.obj.descProduto == "" && $scope.obj.descEspecificacaoProduto == "" && $scope.obj.linhaBase == "" && $scope.obj.anoLinhaBase == "" && $scope.obj.dataApuracao == "" && $scope.obj.metodoApuracao == "" && $scope.obj.polaridadeIndicador == "vazio" && $scope.obj.periodicidade == "vazio"){
+      //     SwAlert.error('', 'Preencha todos os campos para salvar');
+      // }else {
+      //   await pemsService.loadCamposIndicador($scope.obj, $stateParams.itemId);
+      //   $scope.$apply();
+      //   await pemsService.loadItem(pemsFilterService.getFiltros(), function (item) {
+      //     vm.item = item;
+      //     vm.item.parecer = truncate(vm.item.parecer, '<a><br><ul><li><strong><b><table><p><i><ol><td><tr><h1><h2><h3>');
+      //   });
+      // }
+    };
 
     pemsFilterService.getFiltros().codIett = $stateParams.itemId;
     pemsFilterService.getFiltros().nivel = $stateParams.nivel;

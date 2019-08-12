@@ -34,81 +34,91 @@
 		
 		accordion(is-open='false')
 			accordion-group(is-open='false')
-				accordion-heading Título
-				p.row
-					.col-md-12
-						button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita == false", ng-click="botaoEditar()") Editar
-					.col-md-6
-						button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita", ng-click="botaoSalvar()") Salvar
-					.col-md-6
-						button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita", ng-click="botaoEditar()") Cancelar
-				p.row
-					.col-md-12
-						strong Descrição do produto:
-						small(ng-if="edita == false") {{itemDash.item.descProduto}}
-				p.row
-					.col-md-6
-						input.form-control(type='text' placeholder='teste' ng-if="edita", ng-model="obj.descProduto")
-				p.row
-					.col-md-12
-						strong Descrição especifica:
-						small(ng-if="edita == false") {{itemDash.item.descEspecificacaoProduto}}
-				p.row
-					.col-md-6
-						input.form-control(type='text', placeholder='teste', ng-if="edita", ng-model="obj.descEspecificacaoProduto")
-				p.row
-					.col-md-6
-						strong Linha base:
-						small(ng-if="edita == false") {{itemDash.item.linhaBase}}
-				p.row
-					.col-md-4
-						input.form-control(type="number", placeholder="teste", ng-if="edita", ng-model="obj.linhaBase")
-				p.row
-					.col-md-6
-						strong Ano linha base:
-						small(ng-if="edita == false") {{itemDash.item.anoLinhaBase}}
-				p.row
-					.col-md-4
-						input.form-control(type="number", placeholder="teste", ng-if="edita", ng-model="obj.anoLinhaBase")
-				p.row
-					.col-md-6
-						strong Data de apuração:
-						small(ng-if="edita == false") {{itemDash.item.dataApuracao}}
-				p.row
-					.col-md-4
-						input.form-control(type="date", placeholder="teste", ng-if="edita", ng-model="obj.dataApuracao")
-				p.row
-					.col-md-12
-						strong Método de apuração:
-						small(ng-if="edita == false") {{itemDash.item.metodoApuracao}}
-				p.row
-					.col-md-6
-						input.form-control(type='text', placeholder='teste', ng-if="edita", ng-model="obj.metodoApuracao")
-				p.row
-					.col-md-3
-						strong Polaridade:
-						small(ng-if="edita == false") {{itemDash.item.polaridadeIndicador}}
-				p.row
-					.col-md-4
-						select.form-control(ng-if="edita", name="optPolaridade", ng-model="obj.polaridadeIndicador")
-							option(value="") ---selecione a polaridade---
-							option(value="MAIOR_MELHOR", ng-selected="obj.polaridadeIndicador == MAIOR_MELHOR") Maior
-							option(value="MENOR_MELHOR", ng-selected="obj.polaridadeIndicador == MENOR_MELHOR") Menor
-							option(value="MANTER", ng-selected="obj.polaridadeIndicador == MANTER") Manter
-				p.row
-					.col-md-3
-						strong Periodicidade:
-						small(ng-if="edita == false") {{itemDash.item.periodicidade}}
-				p.row
-					.col-md-4
-						select.form-control(ng-if="edita", name="optPeriodicidade", ng-model="obj.periodicidade")
-							option(value="") ---selecione a periodicidade---
-							option(value="MENSAL", ng-selected="obj.periodicidade == MENSAL") Mensal
-							option(value="BIMENSAL", ng-selected="obj.periodicidade == BIMENSAL") Bimensal
-							option(value="TRIMENSAL", ng-selected="obj.periodicidade == TRIMENSAL") Trimensal
-							option(value="QUADRIMENSAL", ng-selected="obj.periodicidade == QUADRIMENSAL") Quadrimensal
-							option(value="SEMESTRAL", ng-selected="obj.periodicidade == SEMESTRAL") Semestral
-							option(value="ANUAL", ng-selected="obj.periodicidade == ANUAL") Anual
+				accordion-heading Campos Indicador
+				form.form-validate(role='form', name="frmVerificacao").mb-lg.p
+					p.row
+						.col-md-12
+							strong Descrição do produto:
+							small(ng-if="edita == false") {{itemDash.item.descProduto}}
+					p.row
+						.form-group.has-feedback
+							.col-md-6
+								input.form-control(type='text' placeholder='insira uma descrição para o produto' ng-if="edita", ng-model="obj.descProduto", required='')
+					p.row
+						.col-md-12
+							strong Descrição especifica:
+							small(ng-if="edita == false") {{itemDash.item.descEspecificacaoProduto}}
+					p.row
+						.form-group.has-feedback
+							.col-md-6
+								input.form-control(type='text', placeholder='insira a descrição especifica do produto', ng-if="edita", ng-model="obj.descEspecificacaoProduto", required='')
+					p.row
+						.col-md-6
+							strong Linha base:
+							small(ng-if="edita == false") {{itemDash.item.linhaBase}}
+					p.row
+						.form-group.has-feedback
+							.col-md-4
+								input.form-control(type="number", placeholder="insira a linha base", ng-if="edita", ng-model="obj.linhaBase", required='')
+					p.row
+						.col-md-6
+							strong Ano linha base:
+							small(ng-if="edita == false") {{itemDash.item.anoLinhaBase}}
+					p.row
+						.form-group.has-feedback
+							.col-md-4
+								input.form-control(type="number", placeholder="insira o ano da linha base", ng-if="edita", ng-model="obj.anoLinhaBase", required='')
+					p.row
+						.col-md-6
+							strong Data de apuração:
+							small(ng-if="edita == false") {{itemDash.item.dataApuracao | date: 'dd/MM/yyyy' }}
+							//- small(ng-if="edita == false") {{itemDash.item.dataApuracao}}
+					p.row
+						.form-group.has-feedback
+							.col-md-4
+								input.form-control(type="date",placeholder="insira a data" ng-if="edita", ng-model="obj.dataApuracao", required='')
+					p.row
+						.col-md-12
+							strong Método de apuração:
+							small(ng-if="edita == false") {{itemDash.item.metodoApuracao}}
+					p.row
+						.form-group.has-feedback
+							.col-md-6
+								input.form-control(type='text', placeholder='insira o método de apuração', ng-if="edita", ng-model="obj.metodoApuracao", required='')
+					p.row
+						.col-md-3
+							strong Polaridade:
+							small(ng-if="edita == false") {{itemDash.item.polaridadeIndicador}}
+					p.row
+						.form-group.has-feedback
+							.col-md-4
+								select.form-control(ng-if="edita", name="optPolaridade", ng-model="obj.polaridadeIndicador", required='')
+									option(value="") ---selecione a polaridade---
+									option(value="MAIOR_MELHOR", ng-selected="obj.polaridadeIndicador == MAIOR_MELHOR") Maior
+									option(value="MENOR_MELHOR", ng-selected="obj.polaridadeIndicador == MENOR_MELHOR") Menor
+									option(value="MANTER", ng-selected="obj.polaridadeIndicador == MANTER") Manter
+					p.row
+						.col-md-3
+							strong Periodicidade:
+							small(ng-if="edita == false") {{itemDash.item.periodicidade}}
+					p.row
+						.form-group.has-feedback
+							.col-md-4
+								select.form-control(ng-if="edita", name="optPeriodicidade", ng-model="obj.periodicidade", required='')
+									option(value="") ---selecione a periodicidade---
+									option(value="MENSAL", ng-selected="obj.periodicidade == MENSAL") Mensal
+									option(value="BIMENSAL", ng-selected="obj.periodicidade == BIMENSAL") Bimensal
+									option(value="TRIMESTRAL", ng-selected="obj.periodicidade == TRIMESTRAL") Trimestral
+									option(value="QUADRIMESTRAL", ng-selected="obj.periodicidade == QUADRIMESTRAL") Quadrimestral
+									option(value="SEMESTRAL", ng-selected="obj.periodicidade == SEMESTRAL") Semestral
+									option(value="ANUAL", ng-selected="obj.periodicidade == ANUAL") Anual
+					p.row
+						.col-md-12
+							button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita == false", ng-click="botaoEditar()") Editar
+						.col-md-6
+							button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita", ng-click="botaoSalvar()", ng-disabled="frmVerificacao.$invalid") Salvar
+						.col-md-6
+							button.btn.btn-block.btn-info.mb(type='submit', ng-if="edita", ng-click="botaoEditar()") Cancelar
 
 		accordion(close-others='false')
 			accordion-group(is-open='true')
