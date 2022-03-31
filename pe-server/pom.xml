@@ -11,7 +11,7 @@
 	<url>http://pems.saude.gov.br</url>
 
 	<properties>
-		<spring-version>4.3.3.RELEASE</spring-version>
+		<spring-version>5.3.18</spring-version>
 		<spring-security-version>4.0.2.RELEASE</spring-security-version>
 	</properties>
 
